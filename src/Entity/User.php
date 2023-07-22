@@ -76,7 +76,7 @@ class User implements UserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string) $this->idDiscord;
     }
 
     /**
