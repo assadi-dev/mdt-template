@@ -9,17 +9,27 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class DiscordAuthController extends AbstractController
 {
+    private $request;
+    private $clientRegistry;
+
+    public function __construct(Request $request, ClientRegistry $clientRegistry)
+    {
+        $this->clientRegistry = $clientRegistry;
+        $this->request = $request;
+
+    }
+
+
     /**
      * Link to this controller to start the "connect" process
      *
      * @Route("/connect/facebook", name="connect_facebook_start")
      */
-    public function connectAction(ClientRegistry $clientRegistry)
+    public function connectAction()
     {
         // on Symfony 3.3 or lower, $clientRegistry = $this->get('knpu.oauth2.registry');
 
-        // will redirect to Facebook!
-        return $clientRegistry
+        return $this->clientRegistry
             ->getClient('discord') // key used in config/packages/knpu_oauth2_client.yaml
             ->redirect([ 'identify', 'email' ]);
     }
@@ -29,20 +39,19 @@ class DiscordAuthController extends AbstractController
      * because this is the "redirect_route" you configured
      * in config/packages/knpu_oauth2_client.yaml
      *
-     * @Route("/connect/facebook/check", name="connect_facebook_check")
+     * @Route("/connect/discord/check", name="connect_discord_check")
      */
-    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
+    public function connectCheckAction()
     {
         // ** if you want to *authenticate* the user, then
         // leave this method blank and create a Guard authenticator
         // (read below)
 
-        /** @var \KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient $client */
-        $client = $clientRegistry->getClient('discord');
+
+        $client = $this->clientRegistry->getClient('discord');
 
         try {
-            // the exact class depends on which provider you're using
-            /** @var \League\OAuth2\Client\Provider\FacebookUser $user */
+
             $user = $client->fetchUser();
 
             // do something with all this new power!
