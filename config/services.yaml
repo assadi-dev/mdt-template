@@ -22,3 +22,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Symfony\Component\HttpFoundation\Request:
+        
+    Wohali\OAuth2\Client\Provider\Discord:
+        class: Wohali\OAuth2\Client\Provider\Discord
+        arguments:
+            - {clientId: '%env(OAUTH_DISCORD_CLIENT_ID)%', clientSecret: '%env(OAUTH_DISCORD_CLIENT_SECRET)%'}
+       

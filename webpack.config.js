@@ -1,4 +1,6 @@
 const Encore = require("@symfony/webpack-encore");
+const Dotenv = require("dotenv-webpack");
+const path = require("path");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -20,7 +22,7 @@ Encore
    * Each entry will result in one JavaScript file (e.g. app.js)
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
-  .addEntry("app", "./app/app.js")
+  .addEntry("app", "./app/index.jsx")
 
   // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
   .enableStimulusBridge("./assets/controllers.json")
@@ -50,6 +52,12 @@ Encore
   //     config.plugins.push('@babel/a-babel-plugin');
   // })
 
+  .configureBabel((config) => {
+    config.plugins.push("@babel/plugin-proposal-class-properties");
+    config.plugins.push("@babel/plugin-syntax-jsx");
+    config.plugins.push("@babel/plugin-transform-runtime");
+  })
+
   // enables and configure @babel/preset-env polyfills
   .configureBabelPresetEnv((config) => {
     config.useBuiltIns = "usage";
@@ -63,7 +71,8 @@ Encore
   //.enableTypeScriptLoader()
 
   // uncomment if you use React
-  .enableReactPreset();
+  .enableReactPreset()
+  .addPlugin(new Dotenv({ path: "./.env", systemvars: true }));
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher

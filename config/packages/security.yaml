@@ -14,10 +14,16 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        #main:
+        #    lazy: true
+        #    provider: app_user_provider
+        discord:
             lazy: true
             provider: app_user_provider
-
+            custom_authenticators:
+                - App\Security\DiscordAuthenticator
+            logout :
+                path: app_logout
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

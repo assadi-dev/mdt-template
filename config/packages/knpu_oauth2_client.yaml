@@ -1,7 +1,8 @@
 knpu_oauth2_client:
     clients:
-        # configure your clients as described here: https://github.com/knpuniversity/oauth2-client-bundle#configuration
-     # must be "discord" - it activates that type!
+        discord:
+            # configure your clients as described here: https://github.com/knpuniversity/oauth2-client-bundle#configuration
+            # must be "discord" - it activates that type!
             type: discord
             # add and set these environment variables in your .env files
             client_id: '%env(OAUTH_DISCORD_CLIENT_ID)%'

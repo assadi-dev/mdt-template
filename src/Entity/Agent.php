@@ -49,9 +49,19 @@ class Agent
     private $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="agent", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="agent", cascade={"persist"}, orphanRemoval=false,  )
      */
     private $userAccount;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $faction;
+
+    /**
+     * @ORM\Column(type="string", length=55, nullable=true)
+     */
+    private $discipline;
 
     public function getId(): ?int
     {
@@ -126,6 +136,30 @@ class Agent
     public function setUserAccount(?User $userAccount): self
     {
         $this->userAccount = $userAccount;
+
+        return $this;
+    }
+
+    public function getFaction(): ?string
+    {
+        return $this->faction;
+    }
+
+    public function setFaction(string $faction): self
+    {
+        $this->faction = $faction;
+
+        return $this;
+    }
+
+    public function getDiscipline(): ?string
+    {
+        return $this->discipline;
+    }
+
+    public function setDiscipline(?string $discipline): self
+    {
+        $this->discipline = $discipline;
 
         return $this;
     }

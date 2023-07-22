@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\DiscordClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
@@ -23,7 +25,7 @@ class DiscordAuthController extends AbstractController
     /**
      * Link to this controller to start the "connect" process
      *
-     * @Route("/connect/facebook", name="connect_facebook_start")
+     * @Route("/connect/discord", name="connect_discord_start")
      */
     public function connectAction()
     {
@@ -48,15 +50,24 @@ class DiscordAuthController extends AbstractController
         // (read below)
 
 
+
+        /** @var DiscordClient $client */
         $client = $this->clientRegistry->getClient('discord');
 
         try {
 
+
             $user = $client->fetchUser();
+
+
 
             // do something with all this new power!
             // e.g. $name = $user->getFirstName();
+
+            echo "<pre>";
             var_dump($user);
+            echo "</pre>";
+
             die;
             // ...
         } catch (IdentityProviderException $e) {
@@ -66,5 +77,18 @@ class DiscordAuthController extends AbstractController
             die;
         }
     }
+
+
+
+
+    /**
+     *@Route("/logout",name="app_logout",methods="GET")
+     */
+    public function logout()
+    {
+    }
+
+
+
 
 }

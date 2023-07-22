@@ -42,10 +42,10 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime")
      */
-    private $lastConectedAt;
+    private $lastConnectedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=Agent::class, mappedBy="userAccount", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Agent::class, mappedBy="userAccount", cascade={"persist"},orphanRemoval=true)
      */
     private $agent;
 
@@ -139,14 +139,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLastConectedAt(): ?\DateTimeInterface
+    public function getLastConnectedAt(): ?\DateTimeInterface
     {
-        return $this->lastConectedAt;
+        return $this->lastConnectedAt;
     }
 
-    public function setLastConectedAt(\DateTimeInterface $lastConectedAt): self
+    public function setLastConnectedAt(\DateTimeInterface $lastConectedAt): self
     {
-        $this->lastConectedAt = $lastConectedAt;
+        $this->lastConnectedAt = $lastConectedAt;
 
         return $this;
     }
