@@ -22,7 +22,8 @@
 
     &::after{
         content:"";
-        background: rgba($color:variables.$bg-primary-color , $alpha:0.8);
+       // background: rgba($color:variables.$bg-primary-color , $alpha:0.8);
+       background: rgba(23, 24, 30, 0.8);
         width: 100%;
         position: absolute;
         top:0;

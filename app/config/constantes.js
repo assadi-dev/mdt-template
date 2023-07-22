@@ -2,9 +2,16 @@ import img_placeholder from "../assets/img/img_placeholder.jpeg";
 import unknown_male from "../assets/img/unknown-male.jpeg";
 import unknown_female from "../assets/img/unknown-female.jpeg";
 
-export const TOKEN_STORAGE_NAME = "mdt911-Offline-Token";
+export const TOKEN_STORAGE_NAME =
+  process.env.APP_NAME.toLocaleLowerCase()
+    .replace("mdt", "mdt911")
+    .replace(/\s/, "-") + "-storage";
+
 export const REFRESH_TOKEN_STORAGE_NAME = "mdt911-Offline-Refresh-Token";
-export const USER_DATA_STORAGE = "mdt911-user-storage";
+export const USER_DATA_STORAGE = TOKEN_STORAGE_NAME.replace(
+  "storage",
+  "user-storage"
+);
 export const ID_SERVICE_STORAGE = "mdt911-service-active";
 
 const protocol = location.protocol;

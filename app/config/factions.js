@@ -24,7 +24,7 @@ export const listsFactions = [
   },
 ];
 
-export const collectionFactions = {
+export const factionsCollections = {
   lspd: {
     short_name: "lspd",
     full_name: "Los Santos Police Departement",

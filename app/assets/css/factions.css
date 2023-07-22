@@ -34,7 +34,7 @@
 }
 .lspd::after, .bcso::after, .doj::after {
   content: "";
-  background: rgba(19, 27, 38, 0.8);
+  background: rgba(23, 24, 30, 0.8);
   width: 100%;
   position: absolute;
   top: 0;

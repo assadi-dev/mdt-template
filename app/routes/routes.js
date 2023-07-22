@@ -3,14 +3,7 @@ import React from "react";
 import Pages from "./import";
 import { Outlet, redirect } from "react-router-dom";
 import ThemeLayout from "../components/Layout/ThemeLayout";
-
-const ChechUserAuth = () => {
-  console.log(usercredential);
-
-  if (!usercredential.hasOwnProperty("idDiscord")) return redirect("/factions");
-
-  return <Outlet />;
-};
+import { userRedirect } from "./helper";
 
 const checkUserPermission = () => {};
 
@@ -18,7 +11,7 @@ export const routing = [
   {
     path: "/",
     element: <ThemeLayout />,
-    loader: ChechUserAuth,
+    loader: userRedirect,
     children: [
       {
         index: true,

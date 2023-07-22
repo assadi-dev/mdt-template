@@ -25,7 +25,7 @@ const SelectFaction = () => {
     document.body.classList.add(selectedFaction.short_name);
 
     return () => {
-      document.body.className = "";
+      document.body.classList.remove(selectedFaction.short_name);
     };
   }, [selectedFaction.short_name]);
 
