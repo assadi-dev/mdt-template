@@ -71,6 +71,7 @@ export const ConnecionCardHeaderTitle = styled.p`
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: 1.4px;
   font-family: var(--font-title);
   @media screen and (min-width: 992px) {
     font-size: 1.4rem;

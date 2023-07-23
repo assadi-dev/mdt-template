@@ -93,12 +93,14 @@ export const SubmittButton = styled.button`
 `;
 
 export const FormInfoContainer = styled.div`
-  margin-top: 1rem;
+  margin: 1.4rem 0;
   display: flex;
   grid-gap: 1rem;
   align-items: center;
   max-height: 30px;
-  color: rgba(255, 255, 255, 0.3);
+  line-height: 18px;
+  letter-spacing: 1.05px;
+  color: rgba(255, 255, 255, 0.5);
   small {
     font-size: 1.2rem;
   }

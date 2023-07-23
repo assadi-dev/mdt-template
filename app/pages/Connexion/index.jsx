@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { ConnexionCardAnimation } from "./Animation";
 import ConnexionCardBody from "./ConnexionCardBody";
 import ConnexionHeaderTitle from "./ConnexionHeaderTitle";
-import RegisterHeaderTitle from "../Register/RegisterHeaderTitle";
 
 const Connexion = () => {
   const { faction } = useParams();
@@ -18,7 +17,7 @@ const Connexion = () => {
         animate="show"
       >
         <ConnexionCard>
-          <RegisterHeaderTitle />
+          <ConnexionHeaderTitle />
 
           <ConnexionCardBody />
         </ConnexionCard>

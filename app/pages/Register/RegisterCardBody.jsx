@@ -162,7 +162,7 @@ const RegisterCardBody = () => {
 
             <Info
               message={
-                "Veuillez laissez ce champs vide si vous possedez pas de téléphone"
+                "Veuillez laissez ce champ vide si vous ne possedez pas de téléphone"
               }
             />
           </FormControl>
