@@ -82,11 +82,13 @@ class DiscordAuthController extends AbstractController
 
 
     /**
-     *@Route("/logout",name="app_logout",methods="GET")
+     *@Route("/revoke/token",name="revoke_token_discord",methods="GET")
      */
-    public function logout()
+    public function revoke_token()
     {
+
     }
+
 
 
 
