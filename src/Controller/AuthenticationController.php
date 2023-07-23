@@ -28,7 +28,7 @@ class AuthenticationController extends AbstractController
     /**
      *@Route("/api/register",name="app_register",methods="POST")
      */
-    public function register()
+    public function register(): Response
     {
 
         try {
@@ -51,7 +51,19 @@ class AuthenticationController extends AbstractController
             $agent->setFaction($faction);
             $agent->setPhone($phone);
             $agent->setGender($gender);
-            dd($agent);
+            $userAccount->setAgent($agent);
+            $this->entityManager->persist($userAccount);
+            $this->entityManager->flush();
+
+            $userCreated = $this->userRepository->getCredential($idDiscord);
+
+
+            $response = new Response();
+            $response->setContent(json_encode($userCreated));
+            $response->setStatusCode(Response::HTTP_CREATED);
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+
 
 
         } catch (\Throwable $th) {
@@ -64,10 +76,10 @@ class AuthenticationController extends AbstractController
             */
             $response = new Response();
             $response->setContent(json_encode([
-                "code" => 500,
+                "code" => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' =>  $message,
             ]));
-            $response->setStatusCode(500);
+            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
             $response->headers->set('Content-Type', 'application/json');
             return $response;
 
