@@ -6,7 +6,7 @@ import {
 import { AiOutlineUser } from "react-icons/ai";
 import { FaDiscord } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { redirect, useParams } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { USER_DATA_STORAGE } from "../../config/constantes";
 import useLocalStorage from "use-local-storage";
@@ -38,6 +38,7 @@ const RegisterCardBody = () => {
   const [isProcess, setIsProcess] = useState(false);
 
   const submitButtonRef = useRef(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -65,9 +66,10 @@ const RegisterCardBody = () => {
       let phone = textForNullValue(data.phone, "N/A");
 
       console.log({ idDiscord, ...cleanAgent, faction, phone });
-      /*     if (submitButtonRef.current) {
-        submitButtonRef.current.textContent = "Terminé";
-      } */
+
+      usercredential.agent = { ...cleanAgent, faction, phone };
+
+      navigate("/", { replace: true });
     }
   };
 

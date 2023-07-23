@@ -71,8 +71,7 @@ class DiscordAuthenticator extends OAuth2Authenticator implements Authentication
                 // 2) do we have a matching user by email?
                 $user = new User();
                 $user->setUsername($discordUser->getUsername())
-                ->setIdDiscord($discordUser->getId())
-                ->setLastConnectedAt($dateNow);
+                ->setIdDiscord($discordUser->getId());
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 

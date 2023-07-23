@@ -48,7 +48,8 @@ class MainController extends AbstractController
                  "id" => $user->getId(),
                 "idDiscord" => $user->getUserIdentifier(),
                 "roles" => $user->getRoles(),
-                "agent"=>$user->getAgent()
+                "agent"=>$user->getAgent(),
+                "isValidate"=>false
 
             ];
         }

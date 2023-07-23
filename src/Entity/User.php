@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use DateTime;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -15,6 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     use TimestampableEntity;
+
 
     /**
      * @ORM\Id
@@ -48,6 +50,20 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity=Agent::class, mappedBy="userAccount", cascade={"persist"},orphanRemoval=true)
      */
     private $agent;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValidate;
+
+
+    public function __construct()
+    {
+        $this->isValidate = false;
+        $this->lastConnectedAt= new DateTime();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -169,6 +185,18 @@ class User implements UserInterface
         }
 
         $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function isIsValidate(): ?bool
+    {
+        return $this->isValidate;
+    }
+
+    public function setIsValidate(bool $isValidate): self
+    {
+        $this->isValidate = $isValidate;
 
         return $this;
     }
