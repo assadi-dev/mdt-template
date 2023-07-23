@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Agent;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +14,13 @@ class AuthenticationController extends AbstractController
 {
     private $request;
     private $entityManager;
+    private $userRepository;
 
-    public function __construct(Request $request, EntityManagerInterface $entityManager)
+    public function __construct(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $this->request = $request;
         $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
 
     }
 
@@ -30,11 +34,24 @@ class AuthenticationController extends AbstractController
         try {
             $body = json_decode($this->request->getContent(), true);
 
-            dd($body);
+
 
             $idDiscord = $body["idDiscord"];
             $firstname = $body["firstname"];
+            $name = $body["name"];
+            $faction = $body["faction"];
+            $phone = $body["phone"];
+            $gender = $body["gender"];
 
+
+            $userAccount =  $this->userRepository->findOneBy(["idDiscord"=> $idDiscord  ]);
+            $agent = new Agent();
+            $agent->setFirstname($firstname);
+            $agent->setName($name);
+            $agent->setFaction($faction);
+            $agent->setPhone($phone);
+            $agent->setGender($gender);
+            dd($agent);
 
 
         } catch (\Throwable $th) {

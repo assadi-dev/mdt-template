@@ -24,12 +24,12 @@ class Agent
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $name;
 
@@ -61,7 +61,7 @@ class Agent
     /**
      * @ORM\Column(type="string", length=55, nullable=true)
      */
-    private $discipline;
+    private $division;
 
     public function getId(): ?int
     {
@@ -152,14 +152,14 @@ class Agent
         return $this;
     }
 
-    public function getDiscipline(): ?string
+    public function getDivision(): ?string
     {
-        return $this->discipline;
+        return $this->division;
     }
 
-    public function setDiscipline(?string $discipline): self
+    public function setDivision(?string $division): self
     {
-        $this->discipline = $discipline;
+        $this->division= $division;
 
         return $this;
     }
