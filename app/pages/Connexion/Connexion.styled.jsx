@@ -10,7 +10,7 @@ export const ConnexionPageWrapper = styled.div`
 `;
 
 export const ConnexionCard = styled.div`
-  margin: 10% auto;
+  margin: 8% auto;
   display: grid;
   grid-template-rows: 80px 0.75fr;
   min-height: 200px;
@@ -140,7 +140,7 @@ export const DiscordButton = styled.button`
   grid-gap: 1rem;
   transition: all 0.15s;
   text-transform: uppercase;
-  font-family: var(--font-title);
+  //font-family: var(--font-title);
   letter-spacing: 1cap.5;
   &:hover {
     background-color: #4752c4;

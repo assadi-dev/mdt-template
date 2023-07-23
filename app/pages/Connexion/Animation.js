@@ -1,6 +1,6 @@
 export const ConnexionCardAnimation = {
   hidden: {
-    y: 25,
+    y: 15,
     opacity: 0,
     transition: {
       duration: 0.35,

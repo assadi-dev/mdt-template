@@ -28,7 +28,7 @@ export const routing = [
     element: <Pages.Connexion />,
   },
   {
-    path: "inscription",
-    element: <Pages.SelectFaction />,
+    path: "enregistrement/:faction",
+    element: <Pages.Register />,
   },
 ];

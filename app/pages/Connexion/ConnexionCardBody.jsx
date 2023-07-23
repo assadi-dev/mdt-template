@@ -32,7 +32,7 @@ const ConnexionCardBody = () => {
 
       setIdentiy({ agentIdentity, faction });
 
-      // return location.replace("/connect/discord");
+      return location.replace("/connect/discord");
     }
   };
 
@@ -69,7 +69,7 @@ const ConnexionCardBody = () => {
           </ErrorMessage>
         </FormControl>
 
-        <DiscordButton>
+        <DiscordButton type="submit">
           <span>
             <FaDiscord />
           </span>
