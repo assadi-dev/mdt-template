@@ -8,7 +8,6 @@ import { FaDiscord } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { redirect, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ErrorConnexionApparition } from "./Animation";
 import { USER_DATA_STORAGE } from "../../config/constantes";
 import useLocalStorage from "use-local-storage";
 import { BsGenderAmbiguous, BsPhone } from "react-icons/bs";
@@ -20,6 +19,7 @@ import {
   SubmittButton,
 } from "./Register.styled";
 import { retrieveUserFaction, retrieveUseridentity } from "../Connexion/helper";
+import { ErrorConnexionApparition } from "../Connexion/Animation";
 
 const RegisterCardBody = () => {
   const { faction } = useParams();
@@ -42,8 +42,6 @@ const RegisterCardBody = () => {
     if (data) {
       const { agentIdentity } = data;
       console.log(data);
-
-      // return location.replace("/connect/discord");
     }
   };
 

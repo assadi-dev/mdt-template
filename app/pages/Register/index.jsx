@@ -24,7 +24,6 @@ const Register = () => {
       >
         <ConnexionCard>
           <RegisterHeaderTitle />
-
           <RegisterCardBody />
         </ConnexionCard>
       </motion.div>
