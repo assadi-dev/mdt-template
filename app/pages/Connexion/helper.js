@@ -1,4 +1,5 @@
 import { USER_DATA_STORAGE } from "../../config/constantes";
+import { firsLetterCapitalise } from "../../services/utils/textUtils";
 
 USER_DATA_STORAGE;
 
@@ -16,4 +17,14 @@ export const retrieveUserFaction = () => {
   const storage = JSON.parse(localStorage.getItem(USER_DATA_STORAGE));
 
   return storage.faction;
+};
+
+export const retrieveSubmitUseridentity = (userIdentity) => {
+  if (!userIdentity) return;
+
+  const agent = userIdentity.split(" ");
+  return {
+    firstname: firsLetterCapitalise(agent[0]),
+    name: firsLetterCapitalise(agent[1]),
+  };
 };

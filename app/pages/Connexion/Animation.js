@@ -11,6 +11,8 @@ export const ConnexionCardAnimation = {
     opacity: 1,
     transition: {
       duration: 0.35,
+      staggerChildren: 0.15,
+      when: "beforeChildren",
     },
   },
 };
@@ -30,4 +32,21 @@ export const ErrorConnexionApparition = {
       duration: 0.15,
     },
   },
+};
+
+export const InputAnimation = {
+  hidden: (stagger) => ({
+    x: -5,
+    opacity: 0,
+    transition: {
+      duration: 0.35,
+    },
+  }),
+  show: (stagger) => ({
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+    },
+  }),
 };

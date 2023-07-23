@@ -91,3 +91,23 @@ export const SubmittButton = styled.button`
     font-size: 1.2rem;
   }
 `;
+
+export const FormInfoContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  grid-gap: 1rem;
+  align-items: center;
+  max-height: 30px;
+  color: rgba(255, 255, 255, 0.3);
+  small {
+    font-size: 1.2rem;
+  }
+  span {
+    width: 25px;
+    height: 25px;
+    svg: {
+      width: 25px;
+      height: 25px;
+    }
+  }
+`;
