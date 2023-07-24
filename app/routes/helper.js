@@ -3,7 +3,7 @@ import { Outlet, redirect } from "react-router-dom";
 import { USER_DATA_STORAGE } from "../config/constantes";
 
 export const userRedirect = () => {
-  console.log(usercredential);
+  // console.log(usercredential);
 
   if (!usercredential.hasOwnProperty("idDiscord")) return redirect("/factions");
   if (localStorage.getItem(USER_DATA_STORAGE)) {
