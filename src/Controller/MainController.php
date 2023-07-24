@@ -50,7 +50,6 @@ class MainController extends AbstractController
             $user = $this->userRepository->findOneBy(["idDiscord"=>$identifier]);
 
 
-
             if(empty($user->getAgent())) {
                 return [
                     "id" => $user->getId(),
