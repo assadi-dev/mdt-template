@@ -9,6 +9,7 @@ import {
 import { APP_NAME } from "../../config/constantes";
 import FactionItems from "./FactionItems";
 import { listsFactions } from "../../config/factions";
+import IndicatorFaction from "./IndicatorFaction";
 
 const SelectFaction = () => {
   const [selectedFaction, useSelectedFaction] = useState({
@@ -48,9 +49,7 @@ const SelectFaction = () => {
           <FactionItems />
         )}
       </SelectFactionRow>
-      <SelectFactionIndicatorCard>
-        {selectedFaction.full_name}
-      </SelectFactionIndicatorCard>
+      <IndicatorFaction selectedFaction={selectedFaction} />
     </SelectFactionsWrapper>
   );
 };

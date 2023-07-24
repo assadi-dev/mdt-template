@@ -49,16 +49,20 @@ export const SelectFactionIndicatorCard = styled.div`
   text-transform: uppercase;
   transition: all 0.35s;
   @media screen and (min-width: 992px) {
-    width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    width: 480px;
     padding: 1.8rem;
     border-radius: 10px;
   }
+  text-align: center;
+  .row-selected-faction {
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    align-items: center;
+    grid-gap: 1rem;
+  }
 `;
 
-export const FactionItem = styled.div`
+export const FactionItemContainer = styled.div`
   border-radius: 100%;
   width: 100px;
   height: 100px;
@@ -68,7 +72,7 @@ export const FactionItem = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: ${({ img }) => (img ? `url(${img})` : ``)};
+  background-image: ${({ emblem }) => (emblem ? `url(${emblem})` : ``)};
   cursor: pointer;
   &:hover {
     box-shadow: 0 0 25px 3px rgba(255, 255, 255, 0.45);
@@ -78,5 +82,25 @@ export const FactionItem = styled.div`
   @media screen and (min-width: 992px) {
     width: 200px;
     height: 200px;
+  }
+`;
+
+export const EmblemMini = styled.div`
+  display: none;
+  @media screen and (min-width: 992px) {
+    display: block;
+    height: 45px;
+    width: 45px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: ${({ img }) => (img ? `url(${img})` : ``)};
+    justify-self: center;
+    :first-of-type {
+      justify-self: start;
+    }
+    :last-of-type {
+      justify-self: end;
+    }
   }
 `;

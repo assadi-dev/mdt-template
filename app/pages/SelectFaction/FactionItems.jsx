@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
-import { FactionItem } from "./SelectFaction.styled";
+import { FactionItemContainer } from "./SelectFaction.styled";
 import { Link } from "react-router-dom";
 
-const FactionItems = ({ faction, index, onSelectFaction }) => {
+const FactionItems = ({ faction, index, onSelectFaction, ...props }) => {
   const src = faction ? faction.emblem : "";
 
   const handleMouseOver = useCallback(() => {
@@ -11,7 +11,7 @@ const FactionItems = ({ faction, index, onSelectFaction }) => {
 
   return (
     <Link to={`/connexion/${faction.short_name}`}>
-      <FactionItem img={src} onMouseOver={handleMouseOver}></FactionItem>
+      <FactionItemContainer emblem={src} onMouseOver={handleMouseOver} />
     </Link>
   );
 };
