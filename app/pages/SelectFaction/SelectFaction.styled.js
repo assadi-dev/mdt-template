@@ -48,9 +48,14 @@ export const SelectFactionIndicatorCard = styled.div`
   margin: 2rem auto 2rem auto;
   text-transform: uppercase;
   transition: all 0.35s;
+  p {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    letter-spacing: 1.5px;
+  }
   @media screen and (min-width: 992px) {
     width: 480px;
-    padding: 1.8rem;
+    padding: 1.8rem 1.3rem;
     border-radius: 10px;
   }
   text-align: center;
