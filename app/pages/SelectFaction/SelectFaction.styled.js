@@ -94,8 +94,8 @@ export const EmblemMini = styled.div`
   display: none;
   @media screen and (min-width: 992px) {
     display: block;
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
