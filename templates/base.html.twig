@@ -26,7 +26,7 @@
         {% block body %}{% endblock %}
 
 <script  >
-	const usercredential = {{ userData|json_encode|raw }};
+	let usercredential = {{ userData|json_encode|raw }};
    
 </script>
 

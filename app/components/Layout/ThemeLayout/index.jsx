@@ -1,11 +1,21 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import {
+  ThemeLayoutWrapper,
+  ThemeMainLayoutWrapper,
+} from "./ThemeLayout.styled";
+import Sidebar from "./Navigations/Sidebar";
+import Navbar from "./Navigations/Navbar";
 
 const ThemeLayout = () => {
   return (
-    <div>
-      <Outlet />
-    </div>
+    <ThemeLayoutWrapper>
+      <Sidebar />
+      <ThemeMainLayoutWrapper>
+        <Navbar />
+        <Outlet />
+      </ThemeMainLayoutWrapper>
+    </ThemeLayoutWrapper>
   );
 };
 

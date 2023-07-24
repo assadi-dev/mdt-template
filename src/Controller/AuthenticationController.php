@@ -54,10 +54,7 @@ class AuthenticationController extends AbstractController
             $userAccount->setAgent($agent);
             $this->entityManager->persist($userAccount);
             $this->entityManager->flush();
-
             $userCreated = $this->userRepository->getCredential($idDiscord);
-
-
             $response = new Response();
             $response->setContent(json_encode($userCreated));
             $response->setStatusCode(Response::HTTP_CREATED);

@@ -3,18 +3,21 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
     private $userRepository;
+    private $serializer;
 
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, SerializerInterface $serializer)
     {
         $this->userRepository = $userRepository;
+        $this->serializer = $serializer;
     }
 
 
@@ -39,19 +42,32 @@ class MainController extends AbstractController
     public function getUserData()
     {
 
+
         if ($this->getUser()) {
+            $userCredentials = null;
 
             $identifier = $this->getUser()->getUserIdentifier();
-
             $user = $this->userRepository->findOneBy(["idDiscord"=>$identifier]);
-            return [
-                 "id" => $user->getId(),
-                "idDiscord" => $user->getUserIdentifier(),
-                "roles" => $user->getRoles(),
-                "agent"=>$user->getAgent(),
-                "isValidate"=>false
 
-            ];
+
+
+            if(empty($user->getAgent())) {
+                return [
+                    "id" => $user->getId(),
+                    "idDiscord" => $user->getUserIdentifier(),
+                    "roles" => $user->getRoles(),
+                    "idAgent"=>$user->getAgent(),
+                    "isValidate"=>$user->isIsValidate()
+
+                ];
+            }
+
+            $userCredentials  = $this->userRepository->getCredential($identifier) ;
+            $userCredentials["roles"] = $this->getUser()->getRoles();
+            return $userCredentials ;
+
+
+
         }
         return [];
 

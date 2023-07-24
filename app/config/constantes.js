@@ -24,6 +24,8 @@ export const APP_NAME = process.env.APP_NAME;
 
 export const API_BASE_URL = protocol + "//" + process.env.APP_URLBACKEND;
 
+export const API_INSTANCE = API_BASE_URL + "/api";
+
 export const blank_img = img_placeholder;
 export const user_mal = unknown_male;
 export const user_female = unknown_female;

@@ -10,7 +10,7 @@ export const ConnexionPageWrapper = styled.div`
 `;
 
 export const ConnexionCard = styled.div`
-  margin: 8% auto;
+  margin: 6% auto;
   display: grid;
   grid-template-rows: 80px 0.75fr;
   min-height: 200px;
@@ -58,8 +58,8 @@ export const EmblemMini = styled.span`
   display: none;
   @media screen and (min-width: 992px) {
     display: block;
-    height: 35px;
-    width: 35px;
+    height: 45px;
+    width: 45px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

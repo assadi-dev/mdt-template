@@ -3,9 +3,7 @@ import React from "react";
 import Pages from "./import";
 import { Outlet, redirect } from "react-router-dom";
 import ThemeLayout from "../components/Layout/ThemeLayout";
-import { userRedirect } from "./helper";
-
-const checkUserPermission = () => {};
+import { checkUserPermission, userRedirect } from "./helper";
 
 export const routing = [
   {
