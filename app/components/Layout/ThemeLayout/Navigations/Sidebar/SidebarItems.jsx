@@ -15,8 +15,6 @@ const SidebarItems = ({ item }) => {
     setOpen((current) => (current = !current));
   };
 
-  console.log(item);
-
   if (item.childrens) {
     return (
       <>
@@ -32,6 +30,7 @@ const SidebarItems = ({ item }) => {
               <DropDownSubItemsList>
                 {item.childrens.map((child, index) => (
                   <motion.div
+                    key={index}
                     variants={menuItemAnimation}
                     animate="show"
                     initial="hidden"

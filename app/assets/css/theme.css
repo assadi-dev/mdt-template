@@ -43,6 +43,9 @@
   background-color: #131B26;
   min-height: 100vh;
 }
+.theme-lspd .navbar {
+  background-color: #17181E;
+}
 .theme-lspd .btn {
   background-color: #2B7DE9;
   padding: 10px 15px;

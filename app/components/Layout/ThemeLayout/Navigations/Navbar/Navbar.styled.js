@@ -10,7 +10,7 @@ export const NavbarWrapper = styled.nav`
   grid-template-columns: 1fr;
   align-items: center;
   width: 100%;
-
+  z-index: 25;
   // box-shadow: 25px -10px 25px 0px rgba(255, 255, 255, 0.15);
 `;
 

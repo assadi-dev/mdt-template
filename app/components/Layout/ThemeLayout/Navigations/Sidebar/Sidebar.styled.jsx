@@ -7,7 +7,7 @@ export const SidebarHeader = styled.div`
   width: 100%;
   height: 100px;
   margin: 22px 0;
-  background-image: url(${url});
+  /*background-image: url(${url});*/
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -21,6 +21,7 @@ export const SibarListCOntainer = styled.ul`
   overflow-y: auto;
   .sidebar-selected {
     background-color: rgba(255, 255, 255, 0.3);
+    padding: 0.6rem 0.8rem;
   }
 `;
 
@@ -40,13 +41,13 @@ export const SibartItemRow = styled.li`
   padding: 0 0.8rem;
   overflow: hidden;
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   letter-spacing: 0.8px;
   cursor: pointer;
   a {
     display: block;
     width: 100%;
-    padding: 0.6rem 0.8rem;
+
     border-radius: 5px;
   }
 `;
@@ -62,5 +63,6 @@ export const DropDownSubItemsList = styled.ul`
   font-size: 1.26rem;
   li {
     margin-bottom: 0;
+    padding: 0.6rem 0.8rem;
   }
 `;
