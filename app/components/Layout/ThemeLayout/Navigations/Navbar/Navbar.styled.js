@@ -15,12 +15,34 @@ export const NavbarWrapper = styled.nav`
 `;
 
 export const UserProfileContainer = styled.div`
-  width: 25%;
+  max-width: 25%;
   justify-self: end;
   display: flex;
-  align-items: center;
   grid-gap: 10px;
   justify-content: flex-end;
+  align-items: center;
+  margin: 0px 18px;
+  cursor: pointer;
+  position: relative;
+
+  .dropdown-user-chevron {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 1rem 0 0;
+    display: flex;
+    align-items: center;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .dropdown-absolute {
+    position: absolute;
+    right: 0;
+    top: 130%;
+    width: 100%;
+  }
 `;
 
 export const UsernameStyle = styled.p`
@@ -31,7 +53,7 @@ export const UsernameStyle = styled.p`
   margin: 0px 15px;
   max-width: 280px;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
 `;
 
@@ -46,7 +68,7 @@ export const GradeNameStyle = styled.p`
   min-width: 80px;
   max-width: 180px;
   text-overflow: ellipsis;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
 `;
 
@@ -57,4 +79,18 @@ export const Userphoto = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+export const UsernameTextRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const DropdownContentWrapper = styled.div`
+  padding: 0.5rem;
+  min-height: 125px;
+  background-color: var(--background-color-dark);
+  font-weight: 500;
+  box-shadow: rgba(255, 255, 255, 0.314) 0px 0px 3px 0px;
+  border-radius: 5px;
 `;

@@ -15,6 +15,24 @@ export const routing = [
         index: true,
         element: <Pages.Home />,
       },
+      {
+        path: "services",
+        element: (
+          <>
+            <Outlet />
+          </>
+        ),
+        children: [
+          {
+            path: "dispatch",
+            element: (
+              <>
+                <h1>Dispatch</h1>
+              </>
+            ),
+          },
+        ],
+      },
     ],
   },
   {
