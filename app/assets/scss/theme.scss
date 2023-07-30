@@ -61,6 +61,11 @@
     }
 
 
+    .dropdown-menu{
+        background-color: variables.$lspd-secondary-color;
+       // box-shadow: variables.$lspd-shadow-color;
+
+    }
     
 
 
@@ -130,7 +135,10 @@
         }
     }
 
-
+    .dropdown-menu{
+        background-color:  variables.$bcso-secondary-color;
+       // box-shadow: variables.$bcso-shadow-color;
+    }
 
     
 }
@@ -197,7 +205,7 @@
     }
         .dropdown-menu{
             background-color: variables.$doj-secondary-color;
-            box-shadow: variables.$doj-shadow-color;
+           // box-shadow: variables.$doj-shadow-color;
         }
     
 }

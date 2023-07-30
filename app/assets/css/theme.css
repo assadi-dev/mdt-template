@@ -62,6 +62,9 @@
 .theme-lspd .btn:hover {
   box-shadow: rgba(43, 125, 233, 0.8) 0px 0px 10px;
 }
+.theme-lspd .dropdown-menu {
+  background-color: #131B26;
+}
 
 /**** End ******/
 /**** Theme BCSO ***/
@@ -111,6 +114,9 @@
 }
 .theme-bcso .btn:hover {
   box-shadow: rgba(106, 108, 96, 0.8) 0px 0px 10px 1px;
+}
+.theme-bcso .dropdown-menu {
+  background-color: #3D3E36;
 }
 
 .theme-doj {
@@ -162,5 +168,4 @@
 }
 .theme-doj .dropdown-menu {
   background-color: #4E4E4E;
-  box-shadow: rgba(78, 78, 78, 0.3) 0px 0px 10px 1px;
 }/*# sourceMappingURL=theme.css.map */

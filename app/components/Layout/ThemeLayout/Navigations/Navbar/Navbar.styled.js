@@ -89,7 +89,6 @@ export const UsernameTextRow = styled.div`
 export const DropdownContentWrapper = styled.div`
   padding: 0.5rem;
   min-height: 125px;
-  background-color: var(--background-color-dark);
   font-weight: 500;
   box-shadow: rgba(255, 255, 255, 0.314) 0px 0px 3px 0px;
   border-radius: 5px;
