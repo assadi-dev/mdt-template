@@ -1,20 +1,22 @@
 @use 'variables';
 
+
+/**** Theme LSPD ******/
 .theme-lspd{
     background-color: variables.$lspd-bg-color;
     min-height: 100vh;
     width: 100%;
 
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 5px;
     }
     
-    ::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track {
         background-color: var(--color-blue-opacity-50);
         border-radius: 100px;
     }
     
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         background-color: var(--color-blue-primary);
         border-radius: 100px;
@@ -35,6 +37,9 @@
 
         background-color: variables.$lspd-secondary-color;
         min-height: 100vh;
+        .sidebar-selected,.active,.selected{
+            background-color: rgba($color: variables.$lspd-primary-color, $alpha: 0.5);
+        }
 
     }
 
@@ -49,111 +54,150 @@
         width: fit-content;
         height: fit-content;
         transition: all 0.35s ease 0s;
+        &:hover
+        {
+         box-shadow: rgba(43, 125, 233, 0.8) 0px 0px 10px 
+        }
     }
-   &:hover
-   {
-    box-shadow: rgba(43, 125, 233, 0.8) 0px 0px 10px 
-   }
+
 
     
 
 
 }
 
+/**** End ******/
 
+
+
+/**** Theme BCSO ***/
 .theme-bcso{
 
-    background-color: variables.$lspd-bg-color;
+    background-color: variables.$bcso-bg-color;
     min-height: 100vh;
     width: 100%;
 
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 5px;
     }
-    
-    ::-webkit-scrollbar-track {
-        background-color: var(--color-blue-opacity-50);
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.5);
         border-radius: 100px;
     }
     
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: var(--color-blue-primary);
+        background-color: rgba(0, 0, 0, 0.3);
         border-radius: 100px;
     }
     
     html {
         -ms-overflow-style: none;
-        scrollbar-color: var(--color-blue-primary) var(--color-blue-opacity-50);
+        scrollbar-color: rgba(131, 130, 126, 0.3137254902) rgba(0, 0, 0, 0.3);
         scrollbar-width: thin;
     }
     
-    ::-webkit-calendar-picker-indicator {
+    &::-webkit-calendar-picker-indicator {
         filter: invert(1);
     }
 
 
     .sidebar{
 
+        background-color:  variables.$bcso-secondary-color;
+        min-height: 100vh;
+        .sidebar-selected,.active,.selected{
+            background-color: rgba($color: variables.$bcso-primary-color, $alpha: 0.5);
+        }
+
     }
 
     .navbar{
-        
+        background-color: variables.$bcso-bg-color;
     }
 
     .btn
     {
-
+        background-color: variables.$bcso-primary-color;
+        padding: 10px 15px;
+        width: fit-content;
+        height: fit-content;
+        transition: all 0.35s ease 0s;
+        &:hover
+        {
+         box-shadow: variables.$bcso-shadow-color;
+        }
     }
+
+
 
     
 }
 
 
-.theme-doj{
+.theme-doj
+{
 
-    background-color: variables.$lspd-bg-color;
+    background-color: variables.$doj-bg-color;
     min-height: 100vh;
     width: 100%;
 
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 5px;
     }
     
-    ::-webkit-scrollbar-track {
-        background-color: var(--color-blue-opacity-50);
+    &::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.3);
         border-radius: 100px;
     }
     
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: var(--color-blue-primary);
+        background-color: #fff;
         border-radius: 100px;
     }
     
     html {
         -ms-overflow-style: none;
-        scrollbar-color: var(--color-blue-primary) var(--color-blue-opacity-50);
+        scrollbar-color: #6A6C60 rgba(0, 0, 0, 0.3);
         scrollbar-width: thin;
     }
     
-    ::-webkit-calendar-picker-indicator {
+    &::-webkit-calendar-picker-indicator {
         filter: invert(1);
     }
 
-
     .sidebar{
+
+        background-color:  variables.$doj-secondary-color;
+        min-height: 100vh;
+        .sidebar-selected,.active,.selected{
+            background-color: rgba($color: variables.$doj-primary-color, $alpha: 0.5);
+        }
 
     }
 
     .navbar{
-        
+        background-color: variables.$doj-bg-color;
     }
 
     .btn
     {
-
+        background-color: variables.$bcso-primary-color;
+        padding: 10px 15px;
+        width: fit-content;
+        height: fit-content;
+        transition: all 0.35s ease 0s;
+        &:hover
+        {
+         box-shadow: variables.$bcso-shadow-color;
+        }
+     
     }
-
+        .dropdown-menu{
+            background-color: variables.$doj-secondary-color;
+            box-shadow: variables.$doj-shadow-color;
+        }
     
 }

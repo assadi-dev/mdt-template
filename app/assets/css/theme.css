@@ -14,19 +14,20 @@
   font-size: 1.6rem;
 }
 
+/**** Theme LSPD ******/
 .theme-lspd {
   background-color: #17181E;
   min-height: 100vh;
   width: 100%;
 }
-.theme-lspd ::-webkit-scrollbar {
+.theme-lspd::-webkit-scrollbar {
   width: 5px;
 }
-.theme-lspd ::-webkit-scrollbar-track {
+.theme-lspd::-webkit-scrollbar-track {
   background-color: var(--color-blue-opacity-50);
   border-radius: 100px;
 }
-.theme-lspd ::-webkit-scrollbar-thumb {
+.theme-lspd::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: var(--color-blue-primary);
   border-radius: 100px;
@@ -43,6 +44,9 @@
   background-color: #131B26;
   min-height: 100vh;
 }
+.theme-lspd .sidebar .sidebar-selected, .theme-lspd .sidebar .active, .theme-lspd .sidebar .selected {
+  background-color: rgba(43, 125, 233, 0.5);
+}
 .theme-lspd .navbar {
   background-color: #17181E;
 }
@@ -55,57 +59,108 @@
   height: fit-content;
   transition: all 0.35s ease 0s;
 }
-.theme-lspd:hover {
+.theme-lspd .btn:hover {
   box-shadow: rgba(43, 125, 233, 0.8) 0px 0px 10px;
 }
 
+/**** End ******/
+/**** Theme BCSO ***/
 .theme-bcso {
-  background-color: #17181E;
+  background-color: #6A6C60;
   min-height: 100vh;
   width: 100%;
 }
-.theme-bcso ::-webkit-scrollbar {
+.theme-bcso::-webkit-scrollbar {
   width: 5px;
 }
-.theme-bcso ::-webkit-scrollbar-track {
-  background-color: var(--color-blue-opacity-50);
+.theme-bcso::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 100px;
 }
-.theme-bcso ::-webkit-scrollbar-thumb {
+.theme-bcso::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: var(--color-blue-primary);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 100px;
 }
 .theme-bcso html {
   -ms-overflow-style: none;
-  scrollbar-color: var(--color-blue-primary) var(--color-blue-opacity-50);
+  scrollbar-color: rgba(131, 130, 126, 0.3137254902) rgba(0, 0, 0, 0.3);
   scrollbar-width: thin;
 }
-.theme-bcso ::-webkit-calendar-picker-indicator {
+.theme-bcso::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+.theme-bcso .sidebar {
+  background-color: #3D3E36;
+  min-height: 100vh;
+}
+.theme-bcso .sidebar .sidebar-selected, .theme-bcso .sidebar .active, .theme-bcso .sidebar .selected {
+  background-color: rgba(106, 108, 96, 0.5);
+}
+.theme-bcso .navbar {
+  background-color: #6A6C60;
+}
+.theme-bcso .btn {
+  background-color: #6A6C60;
+  padding: 10px 15px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  transition: all 0.35s ease 0s;
+}
+.theme-bcso .btn:hover {
+  box-shadow: rgba(106, 108, 96, 0.8) 0px 0px 10px 1px;
+}
+
 .theme-doj {
-  background-color: #17181E;
+  background-color: #6A6A6A;
   min-height: 100vh;
   width: 100%;
 }
-.theme-doj ::-webkit-scrollbar {
+.theme-doj::-webkit-scrollbar {
   width: 5px;
 }
-.theme-doj ::-webkit-scrollbar-track {
-  background-color: var(--color-blue-opacity-50);
+.theme-doj::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 100px;
 }
-.theme-doj ::-webkit-scrollbar-thumb {
+.theme-doj::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: var(--color-blue-primary);
+  background-color: #fff;
   border-radius: 100px;
 }
 .theme-doj html {
   -ms-overflow-style: none;
-  scrollbar-color: var(--color-blue-primary) var(--color-blue-opacity-50);
+  scrollbar-color: #6A6C60 rgba(0, 0, 0, 0.3);
   scrollbar-width: thin;
 }
-.theme-doj ::-webkit-calendar-picker-indicator {
+.theme-doj::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+.theme-doj .sidebar {
+  background-color: #4E4E4E;
+  min-height: 100vh;
+}
+.theme-doj .sidebar .sidebar-selected, .theme-doj .sidebar .active, .theme-doj .sidebar .selected {
+  background-color: rgba(106, 106, 106, 0.5);
+}
+.theme-doj .navbar {
+  background-color: #6A6A6A;
+}
+.theme-doj .btn {
+  background-color: #6A6C60;
+  padding: 10px 15px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  transition: all 0.35s ease 0s;
+}
+.theme-doj .btn:hover {
+  box-shadow: rgba(106, 108, 96, 0.8) 0px 0px 10px 1px;
+}
+.theme-doj .dropdown-menu {
+  background-color: #4E4E4E;
+  box-shadow: rgba(78, 78, 78, 0.3) 0px 0px 10px 1px;
 }/*# sourceMappingURL=theme.css.map */

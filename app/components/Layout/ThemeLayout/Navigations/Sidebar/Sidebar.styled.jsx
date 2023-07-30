@@ -20,7 +20,6 @@ export const SibarListCOntainer = styled.ul`
   overflow-x: hidden;
   overflow-y: auto;
   .sidebar-selected {
-    background-color: rgba(255, 255, 255, 0.3);
     padding: 0.6rem 0.8rem;
   }
 `;
@@ -30,7 +29,7 @@ export const SideBarItemsContainer = styled.div`
   min-height: 25px;
   width: 100%;
   font-size: 1rem;
-  text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.8);
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.9);
 `;
 
 export const SibartItemRow = styled.li`

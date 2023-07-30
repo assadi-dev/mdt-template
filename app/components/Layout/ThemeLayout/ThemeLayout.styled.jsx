@@ -17,7 +17,7 @@ export const SidebarWrapper = styled.div`
   left: 0;
   top: 0;
   background-color: var(--background-color-dark);
-  box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5);
 `;
 
 export const ThemeMainLayoutWrapper = styled.div`
