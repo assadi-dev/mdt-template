@@ -29,3 +29,7 @@ export const ThemeMainLayoutWrapper = styled.div`
     grid-template-rows: ${navbarHeight + 20}px 1fr;
   }
 `;
+
+export const MainContent = styled.div`
+  padding: 1rem 1.4rem;
+`;

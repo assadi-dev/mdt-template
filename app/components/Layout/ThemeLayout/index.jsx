@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { Outlet } from "react-router-dom";
 import {
+  MainContent,
   ThemeLayoutWrapper,
   ThemeMainLayoutWrapper,
 } from "./ThemeLayout.styled";
@@ -25,7 +26,9 @@ const ThemeLayout = () => {
       <Sidebar />
       <ThemeMainLayoutWrapper>
         <Navbar />
-        <Outlet />
+        <MainContent>
+          <Outlet />
+        </MainContent>
       </ThemeMainLayoutWrapper>
     </ThemeLayoutWrapper>
   );
