@@ -94,3 +94,26 @@ export const DropdownContentWrapper = styled.div`
   box-shadow: rgba(255, 255, 255, 0.314) 0px 0px 3px 0px;
   border-radius: 5px;
 `;
+
+export const UserDropDownListContentWrapper = styled.ul`
+  margin: 1.2rem 0 0 1.2rem;
+  li {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+    margin-bottom: 1.3rem;
+    :last-of-type {
+      margin-bottom: 0;
+    }
+    grid-gap: 1.2rem;
+    span {
+      width: 25px;
+      height: 25px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+`;

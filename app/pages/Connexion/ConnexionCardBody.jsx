@@ -15,6 +15,7 @@ import { ErrorConnexionApparition, InputAnimation } from "./Animation";
 import { USER_DATA_STORAGE } from "../../config/constantes";
 import useLocalStorage from "use-local-storage";
 import SpinnerButton from "../../components/Shared/Loading/SpinnerButton";
+import { FiUser } from "react-icons/fi";
 
 const ConnexionCardBody = () => {
   const { faction } = useParams();
@@ -52,7 +53,7 @@ const ConnexionCardBody = () => {
             <InputConnextionWrapper>
               <span>
                 {" "}
-                <AiOutlineUser />
+                <FiUser />
               </span>
               <input
                 type="text"

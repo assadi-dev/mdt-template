@@ -17,6 +17,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { USER_DATA_STORAGE } from "../../config/constantes";
 import useLocalStorage from "use-local-storage";
 import { BsGenderAmbiguous, BsPhone } from "react-icons/bs";
+import { FiUser } from "react-icons/fi";
 import { MdOutlineLocalPolice } from "react-icons/md";
 import {
   ErrorMessage,
@@ -119,7 +120,7 @@ const RegisterCardBody = () => {
             <InputConnextionWrapper>
               <span>
                 {" "}
-                <AiOutlineUser />
+                <FiUser />
               </span>
               <input
                 type="text"

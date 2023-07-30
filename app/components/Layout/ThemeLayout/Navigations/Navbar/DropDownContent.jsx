@@ -2,6 +2,7 @@ import React from "react";
 import { DropdownContentWrapper } from "./Navbar.styled";
 import { motion } from "framer-motion";
 import { dropdownAnimation } from "./Animation";
+import DropDownUserList from "./DropDownUserList";
 
 const DropDownContent = () => {
   return (
@@ -13,7 +14,7 @@ const DropDownContent = () => {
       exit="hidden"
     >
       <DropdownContentWrapper className="dropdown-menu">
-        DropDownContent
+        <DropDownUserList />
       </DropdownContentWrapper>
     </motion.div>
   );
