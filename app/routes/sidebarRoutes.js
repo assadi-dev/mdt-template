@@ -7,12 +7,24 @@ export const sidebarRoutes = [
     name: "Services",
     childrens: [
       {
-        name: "Dispatch",
-        path: "/services/dispatch",
-      },
-      {
         name: "Feuilles d'heures",
         path: "/services/feuille-d-heures",
+      },
+      {
+        name: "Trombinoscop",
+        path: "/services/trombinoscop",
+      },
+      {
+        name: "Demande comptabilité",
+        path: "/services/demande-comptabilite",
+      },
+      {
+        name: "Saisies",
+        path: "/services/saisie",
+      },
+      {
+        name: "Attribution patrouilleur",
+        path: "/services/attribution-patrouilleur",
       },
     ],
   },
@@ -20,8 +32,16 @@ export const sidebarRoutes = [
     name: "MDT",
     childrens: [
       {
-        name: "Civils",
-        path: "/mdt/civil",
+        name: "Encodage",
+        childrens: [
+          { name: "Armes", path: "/mdt/encodage/armes" },
+          { name: "Civils", path: "/mdt/encodage/civils" },
+          { name: "Véhicules", path: "/mdt/encodage/vehicules" },
+        ],
+      },
+      {
+        name: "Panic Bouton",
+        path: "/mdt/panic-bouton",
       },
     ],
   },

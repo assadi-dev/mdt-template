@@ -1,6 +1,6 @@
 import React from "react";
 
-import Pages from "./import";
+import Pages from "./bootstrap";
 import { Outlet, redirect } from "react-router-dom";
 import ThemeLayout from "../components/Layout/ThemeLayout";
 import { checkUserPermission, userRedirect } from "./helper";
@@ -15,21 +15,62 @@ export const routing = [
         index: true,
         element: <Pages.Home />,
       },
+      { path: "mon-compte", element: <Pages.Compte /> },
       {
         path: "services",
-        element: (
-          <>
-            <Outlet />
-          </>
-        ),
+        element: <Outlet />,
         children: [
           {
-            path: "dispatch",
-            element: (
-              <>
-                <h1>Dispatch</h1>
-              </>
-            ),
+            path: "feuille-d-heures",
+            element: <Pages.FeuilleDheures />,
+          },
+          {
+            path: "trombinoscop",
+            element: <Pages.Trombinoscop />,
+          },
+          {
+            path: "plaintes",
+            element: <Pages.Plaintes />,
+          },
+          {
+            path: "demande-comptabilite",
+            element: <Pages.DemandeComptaabilite />,
+          },
+          {
+            path: "saisie",
+            element: <Pages.Saisies />,
+          },
+          {
+            path: "attribution-patrouilleur",
+            element: <Pages.AttributionPatrouilleurs />,
+          },
+        ],
+      },
+      {
+        path: "mdt",
+        element: <Outlet />,
+        children: [
+          {
+            path: "encodage",
+            element: <Outlet />,
+            children: [
+              {
+                path: "armes",
+                element: <Pages.EncodageArmes />,
+              },
+              {
+                path: "civils",
+                element: <Pages.EncodageCivils />,
+              },
+              {
+                path: "vehicules",
+                element: <Pages.EncodageVehicules />,
+              },
+            ],
+          },
+          {
+            path: "panic-bouton",
+            element: <Pages.PanicButton />,
           },
         ],
       },
