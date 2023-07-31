@@ -13,12 +13,18 @@ import Plaintes from "../pages/Protected/Services/Plaintes";
 import Saisies from "../pages/Protected/Services/Saisies";
 import AttributionPatrouilleurs from "../pages/Protected/Services/AttributionPatrouilleurs";
 /***Services***/
-/***MDT**/
+/***MDT***/
 import EncodageCivils from "../pages/Protected/Mdt/Encodage/Civils";
 import EncodageVehicules from "../pages/Protected/Mdt/Encodage/Vehicules";
 import EncodageArmes from "../pages/Protected/Mdt/Encodage/Armes";
 import PanicButton from "../pages/Protected/Mdt/PanicButton";
-/***MDT**/
+import Plainte from "../pages/Protected/Mdt/Rapport/Plainte";
+import RapportAspirant from "../pages/Protected/Mdt/Rapport/RapportAspirant";
+import RapportIncident from "../pages/Protected/Mdt/Rapport/RapportIncident";
+import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
+import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
+/***MDT***/
+import AccesPermissions from "../pages/Protected/Administrations/AccesPermissions";
 
 export default {
   AuthLayout,
@@ -37,4 +43,10 @@ export default {
   EncodageVehicules,
   EncodageArmes,
   PanicButton,
+  Plainte,
+  RapportAspirant,
+  RapportIncident,
+  ConsultationRapportRookie,
+  ConsultationRapportAspirant,
+  AccesPermissions,
 };

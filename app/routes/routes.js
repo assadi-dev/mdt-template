@@ -72,6 +72,51 @@ export const routing = [
             path: "panic-bouton",
             element: <Pages.PanicButton />,
           },
+          {
+            path: "police-academy",
+            children: [
+              {
+                path: "consultation-rapport-rookie",
+                element: <Pages.ConsultationRapportRookie />,
+              },
+            ],
+          },
+          {
+            path: "sheriff-academy",
+            children: [
+              {
+                path: "consultation-rapport-aspirant",
+                element: <Pages.ConsultationRapportAspirant />,
+              },
+            ],
+          },
+          {
+            path: "rapport",
+            element: <Outlet />,
+            children: [
+              {
+                path: "plainte",
+                element: <Pages.Plainte />,
+              },
+              {
+                path: "rapport-aspirant",
+                element: <Pages.RapportAspirant />,
+              },
+              {
+                path: "rapport-incident",
+                element: <Pages.RapportIncident />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "administrations",
+        children: [
+          {
+            path: "acces-permissions",
+            element: <Pages.AccesPermissions />,
+          },
         ],
       },
     ],
