@@ -8,6 +8,7 @@ export const access = [
   },
   {
     page: "MDT",
+    childrens: "Encodage/Civils",
     path: "/mdt/encodage/civils",
     isCanAdd: false,
     isCanUpdate: false,
@@ -15,6 +16,7 @@ export const access = [
   },
   {
     page: "MDT",
+    childrens: "Encodages/Armes",
     path: "/mdt/encodage/armes",
     isCanAdd: true,
     isCanUpdate: false,
@@ -22,6 +24,7 @@ export const access = [
   },
   {
     page: "MDT",
+    childrens: "Panic Bouton",
     path: "/mdt/panic-bouton",
     isCanAdd: true,
     isCanUpdate: false,
@@ -29,6 +32,7 @@ export const access = [
   },
   {
     page: "MDT",
+    childrens: "MDT/Encodage/Véhicules/Voitures",
     path: "/mdt/encodage/vehicules",
     isCanAdd: true,
     isCanUpdate: false,
@@ -36,6 +40,7 @@ export const access = [
   },
   {
     page: "Services",
+    childrens: "Feuilles d'heures",
     path: "/services/feuille-d-heures",
     isCanAdd: true,
     isCanUpdate: false,
