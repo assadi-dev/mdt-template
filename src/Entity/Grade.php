@@ -40,9 +40,16 @@ class Grade
      */
     private $agents;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Access::class, mappedBy="grade")
+     */
+    private $access;
+
+
     public function __construct()
     {
         $this->agents = new ArrayCollection();
+        $this->access = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,4 +110,36 @@ class Grade
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Access>
+     */
+    public function getAccess(): Collection
+    {
+        return $this->access;
+    }
+
+    public function addAccess(Access $access): self
+    {
+        if (!$this->access->contains($access)) {
+            $this->access[] = $access;
+            $access->setGrade($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccess(Access $access): self
+    {
+        if ($this->access->removeElement($access)) {
+            // set the owning side to null (unless already changed)
+            if ($access->getGrade() === $this) {
+                $access->setGrade(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

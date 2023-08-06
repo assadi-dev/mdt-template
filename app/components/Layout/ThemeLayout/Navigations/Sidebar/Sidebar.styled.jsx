@@ -16,7 +16,7 @@ export const SidebarHeader = styled.div`
 export const SibarListCOntainer = styled.ul`
   padding: 18px 10px;
   padding-left: 15px;
-  height: 100vh;
+  height: 85vh;
   overflow-x: hidden;
   overflow-y: auto;
   .sidebar-selected {
@@ -36,6 +36,7 @@ export const SibartItemRow = styled.li`
   display: flex;
   align-items: center;
   width: 100%;
+  height: auto;
   border-radius: 5px;
   padding: 0 0.8rem;
   overflow: hidden;

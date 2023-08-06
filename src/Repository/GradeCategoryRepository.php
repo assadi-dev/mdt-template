@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Access;
 use App\Entity\GradeCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,28 +40,32 @@ class GradeCategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return GradeCategory[] Returns an array of GradeCategory objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return GradeCategory[] Returns an array of GradeCategory objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('g')
+    //            ->andWhere('g.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('g.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?GradeCategory
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?GradeCategory
+    //    {
+    //        return $this->createQueryBuilder('g')
+    //            ->andWhere('g.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+
+
+
 }
