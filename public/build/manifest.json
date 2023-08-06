@@ -14,5 +14,7 @@
   "build/images/doj.png": "http://localhost:8080/build/images/doj.6a17b704.png",
   "build/images/bcso.png": "http://localhost:8080/build/images/bcso.0155d787.png",
   "build/fonts/Azonix.otf": "http://localhost:8080/build/fonts/Azonix.9091792c.otf",
-  "build/fonts/Azonix.ttf": "http://localhost:8080/build/fonts/Azonix.bec31ba2.ttf"
+  "build/fonts/Azonix.ttf": "http://localhost:8080/build/fonts/Azonix.bec31ba2.ttf",
+  "build/app.png": "http://localhost:8080/build/images/lspd.5d2748dd.png",
+  "build/app.jpeg": "http://localhost:8080/build/images/unknown-male.6cc7df11.jpeg"
 }
