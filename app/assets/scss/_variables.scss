@@ -1,0 +1,57 @@
+
+
+$font-stack: Montserrat, sans-serif;
+
+//Default Color
+$bg-primary-color: #131B26;
+$primary-color: #2B7DE9;
+$secondary-color: #131B26;
+
+
+//LSPD Theme-color
+$lspd-bg-color: #17181E;
+$lspd-primary-color: #2B7DE9;
+$lspd-secondary-color: #131B26;
+$lspd-third-color: #2C3748;
+$lspd-shadow-color: rgba(43, 125, 233, 0.8) 0px 0px 10px 1px;
+
+//BCSO Theme-color
+$bcso-bg-color: #6A6C60;
+$bcso-primary-color: #6A6C60;
+$bcso-secondary-color: #3D3E36;
+$bcso-third-color: #2C3748;
+$bcso-shadow-color: rgba(106, 108, 96, 0.8) 0px 0px 10px 1px;
+
+//DOJ Theme-color
+$doj-bg-color: #6A6A6A;
+$doj-primary-color: #6A6A6A;
+$doj-secondary-color: #4E4E4E;
+$doj-third-color: #2C3748;
+$doj-shadow-color: rgba(78, 78, 78, 0.3) 0px 0px 10px 1px;
+
+
+
+
+
+.dicord-btn{
+    padding: 10px 15px;
+    width: fit-content;
+    height: fit-content;
+    margin: 18px auto;
+    background-color: #5865f2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+    transition: all 0.15s;
+    font-size: 1.6rem;
+}
+
+
+// Breakpoints
+$breakpoint-xs: 438px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$navbar-height: 80px;

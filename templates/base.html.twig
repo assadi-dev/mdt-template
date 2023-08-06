@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}MDT{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        {#  PWA #}
+        <link rel="manifest"  href="{{ asset('./manifest.json') }}" />
+        <link rel="apple-touch-icon" href="{{ asset('./apple-touch-icon.png') }}" />
+        <meta rel="apple-mobile-web-app-status-bar" content="default" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="theme-color" content="#2C3748" >
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+
+<script  >
+	let usercredential = {{ userData|json_encode|raw }};
+   
+</script>
+
+    </body>
+</html>

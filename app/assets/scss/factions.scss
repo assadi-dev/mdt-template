@@ -1,0 +1,82 @@
+@use 'variables';
+
+
+.lspd, .bcso, .doj {
+
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.9);
+    position: relative;
+    overflow: hidden;
+    &::before{
+        content:"";
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+        bottom: 0;
+        transition:all 0.35s;
+        -webkit-transition:all 0.35s;
+        -moz-transition:all 0.35s;
+        -ms-transition:all 0.35s;
+        -o-transition:all 0.35s;
+}
+
+    &::after{
+        content:"";
+       // background: rgba($color:variables.$bg-primary-color , $alpha:0.8);
+       background: rgba(23, 24, 30, 0.8);
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+        bottom: 0;
+        z-index: -1;
+     
+    }
+
+}
+
+
+
+.lspd
+{
+  
+    &::before{
+        background: url("../img/lspd-bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    }
+
+}
+
+.bcso
+{
+    &::before{
+        background: url("../img/bcso-bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    } 
+
+}
+
+.doj
+{
+    &::before{
+        background: url("../img/doj-bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    }
+
+}
+
