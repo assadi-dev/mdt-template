@@ -11,7 +11,6 @@ const App = () => {
     <>
       <ReduxProvider store={store}>
         <RouterProvider router={router} />
-        <div>hello</div>
       </ReduxProvider>
     </>
   );
