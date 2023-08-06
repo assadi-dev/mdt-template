@@ -63,6 +63,11 @@ class Agent
      */
     private $division;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Grade::class, inversedBy="agents")
+     */
+    private $grade;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -160,6 +165,18 @@ class Agent
     public function setDivision(?string $division): self
     {
         $this->division= $division;
+
+        return $this;
+    }
+
+    public function getGrade(): ?Grade
+    {
+        return $this->grade;
+    }
+
+    public function setGrade(?Grade $grade): self
+    {
+        $this->grade = $grade;
 
         return $this;
     }

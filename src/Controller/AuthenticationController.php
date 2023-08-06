@@ -51,6 +51,7 @@ class AuthenticationController extends AbstractController
             $agent->setFaction($faction);
             $agent->setPhone($phone);
             $agent->setGender($gender);
+            //$agent->setGrade();
             $userAccount->setAgent($agent);
             $this->entityManager->persist($userAccount);
             $this->entityManager->flush();

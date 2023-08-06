@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Agent;
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Agent;
+use App\Entity\Grade;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -83,8 +84,10 @@ class UserRepository extends ServiceEntityRepository
         a.faction,
         a.division,
         a.createdAt,
+        g.name as grade,
         a.updatedAt")
         ->innerJoin(Agent::class, "a", "WITH", "u.id=a.userAccount")
+        ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
         ->where("u.idDiscord=:idDiscord")
         ->setParameter("idDiscord", $idDiscord)
         ;
@@ -93,6 +96,7 @@ class UserRepository extends ServiceEntityRepository
         return $result;
 
     }
+
 
 
 
