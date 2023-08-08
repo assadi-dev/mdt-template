@@ -32,7 +32,7 @@ export const access = [
   },
   {
     page: "MDT",
-    childrens: "MDT/Encodage/Véhicules/Voitures",
+    childrens: "Encodage/Véhicules/Voitures",
     path: "/mdt/encodage/vehicules",
     isCanAdd: true,
     isCanUpdate: false,

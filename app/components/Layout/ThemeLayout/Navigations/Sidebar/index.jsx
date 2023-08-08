@@ -15,64 +15,53 @@ const Sidebar = () => {
   const [accesRoutes, setAccessRoutes] = useState([]);
   let authorize = [];
 
-  const getParentRoutes = (parent) => {
-    let children = { name: "", childrens: [] };
-    if (parent.childrens) {
-      children.name = Object.entries(parent)[0][1];
-      let values = Object.entries(parent)[1][1];
-      values.forEach((v) => {
-        let findValue = access.find((a) => a.path.includes(v.path));
-        if (findValue) children.childrens.push(v);
-      });
-    } else {
-      if (parent.path) {
-        let find = access.find((a) => a.path.includes(parent.path));
-        let entrie = Object.entries(parent);
-
-        if (find) {
-          return parent;
+  const accessChildrenToArray = () => {
+    let mapping = [...access].map((ac) => {
+      if (ac.childrens) {
+        if (ac.childrens.includes("/")) {
+          let list = ac.childrens.split("/");
+          list.map((l) => ({ childrens: l }));
+          return { ...ac, childrens: list };
         }
+        return { ...ac, childrens: [ac.childrens] };
+      } else {
+        return ac;
       }
-    }
-    if (children.childrens.length > 0) {
-      return children;
+    });
+
+    return mapping;
+  };
+  const accessMapRoutes = accessChildrenToArray();
+
+  //console.log(accessMapRoutes);
+  const getSubPath = (childrens) => {
+    if (childrens) {
+      // childrens.map(chil=>getSubPath(chil))
+      // return getSubPath(childrens.childrens);
+    } else {
+      let fc = access.find((c) => c.path == childrens.path);
+      //console.log(fc);
+      // return fc;
     }
   };
 
+  const getParentRoutes = (parent) => {
+    console.log(test.find((t) => t[1].name == "MDT"));
+    console.log(parent);
+  };
+
   const checkRoutes = (route) => {
-    let generateParent = { name: "", childrens: [] };
     if (route.childrens) {
-      let exist = access.find((a) => a.page == route.name);
-
-      if (exist) {
-        generateParent.name = route.name;
-      }
-
-      for (let children of route.childrens) {
-        if (route.childrens) {
-          let findChildrens = getParentRoutes(children);
-
-          findChildrens && findChildrens.name
-            ? generateParent.childrens.push(findChildrens)
-            : null;
-        }
-        // authorize.push(route)
-      }
-      authorize.push(generateParent);
+      let test = route.childrens.map((rc) => checkRoutes(rc));
+      return { name: route.name, childrens: test };
     } else {
       if (route.path) {
-        /*       let parent = sidebarRoutes.find((sb) => sb.name == exist.page);
-        if (parent.childrens) {
-          for (let getROutes of parent.childrens) {
-          let test =  getParentRoutes(getROutes);
-          }
-        }
- */
-        route.path ? authorize.push(route) : null;
+        let fa = access.find((ra) => ra.path == route.path);
+        if (!fa) return [];
+        const { isCanAdd, isCanDelete, isCanUpdate } = fa;
+        return { ...route, isCanAdd, isCanDelete, isCanUpdate };
       }
     }
-
-    setAccessRoutes((current) => (current = authorize));
   };
 
   useEffect(() => {
@@ -81,10 +70,23 @@ const Sidebar = () => {
     if (sideBarHeaderRef.current)
       sideBarHeaderRef.current.style.backgroundImage = `url(${factionEmblem})`;
 
-    for (const route of sidebarRoutes) {
-      checkRoutes(route);
-    }
-    console.log(accesRoutes);
+    const cleanArray = (mf) => {
+      if (mf.childrens) {
+        return cleanArray(mf.childrens);
+      } else {
+        return mf.length > 0 || mf.path;
+      }
+    };
+    // console.log(access);
+    let mapRoute = [...sidebarRoutes]
+      .map((sbr) => checkRoutes(sbr))
+      .filter((clean) => cleanArray(clean));
+
+    console.log(mapRoute);
+
+    setAccessRoutes((current) => (current = mapRoute));
+
+    // console.log(accesRoutes);
   }, [sideBarHeaderRef, faction]);
 
   return (
