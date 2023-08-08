@@ -2,13 +2,13 @@ export const access = [
   {
     page: "Accueil",
     path: "/",
-    isCanAdd: false,
+    isCanAdd: true,
     isCanUpdate: false,
     isCanDelete: false,
   },
   {
     page: "MDT",
-    childrens: "Encodage/Civils",
+    childrens: "Encodage",
     path: "/mdt/encodage/civils",
     isCanAdd: false,
     isCanUpdate: false,
@@ -16,7 +16,7 @@ export const access = [
   },
   {
     page: "MDT",
-    childrens: "Encodages/Armes",
+    childrens: "Encodages",
     path: "/mdt/encodage/armes",
     isCanAdd: true,
     isCanUpdate: false,
@@ -32,7 +32,7 @@ export const access = [
   },
   {
     page: "MDT",
-    childrens: "Encodage/Véhicules/Voitures",
+    childrens: "Encodage",
     path: "/mdt/encodage/vehicules",
     isCanAdd: true,
     isCanUpdate: false,
@@ -47,3 +47,40 @@ export const access = [
     isCanDelete: false,
   },
 ];
+
+/**
+ * Mapping des routes avec les permission
+ * @param {*} route
+ * @returns
+ */
+export const checkRoutes = (route) => {
+  if (route.childrens) {
+    let test = route.childrens.map((rc) => checkRoutes(rc));
+    return { name: route.name, childrens: test };
+  } else {
+    if (route.path) {
+      let fa = access.find((ra) => ra.path == route.path);
+      if (!fa) return [];
+      const { isCanAdd, isCanDelete, isCanUpdate } = fa;
+      return { ...route, isCanAdd, isCanDelete, isCanUpdate };
+    }
+  }
+};
+
+/**
+ * Suppression des routes avec enfant vides
+ * @param {*} route
+ * @returns
+ */
+export const filtrerEmptyObjets = (route) => {
+  return route.filter((objet) => {
+    if (Object.keys(objet).length == 0) {
+      return false;
+    }
+    if (objet.childrens && Array.isArray(objet.childrens)) {
+      objet.childrens = filtrerEmptyObjets(objet.childrens);
+      return objet.childrens.length > 0;
+    }
+    return true;
+  });
+};
