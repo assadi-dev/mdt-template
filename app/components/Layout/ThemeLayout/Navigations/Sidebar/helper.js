@@ -64,8 +64,8 @@ export const access = [
  */
 export const checkRoutes = (route) => {
   if (route.childrens) {
-    let test = route.childrens.map((rc) => checkRoutes(rc));
-    return { name: route.name, childrens: test };
+    let routesConfig = route.childrens.map((rc) => checkRoutes(rc));
+    return { name: route.name, childrens: routesConfig };
   } else {
     if (route.path) {
       let fa = access.find((ra) => ra.path == route.path);
