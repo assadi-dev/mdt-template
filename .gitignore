@@ -10,6 +10,7 @@
 /vendor/
 migrations/*
 uploads/*
+composer-lock.json
 
 ###< symfony/framework-bundle ###
 
