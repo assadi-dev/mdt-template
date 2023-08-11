@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AccessPermisssionContainer = styled.div`
+export const AccessPermissionContainer = styled.div`
   width: 100%;
   min-height: 50vh;
 `;

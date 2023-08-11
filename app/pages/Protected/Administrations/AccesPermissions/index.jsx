@@ -1,9 +1,12 @@
 import React from "react";
-import { AccessPermisssionContainer } from "./AccesPermission.style";
+import { AccessPermissionContainer } from "./AccesPermission.style";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const AccesPermissions = () => {
   return (
-    <AccessPermisssionContainer>Acces Permission</AccessPermisssionContainer>
+    <AccessPermissionContainer>
+      {/*   <AccessPermisssionHeader></AccessPermisssionHeader> */}
+    </AccessPermissionContainer>
   );
 };
 
