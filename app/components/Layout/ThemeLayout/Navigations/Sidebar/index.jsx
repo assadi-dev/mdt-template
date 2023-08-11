@@ -5,16 +5,17 @@ import SidebarItems from "./SidebarItems";
 import { sidebarRoutes } from "../../../../../routes/sidebarRoutes";
 import { useSelector } from "react-redux";
 import { factionsCollections } from "../../../../../config/factions";
-import { checkRoutes, filtrerEmptyObjets } from "./helper";
+import { checkRoutes, filtrerEmptyObjets, isAdmin } from "./helper";
 
 const Sidebar = () => {
   const sideBarHeaderRef = useRef(null);
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
-  const faction = authenticateUser.faction;
+  const { faction, roles } = authenticateUser;
   const [accesRoutes, setAccessRoutes] = useState([]);
 
   useLayoutEffect(() => {
     if (!faction) return;
+
     const factionEmblem = faction ? factionsCollections[faction].emblem : "";
     if (sideBarHeaderRef.current)
       sideBarHeaderRef.current.style.backgroundImage = `url(${factionEmblem})`;
@@ -29,9 +30,18 @@ const Sidebar = () => {
     <SidebarWrapper className="sidebar">
       <SidebarHeader ref={sideBarHeaderRef} />
       <SibarListCOntainer>
-        {accesRoutes.map((item, i) => (
-          <SidebarItems key={i} item={item} />
-        ))}
+        {accesRoutes
+          .map((item) => {
+            if (item.name == "Administrations") {
+              if (isAdmin(roles)) return { ...item };
+              else return (item.path = "");
+            }
+            return item;
+          })
+
+          .map((item, i) => (
+            <SidebarItems key={i} item={item} />
+          ))}
       </SibarListCOntainer>
     </SidebarWrapper>
   );
