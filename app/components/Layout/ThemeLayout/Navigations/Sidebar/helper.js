@@ -27,6 +27,7 @@ export const access = [
     childrens: "Panic Bouton",
     path: "/mdt/panic-bouton",
     isCanAdd: true,
+
     isCanUpdate: false,
     isCanDelete: false,
   },
@@ -42,6 +43,14 @@ export const access = [
     page: "Services",
     childrens: "Feuilles d'heures",
     path: "/services/feuille-d-heures",
+    isCanAdd: true,
+    isCanUpdate: false,
+    isCanDelete: false,
+  },
+  {
+    page: "Administrations",
+    childrens: "Acces/Permissions",
+    path: "/administrations/acces-permissions",
     isCanAdd: true,
     isCanUpdate: false,
     isCanDelete: false,
@@ -83,4 +92,16 @@ export const filtrerEmptyObjets = (route) => {
     }
     return true;
   });
+};
+
+/**
+ * Verifie si l'utilisateur posedde le role Admin
+ * @param {array} roles
+ * @returns {boolean} true | false
+ */
+export const isAdmin = (roles) => {
+  if (roles) {
+    return roles.includes("ROLE_ADMIN");
+  }
+  return usercredential.roles.includes("ROLE_ADMIN");
 };
