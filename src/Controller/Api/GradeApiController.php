@@ -28,14 +28,14 @@ class GradeApiController extends AbstractController
 
 
     /**
-     * @Route("/api/grades/access/{id}", name="app_get_grade_access",methods="GET")
+     * @Route("/api/grades/access/{gradeId}", name="app_get_grade_access",methods="GET")
      */
-    public function getAccesCollection($id)
+    public function getAccesCollection($gradeId)
     {
 
         try {
 
-            $access = $this->gradeRepository->findAccessById($id);
+            $access = $this->gradeRepository->findAccessById($gradeId);
             $result = json_encode($access);
             $response = new Response($result, Response::HTTP_OK, [], true);
             return $response;

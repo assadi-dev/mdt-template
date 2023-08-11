@@ -66,6 +66,9 @@ class GradeRepository extends ServiceEntityRepository
     //    }
 
 
+    /**
+     * Retourne la listes des pages d'acces avec pour id du grade en argument ainsi que les permissions des actions
+     */
     public function findAccessById($id)
     {
         $qb = $this->createQueryBuilder("g");
