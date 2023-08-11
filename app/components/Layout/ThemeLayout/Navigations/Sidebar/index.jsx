@@ -33,7 +33,7 @@ const Sidebar = () => {
         {accesRoutes
           .map((item) => {
             if (item.name == "Administrations") {
-              if (isAdmin(roles)) return { ...item };
+              if (isAdmin()) return { ...item };
               else return (item.path = "");
             }
             return item;
