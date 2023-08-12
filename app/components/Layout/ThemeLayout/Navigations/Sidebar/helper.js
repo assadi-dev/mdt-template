@@ -1,70 +1,13 @@
-export const access = [
-  {
-    page: "Accueil",
-    path: "/",
-    isCanAdd: true,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "MDT",
-    childrens: "Encodage",
-    path: "/mdt/encodage/civils",
-    isCanAdd: false,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "MDT",
-    childrens: "Encodages",
-    path: "/mdt/encodage/armes",
-    isCanAdd: true,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "MDT",
-    childrens: "Panic Bouton",
-    path: "/mdt/panic-bouton",
-    isCanAdd: true,
-
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "MDT",
-    childrens: "Encodage",
-    path: "/mdt/encodage/vehicules",
-    isCanAdd: true,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "Services",
-    childrens: "Feuilles d'heures",
-    path: "/services/feuille-d-heures",
-    isCanAdd: true,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-  {
-    page: "Administrations",
-    childrens: "Acces/Permissions",
-    path: "/administrations/acces-permissions",
-    isCanAdd: true,
-    isCanUpdate: false,
-    isCanDelete: false,
-  },
-];
-
 /**
  * Mapping des routes avec les permission
  * @param {*} route
  * @returns
  */
-export const checkRoutes = (route) => {
+export const checkRoutes = (route, access) => {
+  if (!access) return [];
+
   if (route.childrens) {
-    let routesConfig = route.childrens.map((rc) => checkRoutes(rc));
+    let routesConfig = route.childrens.map((rc) => checkRoutes(rc, access));
     return { name: route.name, childrens: routesConfig };
   } else {
     if (route.path) {
