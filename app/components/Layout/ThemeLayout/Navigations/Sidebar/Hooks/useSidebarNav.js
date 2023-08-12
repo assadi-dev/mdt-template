@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { checkRoutes, filtrerEmptyObjets } from "../helper";
+import { checkRoutes, filtrerEmptyObjets, isAdmin } from "../helper";
 import { sidebarRoutes } from "../../../../../../routes/sidebarRoutes";
 
 const useSidebarNav = () => {
@@ -14,10 +14,16 @@ const useSidebarNav = () => {
   useEffect(() => {
     if (!access) return;
 
+    const adminPage = [...sidebarRoutes].find(
+      (sb) => sb.name == "Administrations"
+    );
+
     try {
       setError((current) => (current = ""));
       let mapRoute = [...sidebarRoutes].map((sbr) => checkRoutes(sbr, access));
       mapRoute = filtrerEmptyObjets(mapRoute);
+      if (isAdmin()) mapRoute.push(adminPage);
+
       setAccessRoutes((current) => (current = mapRoute));
       setStatus((current) => (current = "fulfilled"));
     } catch (error) {

@@ -29,11 +29,6 @@ class Access
     private $page;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $childrens;
-
-    /**
      * @ORM\Column(type="string", length=50)
      */
     private $path;
@@ -85,19 +80,6 @@ class Access
     public function setPage(?string $page): self
     {
         $this->page = $page;
-
-        return $this;
-    }
-
-
-    public function getChildrens(): ?string
-    {
-        return $this->childrens;
-    }
-
-    public function setChildrens(?string $childrens): self
-    {
-        $this->childrens = $childrens;
 
         return $this;
     }

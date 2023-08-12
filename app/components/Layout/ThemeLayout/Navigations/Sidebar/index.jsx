@@ -26,18 +26,9 @@ const Sidebar = () => {
     <SidebarWrapper className="sidebar">
       <SidebarHeader ref={sideBarHeaderRef} />
       <SibarListCOntainer>
-        {accesRoutes
-          .map((item) => {
-            if (item.name == "Administrations") {
-              if (isAdmin()) return { ...item };
-              else return (item.path = "");
-            }
-            return item;
-          })
-
-          .map((item, i) => (
-            <SidebarItems key={i} item={item} />
-          ))}
+        {accesRoutes.map((item, i) => (
+          <SidebarItems key={i} item={item} />
+        ))}
       </SibarListCOntainer>
     </SidebarWrapper>
   );
