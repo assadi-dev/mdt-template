@@ -1,6 +1,7 @@
 import React from "react";
 import { GradesColCOntainer, TabsContentContainer } from "./TabsContent.styled";
 import useGradeCategories from "../../hooks/useGradeCategories";
+import ListeGradesCategories from "./ListeGradesCategories";
 
 const TabContent = ({ faction }) => {
   const { data } = useGradeCategories(faction);
@@ -9,11 +10,8 @@ const TabContent = ({ faction }) => {
     <TabsContentContainer>
       <GradesColCOntainer>
         <ul>
-          {data.map((cat) => (
-            <li>
-              {cat.grades ? cat.name : ""}
-              {cat.grades ? cat.grades.map((g) => <p>{g.name}</p>) : ""}{" "}
-            </li>
+          {data.map((categories) => (
+            <ListeGradesCategories gradesCategories={categories} />
           ))}
         </ul>
       </GradesColCOntainer>

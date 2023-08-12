@@ -20,7 +20,6 @@ const useGradeCategories = (faction) => {
     const controller = new AbortController();
     const signal = controller.signal;
     fetchData(signal);
-    console.log(faction);
     return () => {
       controller.abort();
     };
