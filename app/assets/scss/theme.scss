@@ -300,4 +300,43 @@ html:has(.theme-doj)
     }
 
 
+
+}
+
+
+/** Title or Specieal elements **/
+
+html:has(.theme-bcso)
+{
+    .grade-category-name {
+        color: variables.$bcso-secondary-color;
+    }
+    .grade-category-col-separator
+    {
+        border-right: solid 2px variables.$bcso-secondary-color;
+    }
+}
+
+html:has(.theme-lspd)
+{
+    .grade-category-name {
+        color: var(--danger-color);
+    }
+    .grade-category-col-separator
+    {
+        border-right: solid 2px var(--danger-color);
+    }
+}
+
+html:has(.theme-doj)
+{
+    .grade-category-name {
+        color: variables.$doj-secondary-color;
+    }
+    .grade-category-col-separator
+    {
+        border-right: solid 2px variables.$doj-third-color;
+    }
+    
+
 }

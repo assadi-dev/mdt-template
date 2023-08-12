@@ -236,4 +236,26 @@ html:has(.theme-doj) ::-webkit-scrollbar-thumb {
 }
 html:has(.theme-doj) ::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+
+/** Title or Specieal elements **/
+html:has(.theme-bcso) .grade-category-name {
+  color: #3D3E36;
+}
+html:has(.theme-bcso) .grade-category-col-separator {
+  border-right: solid 2px #3D3E36;
+}
+
+html:has(.theme-lspd) .grade-category-name {
+  color: var(--danger-color);
+}
+html:has(.theme-lspd) .grade-category-col-separator {
+  border-right: solid 2px var(--danger-color);
+}
+
+html:has(.theme-doj) .grade-category-name {
+  color: #4E4E4E;
+}
+html:has(.theme-doj) .grade-category-col-separator {
+  border-right: solid 2px #2C3748;
 }/*# sourceMappingURL=theme.css.map */

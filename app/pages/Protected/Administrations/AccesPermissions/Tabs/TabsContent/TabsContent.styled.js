@@ -10,11 +10,77 @@ export const TabsContentContainer = styled.div`
   }
 `;
 
-export const GradesColCOntainer = styled.div`
+export const GradesColContainer = styled.div`
   padding-top: 2rem;
-  border-right: solid 2px red;
+
   width: 100%;
   min-height: 200px;
 `;
 
-export const GradesListeContainer = styled.ul``;
+export const GradesListeContainer = styled.ul`
+  width: 100%;
+  min-height: 50px;
+  max-width: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-transform: uppercase;
+`;
+
+export const ListGradeCatItemsContainer = styled.div`
+  .grade-category-name {
+    margin-bottom: 2.3rem;
+    font-weight: 600;
+  }
+  .listGradeItem {
+    padding: 0.6rem 0 0.6rem 1rem;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.85);
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      opacity: 0;
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 2px;
+      top: 50%;
+      bottom: 0;
+      border-radius: 50px;
+      height: 80%;
+      transform: translateY(-50%);
+      transition: all 0.25s linear;
+    }
+
+    &:hover {
+      &::before {
+        opacity: 1;
+        background-color: #fff;
+      }
+    }
+
+    :active {
+      opacity: 0.5;
+    }
+  }
+
+  .grade-selected {
+    &::before {
+      content: "";
+      opacity: 1;
+      position: absolute;
+      left: 0;
+      width: 2px;
+      top: 50%;
+      bottom: 0;
+      border-radius: 50px;
+      height: 80%;
+      transform: translateY(-50%);
+      transition: all 0.25s linear;
+      background-color: #fff;
+    }
+  }
+`;
+
+export const PageListColContainer = styled.div`
+  padding: 1.6rem 1rem;
+`;
