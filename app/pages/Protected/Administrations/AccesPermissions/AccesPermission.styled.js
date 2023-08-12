@@ -48,9 +48,9 @@ export const EmblemFaction = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 100px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0);
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-position: center;
   background-image: ${({ src }) => (src ? `url(${src})` : "")};
   cursor: pointer;
