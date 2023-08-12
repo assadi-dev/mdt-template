@@ -10,6 +10,13 @@ const initialState = {
       isCanDelete: false,
     },
     {
+      page: "Civil",
+      path: "/mdt/encodage/civils",
+      isCanAdd: true,
+      isCanUpdate: false,
+      isCanDelete: false,
+    },
+    {
       page: "Mon Compte",
       path: "/mon-compte",
       isCanAdd: true,

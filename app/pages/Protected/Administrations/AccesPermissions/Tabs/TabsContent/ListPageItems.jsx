@@ -15,7 +15,7 @@ const ListPageItems = ({ idGrade }) => {
         <thead>
           <tr>
             <th style={{ textAlign: "left" }}></th>{" "}
-            <th style={styles}>Ajouter</th> <th style={styles}>Modififer</th>{" "}
+            <th style={styles}>Ajouter</th> <th style={styles}>Modifier</th>{" "}
             <th style={styles}>Supprimer</th>{" "}
           </tr>
         </thead>
