@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HeaderPageSelect, TablePagesList } from "./TabsContent.styled";
-import { retrievesAllName, rtrievesRoutesByPgeName } from "./helper";
+import { retrievesAllName, retrievesRoutesByPgeName } from "./helper";
 import uniqid from "uniqid";
 import { useSelector } from "react-redux";
 
@@ -12,14 +12,12 @@ const ListPageItems = ({ idGrade }) => {
   useEffect(() => {
     if (!idGrade) return;
 
-    rtrievesRoutesByPgeName();
-    console.log(pageSelected);
+    let routes = retrievesRoutesByPgeName(pageSelected);
 
-    console.log(pagesNameList);
+    console.log(routes);
   }, [idGrade, pageSelected]);
 
   const handleClickPageName = (page) => {
-    console.log();
     setPageSelected((current) => (current = page));
   };
 
