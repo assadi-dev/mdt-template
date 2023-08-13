@@ -13,8 +13,6 @@ const ListPageItems = ({ idGrade }) => {
     if (!idGrade) return;
 
     let routes = retrievesRoutesByPgeName(pageSelected);
-
-    console.log(routes);
   }, [idGrade, pageSelected]);
 
   const handleClickPageName = (page) => {
