@@ -1,13 +1,45 @@
-import React from "react";
-import { TablePagesList } from "./TabsContent.styled";
+import React, { useEffect, useState } from "react";
+import { HeaderPageSelect, TablePagesList } from "./TabsContent.styled";
+import { retrievesAllName, rtrievesRoutesByPgeName } from "./helper";
+import uniqid from "uniqid";
+import { useSelector } from "react-redux";
 
 const ListPageItems = ({ idGrade }) => {
-  const styles = { textAlign: "center" };
+  const pagesNameList = retrievesAllName();
 
-  console.log(idGrade);
+  const [pageSelected, setPageSelected] = useState(pagesNameList[0]);
+
+  useEffect(() => {
+    if (!idGrade) return;
+
+    rtrievesRoutesByPgeName();
+    console.log(pageSelected);
+
+    console.log(pagesNameList);
+  }, [idGrade, pageSelected]);
+
+  const handleClickPageName = (page) => {
+    console.log();
+    setPageSelected((current) => (current = page));
+  };
 
   return (
     <>
+      <HeaderPageSelect>
+        {pagesNameList
+          ? pagesNameList.map((page) => (
+              <span
+                key={uniqid()}
+                className={`header-page-btn ${
+                  pageSelected == page && "bg-btn-theme-color"
+                }`}
+                onClick={() => handleClickPageName(page)}
+              >
+                {page}
+              </span>
+            ))
+          : null}
+      </HeaderPageSelect>
       <TablePagesList>
         <thead>
           <tr>
@@ -22,10 +54,10 @@ const ListPageItems = ({ idGrade }) => {
             <td>
               <input type="checkbox" name="" id="" />
             </td>
-            <td style={styles}>
+            <td>
               <input type="checkbox" name="" id="" />
             </td>
-            <td style={styles}>
+            <td>
               <input type="checkbox" name="" id="" />
             </td>
           </tr>

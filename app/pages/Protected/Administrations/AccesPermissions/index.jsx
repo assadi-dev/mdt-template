@@ -15,10 +15,8 @@ import TabContent from "./Tabs/TabsContent";
 
 const AccesPermissions = () => {
   const [selected, setSelected] = useState(-1);
-
+  const faction = userFaction();
   useEffect(() => {
-    const faction = userFaction();
-
     let index = listsFactions.findIndex((f) => f.short_name == faction);
     setSelected(index);
   }, []);

@@ -315,6 +315,9 @@ html:has(.theme-bcso)
     {
         border-right: solid 2px variables.$bcso-secondary-color;
     }
+    .bg-btn-theme-color{
+        background-color: variables.$bcso-primary-color;
+    }
 }
 
 html:has(.theme-lspd)
@@ -325,6 +328,9 @@ html:has(.theme-lspd)
     .grade-category-col-separator
     {
         border-right: solid 2px var(--danger-color);
+    }
+    .bg-btn-theme-color{
+        background-color: variables.$lspd-primary-color;
     }
 }
 
@@ -338,5 +344,7 @@ html:has(.theme-doj)
         border-right: solid 2px variables.$doj-third-color;
     }
     
-
+    .bg-btn-theme-color{
+        background-color: variables.$doj-primary-color;
+    }
 }

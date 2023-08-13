@@ -245,6 +245,9 @@ html:has(.theme-bcso) .grade-category-name {
 html:has(.theme-bcso) .grade-category-col-separator {
   border-right: solid 2px #3D3E36;
 }
+html:has(.theme-bcso) .bg-btn-theme-color {
+  background-color: #6A6C60;
+}
 
 html:has(.theme-lspd) .grade-category-name {
   color: var(--danger-color);
@@ -252,10 +255,16 @@ html:has(.theme-lspd) .grade-category-name {
 html:has(.theme-lspd) .grade-category-col-separator {
   border-right: solid 2px var(--danger-color);
 }
+html:has(.theme-lspd) .bg-btn-theme-color {
+  background-color: #2B7DE9;
+}
 
 html:has(.theme-doj) .grade-category-name {
   color: #4E4E4E;
 }
 html:has(.theme-doj) .grade-category-col-separator {
   border-right: solid 2px #2C3748;
+}
+html:has(.theme-doj) .bg-btn-theme-color {
+  background-color: #6A6A6A;
 }/*# sourceMappingURL=theme.css.map */

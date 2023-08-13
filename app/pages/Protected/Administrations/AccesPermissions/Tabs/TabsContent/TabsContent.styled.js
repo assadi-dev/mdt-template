@@ -98,3 +98,20 @@ export const TablePagesList = styled.table`
     text-align: center;
   }
 `;
+
+export const HeaderPageSelect = styled.div`
+  border-radius: 5px;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .header-page-btn {
+    padding: 1rem 1.3rem;
+    margin: 0.3rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+`;
