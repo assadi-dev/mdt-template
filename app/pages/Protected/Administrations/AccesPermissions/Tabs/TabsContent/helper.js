@@ -20,7 +20,9 @@ export const retrievesRoutesByPgeName = (name) => {
 };
 
 export const retrievesAllName = () => {
-  return [...sidebarRoutes].map((sr) => sr.name).filter((p) => p != "Accueil");
+  return [...sidebarRoutes]
+    .map((sr) => sr.name)
+    .filter((p) => p != "Accueil" && p != "Administrations");
 };
 
 /**
