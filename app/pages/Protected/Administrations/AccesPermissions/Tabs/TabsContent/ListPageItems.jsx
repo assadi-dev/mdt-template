@@ -1,28 +1,25 @@
 import React from "react";
+import { TablePagesList } from "./TabsContent.styled";
 
 const ListPageItems = ({ idGrade }) => {
   const styles = { textAlign: "center" };
 
+  console.log(idGrade);
+
   return (
-    <ul>
-      <table
-        style={{
-          width: "100%",
-          borderSpacing: "0 15px",
-          borderCollapse: "separate",
-        }}
-      >
+    <>
+      <TablePagesList>
         <thead>
           <tr>
-            <th style={{ textAlign: "left" }}></th>{" "}
-            <th style={styles}>Ajouter</th> <th style={styles}>Modifier</th>{" "}
-            <th style={styles}>Supprimer</th>{" "}
+            <th></th>
+            <th>Ajouter</th> <th>Modifier</th>
+            <th>Supprimer</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Feuille d'heures</td>
-            <td style={styles}>
+            <td>
               <input type="checkbox" name="" id="" />
             </td>
             <td style={styles}>
@@ -33,8 +30,8 @@ const ListPageItems = ({ idGrade }) => {
             </td>
           </tr>
         </tbody>
-      </table>
-    </ul>
+      </TablePagesList>
+    </>
   );
 };
 

@@ -3,7 +3,11 @@ import { ListGradeCatItemsContainer } from "./TabsContent.styled";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationGradeItem } from "../../Animation";
 
-const ListGradeCatItems = ({ category }) => {
+const ListGradeCatItems = ({ category, onGradSelected }) => {
+  const handeClick = (data) => {
+    onGradSelected(data);
+  };
+
   return (
     <ListGradeCatItemsContainer>
       <h3 className="grade-category-name">{category.name} </h3>
@@ -18,6 +22,7 @@ const ListGradeCatItems = ({ category }) => {
                   initial="hidden"
                   animate="show"
                   custom={index}
+                  onClick={() => handeClick(grade.id)}
                 >
                   <span> {grade.name}</span>
                 </motion.li>

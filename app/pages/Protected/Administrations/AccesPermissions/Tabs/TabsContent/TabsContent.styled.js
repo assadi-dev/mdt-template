@@ -84,3 +84,17 @@ export const ListGradeCatItemsContainer = styled.div`
 export const PageListColContainer = styled.div`
   padding: 1.6rem 1rem;
 `;
+
+export const TablePagesList = styled.table`
+  width: 100%;
+  border-spacing: 0px 1.2rem;
+  border-collapse: separate;
+
+  td:first-of-type {
+    text-align: left;
+  }
+  thead,
+  td {
+    text-align: center;
+  }
+`;
