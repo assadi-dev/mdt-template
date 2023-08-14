@@ -1,8 +1,25 @@
 import { sidebarRoutes } from "../../../../../../routes/sidebarRoutes";
 import Api from "../../../../../../services/api/instance";
 
+/**
+ * Récuperation grade lié aux factions passé en parametre
+ * @param {*} faction
+ * @param {*} signal
+ * @returns
+ */
 export const fetchGradesCategoriesByFaction = (faction, signal) => {
   return Api.get(`/grade_categories/permissions/${faction}`, { signal });
+};
+
+/**
+ *
+ * Récuperation de la listes des routes associé aux grades à partir de l'id du grade
+ * @param {*} idGrade
+ * @param {*} signal
+ * @returns contient le nom ,liens et permissions
+ */
+export const fetchAccessRouteLists = (idGrade, signal) => {
+  return Api.get(`/grades/access/${idGrade}`, { signal });
 };
 
 export const retrievesRoutesByPgeName = (name) => {

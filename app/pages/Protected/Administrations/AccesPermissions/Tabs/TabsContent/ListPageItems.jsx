@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { HeaderPageSelect, TablePagesList } from "./TabsContent.styled";
-import { retrievesAllName, retrievesRoutesByPgeName } from "./helper";
+import {
+  fetchAccessRouteLists,
+  retrievesAllName,
+  retrievesRoutesByPgeName,
+} from "./helper";
 import uniqid from "uniqid";
 import { useSelector } from "react-redux";
 
@@ -10,12 +14,47 @@ const ListPageItems = ({ idGrade }) => {
   const [pageSelected, setPageSelected] = useState(pagesNameList[0]);
   const [pageListes, setPageListes] = useState([]);
 
+  const initAcces = async (signal) => {
+    if (!pageListes) return;
+    try {
+      const routesAccess = await fetchAccessRouteLists(idGrade, signal);
+      if (routesAccess.data) {
+        const accesData = routesAccess.data;
+
+        let updatePageLists = [...pageListes].map((current) => {
+          let findPath = accesData.find(
+            (access) => access.path == current.path
+          );
+
+          if (findPath) {
+            const { isCanAdd, isCanUpdate, isCanDelete, page, path } = findPath;
+            return {
+              ...current,
+              isCanAdd,
+              isCanUpdate,
+              isCanDelete,
+            };
+          }
+
+          return current;
+        });
+        setPageListes((current) => (current = updatePageLists));
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (!idGrade) return;
-
+    const controller = new AbortController();
+    const signal = controller.signal;
     let routes = retrievesRoutesByPgeName(pageSelected);
     setPageListes((current) => (current = routes));
-  }, [idGrade, pageSelected]);
+    pageListes.length > 0 && initAcces(signal);
+
+    return () => {
+      controller.abort();
+    };
+  }, [idGrade, pageSelected, pageListes.length]);
 
   const handleClickPageName = (page) => {
     setPageSelected((current) => (current = page));
@@ -52,13 +91,28 @@ const ListPageItems = ({ idGrade }) => {
               <tr key={uniqid()}>
                 <td>{page.name}</td>
                 <td>
-                  <input type="checkbox" name="" id="" />
+                  <input
+                    type="checkbox"
+                    name="isCanAdd"
+                    id="isCanAdd"
+                    defaultChecked={page.isCanAdd}
+                  />
                 </td>
                 <td>
-                  <input type="checkbox" name="" id="" />
+                  <input
+                    type="checkbox"
+                    name="isCanUpdate"
+                    id="isCanUpdate"
+                    defaultChecked={page.isCanUpdate}
+                  />
                 </td>
                 <td>
-                  <input type="checkbox" name="" id="" />
+                  <input
+                    type="checkbox"
+                    name="isCanDelete"
+                    id="isCanDelete"
+                    defaultChecked={page.isCanDelete}
+                  />
                 </td>
               </tr>
             ))}
