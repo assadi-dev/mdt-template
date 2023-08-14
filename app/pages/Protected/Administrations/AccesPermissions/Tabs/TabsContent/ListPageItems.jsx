@@ -84,6 +84,7 @@ const ListPageItems = ({ idGrade }) => {
               <th></th>
               <th>Ajouter</th> <th>Modifier</th>
               <th>Supprimer</th>
+              <th>Afficher</th>
             </tr>
           </thead>
           <tbody>
