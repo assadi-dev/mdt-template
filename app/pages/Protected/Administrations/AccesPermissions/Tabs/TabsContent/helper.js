@@ -9,13 +9,8 @@ export const retrievesRoutesByPgeName = (name) => {
   let route = [...sidebarRoutes].find((res) => res.name == name);
 
   let pathList = [];
+  pathList = extractPath(route);
 
-  if (route.childrens) {
-    route.childrens.forEach((r) => {
-      let res = extractPath(r);
-      pathList.push(res);
-    });
-  }
   return pathList;
 };
 
@@ -31,22 +26,33 @@ export const retrievesAllName = () => {
  */
 const extractPath = (routes) => {
   let final = [];
-  if (routes.childrens) {
-    routes.childrens.forEach((element) => {
-      let res = extractPath(element);
-      final = res;
-    });
-  } else {
-    if (routes.path) {
+
+  routes.childrens.map((route) => {
+    if (route.childrens) {
+      route.childrens.map((element) => {
+        if (element.childrens) {
+          extractPath(element);
+        } else {
+          let res = {
+            name: element.name,
+            path: element.path,
+            isCanAdd: false,
+            isCanUpdate: false,
+            isCanDelete: false,
+          };
+          final.push(res);
+        }
+      });
+    } else {
       let res = {
-        name: routes.name,
-        path: routes.path,
+        name: route.name,
+        path: route.path,
         isCanAdd: false,
         isCanUpdate: false,
         isCanDelete: false,
       };
-      final = res;
+      final.push(res);
     }
-  }
+  });
   return final;
 };
