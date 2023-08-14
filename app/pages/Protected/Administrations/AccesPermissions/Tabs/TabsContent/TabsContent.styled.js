@@ -107,11 +107,14 @@ export const HeaderPageSelect = styled.div`
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
   background-color: rgba(0, 0, 0, 0.6);
-
+  justify-content: space-evenly;
+  grid-gap: 1rem;
   .header-page-btn {
+    background-color: transparent;
     padding: 1rem 1.3rem;
-    margin: 0.3rem;
+    margin: 0 0.3rem;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.35s;
   }
 `;

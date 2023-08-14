@@ -34,8 +34,8 @@ export const FactionSelectedContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   .title {
-    margin-left: 5rem;
     white-space: nowrap;
     font-weight: 600;
     text-transform: uppercase;

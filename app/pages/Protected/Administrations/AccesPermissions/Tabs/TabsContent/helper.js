@@ -27,9 +27,9 @@ export const retrievesAllName = () => {
 const extractPath = (routes) => {
   let final = [];
 
-  routes.childrens.map((route) => {
+  routes.childrens.forEach((route) => {
     if (route.childrens) {
-      route.childrens.map((element) => {
+      route.childrens.forEach((element) => {
         if (element.childrens) {
           extractPath(element);
         } else {
