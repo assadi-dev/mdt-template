@@ -1,5 +1,6 @@
 import { sidebarRoutes } from "../../../../../../routes/sidebarRoutes";
 import Api from "../../../../../../services/api/instance";
+import uniqid from "uniqid";
 
 /**
  * Récuperation grade lié aux factions passé en parametre
@@ -51,22 +52,26 @@ const extractPath = (routes) => {
           extractPath(element);
         } else {
           let res = {
+            id: uniqid(),
             name: element.name,
             path: element.path,
             isCanAdd: false,
             isCanUpdate: false,
             isCanDelete: false,
+            isShow: false,
           };
           final.push(res);
         }
       });
     } else {
       let res = {
+        id: uniqid(),
         name: route.name,
         path: route.path,
         isCanAdd: false,
         isCanUpdate: false,
         isCanDelete: false,
+        isShow: false,
       };
       final.push(res);
     }

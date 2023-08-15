@@ -47,6 +47,10 @@ class Access
      * @ORM\Column(type="boolean")
      */
     private $isCanDelete;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isShow;
 
     /**
      * @ORM\ManyToOne(targetEntity=Grade::class, inversedBy="access")
@@ -131,6 +135,18 @@ class Access
 
         return $this;
     }
+    public function isIsShow(): ?bool
+    {
+        return $this->isShow;
+    }
+
+    public function setIsShow(bool $isShow): self
+    {
+        $this->isShow = $isShow;
+
+        return $this;
+    }
+
 
     public function getGrade(): ?Grade
     {

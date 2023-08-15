@@ -33,6 +33,7 @@ const ListPageItems = ({ idGrade }) => {
               isCanAdd,
               isCanUpdate,
               isCanDelete,
+              isShow: true,
             };
           }
 
@@ -60,66 +61,103 @@ const ListPageItems = ({ idGrade }) => {
     setPageSelected((current) => (current = page));
   };
 
+  const handleChangePageAccess = (e) => {
+    const id = e.target.id;
+    const name = e.target.name;
+    const value = e.target.checked;
+    let findElement = pageListes.find((el) => el.id == id);
+    let update = { ...findElement, [name]: value };
+    console.log(update);
+
+    let updateCollection = [...pageListes].map((p) => {
+      if (p.id == update.id) {
+        return { ...update };
+      }
+      return p;
+    });
+
+    setPageListes((current) => (current = updateCollection));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(pageListes);
+  };
+
   return (
     <>
-      <HeaderPageSelect>
-        {pagesNameList
-          ? pagesNameList.map((page) => (
-              <span
-                key={uniqid()}
-                className={`header-page-btn ${
-                  pageSelected == page && "bg-btn-theme-color"
-                }`}
-                onClick={() => handleClickPageName(page)}
-              >
-                {page}
-              </span>
-            ))
-          : null}
-      </HeaderPageSelect>
-      {pageListes.length > 0 && (
-        <TablePagesList>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Ajouter</th> <th>Modifier</th>
-              <th>Supprimer</th>
-              <th>Afficher</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pageListes.map((page) => (
-              <tr key={uniqid()}>
-                <td>{page.name}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="isCanAdd"
-                    id="isCanAdd"
-                    defaultChecked={page.isCanAdd}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="isCanUpdate"
-                    id="isCanUpdate"
-                    defaultChecked={page.isCanUpdate}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="isCanDelete"
-                    id="isCanDelete"
-                    defaultChecked={page.isCanDelete}
-                  />
-                </td>
+      <form onSubmit={handleSubmit}>
+        <button type="submit">Enregistrer</button>
+        <HeaderPageSelect>
+          {pagesNameList
+            ? pagesNameList.map((page) => (
+                <span
+                  key={uniqid()}
+                  className={`header-page-btn ${
+                    pageSelected == page && "bg-btn-theme-color"
+                  }`}
+                  onClick={() => handleClickPageName(page)}
+                >
+                  {page}
+                </span>
+              ))
+            : null}
+        </HeaderPageSelect>
+        {pageListes.length > 0 && (
+          <TablePagesList>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Ajouter</th> <th>Modifier</th>
+                <th>Supprimer</th>
+                <th>Afficher</th>
               </tr>
-            ))}
-          </tbody>
-        </TablePagesList>
-      )}
+            </thead>
+            <tbody>
+              {pageListes.map((page) => (
+                <tr key={page.id}>
+                  <td>{page.name}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="isCanAdd"
+                      id={page.id}
+                      defaultChecked={page.isCanAdd}
+                      onChange={handleChangePageAccess}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="isCanUpdate"
+                      id={page.id}
+                      defaultChecked={page.isCanUpdate}
+                      onChange={handleChangePageAccess}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="isCanDelete"
+                      id={page.id}
+                      defaultChecked={page.isCanDelete}
+                      onChange={handleChangePageAccess}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="isShow"
+                      id={page.id}
+                      defaultChecked={page.isShow}
+                      onChange={handleChangePageAccess}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </TablePagesList>
+        )}
+      </form>
     </>
   );
 };
