@@ -76,7 +76,6 @@ const ListPageItems = ({ idGrade }) => {
     const value = e.target.checked;
     let findElement = pageListes.find((el) => el.id == id);
     let update = { ...findElement, [name]: value };
-    console.log(update);
 
     let updateCollection = [...pageListes].map((p) => {
       if (p.id == update.id) {
