@@ -14,6 +14,7 @@ import {
 import uniqid from "uniqid";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAccess } from "../../../../../../features/UserPermissions/UserPermissions.slice";
+import { userIdGrade } from "../../../../../../services/utils/user";
 
 const ListPageItems = ({ idGrade }) => {
   const pagesNameList = retrievesAllName();
@@ -91,6 +92,8 @@ const ListPageItems = ({ idGrade }) => {
 
     const data = { idGrade, body: { access: pageListes } };
     const res = await updatePermission(data);
+
+    if (userIdGrade() != idGrade) return;
     dispatch(updateAccess(res.data));
   };
 

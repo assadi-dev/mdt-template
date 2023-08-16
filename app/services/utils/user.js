@@ -11,7 +11,19 @@ export const isAdmin = (roles) => {
   return usercredential.roles.includes("ROLE_ADMIN");
 };
 
+//Obtention de la faction de l'utilisateur connecté
 export const userFaction = () => {
   if (!usercredential) return;
   return usercredential.faction;
+};
+
+//Obtention du grade de l'utilisateur connecté
+export const userGrade = () => {
+  if (!usercredential) return;
+  return usercredential.grade;
+};
+//Obtention de l'id grade de l'utilisateur connecté
+export const userIdGrade = () => {
+  if (!usercredential) return;
+  return usercredential.idGrade;
 };
