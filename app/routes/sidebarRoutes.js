@@ -103,6 +103,14 @@ export const sidebarRoutes = [
         name: "Acces/Permissions",
         path: "/administrations/acces-permissions",
       },
+      {
+        name: "Grades",
+        path: "/administrations/grades",
+      },
+      {
+        name: "Utilisateurs",
+        path: "/administrations/utilisateurs",
+      },
     ],
   },
 ];

@@ -57,12 +57,12 @@ export const ListGradeCatItemsContainer = styled.div`
       transition: all 0.25s linear;
     }
 
-    &:hover {
+    /*     &:hover {
       &::before {
         opacity: 1;
         background-color: #fff;
       }
-    }
+    } */
 
     :active {
       opacity: 0.5;
@@ -83,6 +83,7 @@ export const ListGradeCatItemsContainer = styled.div`
       transform: translateY(-50%);
       transition: all 0.25s linear;
       background-color: #fff;
+      font-weight: bold !important;
     }
   }
 `;
@@ -115,6 +116,7 @@ export const HeaderPageSelect = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   justify-content: space-evenly;
   grid-gap: 1rem;
+
   .header-page-btn {
     background-color: transparent;
     padding: 1rem 1.3rem;
