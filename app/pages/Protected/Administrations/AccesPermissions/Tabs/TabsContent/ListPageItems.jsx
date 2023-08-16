@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { HeaderPageSelect, TablePagesList } from "./TabsContent.styled";
+import {
+  HeaderPageSelect,
+  RowStartEnd,
+  SubmitButton,
+  TablePagesList,
+} from "./TabsContent.styled";
 import {
   fetchAccessRouteLists,
   retrievesAllName,
   retrievesRoutesByPgeName,
+  updatePermission,
 } from "./helper";
 import uniqid from "uniqid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAccess } from "../../../../../../features/UserPermissions/UserPermissions.slice";
 
 const ListPageItems = ({ idGrade }) => {
   const pagesNameList = retrievesAllName();
+  const dispatch = useDispatch();
 
   const [pageSelected, setPageSelected] = useState(pagesNameList[0]);
   const [pageListes, setPageListes] = useState([]);
@@ -20,20 +28,20 @@ const ListPageItems = ({ idGrade }) => {
       const routesAccess = await fetchAccessRouteLists(idGrade, signal);
       if (routesAccess.data) {
         const accesData = routesAccess.data;
-
         let updatePageLists = [...pageListes].map((current) => {
           let findPath = accesData.find(
             (access) => access.path == current.path
           );
 
           if (findPath) {
-            const { isCanAdd, isCanUpdate, isCanDelete, page, path } = findPath;
+            const { isCanAdd, isCanUpdate, isCanDelete, isShow, page, path } =
+              findPath;
             return {
               ...current,
               isCanAdd,
               isCanUpdate,
               isCanDelete,
-              isShow: true,
+              isShow,
             };
           }
 
@@ -78,15 +86,23 @@ const ListPageItems = ({ idGrade }) => {
 
     setPageListes((current) => (current = updateCollection));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(pageListes);
+
+    const data = { idGrade, body: { access: pageListes } };
+    const res = await updatePermission(data);
+    dispatch(updateAccess(res.data));
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <button type="submit">Enregistrer</button>
+        <RowStartEnd>
+          <SubmitButton type="submit" className="bg-btn-theme-color">
+            Enregistrer
+          </SubmitButton>
+        </RowStartEnd>
+
         <HeaderPageSelect>
           {pagesNameList
             ? pagesNameList.map((page) => (

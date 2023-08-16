@@ -118,3 +118,16 @@ export const HeaderPageSelect = styled.div`
     transition: all 0.35s;
   }
 `;
+
+export const SubmitButton = styled.button`
+  padding: 1rem 1.3rem;
+  border-radius: 5px;
+  margin-bottom: 1.2rem;
+`;
+
+export const RowStartEnd = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+`;

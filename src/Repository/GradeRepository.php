@@ -72,7 +72,7 @@ class GradeRepository extends ServiceEntityRepository
     public function findAccessById($id)
     {
         $qb = $this->createQueryBuilder("g");
-        $qb->select("a.page,a.path,a.isCanAdd,a.isCanUpdate,a.isCanDelete")
+        $qb->select("a.id, a.page,a.path,a.isCanAdd,a.isCanUpdate,a.isCanDelete,a.isShow")
         ->innerJoin(Access::class, "a", "WITH", "a.grade=g.id")
         ->where("g.id=:id")
         ->setParameter("id", $id)

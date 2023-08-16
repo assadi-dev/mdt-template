@@ -9,6 +9,7 @@ import Sidebar from "./Navigations/Sidebar";
 import Navbar from "./Navigations/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { hydrateUser } from "../../../features/Authenticate/Athenticate.slice";
+import { RetrieveAccessByGradeAsync } from "../../../features/UserPermissions/UserPermissionAsync.action";
 
 const ThemeLayout = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ThemeLayout = () => {
 
   useLayoutEffect(() => {
     dispatch(hydrateUser(usercredential));
+    dispatch(RetrieveAccessByGradeAsync(usercredential.idGrade));
     if (!faction) return;
     document.body.classList.add(`theme-${faction}`);
   }, [faction]);

@@ -23,6 +23,16 @@ export const fetchAccessRouteLists = (idGrade, signal) => {
   return Api.get(`/grades/access/${idGrade}`, { signal });
 };
 
+/**
+ * Envoies les page et les permission vers la base de données
+ * @param {Array} access liste des object conteneant les permissions
+ * @returns
+ */
+export const updatePermission = (data) => {
+  const { idGrade, body } = data;
+  return Api.patch(`/grades/access/${idGrade}`, body);
+};
+
 export const retrievesRoutesByPgeName = (name) => {
   let route = [...sidebarRoutes].find((res) => res.name == name);
 
