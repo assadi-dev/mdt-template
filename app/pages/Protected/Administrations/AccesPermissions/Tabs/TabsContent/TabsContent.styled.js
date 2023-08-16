@@ -8,6 +8,12 @@ export const TabsContentContainer = styled.div`
     grid-gap: 18px;
     padding-bottom: 22px;
   }
+  .listGradeItem_selected {
+    &::before {
+      opacity: 1 !important;
+      background-color: #fff;
+    }
+  }
 `;
 
 export const GradesColContainer = styled.div`

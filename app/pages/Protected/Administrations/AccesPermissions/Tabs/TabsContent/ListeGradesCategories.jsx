@@ -2,7 +2,11 @@ import React from "react";
 import { GradesListeContainer } from "./TabsContent.styled";
 import ListGradeCatItems from "./ListGradeCatItems";
 
-const ListeGradesCategories = ({ gradesCategories = [], onGradeSelected }) => {
+const ListeGradesCategories = ({
+  gradesCategories = [],
+  onGradeSelected,
+  gradeSelected,
+}) => {
   return (
     <GradesListeContainer>
       {gradesCategories &&
@@ -11,6 +15,7 @@ const ListeGradesCategories = ({ gradesCategories = [], onGradeSelected }) => {
             key={gradeCat.id}
             category={gradeCat}
             onGradSelected={onGradeSelected}
+            gradeSelected={gradeSelected}
           />
         ))}
     </GradesListeContainer>

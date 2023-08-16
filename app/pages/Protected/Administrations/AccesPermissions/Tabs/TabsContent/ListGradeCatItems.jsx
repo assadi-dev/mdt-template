@@ -3,7 +3,7 @@ import { ListGradeCatItemsContainer } from "./TabsContent.styled";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationGradeItem } from "../../Animation";
 
-const ListGradeCatItems = ({ category, onGradSelected }) => {
+const ListGradeCatItems = ({ category, gradeSelected, onGradSelected }) => {
   const handeClick = (data) => {
     onGradSelected(data);
   };
@@ -16,7 +16,9 @@ const ListGradeCatItems = ({ category, onGradSelected }) => {
           {category.grades
             ? category.grades.map((grade, index) => (
                 <motion.li
-                  className="listGradeItem"
+                  className={`listGradeItem ${
+                    gradeSelected == grade.id ? "listGradeItem_selected" : ""
+                  }`}
                   key={grade.id}
                   variants={AnimationGradeItem}
                   initial="hidden"

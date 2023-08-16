@@ -35,6 +35,7 @@ const TabContent = ({ faction }) => {
         <ListeGradesCategories
           gradesCategories={data}
           onGradeSelected={handleGradeSelected}
+          gradeSelected={gradeSelected}
         />
       </GradesColContainer>
       <PageListColContainer>
