@@ -318,18 +318,21 @@ html:has(.theme-bcso)
     .bg-btn-theme-color{
         background-color: variables.$bcso-secondary-color;
     }
-    .bg-btn-grade-page-theme-color{
+    .bg-btn-alt-theme-color{
         background-color: variables.$bcso-primary-color;
     }
 
   .dataTable-theme-color{
     & tbody tr {
-        background-color: variables.$bcso-secondary-color;
+        background-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5) ;
+        &:hover{
+            background-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 1) ;
+        }
     
       }
-     & tbody tr td {
-        background-color: variables.$bcso-secondary-color;    
-      }
+      & tbody tr td {
+        background-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5) ;
+      } 
 
     }
 
@@ -349,6 +352,24 @@ html:has(.theme-lspd)
     .bg-btn-theme-color{
         background-color: variables.$lspd-primary-color;
     }
+    .bg-btn-alt-theme-color{
+        background-color: variables.$lspd-primary-color;
+    }
+
+    .dataTable-theme-color{
+        & tbody tr {
+            background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;
+            &:hover{
+                background-color: rgba($color:  variables.$lspd-third-color, $alpha: 1) ;
+            }
+        
+          }
+         & tbody tr td {
+            background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;    
+          }
+    
+        }
+    
 }
 
 html:has(.theme-doj)
@@ -362,6 +383,9 @@ html:has(.theme-doj)
     }
     
     .bg-btn-theme-color{
+        background-color: variables.$doj-primary-color;
+    }
+    .bg-btn-alt-theme-color{
         background-color: variables.$doj-primary-color;
     }
 }

@@ -248,14 +248,17 @@ html:has(.theme-bcso) .grade-category-col-separator {
 html:has(.theme-bcso) .bg-btn-theme-color {
   background-color: #3D3E36;
 }
-html:has(.theme-bcso) .bg-btn-grade-page-theme-color {
+html:has(.theme-bcso) .bg-btn-alt-theme-color {
   background-color: #6A6C60;
 }
 html:has(.theme-bcso) .dataTable-theme-color tbody tr {
-  background-color: #3D3E36;
+  background-color: rgba(61, 62, 54, 0.5);
+}
+html:has(.theme-bcso) .dataTable-theme-color tbody tr:hover {
+  background-color: #3d3e36;
 }
 html:has(.theme-bcso) .dataTable-theme-color tbody tr td {
-  background-color: #3D3E36;
+  background-color: rgba(61, 62, 54, 0.5);
 }
 
 html:has(.theme-lspd) .grade-category-name {
@@ -267,6 +270,18 @@ html:has(.theme-lspd) .grade-category-col-separator {
 html:has(.theme-lspd) .bg-btn-theme-color {
   background-color: #2B7DE9;
 }
+html:has(.theme-lspd) .bg-btn-alt-theme-color {
+  background-color: #2B7DE9;
+}
+html:has(.theme-lspd) .dataTable-theme-color tbody tr {
+  background-color: rgba(44, 55, 72, 0.5);
+}
+html:has(.theme-lspd) .dataTable-theme-color tbody tr:hover {
+  background-color: #2c3748;
+}
+html:has(.theme-lspd) .dataTable-theme-color tbody tr td {
+  background-color: rgba(44, 55, 72, 0.5);
+}
 
 html:has(.theme-doj) .grade-category-name {
   color: #4E4E4E;
@@ -275,5 +290,8 @@ html:has(.theme-doj) .grade-category-col-separator {
   border-right: solid 2px #2C3748;
 }
 html:has(.theme-doj) .bg-btn-theme-color {
+  background-color: #6A6A6A;
+}
+html:has(.theme-doj) .bg-btn-alt-theme-color {
   background-color: #6A6A6A;
 }/*# sourceMappingURL=theme.css.map */
