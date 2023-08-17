@@ -5,6 +5,12 @@ export const GradePageContainer = styled.div`
   min-height: 50vh;
   padding-left: 18px;
   padding-top: 18px;
+  .grades-table {
+    td:not(:first-of-type),
+    th:not(:first-of-type) {
+      text-align: center;
+    }
+  }
 `;
 
 export const GradPageHeaderRow = styled.div`

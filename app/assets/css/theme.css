@@ -246,7 +246,16 @@ html:has(.theme-bcso) .grade-category-col-separator {
   border-right: solid 2px #3D3E36;
 }
 html:has(.theme-bcso) .bg-btn-theme-color {
+  background-color: #3D3E36;
+}
+html:has(.theme-bcso) .bg-btn-grade-page-theme-color {
   background-color: #6A6C60;
+}
+html:has(.theme-bcso) .dataTable-theme-color tbody tr {
+  background-color: #3D3E36;
+}
+html:has(.theme-bcso) .dataTable-theme-color tbody tr td {
+  background-color: #3D3E36;
 }
 
 html:has(.theme-lspd) .grade-category-name {

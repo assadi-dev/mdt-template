@@ -111,7 +111,7 @@ const ListPageItems = ({ idGrade }) => {
                 <span
                   key={uniqid()}
                   className={`header-page-btn ${
-                    pageSelected == page && "bg-btn-theme-color"
+                    pageSelected == page && "bg-btn-grade-page-theme-color"
                   }`}
                   onClick={() => handleClickPageName(page)}
                 >

@@ -316,8 +316,25 @@ html:has(.theme-bcso)
         border-right: solid 2px variables.$bcso-secondary-color;
     }
     .bg-btn-theme-color{
+        background-color: variables.$bcso-secondary-color;
+    }
+    .bg-btn-grade-page-theme-color{
         background-color: variables.$bcso-primary-color;
     }
+
+  .dataTable-theme-color{
+    & tbody tr {
+        background-color: variables.$bcso-secondary-color;
+    
+      }
+     & tbody tr td {
+        background-color: variables.$bcso-secondary-color;    
+      }
+
+    }
+
+
+
 }
 
 html:has(.theme-lspd)
