@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Access;
+use App\Entity\Grade;
 use App\Entity\GradeCategory;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -70,7 +71,12 @@ class GradeCategoryRepository extends ServiceEntityRepository
     public function findGradeCategiesByPage($items_per_page, $page)
     {
         $countResult = ($page - 1) * $items_per_page;
-        $qb = $this->createQueryBuilder('g');
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('gc.id, gc.name, gc.faction, COUNT(g.gradeCategory) as nb_grades, gc.createdAt')
+        ->leftJoin(Grade::class, "g", "WITH", "gc.id =g.gradeCategory")
+        ->groupBy("gc.id")
+        ;
+
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);

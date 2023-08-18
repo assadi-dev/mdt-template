@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Grade;
 use App\Entity\Access;
+use App\Entity\Agent;
 use App\Entity\GradeCategory;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -92,8 +93,10 @@ class GradeRepository extends ServiceEntityRepository
 
         $countResult = ($page - 1) * $items_per_page;
         $qb = $this->createQueryBuilder('g');
-        $qb->select('g.id,g.name,gc.id as idCategory, gc.name as category ,gc.faction,g.createdAt')
-          ->leftJoin(GradeCategory::class, 'gc', 'WITH', 'gc.id=g.gradeCategory')
+        $qb->select('g.id,g.name,gc.id as idCategory, gc.name as category ,gc.faction,g.createdAt, COUNT(a.grade) as nb_agents')
+        ->leftJoin(Agent::class, "a", "WITH", "a.grade=g.id")
+        ->leftJoin(GradeCategory::class, 'gc', 'WITH', 'gc.id=g.gradeCategory')
+        ->groupBy("g.id")
 
 
         ;
@@ -106,9 +109,9 @@ class GradeRepository extends ServiceEntityRepository
         //Otention du nombre total d'items
         $query = $this->createQueryBuilder("g")->getQuery();
         $paginator = new Paginator($query, false);
-
-
         $count =  $paginator->count();
+
+
 
 
         return  ["count" => $count,"data" => $result];

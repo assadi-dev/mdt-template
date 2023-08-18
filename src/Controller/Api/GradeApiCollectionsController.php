@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class GradeApiCollections extends AbstractController
+class GradeApiCollectionsController extends AbstractController
 {
     private $request;
     private $entityManager;
@@ -37,12 +37,25 @@ class GradeApiCollections extends AbstractController
      */
     public function getGradesCategoryCollection($page, Request $request)
     {
-        $max_items = $request->headers->get("max_items");
+        try {
 
-        $result = $this->gradeCategoryRepository->findGradeCategiesByPage($max_items, $page);
+            $item_per_page = $request->headers->get("item_per_page");
+            if(!isset($item_per_page)) {
+                $item_per_page = 5;
+            }
+            $result = $this->gradeCategoryRepository->findGradeCategiesByPage($item_per_page, $page);
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, []);
+            return $response;
 
-        dd($result);
+        } catch (\Throwable $th) {
 
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            return $response;
+
+        }
 
     }
 
@@ -52,11 +65,25 @@ class GradeApiCollections extends AbstractController
      */
     public function getGradesCollection($page, Request $request)
     {
-        $max_items = $request->headers->get("max_items");
+        try {
 
-        $result = $this->gradeRepository->findGradeByPage($max_items, $page);
+            $item_per_page = $request->headers->get("item_per_page");
+            if(!isset($item_per_page)) {
+                $item_per_page = 5;
+            }
 
-        dd($result);
+            $result = $this->gradeRepository->findGradeByPage($item_per_page, $page);
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, []);
+            return $response;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            return $response;
+        }
 
 
     }

@@ -9,8 +9,6 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 const GradesLayout = () => {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <GradePageContainer>
       <GradPageHeaderRow>
