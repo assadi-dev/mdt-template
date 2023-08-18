@@ -119,6 +119,16 @@ class GradeRepository extends ServiceEntityRepository
     }
 
 
+    public function findRookieGradeByFaction($faction)
+    {
+        $qb = $this->createQueryBuilder('g');
+
+        return   $qb->leftJoin(GradeCategory::class, "gc", "WITH", "gc.id =g.gradeCategory")
+           ->where("gc.faction=:faction AND g.name='rookie'")
+               ->setParameter(':faction', $faction)
+               ->getQuery()
+               ->getOneOrNullResult();
+    }
 
 
 }
