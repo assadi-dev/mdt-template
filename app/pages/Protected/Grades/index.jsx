@@ -1,7 +1,8 @@
 import React from "react";
-import { RowAction } from "./grades.styled";
+
 import DataTable from "../../../components/DataTable";
 import ActionCells from "../../../components/DataTable/ActionCells";
+import RowAction from "./RowAction";
 
 const Grades = () => {
   const columns = [
@@ -17,11 +18,12 @@ const Grades = () => {
   ];
   const data = [
     { name: "Rookie", category: "EFFECTIF", faction: "lspd", nb_agents: 7 },
+    { name: "Rookie", category: "EFFECTIF", faction: "bcso", nb_agents: 6 },
   ];
 
   return (
     <>
-      <RowAction></RowAction>
+      <RowAction />
       <DataTable columns={columns} data={data} className="grades-table" />
     </>
   );

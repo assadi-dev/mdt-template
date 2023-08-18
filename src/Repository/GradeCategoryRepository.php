@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Access;
 use App\Entity\GradeCategory;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<GradeCategory>
@@ -65,7 +67,22 @@ class GradeCategoryRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+    public function findGradeCategiesByPage($items_per_page, $page)
+    {
+        $countResult = ($page - 1) * $items_per_page;
+        $qb = $this->createQueryBuilder('g');
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $result = $qb->getQuery()->getArrayResult();
+        //Otention du nombre total d'items
+        $paginator = new Paginator($qb);
+        $count = count($paginator);
 
+        return  ["count" => $count,"data" => $result];
+
+    }
 
 
 }

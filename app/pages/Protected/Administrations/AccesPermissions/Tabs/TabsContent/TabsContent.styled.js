@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TabsContentContainer = styled.div`
   display: grid;
   @media screen and (min-width: 992px) {
-    margin-top: 62px;
+    margin-top: 1rem;
     grid-template-columns: 0.38fr 1fr;
     grid-gap: 18px;
     padding-bottom: 22px;

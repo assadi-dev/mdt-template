@@ -282,6 +282,16 @@ html:has(.theme-lspd) .dataTable-theme-color tbody tr:hover {
 html:has(.theme-lspd) .dataTable-theme-color tbody tr td {
   background-color: rgba(44, 55, 72, 0.5);
 }
+html:has(.theme-lspd) .input-theme-color svg {
+  color: rgba(43, 125, 233, 0.5);
+}
+html:has(.theme-lspd) .input-theme-color input {
+  border-color: rgba(43, 125, 233, 0.5);
+}
+html:has(.theme-lspd) .input-theme-color input:focus {
+  border-color: #2b7de9;
+  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+}
 
 html:has(.theme-doj) .grade-category-name {
   color: #4E4E4E;
