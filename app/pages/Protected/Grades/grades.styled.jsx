@@ -51,7 +51,7 @@ export const SearchSection = styled.div`
   position: relative;
   width: 100%;
   input {
-    padding: 1rem 1.2rem 1rem 50px;
+    padding: 1rem 1.2rem 1rem 35px;
     width: 100%;
     border-radius: 5px;
     border-width: 1px;
@@ -61,8 +61,8 @@ export const SearchSection = styled.div`
     transition: all 0.35s;
   }
   @media screen and (min-width: 992px) {
+    width: 50%;
   }
-  width: 50%;
 `;
 
 export const IconInput = styled.span`

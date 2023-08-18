@@ -101,13 +101,15 @@ class GradeRepository extends ServiceEntityRepository
             ->setFirstResult($countResult)
             ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
-        $query = $qb->getQuery();
+        $result =  $qb->getQuery()->getResult();
+
         //Otention du nombre total d'items
+        $query = $this->createQueryBuilder("g")->getQuery();
         $paginator = new Paginator($query, false);
 
 
-        $count = 0;
-        $result =  $qb->getQuery()->getResult();
+        $count =  $paginator->count();
+
 
         return  ["count" => $count,"data" => $result];
 
