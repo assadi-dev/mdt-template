@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import DataTable from "../../../components/DataTable";
 import ActionCells from "../../../components/DataTable/ActionCells";
 import RowAction from "./RowAction";
+import { useDispatch, useSelector } from "react-redux";
+import { retrievesGradesPaginationAsync } from "../../../features/Grades/GradesAsync.action";
 
 const Grades = () => {
+  const [page, setPage] = useState({ current: 1, item_per_page: 5 });
+  const dispatch = useDispatch();
+  const { collections, status, error } = useSelector(
+    (state) => state.GradeReducer
+  );
+
+  useEffect(() => {
+    const payload = {
+      page: page.current,
+      params: { item_per_page: page.item_per_page },
+    };
+    dispatch(retrievesGradesPaginationAsync(payload));
+  }, [page.current]);
+
   const columns = [
     { Header: "Nom", accessor: "name" },
     { Header: "Categorie", accessor: "category" },
@@ -16,15 +32,15 @@ const Grades = () => {
       Cell: ({ row }) => <ActionCells />,
     },
   ];
-  const data = [
-    { name: "Rookie", category: "EFFECTIF", faction: "lspd", nb_agents: 7 },
-    { name: "Rookie", category: "EFFECTIF", faction: "bcso", nb_agents: 6 },
-  ];
 
   return (
     <>
       <RowAction />
-      <DataTable columns={columns} data={data} className="grades-table" />
+      <DataTable
+        columns={columns}
+        data={collections}
+        className="grades-table"
+      />
     </>
   );
 };
