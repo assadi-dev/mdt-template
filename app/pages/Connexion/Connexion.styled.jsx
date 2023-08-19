@@ -7,10 +7,12 @@ export const ConnexionPageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
+  /*   display: grid;
+  place-items: center; */
 `;
 
 export const ConnexionCard = styled.div`
-  margin: 6% auto;
+  margin: 6% auto auto;
   display: grid;
   grid-template-rows: 80px 0.75fr;
   min-height: 200px;
@@ -162,4 +164,11 @@ export const DiscordButton = styled.button`
   @media screen {
     font-size: 1.5rem;
   }
+`;
+
+export const RememberMeContainer = styled.div`
+  display: flex;
+  grid-gap: 1rem;
+  margin-bottom: 1.3rem;
+  color: #fff;
 `;
