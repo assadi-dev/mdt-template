@@ -107,7 +107,7 @@ function extractNestedPath(objet, propriete) {
       if (typeof objet[key] === "object") {
         valeurs.push(...extractNestedPath(objet[key], propriete));
       } else if (key === propriete) {
-        valeurs.push({ name: objet["name"], path: objet[key] });
+        valeurs.push({ name: objet["name"], path: objet["path"] });
       }
     }
   }
