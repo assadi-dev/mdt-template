@@ -58,22 +58,19 @@ const extractPath = (routes) => {
   routes.childrens.forEach((route) => {
     if (route.childrens) {
       route.childrens.forEach((element) => {
-        if (element.childrens) {
-          extractPath(element);
-        } else {
-          let res = {
-            id: uniqid(),
-            name: element.name,
-            path: element.path,
-            isCanAdd: false,
-            isCanUpdate: false,
-            isCanDelete: false,
-            isShow: false,
-          };
-          final.push(res);
-        }
+        let res = {
+          id: uniqid(),
+          name: element.name,
+          path: element.path,
+          isCanAdd: false,
+          isCanUpdate: false,
+          isCanDelete: false,
+          isShow: false,
+        };
+        final.push(res);
       });
-    } else {
+    }
+    if (route.path) {
       let res = {
         id: uniqid(),
         name: route.name,
