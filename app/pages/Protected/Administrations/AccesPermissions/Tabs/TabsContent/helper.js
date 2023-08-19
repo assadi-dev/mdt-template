@@ -57,18 +57,21 @@ const extractPath = (routes) => {
 
   routes.childrens.forEach((route) => {
     if (route.childrens) {
-      route.childrens.forEach((element) => {
-        let res = {
-          id: uniqid(),
-          name: element.name,
-          path: element.path,
-          isCanAdd: false,
-          isCanUpdate: false,
-          isCanDelete: false,
-          isShow: false,
-        };
-        final.push(res);
-      });
+      let res = extractNestedPath(route.childrens, "path");
+      if (res.length > 0) {
+        res.forEach((child) => {
+          let res = {
+            id: uniqid(),
+            name: child.name,
+            path: child.path,
+            isCanAdd: false,
+            isCanUpdate: false,
+            isCanDelete: false,
+            isShow: false,
+          };
+          final.push(res);
+        });
+      }
     }
     if (route.path) {
       let res = {
@@ -85,3 +88,29 @@ const extractPath = (routes) => {
   });
   return final;
 };
+
+/**
+ * Extraction des objets cintenant des routes imbriqués
+ * @param {*} objet
+ * @param {*} propriete
+ * @returns
+ */
+function extractNestedPath(objet, propriete) {
+  if (typeof objet !== "object") {
+    return [];
+  }
+
+  const valeurs = [];
+
+  for (const key in objet) {
+    if (objet.hasOwnProperty(key)) {
+      if (typeof objet[key] === "object") {
+        valeurs.push(...extractNestedPath(objet[key], propriete));
+      } else if (key === propriete) {
+        valeurs.push({ name: objet["name"], path: objet[key] });
+      }
+    }
+  }
+
+  return valeurs;
+}
