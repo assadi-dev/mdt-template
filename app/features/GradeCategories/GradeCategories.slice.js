@@ -17,6 +17,7 @@ const GradeCategoriesSlice = createSlice({
     addGradeCategory: (state, action) => {
       const { payload } = action;
       state.collections = [...state.collections, payload];
+      state.count = state.count + 1;
     },
     removeGradeCaregory: (state, action) => {
       const { payload } = action;
@@ -25,7 +26,21 @@ const GradeCategoriesSlice = createSlice({
       );
       state.collections = removedgradeCategory;
     },
-    editGradeCategory: (state, action) => {},
+    editGradeCategory: (state, action) => {
+      const { payload } = action;
+
+      const updatateGradeCaategory = [...state.collections].map(
+        (gradeCategory) => {
+          if (gradeCategory.id == payload.id) {
+            return { ...gradeCategory, ...payload };
+          }
+          return gradeCategory;
+        }
+      );
+
+      state.collections = updatateGradeCaategory;
+      state.count = state.count - 1;
+    },
   },
   extraReducers: (builder) => {
     builder

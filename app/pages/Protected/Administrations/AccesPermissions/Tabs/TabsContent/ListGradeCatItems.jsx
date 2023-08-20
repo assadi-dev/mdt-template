@@ -1,5 +1,8 @@
 import React from "react";
-import { ListGradeCatItemsContainer } from "./TabsContent.styled";
+import {
+  GradeCategoryListContainer,
+  ListGradeCatItemsContainer,
+} from "./TabsContent.styled";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationGradeItem } from "../../Animation";
 
@@ -11,7 +14,7 @@ const ListGradeCatItems = ({ category, gradeSelected, onGradSelected }) => {
   return (
     <ListGradeCatItemsContainer>
       <h3 className="grade-category-name">{category.name} </h3>
-      <ul>
+      <GradeCategoryListContainer>
         <AnimatePresence>
           {category.grades
             ? category.grades.map((grade, index) => (
@@ -31,7 +34,7 @@ const ListGradeCatItems = ({ category, gradeSelected, onGradSelected }) => {
               ))
             : null}
         </AnimatePresence>
-      </ul>
+      </GradeCategoryListContainer>
     </ListGradeCatItemsContainer>
   );
 };

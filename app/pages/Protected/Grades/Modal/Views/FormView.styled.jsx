@@ -54,10 +54,12 @@ export const ModalFooter = styled.div`
 export const SubmitButton = styled.button`
   padding: 1rem 2rem;
   width: fit-content;
-  border-radius: 3px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   grid-gap: 1rem;
+  text-transform: uppercase;
+  transition: all 0.35s;
 `;
 
 export const ErrorSection = styled.div`

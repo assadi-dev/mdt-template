@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -8,21 +8,21 @@ import {
   SubmitButton,
 } from "./FormView.styled";
 import CloseModalBtn from "../../../../../components/Modal/CloseModalBtn";
-import SpinnerButton from "../../../../../components/Shared/Loading/SpinnerButton";
-import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
-import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
 import InputGradesCategories from "./InputGradesCategories";
 import { useDispatch } from "react-redux";
-import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
-import { postGrades } from "../../helper";
-import { addGrade } from "../../../../../features/Grades/Grades.slice";
+import { useForm } from "react-hook-form";
+import { fetchOnegGades, putGrades } from "../../helper";
+import { editGrade } from "../../../../../features/Grades/Grades.slice";
+import SpinnerButton from "../../../../../components/Shared/Loading/SpinnerButton";
 
-const FormAddCategory = ({ onCloseModal, ...props }) => {
+const FormEditGrade = ({ data, onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
   const toggleprocess = () => {
     setProcess((current) => (current = !current));
   };
+
+  const [defaultgradeCategory, setDefaultGradeCategory] = useState("");
 
   const dispatch = useDispatch();
 
@@ -43,39 +43,48 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const submitValues = async (values) => {
-    toggleprocess();
-
-    const dataToSend = {
-      name: firsLetterCapitalise(values.name),
-      gradeCategory: values.gradeCategory,
-    };
-
-    const res = await postGrades(dataToSend);
-
+  const initDefaultValues = async (signal) => {
     try {
-      if (res) {
-        let { id, name } = await res.data;
-        let dataToDispatch = {
-          id,
-          name,
-          faction: values.faction,
-          nb_agents: 0,
-          category: values.category,
-        };
-        dispatch(addGrade(dataToDispatch));
-        setProcess((current) => (current = false));
-        onCloseModal();
-      }
+      const res = await fetchOnegGades(data.id, signal);
+      const { name, gradeCategory } = res.data;
+
+      setValue("name", name);
+      setValue("faction", data.faction);
+      setValue("gradeCategory", gradeCategory);
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  useEffect(() => {
+    if (!data.id) return;
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+    initDefaultValues(signal);
+    return () => {
+      controller.abort();
+    };
+  }, [data.id]);
+
+  const submitValues = async (values) => {
+    toggleprocess();
+
+    try {
+      const { name, faction, gradeCategory, category } = values;
+      const dataToDispatch = { id: data.id, name, faction, category };
+      dispatch(editGrade(dataToDispatch));
+      await putGrades(data.id, { name, gradeCategory, category });
+      onCloseModal();
+    } catch (error) {}
+
+    toggleprocess();
+  };
+
   return (
     <ModalContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title"> Ajouter un grade </h2>
+        <h2 className="form-title"> modifier </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <FormContainer
@@ -126,6 +135,8 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
               faction={getValues("faction")}
               errors={errors}
               setValue={setValue}
+              isEditMode={true}
+              defaultGradeCategory={getValues("gradeCategory")}
             />
           )}
         </div>
@@ -141,4 +152,4 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
   );
 };
 
-export default FormAddCategory;
+export default FormEditGrade;

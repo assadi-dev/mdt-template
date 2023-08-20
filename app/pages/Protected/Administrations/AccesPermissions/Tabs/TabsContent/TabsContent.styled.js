@@ -23,6 +23,10 @@ export const GradesColContainer = styled.div`
   min-height: 200px;
 `;
 
+export const GradeCategoryListContainer = styled.ul`
+  margin-bottom: 2rem;
+`;
+
 export const GradesListeContainer = styled.ul`
   width: 100%;
   min-height: 50px;
@@ -42,7 +46,7 @@ export const ListGradeCatItemsContainer = styled.div`
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.85);
     position: relative;
     cursor: pointer;
-
+    font-size: 1.4rem;
     &::before {
       opacity: 0;
       content: "";

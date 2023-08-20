@@ -2,6 +2,8 @@ import React from "react";
 import FormAddCategory from "./Views/FormAddCategory";
 import FormAddGrade from "./Views/FormAddGrade";
 import FormDelete from "./Views/FormDelete";
+import FormEditGradeCategorie from "./Views/FormEditCategorie";
+import FormEditGrade from "./Views/FormEditGrade";
 
 const View = ({ view, data, onCloseModal }) => {
   switch (view) {
@@ -13,6 +15,13 @@ const View = ({ view, data, onCloseModal }) => {
         />
       );
     case "edit-category":
+      return (
+        <FormEditGradeCategorie
+          data={data}
+          className="modal-theme-color"
+          onCloseModal={onCloseModal}
+        />
+      );
       break;
 
     case "delete-category":
@@ -51,7 +60,13 @@ const View = ({ view, data, onCloseModal }) => {
       );
 
     case "edit-grade":
-      return <div>Edit Grade</div>;
+      return (
+        <FormEditGrade
+          data={data}
+          className="modal-theme-color"
+          onCloseModal={onCloseModal}
+        />
+      );
 
     case "delete-grade":
       const titleDeleCategorie = `Etes-vous sur de vouloir supprimer le grade: ${data.name} de la faction ${data.faction} ?`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -8,74 +8,71 @@ import {
   SubmitButton,
 } from "./FormView.styled";
 import CloseModalBtn from "../../../../../components/Modal/CloseModalBtn";
+import { AnimatePresence, motion } from "framer-motion";
 import SpinnerButton from "../../../../../components/Shared/Loading/SpinnerButton";
-import { useForm } from "react-hook-form";
-import { motion, AnimatePresence } from "framer-motion";
-import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
-import InputGradesCategories from "./InputGradesCategories";
 import { useDispatch } from "react-redux";
-import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
-import { postGrades } from "../../helper";
-import { addGrade } from "../../../../../features/Grades/Grades.slice";
+import { useForm } from "react-hook-form";
+import { fetchOneGradeCategory, putGradeCategories } from "../../helper";
+import { editGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
 
-const FormAddCategory = ({ onCloseModal, ...props }) => {
+const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
   const toggleprocess = () => {
     setProcess((current) => (current = !current));
   };
 
+  const defaultValues = { name: "", faction: "" };
+
+  const iniDefaultValues = async (signal) => {
+    try {
+      const res = await fetchOneGradeCategory(data.id, signal);
+      setValue("name", res.data.name);
+      setValue("faction", res.data.faction);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const dispatch = useDispatch();
 
-  const defaultValues = {
-    name: "",
-    faction: "",
-    category: "",
-    gradeCategory: "",
-  };
+  useEffect(() => {
+    if (!data.id) return;
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    iniDefaultValues(signal);
+
+    return () => {
+      controller.abort();
+    };
+  }, [data.id]);
 
   const {
     register,
     handleSubmit,
-    reset,
-    getValues,
     setValue,
-    watch,
+    reset,
     formState: { errors },
   } = useForm({ defaultValues });
 
   const submitValues = async (values) => {
     toggleprocess();
 
-    const dataToSend = {
-      name: firsLetterCapitalise(values.name),
-      gradeCategory: values.gradeCategory,
-    };
-
-    const res = await postGrades(dataToSend);
-
     try {
-      if (res) {
-        let { id, name } = await res.data;
-        let dataToDispatch = {
-          id,
-          name,
-          faction: values.faction,
-          nb_agents: 0,
-          category: values.category,
-        };
-        dispatch(addGrade(dataToDispatch));
-        setProcess((current) => (current = false));
-        onCloseModal();
-      }
+      let toDispatch = { id: data.id, ...values };
+      dispatch(editGradeCategory(toDispatch));
+      await putGradeCategories(data.id, values);
+      onCloseModal();
     } catch (error) {
       console.log(error.message);
     }
+    toggleprocess();
   };
 
   return (
     <ModalContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title"> Ajouter un grade </h2>
+        <h2 className="form-title"> Modifier </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <FormContainer
@@ -88,7 +85,7 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
           <input
             type="text"
             {...register("name", { required: true })}
-            placeholder="EX: OFFICIER I,SENIOR LEAD OFFICER,LIEUTENANT..."
+            placeholder="EX: EFFECTIF,SUPERVISOR,COMMAND STAFF..."
           />
           <ErrorSection>
             <AnimatePresence>
@@ -112,24 +109,12 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
             <AnimatePresence>
               {errors.faction && (
                 <motion.small className="text-error">
-                  Veuillez selectionner une faction
+                  Veuillez définir sa faction
                 </motion.small>
               )}
             </AnimatePresence>
           </ErrorSection>
         </div>
-
-        <div className="form-control">
-          {watch("faction") && (
-            <InputGradesCategories
-              register={register}
-              faction={getValues("faction")}
-              errors={errors}
-              setValue={setValue}
-            />
-          )}
-        </div>
-
         <ModalFooter>
           <SubmitButton className="bg-btn-alt-theme-color" type="submit">
             Enregistrer
@@ -141,4 +126,4 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
   );
 };
 
-export default FormAddCategory;
+export default FormEditGradeCategorie;
