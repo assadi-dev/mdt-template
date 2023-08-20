@@ -13,6 +13,10 @@ import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
 import InputGradesCategories from "./InputGradesCategories";
+import { useDispatch } from "react-redux";
+import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
+import { postGrades } from "../../helper";
+import { addGrade } from "../../../../../features/Grades/Grades.slice";
 
 const FormAddCategory = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -20,9 +24,12 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
     setProcess((current) => (current = !current));
   };
 
+  const dispatch = useDispatch();
+
   const defaultValues = {
     name: "",
     faction: "",
+    category: "",
     gradeCategory: "",
   };
 
@@ -36,14 +43,32 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const submitValues = (values) => {
+  const submitValues = async (values) => {
     toggleprocess();
 
     const dataToSend = {
       name: firsLetterCapitalise(values.name),
       gradeCategory: values.gradeCategory,
     };
-    console.log(dataToSend);
+
+    const res = await postGrades(dataToSend);
+
+    try {
+      if (res) {
+        let { id, name } = await res.data;
+        let dataToDispatch = {
+          id,
+          name,
+          faction: values.faction,
+          nb_agents: 0,
+        };
+        dispatch(addGrade(dataToDispatch));
+        setProcess((current) => (current = false));
+        onCloseModal();
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

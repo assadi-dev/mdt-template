@@ -14,9 +14,11 @@ import {
 import { createPortal } from "react-dom";
 import Modal from "../../../components/Modal/Modal";
 import View from "./Modal/View";
+import { removeGrade } from "../../../features/Grades/Grades.slice";
+import { deleteGrades } from "./helper";
 
 const Grades = () => {
-  const [page, setPage] = useState({ current: 1, item_per_page: 5 });
+  const [page, setPage] = useState({ current: 1, item_per_page: 10 });
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeReducer
@@ -54,11 +56,19 @@ const Grades = () => {
       payload: { view: "edit-grade", data },
     });
   };
-  const handleClicDelete = (data) => {
-    const onConfirmDelete = (data) => {
-      console.log(data);
-    };
 
+  //Dispatch Delete
+  const onConfirmDelete = async (data) => {
+    try {
+      dispatch(removeGrade(data));
+      deleteGrades(data.id);
+      dispatchModelState({ type: CLOSE_MODAL });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleClicDelete = (data) => {
     data = { ...data, onConfirmDelete };
 
     dispatchModelState({

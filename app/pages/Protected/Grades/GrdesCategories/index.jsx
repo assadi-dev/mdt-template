@@ -14,9 +14,11 @@ import {
   modalStateReducer,
 } from "./reducer/ModalReducer";
 import View from "../Modal/View";
+import { removeGradeCaregory } from "../../../../features/GradeCategories/GradeCategories.slice";
+import { deleteGradeCategories } from "../helper";
 
 const GradeCategories = () => {
-  const [page, setPage] = useState({ current: 1, item_per_page: 5 });
+  const [page, setPage] = useState({ current: 1, item_per_page: 10 });
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeCategoriesReducer
@@ -55,7 +57,11 @@ const GradeCategories = () => {
   };
   const handleClicDelete = (data) => {
     const onConfirmDelete = (data) => {
-      console.log(data);
+      dispatch(removeGradeCaregory(data));
+      deleteGradeCategories(data.id);
+      dispatchModelState({
+        type: CLOSE_MODAL,
+      });
     };
 
     data = { ...data, onConfirmDelete };

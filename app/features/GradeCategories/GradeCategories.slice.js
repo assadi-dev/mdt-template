@@ -13,7 +13,20 @@ const initialState = {
 const GradeCategoriesSlice = createSlice({
   name: "GradeCategories",
   initialState,
-  reducer: {},
+  reducers: {
+    addGradeCategory: (state, action) => {
+      const { payload } = action;
+      state.collections = [...state.collections, payload];
+    },
+    removeGradeCaregory: (state, action) => {
+      const { payload } = action;
+      const removedgradeCategory = [...state.collections].filter(
+        (gradeCategory) => gradeCategory.id != payload.id
+      );
+      state.collections = removedgradeCategory;
+    },
+    editGradeCategory: (state, action) => {},
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -44,4 +57,6 @@ const GradeCategoriesSlice = createSlice({
   },
 });
 
+export const { addGradeCategory, removeGradeCaregory, editGradeCategory } =
+  GradeCategoriesSlice.actions;
 export default GradeCategoriesSlice.reducer;

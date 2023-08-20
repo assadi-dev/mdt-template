@@ -13,7 +13,20 @@ const initialState = {
 const GradesSlice = createSlice({
   name: "Grades",
   initialState,
-  reducers: {},
+  reducers: {
+    addGrade: (state, action) => {
+      const { payload } = action;
+      state.collections = [...state.collections, payload];
+    },
+    editGrade: (state, action) => {},
+    removeGrade: (state, action) => {
+      const { payload } = action;
+      const gradeRemoved = [...state.collections].filter(
+        (grade) => grade.id != payload.id
+      );
+      state.collections = gradeRemoved;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(retrievesGradesPaginationAsync.fulfilled, (state, actions) => {
@@ -34,4 +47,5 @@ const GradesSlice = createSlice({
   },
 });
 
+export const { addGrade, removeGrade } = GradesSlice.actions;
 export default GradesSlice.reducer;
