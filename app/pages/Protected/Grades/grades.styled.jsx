@@ -32,6 +32,7 @@ export const RowNavBtn = styled.div`
     padding: 1rem 1.3rem;
     margin: 0.3rem;
     border-radius: 5px;
+    transition: all 0.35s;
   }
 `;
 

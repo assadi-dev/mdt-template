@@ -17,8 +17,8 @@ export const ModalContainer = styled.div`
   .close-section {
     justify-self: end;
     svg {
-      width: 25px;
-      height: 25px;
+      width: 20px;
+      height: 20px;
     }
   }
 `;
@@ -28,6 +28,7 @@ export const HeaderModal = styled.div`
   align-items: center;
   grid-template-columns: 1fr 0.25fr;
   width: 100%;
+  margin-bottom: 1.3rem;
 `;
 
 export const FormContainer = styled.form`

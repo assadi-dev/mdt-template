@@ -17,7 +17,9 @@ const AccesPermissions = () => {
   const [selected, setSelected] = useState(-1);
   const faction = userFaction();
   useEffect(() => {
-    let index = listsFactions.findIndex((f) => f.short_name == faction);
+    let index = listsFactions.findIndex(
+      (f) => f.short_name.toLocaleLowerCase() == faction.toLocaleLowerCase()
+    );
     setSelected(index);
   }, []);
 
