@@ -95,7 +95,7 @@ class GradeCategoryRepository extends ServiceEntityRepository
     {
 
         $qb = $this->createQueryBuilder('gc');
-        $qb->select('gc.name')
+        $qb->select('gc.id,gc.name')
         ->where("gc.faction=:faction")
         ->setParameter("faction", $faction)
         ;
