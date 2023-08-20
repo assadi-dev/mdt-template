@@ -25,6 +25,7 @@ import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/Cons
 import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
 /*** END - MDT***/
 import AccesPermissions from "../pages/Protected/Administrations/AccesPermissions";
+import Users from "../pages/Protected/Administrations/Users";
 
 /** OTHER***/
 import Grades from "../pages/Protected/Grades";
@@ -56,4 +57,5 @@ export default {
   AccesPermissions,
   Grades,
   GradeCategories,
+  Users,
 };

@@ -132,6 +132,10 @@ export const routing = [
               },
             ],
           },
+          {
+            path: "utilisateurs",
+            element: <Pages.Users />,
+          },
         ],
       },
     ],
