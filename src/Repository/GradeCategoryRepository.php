@@ -91,4 +91,21 @@ class GradeCategoryRepository extends ServiceEntityRepository
     }
 
 
+    public function findGradeCategiesForNamebyFaction($faction)
+    {
+
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('gc.name')
+        ->where("gc.faction=:faction")
+        ->setParameter("faction", $faction)
+        ;
+
+        $result = $qb->getQuery()->getResult();
+
+
+        return $result;
+
+    }
+
+
 }

@@ -39,7 +39,6 @@ export const RowNavBtn = styled.div`
 export const RowActionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   min-height: 25px;
   align-items: center;
   margin-bottom: 1.4rem;

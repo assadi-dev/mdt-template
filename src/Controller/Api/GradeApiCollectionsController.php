@@ -89,5 +89,23 @@ class GradeApiCollectionsController extends AbstractController
     }
 
 
+    /**
+     * @Route("/api/grades_categories/list/{faction}", name="app_get_list_categorie_grades",methods="GET")
+     */
+    public function getlisteOfGradeCategory($faction)
+    {
+        try {
+            $result = $this->gradeCategoryRepository->findGradeCategiesForNamebyFaction($faction);
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, []);
+            return $response;
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            return $response;
+        }
+    }
+
 
 }

@@ -13,15 +13,15 @@ import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
 
-const FormAddGrade = ({ onCloseModal, ...props }) => {
+const FormAddCategory = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
   const toggleprocess = () => {
     setProcess((current) => (current = !current));
   };
 
   const defaultValues = {
-    name: "",
     faction: "",
+    name: "",
   };
 
   const {
@@ -44,7 +44,7 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
   return (
     <ModalContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title"> Ajouter une catégorie </h2>
+        <h2 className="form-title"> Ajouter un grade </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <FormContainer
@@ -57,7 +57,7 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
           <input
             type="text"
             {...register("name", { required: true })}
-            placeholder="EX: EFFECTIF,SUPERVISOR,COMMAND STAFF..."
+            placeholder="EX: OFFICIER I,SENIOR LEAD OFFICER,LIEUTENANT..."
           />
           <ErrorSection>
             <AnimatePresence>
@@ -81,7 +81,7 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
             <AnimatePresence>
               {errors.faction && (
                 <motion.small className="text-error">
-                  Veuillez définir sa faction
+                  Veuillez selectionner une faction
                 </motion.small>
               )}
             </AnimatePresence>
@@ -98,4 +98,4 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
   );
 };
 
-export default FormAddGrade;
+export default FormAddCategory;

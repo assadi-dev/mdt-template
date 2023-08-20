@@ -13,6 +13,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
+  z-index: 50;
 
   @media screen and (min-width: 992px) {
     margin-left: ${sidebarSize - 80}px;
