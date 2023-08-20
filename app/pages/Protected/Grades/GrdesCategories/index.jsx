@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 
 import DataTable from "../../../../components/DataTable";
 import ActionCells from "../../../../components/DataTable/ActionCells";
 import RowActionCategories from "./RowActionCategories";
 import { useDispatch, useSelector } from "react-redux";
 import { RetrieveGradeCategoriesPaginationAsync } from "../../../../features/GradeCategories/GradeCategoriesAsync.action";
+import Modal from "../../../../components/Modal/Modal";
+import { createPortal } from "react-dom";
+import {
+  CLOSE_MODAL,
+  initialModalState,
+  modalStateReducer,
+} from "./reducer/ModalReducer";
+import View from "../Modal/View";
 
 const GradeCategories = () => {
   const [page, setPage] = useState({ current: 1, item_per_page: 5 });
@@ -32,14 +40,35 @@ const GradeCategories = () => {
     },
   ];
 
+  const [modalState, dispatchModelState] = useReducer(
+    modalStateReducer,
+    initialModalState
+  );
+
+  const handleClickCloseModal = () => {
+    dispatchModelState({ type: CLOSE_MODAL });
+  };
+
   return (
     <>
-      <RowActionCategories />
+      <RowActionCategories dispatchModelState={dispatchModelState} />
       <DataTable
         columns={columns}
         data={collections}
         className="grades-table"
       />
+      {modalState.isOpen
+        ? createPortal(
+            <Modal isOpen={modalState.isOpen}>
+              <View
+                view={modalState.view}
+                onCloseModal={handleClickCloseModal}
+                data={modalState.data}
+              />
+            </Modal>,
+            document.body
+          )
+        : null}
     </>
   );
 };

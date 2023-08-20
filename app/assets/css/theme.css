@@ -292,6 +292,43 @@ html:has(.theme-lspd) .input-theme-color input:focus {
   border-color: #2b7de9;
   box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
 }
+html:has(.theme-lspd) .form-theme-color select, html:has(.theme-lspd) .form-theme-color input {
+  border: 1px solid rgba(43, 125, 233, 0.5);
+  padding: 1rem;
+  width: 100%;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+html:has(.theme-lspd) .form-theme-color select:focus, html:has(.theme-lspd) .form-theme-color input:focus {
+  border-color: #2b7de9;
+  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+}
+html:has(.theme-lspd) .form-theme-color label {
+  display: block;
+  margin-bottom: 1.3rem;
+}
+html:has(.theme-lspd) .form-theme-color option {
+  color: black;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  font-size: 1.3rem;
+}
+html:has(.theme-lspd) .modal-theme-color {
+  background-color: #131b26;
+  border: 0.5px solid rgba(43, 125, 233, 0.31);
+  box-shadow: 0 0 8px rgba(43, 125, 233, 0.35);
+}
 
 html:has(.theme-doj) .grade-category-name {
   color: #4E4E4E;

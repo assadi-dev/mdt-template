@@ -338,6 +338,8 @@ html:has(.theme-bcso)
 
 
 
+
+
 }
 
 html:has(.theme-lspd)
@@ -381,11 +383,63 @@ html:has(.theme-lspd)
                     border-color: rgba($color:  variables.$lspd-primary-color, $alpha: 1);
                     box-shadow: 0 0 15px rgba($color:  variables.$lspd-primary-color, $alpha: 0.15);
                 }
+
+                
             }
 
 
        
         }
+
+        .form-theme-color{
+         
+            select, input{
+                 border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
+                 padding: 1rem;
+                 width: 100%;
+        
+                 &:focus{
+                     border-color: rgba($color:  variables.$lspd-primary-color, $alpha: 1);
+                     box-shadow: 0 0 15px rgba($color:  variables.$lspd-primary-color, $alpha: 0.15);
+                    }
+                 transition:all 0.25s ;
+                 -webkit-transition:all 0.25s ;
+                 -moz-transition:all 0.25s ;
+                 -ms-transition:all 0.25s ;
+                 -o-transition:all 0.25s ;
+                 border-radius: 5px;
+                 -webkit-border-radius: 5px;
+                 -moz-border-radius: 5px;
+                 -ms-border-radius: 5px;
+                 -o-border-radius: 5px;
+                }
+ 
+
+                label{
+                    display: block;
+                    margin-bottom: 1.3rem;
+                }
+
+                option{
+                    color: black;
+                    border-radius: 0px;
+                    -webkit-border-radius: 0px;
+                    -moz-border-radius: 0px;
+                    -ms-border-radius: 0px;
+                    -o-border-radius: 0px;
+                 font-size: 1.3rem;
+                }
+    
+}
+
+        .modal-theme-color{
+            background-color: rgba($color:  variables.$lspd-secondary-color, $alpha: 1);
+            border:0.5px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.31);
+            box-shadow: 0 0 8px rgba($color:  variables.$lspd-primary-color, $alpha: 0.35);
+          
+
+        }
+    
     
     
 }
@@ -407,3 +461,5 @@ html:has(.theme-doj)
         background-color: variables.$doj-primary-color;
     }
 }
+
+

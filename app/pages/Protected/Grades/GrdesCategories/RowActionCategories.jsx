@@ -6,8 +6,16 @@ import {
   SearchSection,
 } from "../grades.styled";
 import { BiSearch } from "react-icons/bi";
+import { TOGGLE_MODAL } from "./reducer/ModalReducer";
 
-const RowActionCategories = () => {
+const RowActionCategories = ({ dispatchModelState }) => {
+  const handleClickAddCategoryBtn = () => {
+    dispatchModelState({
+      type: TOGGLE_MODAL,
+      payload: { view: "add-category", data: null },
+    });
+  };
+
   return (
     <RowActionContainer>
       <SearchSection className="input-theme-color">
@@ -21,7 +29,12 @@ const RowActionCategories = () => {
           placeholder="Rechercher"
         />
       </SearchSection>
-      <AddButton className="bg-btn-alt-theme-color">Ajouter</AddButton>
+      <AddButton
+        className="bg-btn-alt-theme-color"
+        onClick={handleClickAddCategoryBtn}
+      >
+        Ajouter
+      </AddButton>
     </RowActionContainer>
   );
 };
