@@ -317,9 +317,16 @@ html:has(.theme-bcso)
     }
     .bg-btn-theme-color{
         background-color: variables.$bcso-secondary-color;
+        &:hover{
+            background-color: darken(variables.$bcso-secondary-color, 10%);
+        }
+        
     }
     .bg-btn-alt-theme-color{
         background-color: variables.$bcso-primary-color;
+        &:hover{
+            background-color: darken(variables.$bcso-primary-color, 10%);
+        }
     }
 
   .dataTable-theme-color{
@@ -353,9 +360,15 @@ html:has(.theme-lspd)
     }
     .bg-btn-theme-color{
         background-color: variables.$lspd-primary-color;
+        &:hover{
+            background-color: darken(variables.$lspd-primary-color, 10%);
+        }
     }
     .bg-btn-alt-theme-color{
         background-color: variables.$lspd-primary-color;
+        &:hover{
+            background-color: darken(variables.$lspd-primary-color, 10%);
+        }
     }
 
     .dataTable-theme-color{
@@ -456,10 +469,22 @@ html:has(.theme-doj)
     
     .bg-btn-theme-color{
         background-color: variables.$doj-primary-color;
+        &:hover{
+            background-color: darken(variables.$doj-primary-color, 10%);
+        }
     }
     .bg-btn-alt-theme-color{
         background-color: variables.$doj-primary-color;
+        &:hover{
+            background-color: darken(variables.$doj-primary-color, 10%);
+        }
     }
 }
 
 
+.bg-danger-btn{
+    background-color: variables.$red;
+    &:hover{
+        background-color: darken(variables.$red, 10%);
+    }
+}

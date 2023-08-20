@@ -248,8 +248,14 @@ html:has(.theme-bcso) .grade-category-col-separator {
 html:has(.theme-bcso) .bg-btn-theme-color {
   background-color: #3D3E36;
 }
+html:has(.theme-bcso) .bg-btn-theme-color:hover {
+  background-color: #22231e;
+}
 html:has(.theme-bcso) .bg-btn-alt-theme-color {
   background-color: #6A6C60;
+}
+html:has(.theme-bcso) .bg-btn-alt-theme-color:hover {
+  background-color: #505148;
 }
 html:has(.theme-bcso) .dataTable-theme-color tbody tr {
   background-color: rgba(61, 62, 54, 0.5);
@@ -270,8 +276,14 @@ html:has(.theme-lspd) .grade-category-col-separator {
 html:has(.theme-lspd) .bg-btn-theme-color {
   background-color: #2B7DE9;
 }
+html:has(.theme-lspd) .bg-btn-theme-color:hover {
+  background-color: #1564cc;
+}
 html:has(.theme-lspd) .bg-btn-alt-theme-color {
   background-color: #2B7DE9;
+}
+html:has(.theme-lspd) .bg-btn-alt-theme-color:hover {
+  background-color: #1564cc;
 }
 html:has(.theme-lspd) .dataTable-theme-color tbody tr {
   background-color: rgba(44, 55, 72, 0.5);
@@ -339,6 +351,19 @@ html:has(.theme-doj) .grade-category-col-separator {
 html:has(.theme-doj) .bg-btn-theme-color {
   background-color: #6A6A6A;
 }
+html:has(.theme-doj) .bg-btn-theme-color:hover {
+  background-color: #515151;
+}
 html:has(.theme-doj) .bg-btn-alt-theme-color {
   background-color: #6A6A6A;
+}
+html:has(.theme-doj) .bg-btn-alt-theme-color:hover {
+  background-color: #515151;
+}
+
+.bg-danger-btn {
+  background-color: #dc3545;
+}
+.bg-danger-btn:hover {
+  background-color: #bd2130;
 }/*# sourceMappingURL=theme.css.map */

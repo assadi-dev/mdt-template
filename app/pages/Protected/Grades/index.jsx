@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { retrievesGradesPaginationAsync } from "../../../features/Grades/GradesAsync.action";
 import {
   CLOSE_MODAL,
+  TOGGLE_MODAL,
   initialModalState,
   modalStateReducer,
 } from "./GrdesCategories/reducer/ModalReducer";
@@ -37,9 +38,34 @@ const Grades = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClicDelete}
+        />
+      ),
     },
   ];
+
+  const handleClickEdit = (data) => {
+    dispatchModelState({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-grade", data },
+    });
+  };
+  const handleClicDelete = (data) => {
+    const onConfirmDelete = (data) => {
+      console.log(data);
+    };
+
+    data = { ...data, onConfirmDelete };
+
+    dispatchModelState({
+      type: TOGGLE_MODAL,
+      payload: { view: "delete-grade", data },
+    });
+  };
 
   const [modalState, dispatchModelState] = useReducer(
     modalStateReducer,

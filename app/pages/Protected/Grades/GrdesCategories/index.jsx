@@ -9,6 +9,7 @@ import Modal from "../../../../components/Modal/Modal";
 import { createPortal } from "react-dom";
 import {
   CLOSE_MODAL,
+  TOGGLE_MODAL,
   initialModalState,
   modalStateReducer,
 } from "./reducer/ModalReducer";
@@ -36,9 +37,33 @@ const GradeCategories = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClicDelete}
+        />
+      ),
     },
   ];
+
+  const handleClickEdit = (data) => {
+    dispatchModelState({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-category", data },
+    });
+  };
+  const handleClicDelete = (data) => {
+    const onConfirmDelete = (data) => {
+      console.log(data);
+    };
+
+    data = { ...data, onConfirmDelete };
+    dispatchModelState({
+      type: TOGGLE_MODAL,
+      payload: { view: "delete-category", data },
+    });
+  };
 
   const [modalState, dispatchModelState] = useReducer(
     modalStateReducer,
