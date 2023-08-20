@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Api from "../services/api/instance";
 
 const useGradeCategoriesOptions = (faction) => {
   const [state, setState] = useState({
@@ -41,6 +42,15 @@ const useGradeCategoriesOptions = (faction) => {
     fetchCategories(signal);
 
     return () => {
+      setState(
+        (current) =>
+          (current = {
+            ...current,
+            data: [],
+            error: "",
+            status: "pending",
+          })
+      );
       controller.abort();
     };
   }, [faction]);

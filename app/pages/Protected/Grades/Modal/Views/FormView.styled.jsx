@@ -21,6 +21,12 @@ export const ModalContainer = styled.div`
       height: 20px;
     }
   }
+
+  .row-label {
+    display: flex !important;
+    align-items: center;
+    grid-gap: 1rem;
+  }
 `;
 
 export const HeaderModal = styled.div`

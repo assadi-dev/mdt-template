@@ -12,6 +12,7 @@ import SpinnerButton from "../../../../../components/Shared/Loading/SpinnerButto
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
+import InputGradesCategories from "./InputGradesCategories";
 
 const FormAddCategory = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -20,14 +21,18 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
   };
 
   const defaultValues = {
-    faction: "",
     name: "",
+    faction: "",
+    gradeCategory: "",
   };
 
   const {
     register,
     handleSubmit,
     reset,
+    getValues,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({ defaultValues });
 
@@ -36,7 +41,7 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
 
     const dataToSend = {
       name: firsLetterCapitalise(values.name),
-      faction: values.faction,
+      gradeCategory: values.gradeCategory,
     };
     console.log(dataToSend);
   };
@@ -87,6 +92,18 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
             </AnimatePresence>
           </ErrorSection>
         </div>
+
+        <div className="form-control">
+          {watch("faction") && (
+            <InputGradesCategories
+              register={register}
+              faction={getValues("faction")}
+              errors={errors}
+              setValue={setValue}
+            />
+          )}
+        </div>
+
         <ModalFooter>
           <SubmitButton className="bg-btn-alt-theme-color" type="submit">
             Enregistrer
