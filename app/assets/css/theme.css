@@ -271,7 +271,7 @@ html:has(.theme-bcso) .input-theme-color svg {
   color: rgba(255, 255, 255, 0.55);
 }
 html:has(.theme-bcso) .input-theme-color input {
-  border-color: rgba(61, 62, 54, 0.5);
+  border-color: rgba(255, 255, 255, 0.35);
   background-color: rgba(61, 62, 54, 0.3);
 }
 html:has(.theme-bcso) .input-theme-color input:focus {
