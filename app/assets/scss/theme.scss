@@ -576,12 +576,12 @@ html:has(.theme-doj)
            color:rgba($color:  #fff, $alpha: 0.5); 
         }
         input{
-            border-color: rgba($color: #fff, $alpha: 0.3);
-           //background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
+            border-color: rgba($color: #fff, $alpha: 0.23);
+           background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
     
             &:focus{
                 border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1);
-                box-shadow: 0 0 15px rgba($color:  variables.$doj-secondary-color, $alpha: 0.25);
+                box-shadow: 0 0 12px rgba($color:  variables.$doj-secondary-color, $alpha: 0.25);
             }
             &::placeholder{
                 color:rgba($color: #fff, $alpha: 0.55); 
@@ -596,16 +596,16 @@ html:has(.theme-doj)
     .form-theme-color{
      
         select, input{
-             border: 1px solid rgba($color:  #fff, $alpha: 0.3);
+             border: 1px solid rgba($color:  #fff, $alpha: 0.15);
              padding: 1rem;
              width: 100%;
-             background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
+             background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.4) ;
              &::placeholder{
                 color:rgba($color: #fff, $alpha: 0.45); 
             }
              &:focus{
-                 border-color: rgba($color:  variables.$doj-primary-color, $alpha: 1);
-                 box-shadow: 0 0 18px rgba($color:  variables.$doj-primary-color, $alpha: 0.25);
+                 border-color: rgba($color:  lighten(variables.$doj-primary-color,10%), $alpha: 1);
+                 box-shadow: 0 0 18px rgba($color:  variables.$doj-primary-color, $alpha: 0.35);
                 }
              transition:all 0.25s ;
              -webkit-transition:all 0.25s ;
