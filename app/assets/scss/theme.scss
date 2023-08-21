@@ -316,16 +316,18 @@ html:has(.theme-bcso)
         border-right: solid 2px variables.$bcso-secondary-color;
     }
     .bg-btn-theme-color{
-        background-color: variables.$bcso-secondary-color;
+        background-color: variables.$bcso-primary-color;
+        box-shadow: 0px 0px 8px rgba($color: variables.$bcso-secondary-color, $alpha: 0.45);
         &:hover{
-            background-color: darken(variables.$bcso-secondary-color, 10%);
+            background-color: darken(variables.$bcso-primary-color, 5%);
+           // box-shadow: 0px 0px 8px rgba($color: variables.$bcso-primary-color, $alpha: 0.45);
         }
         
     }
     .bg-btn-alt-theme-color{
-        background-color: variables.$bcso-primary-color;
+        background-color: variables.$bcso-secondary-color;
         &:hover{
-            background-color: darken(variables.$bcso-primary-color, 10%);
+            background-color: darken(variables.$bcso-secondary-color, 10%);
         }
     }
 
@@ -344,6 +346,77 @@ html:has(.theme-bcso)
     }
 
 
+    .input-theme-color{
+        svg{
+           color:rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5); 
+        }
+        input{
+            border-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5);
+            background-color:rgba($color:  variables.$bcso-secondary-color, $alpha: 0.3) ;
+   
+            &:focus{
+                border-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 1);
+                box-shadow: 0 0 15px rgba($color:  variables.$bcso-secondary-color, $alpha: 0.25);
+            }
+            &::placeholder{
+                color:rgba($color: #fff, $alpha: 0.55); 
+            }
+            
+        }
+
+
+   
+    }
+
+    .form-theme-color{
+     
+        select, input{
+             border: 1px solid rgba($color:  variables.$bcso-secondary-color, $alpha: 1);
+             padding: 1rem;
+             width: 100%;
+             background-color:rgba($color:  variables.$bcso-secondary-color, $alpha: 0.3) ;
+    
+             &:focus{
+                 border-color: rgba($color:  variables.$bcso-primary-color, $alpha: 1);
+                 box-shadow: 0 0 24px rgba($color:  variables.$bcso-primary-color, $alpha: 0.25);
+                }
+             transition:all 0.25s ;
+             -webkit-transition:all 0.25s ;
+             -moz-transition:all 0.25s ;
+             -ms-transition:all 0.25s ;
+             -o-transition:all 0.25s ;
+             border-radius: 5px;
+             -webkit-border-radius: 5px;
+             -moz-border-radius: 5px;
+             -ms-border-radius: 5px;
+             -o-border-radius: 5px;
+            }
+
+
+            label{
+                display: block;
+                margin-bottom: 1.3rem;
+            }
+
+            option{
+                color: black;
+                border-radius: 0px;
+                -webkit-border-radius: 0px;
+                -moz-border-radius: 0px;
+                -ms-border-radius: 0px;
+                -o-border-radius: 0px;
+             font-size: 1.3rem;
+            }
+
+}
+
+    .modal-theme-color{
+        background-color: rgba($color:  lighten(variables.$bcso-secondary-color,5%), $alpha: 1);
+        border:0.5px solid rgba($color:  variables.$bcso-primary-color, $alpha: 1);
+        box-shadow: 0 0 8px rgba($color:  variables.$bcso-primary-color, $alpha: 0.35);
+      
+
+    }
 
 
 
