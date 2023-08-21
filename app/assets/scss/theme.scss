@@ -553,113 +553,101 @@ html:has(.theme-doj)
             background-color: darken(variables.$doj-secondary-color, 15%);
         }
     }
-}
 
-.dataTable-theme-color{
-    & tbody tr {
-        background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5) ;
-        &:hover{
-            background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1) ;
+
+    .dataTable-theme-color{
+        & tbody tr {
+            background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5) ;
+            &:hover{
+                background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1) ;
+            }
+        
+          }
+         & tbody tr td {
+            background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5) ;    
+          }
+    
         }
     
-      }
-     & tbody tr td {
-        background-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5) ;    
-      }
-
-    }
-
+    
+    
     .input-theme-color{
         svg{
-           color:rgba($color:  variables.$doj-primary-color, $alpha: 0.5); 
+           color:rgba($color:  #fff, $alpha: 0.5); 
         }
         input{
-            border-color: rgba($color:  variables.$doj-primary-color, $alpha: 0.5);
-   
+            border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
+            background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
+    
             &:focus{
-                border-color: rgba($color:  variables.$doj-primary-color, $alpha: 1);
-                box-shadow: 0 0 15px rgba($color:  variables.$doj-primary-color, $alpha: 0.15);
+                border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1);
+                box-shadow: 0 0 15px rgba($color:  variables.$doj-secondary-color, $alpha: 0.25);
             }
-
+            &::placeholder{
+                color:rgba($color: #fff, $alpha: 0.55); 
+            }
             
         }
-
-
-   
+    
+    
+    
     }
-
-
-.input-theme-color{
-    svg{
-       color:rgba($color:  #fff, $alpha: 0.5); 
-    }
-    input{
-        border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
-        background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
-
-        &:focus{
-            border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1);
-            box-shadow: 0 0 15px rgba($color:  variables.$doj-secondary-color, $alpha: 0.25);
-        }
-        &::placeholder{
-            color:rgba($color: #fff, $alpha: 0.55); 
-        }
-        
-    }
-
-
-
-}
-
-.form-theme-color{
- 
-    select, input{
-         border: 1px solid rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
-         padding: 1rem;
-         width: 100%;
-         background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
-         &::placeholder{
-            color:rgba($color: #fff, $alpha: 0.45); 
-        }
-         &:focus{
-             border-color: rgba($color:  variables.$doj-third-color, $alpha: 1);
-             box-shadow: 0 0 18px rgba($color:  variables.$doj-third-color, $alpha: 0.25);
+    
+    .form-theme-color{
+     
+        select, input{
+             border: 1px solid rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
+             padding: 1rem;
+             width: 100%;
+             background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
+             &::placeholder{
+                color:rgba($color: #fff, $alpha: 0.45); 
             }
-         transition:all 0.25s ;
-         -webkit-transition:all 0.25s ;
-         -moz-transition:all 0.25s ;
-         -ms-transition:all 0.25s ;
-         -o-transition:all 0.25s ;
-         border-radius: 5px;
-         -webkit-border-radius: 5px;
-         -moz-border-radius: 5px;
-         -ms-border-radius: 5px;
-         -o-border-radius: 5px;
-        }
+             &:focus{
+                 border-color: rgba($color:  variables.$doj-third-color, $alpha: 1);
+                 box-shadow: 0 0 18px rgba($color:  variables.$doj-third-color, $alpha: 0.25);
+                }
+             transition:all 0.25s ;
+             -webkit-transition:all 0.25s ;
+             -moz-transition:all 0.25s ;
+             -ms-transition:all 0.25s ;
+             -o-transition:all 0.25s ;
+             border-radius: 5px;
+             -webkit-border-radius: 5px;
+             -moz-border-radius: 5px;
+             -ms-border-radius: 5px;
+             -o-border-radius: 5px;
+            }
+    
+    
+            label{
+                display: block;
+                margin-bottom: 1.3rem;
+            }
+    
+            option{
+                color: black;
+                border-radius: 0px;
+                -webkit-border-radius: 0px;
+                -moz-border-radius: 0px;
+                -ms-border-radius: 0px;
+                -o-border-radius: 0px;
+             font-size: 1.3rem;
+            }
+    
+    }
+    
+    .modal-theme-color{
+        background-color: rgba($color:  lighten(variables.$doj-secondary-color,10%), $alpha: 1);
+        border:0.5px solid rgba($color:  variables.$doj-primary-color, $alpha: 1);
+        box-shadow: 0 0 8px rgba($color:  variables.$doj-primary-color, $alpha: 0.35);
+      
+    
+    }
+    
+    
 
 
-        label{
-            display: block;
-            margin-bottom: 1.3rem;
-        }
-
-        option{
-            color: black;
-            border-radius: 0px;
-            -webkit-border-radius: 0px;
-            -moz-border-radius: 0px;
-            -ms-border-radius: 0px;
-            -o-border-radius: 0px;
-         font-size: 1.3rem;
-        }
-
-}
-
-.modal-theme-color{
-    background-color: rgba($color:  lighten(variables.$doj-secondary-color,10%), $alpha: 1);
-    border:0.5px solid rgba($color:  variables.$doj-primary-color, $alpha: 1);
-    box-shadow: 0 0 8px rgba($color:  variables.$doj-primary-color, $alpha: 0.35);
-  
 
 }
 

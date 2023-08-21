@@ -417,47 +417,33 @@ html:has(.theme-doj) .bg-btn-alt-theme-color {
 html:has(.theme-doj) .bg-btn-alt-theme-color:hover {
   background-color: #282828;
 }
-
-.dataTable-theme-color tbody tr {
+html:has(.theme-doj) .dataTable-theme-color tbody tr {
   background-color: rgba(78, 78, 78, 0.5);
 }
-.dataTable-theme-color tbody tr:hover {
+html:has(.theme-doj) .dataTable-theme-color tbody tr:hover {
   background-color: #4e4e4e;
 }
-.dataTable-theme-color tbody tr td {
+html:has(.theme-doj) .dataTable-theme-color tbody tr td {
   background-color: rgba(78, 78, 78, 0.5);
 }
-
-.input-theme-color svg {
-  color: rgba(106, 106, 106, 0.5);
-}
-.input-theme-color input {
-  border-color: rgba(106, 106, 106, 0.5);
-}
-.input-theme-color input:focus {
-  border-color: #6a6a6a;
-  box-shadow: 0 0 15px rgba(106, 106, 106, 0.15);
-}
-
-.input-theme-color svg {
+html:has(.theme-doj) .input-theme-color svg {
   color: rgba(255, 255, 255, 0.5);
 }
-.input-theme-color input {
+html:has(.theme-doj) .input-theme-color input {
   border-color: rgba(78, 78, 78, 0.5);
   background-color: rgba(78, 78, 78, 0.3);
 }
-.input-theme-color input:focus {
+html:has(.theme-doj) .input-theme-color input:focus {
   border-color: #4e4e4e;
   box-shadow: 0 0 15px rgba(78, 78, 78, 0.25);
 }
-.input-theme-color input::-moz-placeholder {
+html:has(.theme-doj) .input-theme-color input::-moz-placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
-.input-theme-color input::placeholder {
+html:has(.theme-doj) .input-theme-color input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
-
-.form-theme-color select, .form-theme-color input {
+html:has(.theme-doj) .form-theme-color select, html:has(.theme-doj) .form-theme-color input {
   border: 1px solid rgba(78, 78, 78, 0.5);
   padding: 1rem;
   width: 100%;
@@ -473,21 +459,21 @@ html:has(.theme-doj) .bg-btn-alt-theme-color:hover {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-.form-theme-color select::-moz-placeholder, .form-theme-color input::-moz-placeholder {
+html:has(.theme-doj) .form-theme-color select::-moz-placeholder, html:has(.theme-doj) .form-theme-color input::-moz-placeholder {
   color: rgba(255, 255, 255, 0.45);
 }
-.form-theme-color select::placeholder, .form-theme-color input::placeholder {
+html:has(.theme-doj) .form-theme-color select::placeholder, html:has(.theme-doj) .form-theme-color input::placeholder {
   color: rgba(255, 255, 255, 0.45);
 }
-.form-theme-color select:focus, .form-theme-color input:focus {
+html:has(.theme-doj) .form-theme-color select:focus, html:has(.theme-doj) .form-theme-color input:focus {
   border-color: #2c3748;
   box-shadow: 0 0 18px rgba(44, 55, 72, 0.25);
 }
-.form-theme-color label {
+html:has(.theme-doj) .form-theme-color label {
   display: block;
   margin-bottom: 1.3rem;
 }
-.form-theme-color option {
+html:has(.theme-doj) .form-theme-color option {
   color: black;
   border-radius: 0px;
   -webkit-border-radius: 0px;
@@ -496,8 +482,7 @@ html:has(.theme-doj) .bg-btn-alt-theme-color:hover {
   -o-border-radius: 0px;
   font-size: 1.3rem;
 }
-
-.modal-theme-color {
+html:has(.theme-doj) .modal-theme-color {
   background-color: #686868;
   border: 0.5px solid #6a6a6a;
   box-shadow: 0 0 8px rgba(106, 106, 106, 0.35);
