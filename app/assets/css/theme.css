@@ -268,7 +268,7 @@ html:has(.theme-bcso) .dataTable-theme-color tbody tr td {
   background-color: rgba(61, 62, 54, 0.5);
 }
 html:has(.theme-bcso) .input-theme-color svg {
-  color: rgba(61, 62, 54, 0.5);
+  color: rgba(255, 255, 255, 0.55);
 }
 html:has(.theme-bcso) .input-theme-color input {
   border-color: rgba(61, 62, 54, 0.5);
@@ -285,7 +285,7 @@ html:has(.theme-bcso) .input-theme-color input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
 html:has(.theme-bcso) .form-theme-color select, html:has(.theme-bcso) .form-theme-color input {
-  border: 1px solid #3d3e36;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 1rem;
   width: 100%;
   background-color: rgba(61, 62, 54, 0.3);
@@ -318,7 +318,7 @@ html:has(.theme-bcso) .form-theme-color option {
   font-size: 1.3rem;
 }
 html:has(.theme-bcso) .modal-theme-color {
-  background-color: #4a4c42;
+  background-color: #35362f;
   border: 0.5px solid #6a6c60;
   box-shadow: 0 0 8px rgba(106, 108, 96, 0.35);
 }
@@ -430,8 +430,7 @@ html:has(.theme-doj) .input-theme-color svg {
   color: rgba(255, 255, 255, 0.5);
 }
 html:has(.theme-doj) .input-theme-color input {
-  border-color: rgba(78, 78, 78, 0.5);
-  background-color: rgba(78, 78, 78, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 html:has(.theme-doj) .input-theme-color input:focus {
   border-color: #4e4e4e;
@@ -444,7 +443,7 @@ html:has(.theme-doj) .input-theme-color input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
 html:has(.theme-doj) .form-theme-color select, html:has(.theme-doj) .form-theme-color input {
-  border: 1px solid rgba(78, 78, 78, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1rem;
   width: 100%;
   background-color: rgba(78, 78, 78, 0.3);
@@ -466,8 +465,8 @@ html:has(.theme-doj) .form-theme-color select::placeholder, html:has(.theme-doj)
   color: rgba(255, 255, 255, 0.45);
 }
 html:has(.theme-doj) .form-theme-color select:focus, html:has(.theme-doj) .form-theme-color input:focus {
-  border-color: #2c3748;
-  box-shadow: 0 0 18px rgba(44, 55, 72, 0.25);
+  border-color: #6a6a6a;
+  box-shadow: 0 0 18px rgba(106, 106, 106, 0.25);
 }
 html:has(.theme-doj) .form-theme-color label {
   display: block;
@@ -483,7 +482,7 @@ html:has(.theme-doj) .form-theme-color option {
   font-size: 1.3rem;
 }
 html:has(.theme-doj) .modal-theme-color {
-  background-color: #686868;
+  background-color: #414141;
   border: 0.5px solid #6a6a6a;
   box-shadow: 0 0 8px rgba(106, 106, 106, 0.35);
 }

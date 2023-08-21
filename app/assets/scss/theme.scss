@@ -348,7 +348,7 @@ html:has(.theme-bcso)
 
     .input-theme-color{
         svg{
-           color:rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5); 
+            color:rgba($color: #fff, $alpha: 0.55); 
         }
         input{
             border-color: rgba($color:  variables.$bcso-secondary-color, $alpha: 0.5);
@@ -371,7 +371,7 @@ html:has(.theme-bcso)
     .form-theme-color{
      
         select, input{
-             border: 1px solid rgba($color:  variables.$bcso-secondary-color, $alpha: 1);
+             border: 1px solid rgba($color: #fff, $alpha: 0.25);
              padding: 1rem;
              width: 100%;
              background-color:rgba($color:  variables.$bcso-secondary-color, $alpha: 0.3) ;
@@ -411,7 +411,7 @@ html:has(.theme-bcso)
 }
 
     .modal-theme-color{
-        background-color: rgba($color:  lighten(variables.$bcso-secondary-color,5%), $alpha: 1);
+        background-color: rgba($color:  darken(variables.$bcso-secondary-color,3%), $alpha: 1);
         border:0.5px solid rgba($color:  variables.$bcso-primary-color, $alpha: 1);
         box-shadow: 0 0 8px rgba($color:  variables.$bcso-primary-color, $alpha: 0.35);
       
@@ -576,8 +576,8 @@ html:has(.theme-doj)
            color:rgba($color:  #fff, $alpha: 0.5); 
         }
         input{
-            border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
-            background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
+            border-color: rgba($color: #fff, $alpha: 0.3);
+           //background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
     
             &:focus{
                 border-color: rgba($color:  variables.$doj-secondary-color, $alpha: 1);
@@ -596,7 +596,7 @@ html:has(.theme-doj)
     .form-theme-color{
      
         select, input{
-             border: 1px solid rgba($color:  variables.$doj-secondary-color, $alpha: 0.5);
+             border: 1px solid rgba($color:  #fff, $alpha: 0.3);
              padding: 1rem;
              width: 100%;
              background-color:rgba($color:  variables.$doj-secondary-color, $alpha: 0.3) ;
@@ -604,8 +604,8 @@ html:has(.theme-doj)
                 color:rgba($color: #fff, $alpha: 0.45); 
             }
              &:focus{
-                 border-color: rgba($color:  variables.$doj-third-color, $alpha: 1);
-                 box-shadow: 0 0 18px rgba($color:  variables.$doj-third-color, $alpha: 0.25);
+                 border-color: rgba($color:  variables.$doj-primary-color, $alpha: 1);
+                 box-shadow: 0 0 18px rgba($color:  variables.$doj-primary-color, $alpha: 0.25);
                 }
              transition:all 0.25s ;
              -webkit-transition:all 0.25s ;
@@ -638,7 +638,7 @@ html:has(.theme-doj)
     }
     
     .modal-theme-color{
-        background-color: rgba($color:  lighten(variables.$doj-secondary-color,10%), $alpha: 1);
+        background-color: rgba($color:  darken(variables.$doj-secondary-color,5%), $alpha: 1);
         border:0.5px solid rgba($color:  variables.$doj-primary-color, $alpha: 1);
         box-shadow: 0 0 8px rgba($color:  variables.$doj-primary-color, $alpha: 0.35);
       
