@@ -83,6 +83,7 @@ const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
           <label htmlFor="name">Nom</label>
 
           <input
+            autoFocus
             type="text"
             {...register("name", { required: true })}
             placeholder="EX: EFFECTIF,SUPERVISOR,COMMAND STAFF..."

@@ -86,6 +86,7 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
           <label htmlFor="name">Nom</label>
 
           <input
+            autoFocus
             type="text"
             {...register("name", { required: true })}
             placeholder="EX: OFFICIER I,SENIOR LEAD OFFICER,LIEUTENANT..."
