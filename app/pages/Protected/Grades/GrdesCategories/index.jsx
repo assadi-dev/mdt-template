@@ -56,12 +56,16 @@ const GradeCategories = () => {
     });
   };
   const handleClicDelete = (data) => {
-    const onConfirmDelete = (data) => {
-      dispatch(removeGradeCaregory(data));
-      deleteGradeCategories(data.id);
-      dispatchModelState({
-        type: CLOSE_MODAL,
-      });
+    const onConfirmDelete = async (data) => {
+      try {
+        const res = await deleteGradeCategories(data.id);
+        dispatch(removeGradeCaregory(data));
+        dispatchModelState({
+          type: CLOSE_MODAL,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     };
 
     data = { ...data, onConfirmDelete };

@@ -27,7 +27,7 @@ const View = ({ view, data, onCloseModal }) => {
     case "delete-category":
       if (data) {
         const titleDeleCategorie = `Etes-vous sur de vouloir supprimer la categorie : ${data.name} de la faction ${data.faction} ?`;
-        const alertCategorieMessage = `Attention la suppression n'est pas possible si un grade est associé à cette categorie.`;
+        const alertCategorieMessage = `Attention la suppression n'est pas possible si un des grades est associé à cette categorie.`;
         return (
           <FormDelete
             data={data}
