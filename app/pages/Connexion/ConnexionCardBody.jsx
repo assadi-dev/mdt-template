@@ -16,17 +16,28 @@ import { USER_DATA_STORAGE } from "../../config/constantes";
 import useLocalStorage from "use-local-storage";
 import SpinnerButton from "../../components/Shared/Loading/SpinnerButton";
 import { FiUser } from "react-icons/fi";
+import RememberMe from "./RememberMe";
 
 const ConnexionCardBody = () => {
   const { faction } = useParams();
 
   const [isProcess, setIsProcess] = useState(false);
 
+  const { agentIdentity } = localStorage.getItem(USER_DATA_STORAGE)
+    ? JSON.parse(localStorage.getItem(USER_DATA_STORAGE))
+    : "";
+
+  const defaultValues = {
+    agentIdentity: agentIdentity ? agentIdentity : "",
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues,
+  });
 
   const [identity, setIdentiy] = useLocalStorage(USER_DATA_STORAGE, undefined);
   const connectButtonRef = useRef(null);
@@ -63,6 +74,7 @@ const ConnexionCardBody = () => {
                 {...register("agentIdentity", { required: true })}
               />
             </InputConnextionWrapper>
+
             <ErrorMessage>
               <AnimatePresence>
                 {errors.agentIdentity && (
@@ -76,6 +88,7 @@ const ConnexionCardBody = () => {
                   </motion.p>
                 )}
               </AnimatePresence>
+              <RememberMe identity={identity} />
             </ErrorMessage>
           </FormControl>
         </motion.div>

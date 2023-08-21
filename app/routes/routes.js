@@ -4,6 +4,7 @@ import Pages from "./bootstrap";
 import { Outlet, redirect } from "react-router-dom";
 import ThemeLayout from "../components/Layout/ThemeLayout";
 import { checkUserPermission, userRedirect } from "./helper";
+import GradesLayout from "../pages/Protected/Grades/GradesLayout";
 
 export const routing = [
   {
@@ -116,6 +117,24 @@ export const routing = [
           {
             path: "acces-permissions",
             element: <Pages.AccesPermissions />,
+          },
+          {
+            path: "grades",
+            element: <GradesLayout />,
+            children: [
+              {
+                index: true,
+                element: <Pages.Grades />,
+              },
+              {
+                path: "categories",
+                element: <Pages.GradeCategories />,
+              },
+            ],
+          },
+          {
+            path: "utilisateurs",
+            element: <Pages.Users />,
           },
         ],
       },

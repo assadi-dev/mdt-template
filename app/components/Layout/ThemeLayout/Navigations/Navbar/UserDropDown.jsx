@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   GradeNameStyle,
   UserDropDownBtn,
@@ -19,18 +19,39 @@ import DropDownContent from "./DropDownContent";
 
 const UserDropDown = () => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
-  const { photo, gender, name, firstname, grade, matricule } = authenticateUser;
+  const { photo, gender, name, firstname, grade, matricule, faction } =
+    authenticateUser;
 
   const fullGrade = `${matricule ? matricule : "N/A"}-${grade ? grade : "N/A"}`;
+  const lightGrade = `${grade ? grade : "N/A"}`;
   const [openDropdown, setOpenDropdown] = useState(false);
 
-  const toggleOpenDropdown = () => {
+  const toggleOpenDropdown = (e) => {
+    e.stopPropagation();
     setOpenDropdown((current) => (current = !current));
   };
 
+  const userMenuRef = useRef(null);
+
+  useEffect(() => {
+    if (!userMenuRef.current) return;
+    const closeMenu = () => {
+      let dropMenu = userMenuRef.current.querySelector(".dropdown-menu");
+      if (!dropMenu) return;
+      if (document.contains(dropMenu)) {
+        setOpenDropdown((current) => (current = false));
+      }
+    };
+    document.addEventListener("click", closeMenu);
+
+    return () => {
+      document.removeEventListener("click", closeMenu);
+    };
+  }, [userMenuRef.current]);
+
   return (
     <>
-      <UserProfileContainer onClickCapture={toggleOpenDropdown}>
+      <UserProfileContainer ref={userMenuRef} onClick={toggleOpenDropdown}>
         <PhotoProfile photo={photo} gender={gender} />
         <div>
           <UsernameTextRow>
@@ -49,7 +70,9 @@ const UserDropDown = () => {
             </motion.span>
           </UsernameTextRow>
 
-          <GradeNameStyle>{fullGrade}</GradeNameStyle>
+          <GradeNameStyle>
+            {faction ? (faction != "bcso" ? fullGrade : lightGrade) : null}
+          </GradeNameStyle>
         </div>
         <AnimatePresence>
           {openDropdown ? <DropDownContent /> : null}

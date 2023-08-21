@@ -88,4 +88,8 @@ body {
   color: var(--text-color-primary);
   overflow-x: hidden;
   cursor: default;
+}
+
+.text-error {
+  color: var(--red);
 }/*# sourceMappingURL=root.css.map */

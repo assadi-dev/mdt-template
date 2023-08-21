@@ -101,7 +101,15 @@ export const sidebarRoutes = [
     childrens: [
       {
         name: "Acces/Permissions",
-        path: "administrations/acces-permissions",
+        path: "/administrations/acces-permissions",
+      },
+      {
+        name: "Grades",
+        path: "/administrations/grades",
+      },
+      {
+        name: "Utilisateurs",
+        path: "/administrations/utilisateurs",
       },
     ],
   },

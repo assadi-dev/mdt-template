@@ -24,14 +24,9 @@ class Access
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $page;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $childrens;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -52,6 +47,10 @@ class Access
      * @ORM\Column(type="boolean")
      */
     private $isCanDelete;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isShow;
 
     /**
      * @ORM\ManyToOne(targetEntity=Grade::class, inversedBy="access")
@@ -85,19 +84,6 @@ class Access
     public function setPage(?string $page): self
     {
         $this->page = $page;
-
-        return $this;
-    }
-
-
-    public function getChildrens(): ?string
-    {
-        return $this->childrens;
-    }
-
-    public function setChildrens(?string $childrens): self
-    {
-        $this->childrens = $childrens;
 
         return $this;
     }
@@ -149,6 +135,18 @@ class Access
 
         return $this;
     }
+    public function isIsShow(): ?bool
+    {
+        return $this->isShow;
+    }
+
+    public function setIsShow(bool $isShow): self
+    {
+        $this->isShow = $isShow;
+
+        return $this;
+    }
+
 
     public function getGrade(): ?Grade
     {

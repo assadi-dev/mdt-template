@@ -5,7 +5,7 @@ const initialState = {
   photo: "",
   idDiscord: "",
   username: "",
-  roles: "",
+  roles: ["ROLE_USER"],
   idAgent: "",
   firstname: "",
   name: "",

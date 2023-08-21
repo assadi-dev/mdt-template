@@ -10,7 +10,7 @@ export const getPlurialWord = (count, singular, plural) => {
 };
 
 /**
- *
+ *Premier lettre een majuscule de la chanie de caractere
  * @param {*} string
  *
  */
@@ -21,7 +21,7 @@ export const firsLetterCapitalise = (string) => {
     if (letter == 0) {
       newString = string[letter].toLocaleUpperCase();
     } else {
-      newString += string[letter];
+      newString += string[letter].toLocaleLowerCase();
     }
   }
 

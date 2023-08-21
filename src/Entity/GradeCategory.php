@@ -3,16 +3,38 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\ApiPlatform\GradeCategoryCustom;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\GradeCategoryRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=GradeCategoryRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *
+ * collectionOperations = {
+ *      "post",
+ *      "get",
+ *      "get_collection_for_permission"={
+ *          "pagination_enabled"=false,
+ *           "normalization_context"={"groups"={"read:gradeCategory:permission"}},
+ *             "method"="GET",
+ *              "read"=true,
+ *              "path"="/grade_categories/permissions/{faction}",
+ *              "controller" = GradeCategoryCustom::class
+ *      }
+ * }
+ *
+ * )
+ *
  */
+
+#@ApiFilter(SearchFilter::class, properties= {"faction" : "partial"})
 class GradeCategory
 {
     use TimestampableEntity;
@@ -21,21 +43,26 @@ class GradeCategory
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:gradeCategory:permission"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"read:gradeCategory:permission"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Grade::class, mappedBy="gradeCategory")
+     * @Groups({"read:gradeCategory:permission"})
+     *
      */
     private $grades;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"read:gradeCategory:permission"})
      */
     private $faction;
 

@@ -4,7 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Grade;
 use App\Entity\Access;
+use App\Entity\Agent;
+use App\Entity\GradeCategory;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -66,10 +70,13 @@ class GradeRepository extends ServiceEntityRepository
     //    }
 
 
+    /**
+     * Retourne la listes des pages d'acces avec pour id du grade en argument ainsi que les permissions des actions
+     */
     public function findAccessById($id)
     {
         $qb = $this->createQueryBuilder("g");
-        $qb->select("a.page,a.path,a.isCanAdd,a.isCanUpdate,a.isCanDelete")
+        $qb->select("a.id, a.page,a.path,a.isCanAdd,a.isCanUpdate,a.isCanDelete,a.isShow")
         ->innerJoin(Access::class, "a", "WITH", "a.grade=g.id")
         ->where("g.id=:id")
         ->setParameter("id", $id)
@@ -81,9 +88,47 @@ class GradeRepository extends ServiceEntityRepository
     }
 
 
+    public function findGradeByPage($items_per_page, $page)
+    {
+
+        $countResult = ($page - 1) * $items_per_page;
+        $qb = $this->createQueryBuilder('g');
+        $qb->select('g.id,g.name,gc.id as idCategory, gc.name as category ,gc.faction,g.createdAt, COUNT(a.grade) as nb_agents')
+        ->leftJoin(Agent::class, "a", "WITH", "a.grade=g.id")
+        ->leftJoin(GradeCategory::class, 'gc', 'WITH', 'gc.id=g.gradeCategory')
+        ->groupBy("g.id")
+
+
+        ;
+        $criteria = Criteria::create()
+            ->setFirstResult($countResult)
+            ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $result =  $qb->getQuery()->getResult();
+
+        //Otention du nombre total d'items
+        $query = $this->createQueryBuilder("g")->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
 
 
 
+
+        return  ["count" => $count,"data" => $result];
+
+    }
+
+
+    public function findRookieGradeByFaction($faction)
+    {
+        $qb = $this->createQueryBuilder('g');
+
+        return   $qb->leftJoin(GradeCategory::class, "gc", "WITH", "gc.id =g.gradeCategory")
+           ->where("gc.faction=:faction AND g.name='rookie'")
+               ->setParameter(':faction', $faction)
+               ->getQuery()
+               ->getOneOrNullResult();
+    }
 
 
 }

@@ -12,7 +12,7 @@ import DemandeComptaabilite from "../pages/Protected/Services/DemandesComptabili
 import Plaintes from "../pages/Protected/Services/Plaintes";
 import Saisies from "../pages/Protected/Services/Saisies";
 import AttributionPatrouilleurs from "../pages/Protected/Services/AttributionPatrouilleurs";
-/***Services***/
+/***END - Services***/
 /***MDT***/
 import EncodageCivils from "../pages/Protected/Mdt/Encodage/Civils";
 import EncodageVehicules from "../pages/Protected/Mdt/Encodage/Vehicules";
@@ -23,8 +23,14 @@ import RapportAspirant from "../pages/Protected/Mdt/Rapport/RapportAspirant";
 import RapportIncident from "../pages/Protected/Mdt/Rapport/RapportIncident";
 import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
 import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
-/***MDT***/
+/*** END - MDT***/
 import AccesPermissions from "../pages/Protected/Administrations/AccesPermissions";
+import Users from "../pages/Protected/Administrations/Users";
+
+/** OTHER***/
+import Grades from "../pages/Protected/Grades";
+import GradeCategories from "../pages/Protected/Grades/GrdesCategories";
+/**END - OTHER***/
 
 export default {
   AuthLayout,
@@ -49,4 +55,7 @@ export default {
   ConsultationRapportRookie,
   ConsultationRapportAspirant,
   AccesPermissions,
+  Grades,
+  GradeCategories,
+  Users,
 };

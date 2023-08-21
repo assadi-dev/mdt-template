@@ -3,9 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Access;
+use App\Entity\Grade;
 use App\Entity\GradeCategory;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<GradeCategory>
@@ -65,7 +68,44 @@ class GradeCategoryRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+    public function findGradeCategiesByPage($items_per_page, $page)
+    {
+        $countResult = ($page - 1) * $items_per_page;
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('gc.id, gc.name, gc.faction, COUNT(g.gradeCategory) as nb_grades, gc.createdAt')
+        ->leftJoin(Grade::class, "g", "WITH", "gc.id =g.gradeCategory")
+        ->groupBy("gc.id")
+        ;
 
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $result = $qb->getQuery()->getArrayResult();
+        //Otention du nombre total d'items
+        $paginator = new Paginator($qb);
+        $count = count($paginator);
+
+        return  ["count" => $count,"data" => $result];
+
+    }
+
+
+    public function findGradeCategiesForNamebyFaction($faction)
+    {
+
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('gc.id,gc.name')
+        ->where("gc.faction=:faction")
+        ->setParameter("faction", $faction)
+        ;
+
+        $result = $qb->getQuery()->getResult();
+
+
+        return $result;
+
+    }
 
 
 }

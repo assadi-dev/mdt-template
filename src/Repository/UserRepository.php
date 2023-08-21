@@ -84,6 +84,7 @@ class UserRepository extends ServiceEntityRepository
         a.faction,
         a.division,
         a.createdAt,
+        g.id as idGrade,
         g.name as grade,
         a.updatedAt")
         ->innerJoin(Agent::class, "a", "WITH", "u.id=a.userAccount")

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Agent;
+use App\Entity\Grade;
+use App\Repository\GradeRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +17,14 @@ class AuthenticationController extends AbstractController
     private $request;
     private $entityManager;
     private $userRepository;
+    private $gradeRepository;
 
-    public function __construct(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function __construct(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, GradeRepository $gradeRepository)
     {
         $this->request = $request;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->gradeRepository = $gradeRepository;
 
     }
 
@@ -44,14 +48,18 @@ class AuthenticationController extends AbstractController
             $gender = $body["gender"];
 
 
-            $userAccount =  $this->userRepository->findOneBy(["idDiscord"=> $idDiscord  ]);
+            $userAccount =  $this->userRepository->findOneBy(["idDiscord" => $idDiscord  ]);
             $agent = new Agent();
             $agent->setFirstname($firstname);
             $agent->setName($name);
             $agent->setFaction($faction);
             $agent->setPhone($phone);
             $agent->setGender($gender);
-            //$agent->setGrade();
+            $grade = $this->getRookieGrade($faction);
+            if(isset($grade)) {
+                $agent->setGrade($grade);
+            }
+
             $userAccount->setAgent($agent);
             $this->entityManager->persist($userAccount);
             $this->entityManager->flush();
@@ -94,6 +102,21 @@ class AuthenticationController extends AbstractController
      */
     public function logout()
     {
+
+    }
+
+
+    /**
+     *
+     */
+    public function getRookieGrade($faction): Grade
+    {
+        if($faction != "doj") {
+
+            return $this->gradeRepository->findRookieGradeByFaction($faction);
+        }
+
+        return $this->gradeRepository->findOneBy(["name" => "avocat"]);
 
     }
 
