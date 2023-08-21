@@ -399,7 +399,7 @@ html:has(.theme-lspd) .modal-theme-color {
 }
 
 html:has(.theme-doj) .grade-category-name {
-  color: #4E4E4E;
+  color: #2C3748;
 }
 html:has(.theme-doj) .grade-category-col-separator {
   border-right: solid 2px #2C3748;
