@@ -116,7 +116,7 @@ const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
           </ErrorSection>
         </div>
         <ModalFooter>
-          <SubmitButton className="bg-btn-alt-theme-color" type="submit">
+          <SubmitButton className="bg-btn-theme-color" type="submit">
             Enregistrer
             {process && <SpinnerButton />}
           </SubmitButton>

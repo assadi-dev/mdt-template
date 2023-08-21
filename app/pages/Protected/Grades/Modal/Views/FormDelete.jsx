@@ -48,7 +48,7 @@ const FormDelete = ({
             Confirmer
           </ConfirmButton>
           <ConfirmButton
-            className="bg-btn-alt-theme-color"
+            className="bg-btn-theme-color"
             type="button"
             onClick={onCloseModal}
           >

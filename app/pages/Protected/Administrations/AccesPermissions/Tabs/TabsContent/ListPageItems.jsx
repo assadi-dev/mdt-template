@@ -100,7 +100,7 @@ const ListPageItems = ({ idGrade }) => {
     <>
       <form onSubmit={handleSubmit}>
         <RowStartEnd>
-          <SubmitButton type="submit" className="bg-btn-theme-color">
+          <SubmitButton type="submit" className="bg-btn-alt-theme-color">
             Enregistrer
           </SubmitButton>
         </RowStartEnd>
@@ -111,7 +111,7 @@ const ListPageItems = ({ idGrade }) => {
                 <span
                   key={uniqid()}
                   className={`header-page-btn ${
-                    pageSelected == page && "bg-btn-alt-theme-color"
+                    pageSelected == page && "bg-btn-theme-color"
                   }`}
                   onClick={() => handleClickPageName(page)}
                 >
