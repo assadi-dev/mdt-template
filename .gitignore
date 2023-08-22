@@ -32,3 +32,4 @@ yarn-error.log
 composer.lock
 package-lock.json
 ###< symfony/webpack-encore-bundle ###
+*css.map
