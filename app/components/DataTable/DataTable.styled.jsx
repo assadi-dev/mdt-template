@@ -63,19 +63,20 @@ export const TableAction = styled.div`
   align-items: center;
   justify-content: center;
   grid-gap: 1rem;
-  .edit {
-    background: var(--teal);
-  }
-  .delete {
-    background: var(--danger-color);
-  }
 `;
 
 export const ActionButton = styled.button`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   color: #fff;
-  text-shadow: 0px 0px rgba(0, 0, 0, 1);
-  background-color: transparent;
   border-radius: 3px;
+  display: grid;
+  place-items: center;
+  transition: all 0.25s;
+  svg {
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 1));
+    stroke-width: 0.35px;
+    width: 15px;
+    height: 15px;
+  }
 `;

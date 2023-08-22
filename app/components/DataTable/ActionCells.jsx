@@ -1,5 +1,7 @@
 import React from "react";
 import { ActionButton, TableAction } from "./DataTable.styled";
+import { BsPencilSquare } from "react-icons/bs";
+import { TfiTrash } from "react-icons/tfi";
 
 const ActionCells = ({
   data,
@@ -19,12 +21,11 @@ const ActionCells = ({
   return (
     <TableAction>
       {" "}
-      <ActionButton
-        className="edit"
-        onClick={handleClickEdit}
-      ></ActionButton>{" "}
-      <ActionButton className="delete" onClick={handleClicDelete}>
-        {" "}
+      <ActionButton className="btn-edit-table" onClick={handleClickEdit}>
+        <BsPencilSquare />
+      </ActionButton>{" "}
+      <ActionButton className="btn-delete-table" onClick={handleClicDelete}>
+        <TfiTrash />
       </ActionButton>{" "}
     </TableAction>
   );

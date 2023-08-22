@@ -16,7 +16,7 @@ const GradesLayout = () => {
           <NavLink
             className={`nav-tabs-button ${
               location.pathname == "/administrations/grades"
-                ? "bg-btn-theme-color"
+                ? "bg-selected-theme-color"
                 : ""
             } `}
             to={"/administrations/grades"}
@@ -26,7 +26,7 @@ const GradesLayout = () => {
           <NavLink
             className={`nav-tabs-button ${
               location.pathname == "/administrations/grades/categories"
-                ? "bg-btn-theme-color"
+                ? "bg-selected-theme-color"
                 : ""
             } `}
             to={"/administrations/grades/categories"}

@@ -315,12 +315,20 @@ html:has(.theme-bcso)
     {
         border-right: solid 2px variables.$bcso-secondary-color;
     }
+    .bg-selected-theme-color{
+        background-color: variables.$bcso-primary-color;
+    }
+
     .bg-btn-theme-color{
         background-color: variables.$bcso-primary-color;
         box-shadow: 0px 0px 8px rgba($color: variables.$bcso-secondary-color, $alpha: 0.45);
         &:hover{
             background-color: darken(variables.$bcso-primary-color, 10%);
-           // box-shadow: 0px 0px 8px rgba($color: variables.$bcso-primary-color, $alpha: 0.45);
+            box-shadow: 0px 0px 8px rgba($color: variables.$bcso-primary-color, $alpha: 0.45);
+        }
+
+        &:active{
+            background-color: variables.$bcso-primary-color; 
         }
         
     }
@@ -328,6 +336,9 @@ html:has(.theme-bcso)
         background-color: variables.$bcso-secondary-color;
         &:hover{
             background-color: darken(variables.$bcso-secondary-color, 10%);
+        }
+        &:active{
+            background-color: variables.$bcso-secondary-color;
         }
     }
 
@@ -424,6 +435,11 @@ html:has(.theme-bcso)
 
 html:has(.theme-lspd)
 {
+
+    .bg-selected-theme-color{
+        background-color: variables.$lspd-primary-color;
+    }
+
     .grade-category-name {
         color: var(--danger-color);
     }
@@ -434,13 +450,21 @@ html:has(.theme-lspd)
     .bg-btn-theme-color{
         background-color: variables.$lspd-primary-color;
         &:hover{
-            background-color: darken(variables.$lspd-primary-color, 10%);
+            background-color: darken(variables.$lspd-primary-color, 15%);
+            box-shadow: 0 0 8px rgba($color: variables.$lspd-primary-color, $alpha: 0.8);
+        }
+        &:active{
+            background-color: variables.$lspd-primary-color; 
         }
     }
     .bg-btn-alt-theme-color{
         background-color: variables.$lspd-primary-color;
         &:hover{
-            background-color: darken(variables.$lspd-primary-color, 10%);
+            background-color: darken(variables.$lspd-primary-color, 15%);
+            box-shadow: 0 0 8px rgba($color: variables.$lspd-primary-color, $alpha: 0.8);
+        }
+        &:active{
+            background-color: variables.$lspd-primary-color; 
         }
     }
 
@@ -532,6 +556,9 @@ html:has(.theme-lspd)
 
 html:has(.theme-doj)
 {
+    .bg-selected-theme-color{
+        background-color: variables.$doj-primary-color;
+    }
     .grade-category-name {
         color: variables.$doj-third-color;
     }
@@ -545,12 +572,22 @@ html:has(.theme-doj)
         box-shadow: 0 0 15px rgba($color:  variables.$doj-third-color, $alpha: 0.25);
         &:hover{
             background-color: darken(variables.$doj-primary-color, 10%);
+            
+            box-shadow: 0 0 8px rgba($color:  variables.$doj-primary-color, $alpha: 0.65);
+        }
+       &:active{
+            background-color: variables.$doj-primary-color;
+            
         }
     }
     .bg-btn-alt-theme-color{
         background-color: darken(variables.$doj-secondary-color, 10%);
         &:hover{
             background-color: darken(variables.$doj-secondary-color, 15%);
+        }
+        &:active{
+            background-color: variables.$doj-primary-color;
+            background-color: darken(variables.$doj-secondary-color, 10%);
         }
     }
 
@@ -659,6 +696,31 @@ html:has(.theme-doj)
 .bg-danger-btn{
     background-color: variables.$red;
     &:hover{
-        background-color: darken(variables.$red, 10%);
+        background-color: darken(variables.$red, 15%);
+        box-shadow: 0 0 8px rgba($color: variables.$red, $alpha: 0.8);
     }
+}
+
+.btn-edit-table {
+    background: darken(variables.$teal, 10%);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    &:hover{
+        background-color: darken(variables.$teal, 18%);  
+    }
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+    -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+}
+  .btn-delete-table {
+    background-color: darken(variables.$red, 10%);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    &:hover{
+        background-color: darken(variables.$red, 18%);
+      
+    }
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+    -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
 }
