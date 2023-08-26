@@ -553,5 +553,5 @@ html:has(.theme-doj) .modal-theme-color {
 }
 
 .paginate-btn[disabled] {
-  opacity: 0.5;
+  opacity: 0.3;
 }/*# sourceMappingURL=theme.css.map */
