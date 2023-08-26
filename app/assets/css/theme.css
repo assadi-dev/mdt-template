@@ -550,4 +550,8 @@ html:has(.theme-doj) .modal-theme-color {
 }
 .btn-delete-table:hover {
   background-color: #9a1b27;
+}
+
+.paginate-btn[disabled] {
+  opacity: 0.5;
 }/*# sourceMappingURL=theme.css.map */

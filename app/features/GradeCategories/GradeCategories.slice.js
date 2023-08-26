@@ -51,7 +51,7 @@ const GradeCategoriesSlice = createSlice({
 
           state.collections = payload.data;
           state.count = payload.count;
-          state.state = "complete";
+          state.status = "complete";
         }
       )
       .addCase(

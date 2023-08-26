@@ -27,9 +27,9 @@ class GradesFixtures extends Fixture
             ["name" => "Doj","faction" => "doj"]
         ];
         $grades = [
-            ["name" => "rookie","gradeCategory" => "Effectif","faction" => "lspd"],
-            ["name" => "rookie","gradeCategory" => "Effectif","faction" => "bcso"],
-            ["name" => "avocat","gradeCategory" => "Doj","faction" => "doj"]
+            ["name" => "Rookie","gradeCategory" => "Effectif","faction" => "lspd"],
+            ["name" => "Aspirant","gradeCategory" => "Effectif","faction" => "bcso"],
+            ["name" => "Avocat","gradeCategory" => "Doj","faction" => "doj"]
         ];
 
         foreach ($categories as  $value) {

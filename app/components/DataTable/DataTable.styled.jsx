@@ -52,6 +52,33 @@ export const Table = styled.table`
   .td-center {
     text-align: center;
   }
+
+  & .paginate-btn {
+    padding: 0.5rem;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    & :hover {
+      opacity: 0.5;
+    }
+
+    & button {
+      opacity: 0.5;
+      color: red;
+    }
+    & :active {
+      opacity: 1;
+      transform: scale(0.9);
+    }
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 export const EmptyRowStyle = styled.td`
@@ -79,4 +106,24 @@ export const ActionButton = styled.button`
     width: 15px;
     height: 15px;
   }
+`;
+
+export const PaginationContainer = styled.div`
+  width: 100%;
+  margin: 1rem 0;
+  display: flex;
+  grid-gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const PageIndexInput = styled.input`
+  width: 30px;
+  height: 25px;
+  padding: 0rem;
+  text-align: center;
+  //border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.3rem;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.3);
 `;

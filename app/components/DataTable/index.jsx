@@ -1,33 +1,98 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, usePagination } from "react-table";
 import { Table } from "./DataTable.styled";
 import Pagination from "./Pagination";
+import { useEffect } from "react";
 
 const DataTable = ({
   columns = [],
   data = [],
-  manualPagination = false,
+  manualPagination = true,
+  initialStatePagination,
+  totalCount,
+  isSuccess = false,
+  isLoading = true,
+  onPageChange,
+  onPageTotalCountChange,
+  isError,
   ...props
 }) => {
   const columnData = useMemo(() => columns, [columns]);
   const rowData = useMemo(() => data, [data]);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
+
+  const queryPageSize = initialStatePagination
+    ? initialStatePagination.pageSize
+    : 10;
+  const queryPageIndex = initialStatePagination
+    ? initialStatePagination.pageIndex
+    : 0;
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
       columns: columnData,
-      data: rowData,
+      data: isSuccess ? rowData : [],
+      initialState: {
+        pageIndex: queryPageIndex,
+        pageSize: queryPageSize,
+      },
       manualPagination,
-    });
+      pageCount: isSuccess ? Math.ceil(totalCount / queryPageSize) : null,
+    },
+    usePagination
+  );
 
   const TABLE_CLASS = ["dataTable-theme-color", props.className];
+
+  useEffect(() => {
+    console.log("dispach indexChange", pageIndex);
+    if (!onPageChange) return;
+    onPageChange(pageIndex);
+  }, [pageIndex]);
+  useEffect(() => {
+    if (!onPageTotalCountChange) return;
+    console.log(totalCount);
+    onPageTotalCountChange(totalCount);
+  }, [totalCount]);
 
   return (
     <>
       <Table {...getTableProps} {...props} className={TABLE_CLASS.join(" ")}>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+          <tr>
+            <th colSpan={100}>
+              <Pagination
+                pageIndex={queryPageIndex}
+                pageCount={pageCount}
+                gotoPage={gotoPage}
+                nextPage={nextPage}
+                previousPage={previousPage}
+                canPreviousPage={canPreviousPage}
+                canNextPage={canNextPage}
+              />
+            </th>
+          </tr>
+          {headerGroups.map((headerGroup, i) => (
+            <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column, i) => (
+                <th key={i} {...column.getHeaderProps()}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}
@@ -36,10 +101,12 @@ const DataTable = ({
           {rows.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
+              <tr key={i} {...row.getRowProps()}>
+                {row.cells.map((cell, i) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td key={i} {...cell.getCellProps()}>
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
               </tr>

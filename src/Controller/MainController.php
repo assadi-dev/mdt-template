@@ -45,9 +45,8 @@ class MainController extends AbstractController
 
         if ($this->getUser()) {
             $userCredentials = null;
-
             $identifier = $this->getUser()->getUserIdentifier();
-            $user = $this->userRepository->findOneBy(["idDiscord"=>$identifier]);
+            $user = $this->userRepository->findOneBy(["idDiscord" => $identifier]);
 
 
             if(empty($user->getAgent())) {
@@ -55,15 +54,15 @@ class MainController extends AbstractController
                     "id" => $user->getId(),
                     "idDiscord" => $user->getUserIdentifier(),
                     "roles" => $user->getRoles(),
-                    "idAgent"=>$user->getAgent(),
-                    "isValidate"=>$user->isIsValidate()
+                    "idAgent" => $user->getAgent(),
+                    "isValidate" => $user->isIsValidate()
 
                 ];
             }
 
             $userCredentials  = $this->userRepository->getCredential($identifier) ;
             $userCredentials["roles"] = $this->getUser()->getRoles();
-            return $userCredentials ;
+            return $userCredentials;
 
 
 

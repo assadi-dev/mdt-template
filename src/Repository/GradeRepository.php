@@ -96,15 +96,12 @@ class GradeRepository extends ServiceEntityRepository
         $qb->select('g.id,g.name,gc.id as idCategory, gc.name as category ,gc.faction,g.createdAt, COUNT(a.grade) as nb_agents')
         ->leftJoin(Agent::class, "a", "WITH", "a.grade=g.id")
         ->leftJoin(GradeCategory::class, 'gc', 'WITH', 'gc.id=g.gradeCategory')
-        ->groupBy("g.id")
-
-
-        ;
+        ->groupBy("g.id");
         $criteria = Criteria::create()
             ->setFirstResult($countResult)
             ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
-        $result =  $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getResult();
 
         //Otention du nombre total d'items
         $query = $this->createQueryBuilder("g")->getQuery();

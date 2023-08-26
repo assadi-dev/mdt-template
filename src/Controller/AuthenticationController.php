@@ -111,12 +111,18 @@ class AuthenticationController extends AbstractController
      */
     public function getRookieGrade($faction): Grade
     {
-        if($faction != "doj") {
+        $faction = strtolower($faction);
+        switch ($faction) {
+            case 'lspd':
+                return $this->gradeRepository->findOneBy(["name" => "rookie"]);
+            case 'bcso':
+                return $this->gradeRepository->findOneBy(["name" => "aspirant"]);
+            case 'doj':
+                return $this->gradeRepository->findOneBy(["name" => "avocat"]);
 
-            return $this->gradeRepository->findRookieGradeByFaction($faction);
+
         }
 
-        return $this->gradeRepository->findOneBy(["name" => "avocat"]);
 
     }
 

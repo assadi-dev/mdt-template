@@ -16,21 +16,44 @@ import {
 import View from "../Modal/View";
 import { removeGradeCaregory } from "../../../../features/GradeCategories/GradeCategories.slice";
 import { deleteGradeCategories } from "../helper";
+import {
+  PAGE_CHANGED,
+  TOTAL_COUNT_CHANGED,
+  initialStatePagination,
+  paginateReducer,
+} from "./reducer/PaginateReducer";
 
 const GradeCategories = () => {
-  const [page, setPage] = useState({ current: 1, item_per_page: 10 });
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeCategoriesReducer
   );
 
+  const [
+    { pageIndex, pageSize, totalCount, canPrevPage, canNextpage },
+    dispatchPaginate,
+  ] = useReducer(paginateReducer, initialStatePagination);
+
   useEffect(() => {
     const payload = {
-      page: page.current,
-      params: { item_per_page: page.item_per_page },
+      page: pageIndex,
+      params: { item_per_page: pageSize },
     };
-    dispatch(RetrieveGradeCategoriesPaginationAsync(payload));
-  }, [page.current]);
+    dispatch(RetrieveGradeCategoriesPaginationAsync(payload))
+      .unwrap()
+      .then((res) => {
+        const count = res.count;
+        onPageTotalCountChange(count);
+      });
+  }, [pageIndex]);
+
+  const onPageChange = (pageIndex) => {
+    dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
+  };
+
+  const onPageTotalCountChange = (count) => {
+    dispatchPaginate({ type: TOTAL_COUNT_CHANGED, payload: count });
+  };
 
   const columns = [
     { Header: "Nom", accessor: "name" },
@@ -87,11 +110,23 @@ const GradeCategories = () => {
   return (
     <>
       <RowActionCategories dispatchModelState={dispatchModelState} />
-      <DataTable
-        columns={columns}
-        data={collections}
-        className="grades-table"
-      />
+      {
+        <DataTable
+          columns={columns}
+          data={collections}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
+          manualPagination={true}
+          className="grades-table"
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageChange={onPageChange}
+          onPageTotalCountChange={onPageTotalCountChange}
+        />
+      }
       {modalState.isOpen
         ? createPortal(
             <Modal isOpen={modalState.isOpen}>
