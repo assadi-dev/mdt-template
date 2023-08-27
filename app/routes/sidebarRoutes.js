@@ -38,7 +38,7 @@ export const sidebarRoutes = [
           { name: "Civils", path: "/mdt/encodage/civils" },
           {
             name: "Véhicules",
-            childrens: [{ name: "Voiture", path: "/mdt/encodage/vehicules" }],
+            path: "/mdt/encodage/vehicules",
           },
         ],
       },
