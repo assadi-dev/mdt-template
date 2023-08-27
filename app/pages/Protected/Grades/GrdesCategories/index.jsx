@@ -127,7 +127,7 @@ const GradeCategories = () => {
           totalCount={totalCount}
           manualPagination={true}
           className="grades-table"
-          isLoading={status == "pending"}
+          isLoading={status == "pending" ? true : false}
           isSuccess={status == "complete"}
           onPageChange={onPageChange}
           onPageTotalCountChange={onPageTotalCountChange}

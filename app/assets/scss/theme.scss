@@ -729,3 +729,15 @@ html:has(.theme-doj)
 .paginate-btn[disabled]{
     opacity: 0.3;
 }
+
+.dataTable-theme-color{
+    .empty-row, .loading-row{
+        td:first-of-type, td:last-of-type{
+            border-radius: 5px ;
+            -webkit-border-radius: 5px ;
+            -moz-border-radius: 5px ;
+            -ms-border-radius: 5px ;
+            -o-border-radius: 5px ;
+}
+}
+}

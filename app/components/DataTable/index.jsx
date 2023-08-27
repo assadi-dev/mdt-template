@@ -3,6 +3,8 @@ import { useTable, usePagination } from "react-table";
 import { Table } from "./DataTable.styled";
 import Pagination from "./Pagination";
 import { useEffect } from "react";
+import RowLoading from "./RowLoading";
+import EmptyRow from "./EmptyRow";
 
 const DataTable = ({
   columns = [],
@@ -14,6 +16,7 @@ const DataTable = ({
   isLoading = true,
   onPageChange,
   onPageTotalCountChange,
+  loadingMessage,
   isError,
   ...props
 }) => {
@@ -97,20 +100,26 @@ const DataTable = ({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr key={i} {...row.getRowProps()}>
-                {row.cells.map((cell, i) => {
-                  return (
-                    <td key={i} {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {isLoading ? (
+            <RowLoading loadingMessage={loadingMessage} />
+          ) : rows.length == 0 && !isLoading ? (
+            <EmptyRow />
+          ) : (
+            rows.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr key={i} {...row.getRowProps()}>
+                  {row.cells.map((cell, i) => {
+                    return (
+                      <td key={i} {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </Table>
     </>

@@ -554,4 +554,12 @@ html:has(.theme-doj) .modal-theme-color {
 
 .paginate-btn[disabled] {
   opacity: 0.3;
+}
+
+.dataTable-theme-color .empty-row td:first-of-type, .dataTable-theme-color .empty-row td:last-of-type, .dataTable-theme-color .loading-row td:first-of-type, .dataTable-theme-color .loading-row td:last-of-type {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }/*# sourceMappingURL=theme.css.map */
