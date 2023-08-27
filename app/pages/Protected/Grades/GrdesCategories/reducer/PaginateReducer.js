@@ -4,13 +4,13 @@ export const initialStatePagination = {
   pageIndex: 0,
   pageSize: 5,
   totalCount: 0,
-  canPrevPage: false,
-  canNextpage: false,
+  search: "",
 };
 
 export const PAGE_CHANGED = "PAGE_CHANGED";
 export const PAGE_SIZE_CHANGED = "PAGE_SIZE_CHANGED";
 export const TOTAL_COUNT_CHANGED = "TOTAL_COUNT_CHANGED";
+export const SEARCH = "SEARCH";
 
 export const paginateReducer = (state, { type, payload }) => {
   switch (type) {
@@ -29,6 +29,12 @@ export const paginateReducer = (state, { type, payload }) => {
         ...state,
         totalCount: payload,
       };
+    case SEARCH:
+      return {
+        ...state,
+        search: payload,
+      };
+
     default:
       throw new Error(`Unhandled action type: ${type}`);
   }

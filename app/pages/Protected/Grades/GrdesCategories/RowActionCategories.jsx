@@ -7,13 +7,30 @@ import {
 } from "../grades.styled";
 import { BiSearch } from "react-icons/bi";
 import { TOGGLE_MODAL } from "./reducer/ModalReducer";
+import { useRef } from "react";
+import { useState } from "react";
 
-const RowActionCategories = ({ dispatchModelState }) => {
+const RowActionCategories = ({ dispatchModelState, onSearch }) => {
   const handleClickAddCategoryBtn = () => {
     dispatchModelState({
       type: TOGGLE_MODAL,
       payload: { view: "add-category", data: null },
     });
+  };
+
+  const searcInputRef = useRef(null);
+  const [timer, setTimer] = useState(null);
+
+  const handleChangeSearchInput = (e) => {
+    if (!searcInputRef.current) return;
+    let value = searcInputRef.current.value;
+    if (!onSearch) return;
+
+    clearTimeout(timer);
+    let newTimer = setTimeout(() => {
+      onSearch(value);
+    }, 500);
+    setTimer(newTimer);
   };
 
   return (
@@ -27,6 +44,8 @@ const RowActionCategories = ({ dispatchModelState }) => {
           name="search"
           id="search"
           placeholder="Rechercher"
+          ref={searcInputRef}
+          onChange={handleChangeSearchInput}
         />
       </SearchSection>
       <AddButton

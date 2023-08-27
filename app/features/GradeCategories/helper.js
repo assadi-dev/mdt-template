@@ -12,6 +12,6 @@ import api from "../../services/api/instance";
  */
 export const fetchGradeCategorieByPage = (page, params) => {
   return api.get(`/grade_categories/pagination/${page}`, {
-    headers: params,
+    params: params,
   });
 };

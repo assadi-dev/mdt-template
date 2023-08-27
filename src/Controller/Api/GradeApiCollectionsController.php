@@ -39,11 +39,19 @@ class GradeApiCollectionsController extends AbstractController
     {
         try {
 
-            $item_per_page = $request->headers->get("item_per_page");
+
+
+            $item_per_page = $request->query->get("item_per_page");
+            $search =  $request->query->get("search");
             if(!isset($item_per_page)) {
                 $item_per_page = 5;
             }
-            $result = $this->gradeCategoryRepository->findGradeCategiesByPage($item_per_page, $page);
+            if(!isset($search)) {
+                $search = "";
+            }
+
+
+            $result = $this->gradeCategoryRepository->findGradeCategiesByPage($item_per_page, $page, $search);
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, []);
             return $response;
@@ -67,12 +75,17 @@ class GradeApiCollectionsController extends AbstractController
     {
         try {
 
-            $item_per_page = $request->headers->get("item_per_page");
+            $item_per_page = $request->query->get("item_per_page");
+            $search =  $request->query->get("search");
             if(!isset($item_per_page)) {
                 $item_per_page = 5;
             }
+            if(!isset($search)) {
+                $search = "";
+            }
 
-            $result = $this->gradeRepository->findGradeByPage($item_per_page, $page);
+
+            $result = $this->gradeRepository->findGradeByPage($item_per_page, $page, $search);
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, []);
             return $response;

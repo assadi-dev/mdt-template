@@ -68,12 +68,29 @@ class GradeCategoryRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function findGradeCategiesByPage($items_per_page, $page)
+
+    public function findCustom()
+    {
+
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('gc.id, gc.name, gc.faction, COUNT(g.gradeCategory) as nb_grades, gc.createdAt')
+        ->leftJoin(Grade::class, "g", "WITH", "gc.id =g.gradeCategory")
+        ->groupBy("gc.id")
+        ;
+        $result = $qb->getQuery()->getArrayResult();
+        return $result;
+    }
+
+
+    public function findGradeCategiesByPage($items_per_page = 5, $page = 1, $search = "")
     {
         $countResult = ($page - 1) * $items_per_page;
         $qb = $this->createQueryBuilder('gc');
         $qb->select('gc.id, gc.name, gc.faction, COUNT(g.gradeCategory) as nb_grades, gc.createdAt')
         ->leftJoin(Grade::class, "g", "WITH", "gc.id =g.gradeCategory")
+        ->orWhere($qb->expr()->like("gc.name", ":search"))
+        ->orWhere($qb->expr()->like("gc.faction", ":search"))
+        ->setParameter("search", "%$search%")
         ->groupBy("gc.id")
         ;
 

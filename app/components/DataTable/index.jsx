@@ -60,13 +60,12 @@ const DataTable = ({
   const TABLE_CLASS = ["dataTable-theme-color", props.className];
 
   useEffect(() => {
-    console.log("dispach indexChange", pageIndex);
     if (!onPageChange) return;
     onPageChange(pageIndex);
   }, [pageIndex]);
   useEffect(() => {
     if (!onPageTotalCountChange) return;
-    console.log(totalCount);
+    //console.log(totalCount);
     onPageTotalCountChange(totalCount);
   }, [totalCount]);
 

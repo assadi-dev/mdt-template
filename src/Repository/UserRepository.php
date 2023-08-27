@@ -93,7 +93,6 @@ class UserRepository extends ServiceEntityRepository
         ->setParameter("idDiscord", $idDiscord)
         ;
         $result = $qb->getQuery()->getSingleResult();
-
         return $result;
 
     }

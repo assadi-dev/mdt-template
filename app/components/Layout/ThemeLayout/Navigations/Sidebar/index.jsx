@@ -24,7 +24,7 @@ const Sidebar = () => {
     for (const route of sidebarRoutes) {
       checkRoutes(route);
     }
-    console.log(accesRoutes);
+    //console.log(accesRoutes);
   }, [sideBarHeaderRef, faction]);
 
   return (

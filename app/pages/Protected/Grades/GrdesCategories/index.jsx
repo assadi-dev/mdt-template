@@ -18,6 +18,7 @@ import { removeGradeCaregory } from "../../../../features/GradeCategories/GradeC
 import { deleteGradeCategories } from "../helper";
 import {
   PAGE_CHANGED,
+  SEARCH,
   TOTAL_COUNT_CHANGED,
   initialStatePagination,
   paginateReducer,
@@ -29,15 +30,13 @@ const GradeCategories = () => {
     (state) => state.GradeCategoriesReducer
   );
 
-  const [
-    { pageIndex, pageSize, totalCount, canPrevPage, canNextpage },
-    dispatchPaginate,
-  ] = useReducer(paginateReducer, initialStatePagination);
+  const [{ pageIndex, pageSize, totalCount, search }, dispatchPaginate] =
+    useReducer(paginateReducer, initialStatePagination);
 
   useEffect(() => {
     const payload = {
       page: pageIndex,
-      params: { item_per_page: pageSize },
+      params: { item_per_page: pageSize, search },
     };
     dispatch(RetrieveGradeCategoriesPaginationAsync(payload))
       .unwrap()
@@ -45,7 +44,7 @@ const GradeCategories = () => {
         const count = res.count;
         onPageTotalCountChange(count);
       });
-  }, [pageIndex]);
+  }, [pageIndex, search]);
 
   const onPageChange = (pageIndex) => {
     dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
@@ -107,9 +106,16 @@ const GradeCategories = () => {
     dispatchModelState({ type: CLOSE_MODAL });
   };
 
+  const handleSearch = (value) => {
+    dispatchPaginate({ type: SEARCH, payload: value });
+  };
+
   return (
     <>
-      <RowActionCategories dispatchModelState={dispatchModelState} />
+      <RowActionCategories
+        dispatchModelState={dispatchModelState}
+        onSearch={handleSearch}
+      />
       {
         <DataTable
           columns={columns}

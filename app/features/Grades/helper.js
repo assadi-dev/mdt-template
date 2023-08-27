@@ -14,6 +14,6 @@ import api from "../../services/api/instance";
  */
 export const fetchGradesByPage = (page, params) => {
   return api.get(`/grades/pagination/${page}`, {
-    headers: params,
+    params: params,
   });
 };
