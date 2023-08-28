@@ -126,3 +126,57 @@ export const PageIndexInput = styled.input`
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.3);
 `;
+
+export const HeaderTableRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 25px;
+  align-items: center;
+  margin-bottom: 1.4rem;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  & .start {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  & .end {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
+export const SearchSection = styled.div`
+  position: relative;
+  width: 100%;
+  input {
+    padding: 1rem 1.2rem 1rem 35px;
+    width: 100%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 252, 255, 0.3);
+    height: 100%;
+    transition: all 0.35s;
+  }
+  @media screen and (min-width: 992px) {
+    width: 50%;
+  }
+`;
+
+export const IconInput = styled.span`
+  display: block;
+  left: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  color: rgba(255, 252, 255, 0.3);
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;

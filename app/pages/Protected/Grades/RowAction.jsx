@@ -35,19 +35,7 @@ const RowAction = ({ dispatchModelState, onSearch }) => {
 
   return (
     <RowActionContainer>
-      <SearchSection className="input-theme-color">
-        <IconInput>
-          <BiSearch />
-        </IconInput>
-        <input
-          type="search"
-          name="search"
-          id="search"
-          placeholder="Rechercher"
-          ref={searcInputRef}
-          onChange={handleChangeSearchInput}
-        />
-      </SearchSection>
+      <div></div>
       <AddButton
         className="bg-btn-alt-theme-color"
         onClick={handleClickAddGrade}

@@ -112,10 +112,7 @@ const GradeCategories = () => {
 
   return (
     <>
-      <RowActionCategories
-        dispatchModelState={dispatchModelState}
-        onSearch={handleSearch}
-      />
+      <RowActionCategories dispatchModelState={dispatchModelState} />
       {
         <DataTable
           columns={columns}
@@ -131,6 +128,7 @@ const GradeCategories = () => {
           isSuccess={status == "complete"}
           onPageChange={onPageChange}
           onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
         />
       }
       {modalState.isOpen

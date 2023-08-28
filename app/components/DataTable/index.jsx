@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
-import { useTable, usePagination } from "react-table";
-import { Table } from "./DataTable.styled";
+import { useTable, usePagination, useAsyncDebounce } from "react-table";
+import { HeaderTableRow, Table } from "./DataTable.styled";
 import Pagination from "./Pagination";
 import { useEffect } from "react";
 import RowLoading from "./RowLoading";
 import EmptyRow from "./EmptyRow";
+import SearchInput from "./SearchInput";
 
 const DataTable = ({
   columns = [],
@@ -18,6 +19,8 @@ const DataTable = ({
   onPageTotalCountChange,
   loadingMessage,
   isError,
+  onSearchValue,
+  placeholder,
   ...props
 }) => {
   const columnData = useMemo(() => columns, [columns]);
@@ -29,6 +32,9 @@ const DataTable = ({
   const queryPageIndex = initialStatePagination
     ? initialStatePagination.pageIndex
     : 0;
+  const querySearch = initialStatePagination.search
+    ? initialStatePagination.search
+    : "";
 
   const {
     getTableProps,
@@ -45,6 +51,7 @@ const DataTable = ({
     nextPage,
     previousPage,
     setPageSize,
+
     state: { pageIndex, pageSize },
   } = useTable(
     {
@@ -55,12 +62,14 @@ const DataTable = ({
         pageSize: queryPageSize,
       },
       manualPagination,
+      autoResetGlobalFilter: false,
       pageCount: isSuccess ? Math.ceil(totalCount / queryPageSize) : null,
     },
     usePagination
   );
 
   const TABLE_CLASS = ["dataTable-theme-color", props.className];
+  const PLACEHOLDER = placeholder ? placeholder : "Rechercher";
 
   useEffect(() => {
     if (!onPageChange) return;
@@ -72,23 +81,36 @@ const DataTable = ({
     onPageTotalCountChange(totalCount);
   }, [totalCount]);
 
+  const handleChangeSearchInput = useAsyncDebounce((value) => {
+    if (!onSearchValue) return;
+    onSearchValue(value);
+  }, 500);
+
   return (
     <>
+      <HeaderTableRow>
+        <div className="start">
+          <SearchInput
+            className="input-theme-color"
+            placeholder={PLACEHOLDER}
+            onSearchInput={handleChangeSearchInput}
+          />
+        </div>
+
+        <div className="end">
+          <Pagination
+            pageIndex={queryPageIndex}
+            pageCount={pageCount}
+            gotoPage={gotoPage}
+            nextPage={nextPage}
+            previousPage={previousPage}
+            canPreviousPage={canPreviousPage}
+            canNextPage={canNextPage}
+          />
+        </div>
+      </HeaderTableRow>
       <Table {...getTableProps} {...props} className={TABLE_CLASS.join(" ")}>
         <thead>
-          <tr>
-            <th colSpan={100}>
-              <Pagination
-                pageIndex={queryPageIndex}
-                pageCount={pageCount}
-                gotoPage={gotoPage}
-                nextPage={nextPage}
-                previousPage={previousPage}
-                canPreviousPage={canPreviousPage}
-                canNextPage={canNextPage}
-              />
-            </th>
-          </tr>
           {headerGroups.map((headerGroup, i) => (
             <tr key={i} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, i) => (

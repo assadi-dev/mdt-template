@@ -114,10 +114,7 @@ const Grades = () => {
 
   return (
     <>
-      <RowAction
-        dispatchModelState={dispatchModelState}
-        onSearch={handleSearch}
-      />
+      <RowAction dispatchModelState={dispatchModelState} />
       <DataTable
         columns={columns}
         data={collections}
@@ -132,6 +129,7 @@ const Grades = () => {
           pageSize,
         }}
         totalCount={totalCount}
+        onSearchValue={handleSearch}
       />
 
       {modalState.isOpen
