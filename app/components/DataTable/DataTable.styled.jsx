@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Table = styled.table`
   border-spacing: 0 15px;
   border-collapse: separate;
-  width: 90%;
+  width: 100%;
   margin: auto;
   & thead tr th,
   & thead tr td,
@@ -133,7 +133,7 @@ export const HeaderTableRow = styled.div`
   min-height: 25px;
   align-items: center;
   margin-bottom: 1.4rem;
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 

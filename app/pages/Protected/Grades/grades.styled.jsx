@@ -13,6 +13,10 @@ export const GradePageContainer = styled.div`
   }
 `;
 
+export const MainContainer = styled.main`
+  width: 90%;
+  margin: 14px auto;
+`;
 export const GradPageHeaderRow = styled.div`
   display: flex;
   align-items: center;
@@ -42,7 +46,7 @@ export const RowActionContainer = styled.div`
   min-height: 25px;
   align-items: center;
   margin-bottom: 1.4rem;
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 `;

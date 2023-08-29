@@ -2,6 +2,7 @@ import React from "react";
 import {
   GradPageHeaderRow,
   GradePageContainer,
+  MainContainer,
   RowNavBtn,
 } from "./grades.styled";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
@@ -35,7 +36,9 @@ const GradesLayout = () => {
           </NavLink>
         </RowNavBtn>
       </GradPageHeaderRow>
-      <Outlet />
+      <MainContainer>
+        <Outlet />
+      </MainContainer>
     </GradePageContainer>
   );
 };
