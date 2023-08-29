@@ -133,7 +133,7 @@ const ListPageItems = ({ idGrade }) => {
             <tbody>
               {pageListes.map((page) => (
                 <tr key={page.id}>
-                  <td>{page.path}</td>
+                  <td>{page.name}</td>
                   <td>
                     <input
                       type="checkbox"

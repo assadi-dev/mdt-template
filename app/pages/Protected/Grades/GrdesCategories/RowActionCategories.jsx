@@ -21,18 +21,6 @@ const RowActionCategories = ({ dispatchModelState, onSearch }) => {
   const searcInputRef = useRef(null);
   const [timer, setTimer] = useState(null);
 
-  const handleChangeSearchInput = (e) => {
-    if (!searcInputRef.current) return;
-    let value = searcInputRef.current.value;
-    if (!onSearch) return;
-
-    clearTimeout(timer);
-    let newTimer = setTimeout(() => {
-      onSearch(value);
-    }, 500);
-    setTimer(newTimer);
-  };
-
   return (
     <RowActionContainer>
       <div></div>
