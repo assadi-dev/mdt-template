@@ -32,7 +32,7 @@ const DataTable = ({
   const queryPageIndex = initialStatePagination
     ? initialStatePagination.pageIndex
     : 0;
-  const querySearch = initialStatePagination.search
+  const querySearch = initialStatePagination
     ? initialStatePagination.search
     : "";
 
