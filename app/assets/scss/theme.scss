@@ -550,7 +550,39 @@ html:has(.theme-lspd)
 
         }
     
-    
+    /*Dropdown select */
+    .dropdown-select-custom{
+
+        @media screen and (min-width:992px ){
+            width: 200px;
+        }
+
+        & .Dropdown-control{
+            background-color: transparent;
+            color: #fff;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
+            cursor: pointer;
+  
+
+        }
+
+       & .Dropdown-option {
+        background-color:rgba($color:  variables.$lspd-primary-color, $alpha: 0);
+        color:#444;
+          &:hover{
+                background-color:rgba($color:  variables.$lspd-primary-color, $alpha: 1);
+                color:#fff;
+            }
+        }
+
+     
+                
+    }
     
 }
 
@@ -741,3 +773,57 @@ html:has(.theme-doj)
 }
 }
 }
+
+.toggle-custom
+{
+ 
+
+    & .react-toggle-track
+    {
+        background-color: variables.$red;
+    }
+    &:hover
+    {
+      .react-toggle-track {
+            background-color: red !important;
+        }
+    }
+
+    &.react-toggle--checked{
+        &:hover
+        {
+          .react-toggle-track {
+            background-color: #128D15 !important;
+        } 
+            
+        }
+    }
+
+    &.react-toggle--focus
+    {
+       & .react-toggle-thumb 
+       {
+        box-shadow:none !important
+       }
+    } 
+
+
+}
+
+
+.react--toggle-focus{
+    background-color: #444;
+    & .react-toggle-thumb  {
+      box-shadow: none !important;
+     }
+  }
+
+
+/* .toggle-custom.react-toggle--checked .react-toggle-track {
+    background-color: #ab199f;
+  } */
+
+/*   .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: red !important;
+  }
+   */

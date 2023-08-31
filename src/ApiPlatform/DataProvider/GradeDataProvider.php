@@ -9,8 +9,6 @@ use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use App\Repository\GradeRepository;
 
-use function PHPUnit\Framework\isNan;
-
 class GradeDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     private $gradeRepository;
