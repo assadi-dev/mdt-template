@@ -788,6 +788,11 @@ html:has(.theme-doj)
             background-color: red !important;
         }
     }
+    &:active{
+        .react-toggle-thumb{
+            box-shadow: none !important;
+        }
+    }
 
     &.react-toggle--checked{
         &:hover

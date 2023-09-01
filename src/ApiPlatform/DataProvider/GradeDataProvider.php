@@ -57,7 +57,7 @@ class GradeDataProvider implements ContextAwareCollectionDataProviderInterface, 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
 
-        return $resourceClass == Grade::class;
+        return $resourceClass == false;
 
     }
 

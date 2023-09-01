@@ -14,7 +14,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ORM\Entity(repositoryClass=GradeRepository::class)
- * @ApiResource()
+ * @ApiResource( )
  *
  */
 class Grade

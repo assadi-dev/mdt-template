@@ -597,6 +597,9 @@ html:has(.theme-doj) .modal-theme-color {
 .toggle-custom:hover .react-toggle-track {
   background-color: red !important;
 }
+.toggle-custom:active .react-toggle-thumb {
+  box-shadow: none !important;
+}
 .toggle-custom.react-toggle--checked:hover .react-toggle-track {
   background-color: #128D15 !important;
 }

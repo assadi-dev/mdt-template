@@ -20,13 +20,16 @@ const ActionCells = ({
 
   return (
     <TableAction>
-      {" "}
-      <ActionButton className="btn-edit-table" onClick={handleClickEdit}>
-        <BsPencilSquare />
-      </ActionButton>{" "}
-      <ActionButton className="btn-delete-table" onClick={handleClicDelete}>
-        <TfiTrash />
-      </ActionButton>{" "}
+      {canEdit && (
+        <ActionButton className="btn-edit-table" onClick={handleClickEdit}>
+          <BsPencilSquare />
+        </ActionButton>
+      )}
+      {canDelete && (
+        <ActionButton className="btn-delete-table" onClick={handleClicDelete}>
+          <TfiTrash />
+        </ActionButton>
+      )}
     </TableAction>
   );
 };

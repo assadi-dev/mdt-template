@@ -29,6 +29,8 @@ class OpenApiFactory implements OpenApiFactoryInterface
         //   dd($openApi->getPaths());
 
         foreach ($openApi->getPaths()->getPaths() as $value) {
+
+
             /*
                         echo "<pre>";
                         var_dump($value->getGet()->getTags());

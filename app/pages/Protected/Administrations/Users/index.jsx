@@ -2,36 +2,39 @@ import React from "react";
 import { MainContainer, Row } from "./User.styled";
 import DataTable from "../../../../components/DataTable";
 import ActionCells from "../../../../components/DataTable/ActionCells";
-import { getRoleUser } from "./helper";
+import { cleanNameAgent, getRoleUser } from "./helper";
 import SelectRole from "./Modal/Form/SelectRole";
 import ToggleValidation from "./Modal/Form/ToggleValidation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.action";
+import { firsLetterCapitalise } from "../../../../services/utils/textUtils";
 
 const Users = () => {
   const handleSelectRole = (value) => {
     console.log(value);
   };
 
-  const collections = [
-    {
-      id: 22,
-      idDiscord: 123456,
-      matricule: 22,
-      agent: "Philipe Salvatore",
-      grade: "rookie",
-      faction: "lspd",
-      role: ["ROLE_USER"],
-      validate: false,
-    },
-  ];
+  const handleCheckValidation = (e) => {
+    let value = e.target.checked;
+    console.log(value);
+  };
+
   const columns = [
     { Header: "Discord", accessor: "idDiscord" },
     { Header: "Matricule", accessor: "matricule" },
-    { Header: "Agent", accessor: "agent" },
+    {
+      Header: "Agent",
+      accessor: "agent",
+      Cell: ({ row }) => {
+        return cleanNameAgent(row.original.firstname, row.original.name);
+      },
+    },
     { Header: "grade", accessor: "grade" },
     { Header: "faction", accessor: "faction" },
     {
       Header: "Role",
-      accessor: "role",
+      accessor: "roles",
       Cell: ({ value }) => {
         let role = getRoleUser(value);
         return <SelectRole onChange={handleSelectRole} value={role} />;
@@ -42,7 +45,11 @@ const Users = () => {
       accessor: "validate",
       Cell: ({ value }) => {
         return (
-          <ToggleValidation className="toggle-custom" defaultChecked={value} />
+          <ToggleValidation
+            className="toggle-custom"
+            defaultChecked={value}
+            onChange={handleCheckValidation}
+          />
         );
       },
     },
@@ -52,12 +59,28 @@ const Users = () => {
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
-          /*   onEdit={handleClickEdit}
-          onDelete={handleClicDelete} */
+          canDelete={true}
+          /*onEdit={handleClickEdit}
+          onDelete={handleClicDelete}*/
         />
       ),
     },
   ];
+
+  const dispatch = useDispatch();
+  const { collections, status, error } = useSelector(
+    (state) => state.UsersReducer
+  );
+
+  useEffect(() => {
+    let res = null;
+    let payload = { page: 1, params: { item_per_page: 5, search: "" } };
+    res = dispatch(getUserPaginationAsync(payload));
+
+    return () => {
+      res && res.abort();
+    };
+  }, []);
 
   return (
     <MainContainer>
@@ -67,8 +90,8 @@ const Users = () => {
         data={collections}
         className="users-table"
         manualPagination={true}
-        isLoading={false}
-        isSuccess={true}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
         /*  onPageChange={onPageChange}
         onPageTotalCountChange={onPageTotalCountChange}
         initialStatePagination={{

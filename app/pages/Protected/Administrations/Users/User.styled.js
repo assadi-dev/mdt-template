@@ -10,11 +10,18 @@ export const MainContainer = styled.main`
     }
     .dropdown-select-custom {
       margin: 0 auto;
+      text-align: left;
     }
 
     th:first-of-type,
     td:first-of-type {
       text-align: left;
+    }
+  }
+  .empty-row,
+  .loading-row {
+    & td:first-of-type {
+      text-align: center;
     }
   }
 `;

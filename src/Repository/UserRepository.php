@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\Agent;
 use App\Entity\Grade;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -99,6 +101,53 @@ class UserRepository extends ServiceEntityRepository
 
 
 
+    public function findUserByPage($items_per_page = 5, $page = 1, $search)
+    {
+        $countResult = ($page - 1) * $items_per_page;
+        $qb = $this->createQueryBuilder("u");
+        $qb->select("
+        u.id,
+        u.username,
+        u.idDiscord,
+        u.roles,u.isValidate,
+        a.id as idAgent, 
+        a.firstname,
+        a.name,
+        a.matricule,
+        a.phone,
+        a.faction,
+        a.createdAt,
+        g.name as grade")
+        ->leftJoin(Agent::class, "a", "WITH", "u.id=a.userAccount")
+        ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->orWhere($qb->expr()->like("u.username", ":search"))
+        ->orWhere($qb->expr()->like("u.idDiscord", ":search"))
+        ->orWhere($qb->expr()->like("a.firstname", ":search"))
+        ->orWhere($qb->expr()->like("a.name", ":search"))
+        ->orWhere($qb->expr()->like(" a.matricule", ":search"))
+        ->orWhere($qb->expr()->like("a.faction", ":search"))
+        ->orWhere($qb->expr()->like("a.phone", ":search"))
+        ->orWhere($qb->expr()->like("g.name", ":search"))
+        ->setParameter("search", "%$search%")
+        ->groupBy("u.id,a.id");
+        ;
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $result = $qb->getQuery()->getResult();
+
+
+        //Otention du nombre total d'items
+        $query = $this->createQueryBuilder("g")->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+
+        return  ["count" => $count,"data" => $result];
+
+    }
 
 
 
