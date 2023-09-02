@@ -17,7 +17,6 @@ const UsersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserPaginationAsync.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.status = "complete";
         state.collections = payload.data;
         state.count = payload.count;
