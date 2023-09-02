@@ -4,3 +4,7 @@ import "./assets/css/factions.css";
 import "./assets/css/theme.css";
 import "react-dropdown/style.css";
 import "react-toggle/style.css";
+import "../app/assets/css/lspd-theme.css";
+import "../app/assets/css/bcso-theme.css";
+import "../app/assets/css/doj-theme.css";
+import "../app/assets/css/sasp-theme.css";

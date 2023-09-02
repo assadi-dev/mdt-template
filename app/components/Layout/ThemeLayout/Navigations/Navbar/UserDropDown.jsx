@@ -55,7 +55,7 @@ const UserDropDown = () => {
         <PhotoProfile photo={photo} gender={gender} />
         <div>
           <UsernameTextRow>
-            <UsernameStyle>
+            <UsernameStyle className="agent-name">
               {firstname} {name}
             </UsernameStyle>
 
@@ -70,7 +70,7 @@ const UserDropDown = () => {
             </motion.span>
           </UsernameTextRow>
 
-          <GradeNameStyle>
+          <GradeNameStyle className="agent-grade">
             {faction ? (faction != "bcso" ? fullGrade : lightGrade) : null}
           </GradeNameStyle>
         </div>

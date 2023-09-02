@@ -60,6 +60,9 @@ const AccesPermissions = () => {
           <TabPanel itemID={"doj"}>
             <TabContent faction={"doj"} />{" "}
           </TabPanel>
+          <TabPanel itemID={"sasp"}>
+            <TabContent faction={"sasp"} />{" "}
+          </TabPanel>
         </Tabs>
       ) : null}
     </AccessPermissionContainer>

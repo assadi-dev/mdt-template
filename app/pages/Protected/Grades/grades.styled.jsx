@@ -32,6 +32,7 @@ export const RowNavBtn = styled.div`
   grid-gap: 1.2rem;
   margin-bottom: 1.3rem;
   background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
   .nav-tabs-button {
     padding: 1rem 1.3rem;
     margin: 0.3rem;

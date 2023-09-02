@@ -67,6 +67,8 @@ const Grades = () => {
           data={row.original}
           onEdit={handleClickEdit}
           onDelete={handleClicDelete}
+          canEdit={true}
+          canDelete={true}
         />
       ),
     },

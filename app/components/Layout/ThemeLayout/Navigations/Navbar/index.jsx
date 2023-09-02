@@ -5,7 +5,7 @@ import UserDropDown from "./UserDropDown";
 
 const Navbar = () => {
   return (
-    <NavbarWrapper className="navbar">
+    <NavbarWrapper className="navbar ">
       <UserDropDown />
     </NavbarWrapper>
   );

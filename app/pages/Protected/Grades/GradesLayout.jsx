@@ -13,7 +13,7 @@ const GradesLayout = () => {
   return (
     <GradePageContainer>
       <GradPageHeaderRow>
-        <RowNavBtn>
+        <RowNavBtn className="bg-header-tabs">
           <NavLink
             className={`nav-tabs-button ${
               location.pathname == "/administrations/grades"

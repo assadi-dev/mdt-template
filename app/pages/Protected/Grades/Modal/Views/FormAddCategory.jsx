@@ -15,6 +15,7 @@ import { firsLetterCapitalise } from "../../../../../services/utils/textUtils";
 import { useDispatch } from "react-redux";
 import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
 import { postGradeCategories } from "../../helper";
+import { listsFactions } from "../../../../../config/factions";
 
 const FormAddGrade = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -94,9 +95,11 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
           <label htmlFor="faction">Faction</label>
 
           <select type="text" {...register("faction", { required: true })}>
-            <option value="lspd">LSPD</option>
-            <option value="bcso"> BCSO</option>
-            <option value="doj">DOJ</option>
+            {listsFactions.map((faction) => (
+              <option value={faction.short_name}>
+                {faction.short_name.toUpperCase()}
+              </option>
+            ))}
           </select>
           <ErrorSection>
             <AnimatePresence>

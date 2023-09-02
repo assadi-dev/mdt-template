@@ -105,7 +105,7 @@ const ListPageItems = ({ idGrade }) => {
           </SubmitButton>
         </RowStartEnd>
 
-        <HeaderPageSelect>
+        <HeaderPageSelect className="header-page-select-container">
           {pagesNameList
             ? pagesNameList.map((page) => (
                 <span
@@ -121,7 +121,7 @@ const ListPageItems = ({ idGrade }) => {
             : null}
         </HeaderPageSelect>
         {pageListes.length > 0 && (
-          <TablePagesList>
+          <TablePagesList className="table-page-access">
             <thead>
               <tr>
                 <th></th>

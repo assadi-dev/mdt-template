@@ -1,0 +1,283 @@
+@use 'variables';
+
+
+
+/**** Theme SASPD ******/
+.theme-sasp
+{
+    background-color: variables.$sasp-bg-color;
+    min-height: 100vh;
+    width: 100%;
+
+
+    .sidebar{
+
+        background-color: variables.$sasp-secondary-color;
+        min-height: 100vh;
+        .sidebar-selected,.active,.selected{
+            background-color: rgba($color: variables.$sasp-primary-color, $alpha: 1);
+            text-shadow: 0px 0px 8px rgba(0,0,0,1);
+        }
+
+    }
+
+    .navbar{
+        background-color: variables.$sasp-bg-color;
+
+        .agent-grade{
+           color: variables.$sasp-secondary-color;
+           font-weight: bold;
+        }
+
+    }
+
+    .btn
+    {
+        background-color: variables.$sasp-primary-color;
+        padding: 10px 15px;
+        width: fit-content;
+        height: fit-content;
+        transition: all 0.35s ease 0s;
+        &:hover
+        {
+         box-shadow: rgba(43, 125, 233, 0.8) 0px 0px 10px 
+        }
+        color: variables.$sasp-secondary-color;
+    }
+
+
+    .dropdown-menu{
+        background-color: variables.$sasp-secondary-color;
+       // box-shadow: variables.$lspd-shadow-color;
+
+    }
+
+}
+/**** End ******/
+
+/** Scrollbar **/
+html:has(.theme-sasp){
+
+    -ms-overflow-style: none;
+    scrollbar-color: variables.$sasp-primary-color ;
+    scrollbar-width: thin;
+
+    ::-webkit-scrollbar {
+        width: 5px;
+       
+    }
+    
+    ::-webkit-scrollbar-track {
+        background-color: rgba($color:variables.$sasp-secondary-color, $alpha: 0.6);
+        border-radius: 100px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: lighten(variables.$sasp-primary-color,15%);
+        border-radius: 100px;
+      
+    }
+
+}
+
+
+
+/** Title or Special elements **/
+
+html:has(.theme-sasp)
+{
+
+    .bg-selected-theme-color{
+        background-color: variables.$sasp-primary-color;
+        //text-shadow: 0px 0px 2px  rgba(0, 0, 0, 1) ;
+        font-weight: bold;
+        color: variables.$lspd-secondary-color;
+     
+    }
+
+    .grade-category-name {
+        color: variables.$lspd-secondary-color;
+    }
+
+
+
+
+    .grade-category-col-separator
+    {
+        border-right: solid 2px variables.$lspd-secondary-color;
+    }
+
+    .bg-btn-theme-color{
+        background-color: variables.$sasp-primary-color;
+        color: variables.$sasp-secondary-color;
+       font-weight: bold;
+        &:hover{
+            background-color: darken(variables.$sasp-primary-color, 15%);
+            box-shadow: 0 0 8px rgba($color: variables.$sasp-primary-color, $alpha: 0.8);
+        }
+        &:active{
+            background-color: variables.$sasp-primary-color; 
+        }
+    }
+    .bg-btn-alt-theme-color{
+        background-color: variables.$sasp-secondary-color;
+        &:hover{
+            background-color: darken(variables.$sasp-secondary-color, 15%);
+            box-shadow: 0 0 8px rgba($color: variables.$sasp-secondary-color, $alpha: 0.3);
+        }
+        &:active{
+            background-color: variables.$sasp-secondary-color; 
+        }
+    }
+
+    .dataTable-theme-color{
+        & tbody tr {
+            background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;
+            &:hover{
+                background-color: rgba($color:  variables.$lspd-third-color, $alpha: 1) ;
+            }
+        
+          }
+         & tbody tr td {
+            background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;    
+          }
+    
+        }
+
+        .input-theme-color{
+            svg{
+               color:rgba($color:  variables.$sasp-secondary-color, $alpha: 0.5); 
+            }
+            input{
+                border-color: rgba($color:  variables.$sasp-secondary-color, $alpha: 0.5);
+       
+                &:focus{
+                    border-color: rgba($color:  variables.$sasp-secondary-color, $alpha: 1);
+                    box-shadow: 0 0 15px rgba($color:  variables.$sasp-secondary-color, $alpha: 0.15);
+                }
+
+                
+            }
+
+
+       
+        }
+
+        .form-theme-color{
+         
+            select, input{
+                 border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
+                 padding: 1rem;
+                 width: 100%;
+        
+                 &:focus{
+                     border-color: rgba($color:  variables.$lspd-primary-color, $alpha: 1);
+                     box-shadow: 0 0 15px rgba($color:  variables.$lspd-primary-color, $alpha: 0.15);
+                    }
+                 transition:all 0.25s ;
+                 -webkit-transition:all 0.25s ;
+                 -moz-transition:all 0.25s ;
+                 -ms-transition:all 0.25s ;
+                 -o-transition:all 0.25s ;
+                 border-radius: 5px;
+                 -webkit-border-radius: 5px;
+                 -moz-border-radius: 5px;
+                 -ms-border-radius: 5px;
+                 -o-border-radius: 5px;
+                }
+ 
+
+                label{
+                    display: block;
+                    margin-bottom: 1.3rem;
+                }
+
+                option{
+                    color: black;
+                    border-radius: 0px;
+                    -webkit-border-radius: 0px;
+                    -moz-border-radius: 0px;
+                    -ms-border-radius: 0px;
+                    -o-border-radius: 0px;
+                 font-size: 1.3rem;
+                }
+    
+        }
+
+        .bg-header-tabs{
+            background-color: variables.$sasp-secondary-color ;  
+        }
+
+        .paginate-btn{
+            color: variables.$sasp-secondary-color ;
+        }
+
+        #pageIndex
+        {
+            background-color: variables.$sasp-secondary-color;
+        }
+          
+
+        .modal-theme-color{
+            background-color: rgba($color:  variables.$lspd-secondary-color, $alpha: 1);
+            border:0.5px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.31);
+            box-shadow: 0 0 8px rgba($color:  variables.$lspd-primary-color, $alpha: 0.35);
+          
+
+        }
+    
+    /*Dropdown select */
+    .dropdown-select-custom{
+
+        @media screen and (min-width:992px ){
+            width: 200px;
+        }
+
+        & .Dropdown-control{
+            background-color: transparent;
+            color: #fff;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
+            cursor: pointer;
+  
+
+        }
+
+       & .Dropdown-option {
+        background-color:rgba($color:  variables.$lspd-primary-color, $alpha: 0);
+        color:#444;
+          &:hover{
+                background-color:rgba($color:  variables.$lspd-primary-color, $alpha: 1);
+                color:#fff;
+            }
+        }
+
+     
+                
+    }
+
+
+  .listGradeItem_selected{
+       &:before{
+            background-color: variables.$sasp-secondary-color !important;
+        }
+    }
+
+
+    .header-page-select-container{
+        background-color: variables.$sasp-secondary-color;
+    }
+
+    .table-page-access
+    {
+        text-shadow: 0px 0px 2px rgba($color:  variables.$sasp-secondary-color, $alpha: 1);
+    }
+
+
+    
+}

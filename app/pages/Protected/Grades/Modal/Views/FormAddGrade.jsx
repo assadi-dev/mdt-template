@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
 import { postGrades } from "../../helper";
 import { addGrade } from "../../../../../features/Grades/Grades.slice";
+import { listsFactions } from "../../../../../config/factions";
 
 const FormAddCategory = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -105,9 +106,11 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
           <label htmlFor="faction">Faction</label>
 
           <select type="text" {...register("faction", { required: true })}>
-            <option value="lspd">LSPD</option>
-            <option value="bcso"> BCSO</option>
-            <option value="doj">DOJ</option>
+            {listsFactions.map((faction) => (
+              <option value={faction.short_name}>
+                {faction.short_name.toUpperCase()}
+              </option>
+            ))}
           </select>
           <ErrorSection>
             <AnimatePresence>
