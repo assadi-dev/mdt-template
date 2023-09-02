@@ -15,6 +15,11 @@ import uniqid from "uniqid";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAccess } from "../../../../../../features/UserPermissions/UserPermissions.slice";
 import { userIdGrade } from "../../../../../../services/utils/user";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
+import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerButton";
 
 const ListPageItems = ({ idGrade }) => {
   const pagesNameList = retrievesAllName();
@@ -22,6 +27,11 @@ const ListPageItems = ({ idGrade }) => {
 
   const [pageSelected, setPageSelected] = useState(pagesNameList[0]);
   const [pageListes, setPageListes] = useState([]);
+  const [process, setProcess] = useState(false);
+
+  const toggleProcess = () => {
+    setProcess((current) => (current = !current));
+  };
 
   const initAcces = async (signal) => {
     if (!pageListes) return;
@@ -89,12 +99,16 @@ const ListPageItems = ({ idGrade }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const data = { idGrade, body: { access: pageListes } };
-    const res = await updatePermission(data);
-
-    if (userIdGrade() != idGrade) return;
-    dispatch(updateAccess(res.data));
+    toggleProcess();
+    try {
+      const data = { idGrade, body: { access: pageListes } };
+      const res = await updatePermission(data);
+      toastSuccess();
+      if (userIdGrade() != idGrade) dispatch(updateAccess(res.data));
+    } catch (error) {
+      toastError();
+    }
+    toggleProcess();
   };
 
   return (
@@ -102,7 +116,7 @@ const ListPageItems = ({ idGrade }) => {
       <form onSubmit={handleSubmit}>
         <RowStartEnd>
           <SubmitButton type="submit" className="bg-btn-alt-theme-color">
-            Enregistrer
+            Enregistrer {process && <SpinnerButton />}
           </SubmitButton>
         </RowStartEnd>
 

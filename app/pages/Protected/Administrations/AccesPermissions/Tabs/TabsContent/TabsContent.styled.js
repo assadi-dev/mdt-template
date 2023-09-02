@@ -135,6 +135,9 @@ export const SubmitButton = styled.button`
   padding: 1rem 1.3rem;
   border-radius: 5px;
   margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  grid-gap: 1rem;
 `;
 
 export const RowStartEnd = styled.div`
