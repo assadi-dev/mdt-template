@@ -109,9 +109,6 @@ html:has(.theme-sasp) .bg-btn-alt-theme-color:hover {
 html:has(.theme-sasp) .bg-btn-alt-theme-color:active {
   background-color: #131B26;
 }
-html:has(.theme-sasp) .dataTable-theme-color {
-  background-color: #444;
-}
 html:has(.theme-sasp) .dataTable-theme-color tbody tr {
   background-color: rgba(44, 55, 72, 0.5);
 }
@@ -130,6 +127,12 @@ html:has(.theme-sasp) .input-theme-color input {
 html:has(.theme-sasp) .input-theme-color input:focus {
   border-color: #131b26;
   box-shadow: 0 0 15px rgba(19, 27, 38, 0.15);
+}
+html:has(.theme-sasp) .input-theme-color input::-moz-placeholder {
+  color: rgba(19, 27, 38, 0.6);
+}
+html:has(.theme-sasp) .input-theme-color input::placeholder {
+  color: rgba(19, 27, 38, 0.6);
 }
 html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input {
   border: 1px solid rgba(43, 125, 233, 0.5);

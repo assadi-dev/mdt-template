@@ -132,7 +132,7 @@ html:has(.theme-sasp)
     }
 
     .dataTable-theme-color{
-        background-color: #444;
+      
         & tbody tr {
             background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;
             &:hover{
@@ -152,13 +152,16 @@ html:has(.theme-sasp)
             }
             input{
                 border-color: rgba($color:  variables.$sasp-secondary-color, $alpha: 0.5);
-       
+  
                 &:focus{
                     border-color: rgba($color:  variables.$sasp-secondary-color, $alpha: 1);
                     box-shadow: 0 0 15px rgba($color:  variables.$sasp-secondary-color, $alpha: 0.15);
                 }
 
-                
+                &::placeholder{
+                    color: rgba($color:  variables.$sasp-secondary-color, $alpha: 0.6);
+                }
+         
             }
 
 
