@@ -25,6 +25,7 @@ const ListPageItems = ({ idGrade }) => {
 
   const initAcces = async (signal) => {
     if (!pageListes) return;
+
     try {
       const routesAccess = await fetchAccessRouteLists(idGrade, signal);
       if (routesAccess.data) {

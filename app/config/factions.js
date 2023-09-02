@@ -32,6 +32,11 @@ export const listsFactions = [
 ];
 
 export const factionsCollections = {
+  sasp: {
+    short_name: "sasp",
+    full_name: "San Andreas State Police",
+    emblem: sasp_emblem,
+  },
   lspd: {
     short_name: "lspd",
     full_name: "Los Santos Police Departement",
@@ -46,10 +51,5 @@ export const factionsCollections = {
     short_name: "doj",
     full_name: "Departement of Justice",
     emblem: doj_emblem,
-  },
-  sasp: {
-    short_name: "sasp",
-    full_name: "San Andreas State Police",
-    emblem: sasp_emblem,
   },
 };

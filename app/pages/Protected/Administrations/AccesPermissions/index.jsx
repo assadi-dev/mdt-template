@@ -16,6 +16,7 @@ import TabContent from "./Tabs/TabsContent";
 const AccesPermissions = () => {
   const [selected, setSelected] = useState(-1);
   const faction = userFaction();
+
   useEffect(() => {
     let index = listsFactions.findIndex(
       (f) => f.short_name.toLocaleLowerCase() == faction.toLocaleLowerCase()
@@ -51,18 +52,15 @@ const AccesPermissions = () => {
           </AccessPermisssionHeader>
           {/* End of Header */}
           {/* Tabs Contents */}
-          <TabPanel itemID={"lspd"}>
-            <TabContent faction={"lspd"} />{" "}
-          </TabPanel>
-          <TabPanel itemID={"bcso"}>
-            <TabContent faction={"bcso"} />{" "}
-          </TabPanel>
-          <TabPanel itemID={"doj"}>
-            <TabContent faction={"doj"} />{" "}
-          </TabPanel>
-          <TabPanel itemID={"sasp"}>
-            <TabContent faction={"sasp"} />{" "}
-          </TabPanel>
+
+          {listsFactions.map((faction) => (
+            <TabPanel
+              key={faction.id}
+              itemID={faction.short_name.toLowerCase()}
+            >
+              <TabContent faction={faction.short_name.toLowerCase()} />{" "}
+            </TabPanel>
+          ))}
         </Tabs>
       ) : null}
     </AccessPermissionContainer>

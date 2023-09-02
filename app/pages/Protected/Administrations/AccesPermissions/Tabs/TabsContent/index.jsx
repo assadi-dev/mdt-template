@@ -23,7 +23,7 @@ const TabContent = ({ faction }) => {
           )
         : null;
     }
-  }, [data]);
+  }, [data, faction]);
 
   const handleGradeSelected = (idGrade) => {
     if (!gradeSelected) return;
