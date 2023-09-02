@@ -24,12 +24,14 @@ class GradesFixtures extends Fixture
         $categories = [
             ["name" => "Effectif","faction" => "lspd"],
             ["name" => "Effectif","faction" => "bcso"],
-            ["name" => "Doj","faction" => "doj"]
+            ["name" => "Doj","faction" => "doj"],
+            ["name" => "State Officier","faction" => "sasp"]
         ];
         $grades = [
             ["name" => "Rookie","gradeCategory" => "Effectif","faction" => "lspd"],
             ["name" => "Aspirant","gradeCategory" => "Effectif","faction" => "bcso"],
-            ["name" => "Avocat","gradeCategory" => "Doj","faction" => "doj"]
+            ["name" => "Avocat","gradeCategory" => "Doj","faction" => "doj"],
+            ["name" => "Rookie","gradeCategory" => "State Officier","faction" => "sasp"]
         ];
 
         foreach ($categories as  $value) {
