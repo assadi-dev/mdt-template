@@ -21,6 +21,13 @@ import {
   modalStateReducer,
 } from "./reducers/ModalState.reducer";
 import { createPortal } from "react-dom";
+import {
+  PAGE_CHANGED,
+  SEARCH,
+  TOTAL_COUNT_CHANGED,
+  initialStatePagination,
+  paginateReducer,
+} from "./reducers/PaginationState.reducer";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -55,6 +62,9 @@ const Users = () => {
     modalStateReducer,
     initialModalState
   );
+
+  const [{ pageIndex, pageSize, totalCount, search }, dispatchPaginate] =
+    useReducer(paginateReducer, initialStatePagination);
 
   const handleClicEdit = (user) => {
     dispatchModalState({
@@ -124,13 +134,33 @@ const Users = () => {
 
   useEffect(() => {
     let res = null;
-    let payload = { page: 1, params: { item_per_page: 5, search: "" } };
-    res = dispatch(getUserPaginationAsync(payload));
+    const main = async () => {
+      let payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+      res = dispatch(getUserPaginationAsync(payload));
+      let result = await res.unwrap();
+      onPageTotalCountChange(result.count);
+    };
 
+    main();
     return () => {
       res && res.abort();
     };
-  }, []);
+  }, [pageIndex, search]);
+
+  const onPageChange = (pageIndex) => {
+    dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
+  };
+
+  const onPageTotalCountChange = (count) => {
+    dispatchPaginate({ type: TOTAL_COUNT_CHANGED, payload: count });
+  };
+
+  const handleSearch = (value) => {
+    dispatchPaginate({ type: SEARCH, payload: value });
+  };
 
   return (
     <MainContainer>
@@ -142,14 +172,14 @@ const Users = () => {
         manualPagination={true}
         isLoading={status == "pending"}
         isSuccess={status == "complete"}
-        /*  onPageChange={onPageChange}
-        onPageTotalCountChange={onPageTotalCountChange}
+        totalCount={totalCount}
         initialStatePagination={{
           pageIndex,
           pageSize,
         }}
-        totalCount={totalCount}
-        onSearchValue={handleSearch} */
+        onPageChange={onPageChange}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
       />
 
       {modalState.isOpen &&
