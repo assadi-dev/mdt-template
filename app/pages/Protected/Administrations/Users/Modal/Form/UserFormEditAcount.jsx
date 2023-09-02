@@ -25,7 +25,7 @@ import { useCallback } from "react";
 import { fetchGradesByFaction } from "../../../../../../hooks/ApiCall";
 import { useMemo } from "react";
 import SelectAsync from "../../../../../../components/SelectAsync";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { udpateUser } from "../../../../../../features/Users/Users.slice";
 import {
   toastError,
@@ -33,6 +33,7 @@ import {
 } from "../../../../../../services/utils/alert";
 import { upDateAgentData } from "../../helper";
 import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerButton";
+import { hydrateUser } from "../../../../../../features/Authenticate/Athenticate.slice";
 
 const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const defaultValues = {
@@ -51,6 +52,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const { data, status } = useGradesListoption(userData.faction);
 
   const dispatch = useDispatch();
+  const authenticateUser = useSelector((state) => state.AuthenticateReducer);
 
   const handleSelectGrade = (grade) => {
     setValue("grade", grade.label);
@@ -89,6 +91,8 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const submitForm = async (values) => {
     toggleProcess();
 
+    // hydrateUser
+
     try {
       const idAgent = userData.idAgent;
 
@@ -116,6 +120,19 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
         matricule: values.matricule,
       };
       dispatch(udpateUser(payload));
+
+      let updateUserCredential = {
+        firstname: "",
+        idDiscord: values.idDiscord,
+        firstname: values.firstname,
+        name: values.name,
+        grade: values.grade,
+        idGrade: values.gradeId,
+        matricule: values.matricule,
+      };
+      if (authenticateUser.id == idUser)
+        dispatch(hydrateUser(updateUserCredential));
+
       onCloseModal();
       toastSuccess();
     } catch (error) {
