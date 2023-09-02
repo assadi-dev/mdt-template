@@ -110,6 +110,26 @@ class GradeApiCollectionsController extends AbstractController
         try {
             $result = $this->gradeCategoryRepository->findGradeCategiesForNamebyFaction($faction);
             $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, [], true);
+            return $response;
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, [], true);
+            return $response;
+        }
+    }
+
+
+    /**
+     * @Route("/api/grades/list/{faction}", name="app_get_all_grades_by_factions", methods="GET" )
+     */
+    public function getAllGradeByFaction($faction)
+    {
+
+        try {
+            $result = $this->gradeCategoryRepository->findAllGradesByFaction($faction);
+            $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, []);
             return $response;
         } catch (\Throwable $th) {
@@ -118,6 +138,7 @@ class GradeApiCollectionsController extends AbstractController
             $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
             return $response;
         }
+
     }
 
 

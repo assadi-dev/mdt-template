@@ -124,5 +124,18 @@ class GradeCategoryRepository extends ServiceEntityRepository
 
     }
 
+    public function findAllGradesByFaction($faction)
+    {
+        $qb = $this->createQueryBuilder('gc');
+        $qb->select('g.id,g.name')
+        ->leftJoin(Grade::class, "g", "WITH", "gc.id =g.gradeCategory")
+        ->where("gc.faction=:faction")
+        ->setParameter("faction", $faction);
+        $result = $qb->getQuery()->getResult();
+
+
+        return $result;
+    }
+
 
 }

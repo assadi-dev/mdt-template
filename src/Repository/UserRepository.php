@@ -117,6 +117,7 @@ class UserRepository extends ServiceEntityRepository
         a.phone,
         a.faction,
         a.createdAt,
+        g.id as gradeId,
         g.name as grade")
         ->leftJoin(Agent::class, "a", "WITH", "u.id=a.userAccount")
         ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")

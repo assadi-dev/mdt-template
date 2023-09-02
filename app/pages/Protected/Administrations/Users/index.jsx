@@ -11,13 +11,22 @@ import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.ac
 import { firsLetterCapitalise } from "../../../../services/utils/textUtils";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
 import { udpateUser } from "../../../../features/Users/Users.slice";
+import View from "./Modal/View";
+import Modal from "../../../../components/Modal/Modal";
+import { useReducer } from "react";
+import {
+  CLOSE_MODAL,
+  TOGGLE_MODAL,
+  initialModalState,
+  modalStateReducer,
+} from "./reducers/ModalState.reducer";
+import { createPortal } from "react-dom";
 
 const Users = () => {
   const dispatch = useDispatch();
 
   const handleSelectRole = async (value, user) => {
     const id = user.id;
-
     try {
       await userupdateApi(id, { roles: [value.value] });
       toastSuccess();
@@ -41,6 +50,20 @@ const Users = () => {
       toastError();
     }
   };
+
+  const [modalState, dispatchModalState] = useReducer(
+    modalStateReducer,
+    initialModalState
+  );
+
+  const handleClicEdit = (user) => {
+    dispatchModalState({
+      type: TOGGLE_MODAL,
+      payload: { view: "edit-user", data: user },
+    });
+  };
+
+  const handleClickCloseModal = () => dispatchModalState({ type: CLOSE_MODAL });
 
   const columns = [
     { Header: "Discord", accessor: "idDiscord" },
@@ -86,9 +109,10 @@ const Users = () => {
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
-          canDelete={true}
-          /*onEdit={handleClickEdit}
-          onDelete={handleClicDelete}*/
+          canDelete={false}
+          canEdit={true}
+          onEdit={() => handleClicEdit(row.original)}
+          /* onDelete={handleClicDelete}*/
         />
       ),
     },
@@ -127,6 +151,18 @@ const Users = () => {
         totalCount={totalCount}
         onSearchValue={handleSearch} */
       />
+
+      {modalState.isOpen &&
+        createPortal(
+          <Modal isOpen={modalState.isOpen} onClose={handleClickCloseModal}>
+            <View
+              view={modalState.view}
+              data={modalState.data}
+              onCloseModal={handleClickCloseModal}
+            />
+          </Modal>,
+          document.body
+        )}
     </MainContainer>
   );
 };

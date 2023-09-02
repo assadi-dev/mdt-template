@@ -78,7 +78,7 @@ export const Userphoto = styled.div`
   height: 50px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 `;
 
 export const UsernameTextRow = styled.div`

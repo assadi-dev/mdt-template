@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { addGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
 import { postGradeCategories } from "../../helper";
 import { listsFactions } from "../../../../../config/factions";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 
 const FormAddGrade = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -56,8 +57,10 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
       };
       dispatch(addGradeCategory(dataToDispatch));
       onCloseModal();
+      toastSuccess;
     } catch (error) {
       console.log(error.message);
+      toastError();
     }
     toggleprocess();
   };
