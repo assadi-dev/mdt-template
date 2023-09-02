@@ -15,3 +15,7 @@ export const cleanNameAgent = (firstname, lastname) => {
   )}`;
   return fullname;
 };
+
+export const userupdateApi = (id, data) => {
+  return Api.put(`/users/${id}`, data);
+};

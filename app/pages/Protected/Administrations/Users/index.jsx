@@ -2,22 +2,44 @@ import React from "react";
 import { MainContainer, Row } from "./User.styled";
 import DataTable from "../../../../components/DataTable";
 import ActionCells from "../../../../components/DataTable/ActionCells";
-import { cleanNameAgent, getRoleUser } from "./helper";
+import { cleanNameAgent, getRoleUser, userupdateApi } from "./helper";
 import SelectRole from "./Modal/Form/SelectRole";
 import ToggleValidation from "./Modal/Form/ToggleValidation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.action";
 import { firsLetterCapitalise } from "../../../../services/utils/textUtils";
+import { toastError, toastSuccess } from "../../../../services/utils/alert";
+import { udpateUser } from "../../../../features/Users/Users.slice";
 
 const Users = () => {
-  const handleSelectRole = (value) => {
-    console.log(value);
+  const dispatch = useDispatch();
+
+  const handleSelectRole = async (value, user) => {
+    const id = user.id;
+
+    try {
+      await userupdateApi(id, { roles: [value.value] });
+      toastSuccess();
+      let payload = { id, roles: [value.value] };
+      dispatch(udpateUser(payload));
+    } catch (error) {
+      toastError();
+    }
   };
 
-  const handleCheckValidation = (e) => {
+  const handleCheckValidation = async (e, user) => {
     let value = e.target.checked;
-    console.log(value);
+    const id = user.id;
+
+    try {
+      await userupdateApi(id, { isValidate: value });
+      toastSuccess();
+      let payload = { id, isValidate: value };
+      dispatch(udpateUser(payload));
+    } catch (error) {
+      toastError();
+    }
   };
 
   const columns = [
@@ -35,20 +57,25 @@ const Users = () => {
     {
       Header: "Role",
       accessor: "roles",
-      Cell: ({ value }) => {
-        let role = getRoleUser(value);
-        return <SelectRole onChange={handleSelectRole} value={role} />;
+      Cell: ({ row }) => {
+        let role = getRoleUser(row.original.roles);
+        return (
+          <SelectRole
+            onChange={(e) => handleSelectRole(e, row.original)}
+            value={role}
+          />
+        );
       },
     },
     {
       Header: "Validation",
       accessor: "validate",
-      Cell: ({ value }) => {
+      Cell: ({ row }) => {
         return (
           <ToggleValidation
             className="toggle-custom"
-            defaultChecked={value}
-            onChange={handleCheckValidation}
+            defaultChecked={row.original.isValidate}
+            onChange={(e) => handleCheckValidation(e, row.original)}
           />
         );
       },
@@ -67,7 +94,6 @@ const Users = () => {
     },
   ];
 
-  const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.UsersReducer
   );

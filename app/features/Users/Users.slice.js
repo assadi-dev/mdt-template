@@ -13,7 +13,20 @@ const initialState = {
 const UsersSlice = createSlice({
   name: "User/slice",
   initialState,
-  reducers: {},
+  reducers: {
+    udpateUser: (state, action) => {
+      const { payload } = action;
+
+      let userUpdate = [...state.collections].map((u) => {
+        if (u.id == payload.id) {
+          return { ...u, ...payload };
+        }
+        return u;
+      });
+
+      state.collections = userUpdate;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUserPaginationAsync.fulfilled, (state, { payload }) => {
@@ -32,5 +45,7 @@ const UsersSlice = createSlice({
       });
   },
 });
+
+export const { udpateUser } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

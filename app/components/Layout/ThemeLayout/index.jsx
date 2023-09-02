@@ -10,6 +10,8 @@ import Navbar from "./Navigations/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { hydrateUser } from "../../../features/Authenticate/Athenticate.slice";
 import { RetrieveAccessByGradeAsync } from "../../../features/UserPermissions/UserPermissionAsync.action";
+import { ToastContainer } from "react-toastify";
+import { navbarHeight } from "../../../config/stylesValues";
 
 const ThemeLayout = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ const ThemeLayout = () => {
         <MainContent>
           <Outlet />
         </MainContent>
+        <ToastContainer
+          style={{ marginTop: navbarHeight + 10 }}
+          autoClose={3000}
+          hideProgressBar={true}
+          theme="colored"
+        />
       </ThemeMainLayoutWrapper>
     </ThemeLayoutWrapper>
   );

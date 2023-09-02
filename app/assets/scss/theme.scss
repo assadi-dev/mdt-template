@@ -75,7 +75,7 @@
     &:hover
     {
       .react-toggle-track {
-            background-color: red !important;
+        background-color: variables.$red !important;
         }
     }
     &:active{
@@ -85,10 +85,14 @@
     }
 
     &.react-toggle--checked{
+        .react-toggle-track {
+            background-color: variablees.$green !important;
+        } 
+           
         &:hover
         {
           .react-toggle-track {
-            background-color: #128D15 !important;
+            background-color: variablees.$green !important;
         } 
             
         }

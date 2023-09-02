@@ -70,10 +70,13 @@
   background-color: #dc3545;
 }
 .toggle-custom:hover .react-toggle-track {
-  background-color: red !important;
+  background-color: #dc3545 !important;
 }
 .toggle-custom:active .react-toggle-thumb {
   box-shadow: none !important;
+}
+.toggle-custom.react-toggle--checked .react-toggle-track {
+  background-color: #128D15 !important;
 }
 .toggle-custom.react-toggle--checked:hover .react-toggle-track {
   background-color: #128D15 !important;
