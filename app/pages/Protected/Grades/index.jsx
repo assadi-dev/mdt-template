@@ -45,7 +45,7 @@ const Grades = () => {
         const count = res.count;
         onPageTotalCountChange(count);
       });
-  }, [pageIndex, search]);
+  }, [pageIndex, search, collections.length]);
 
   const onPageChange = (pageIndex) => {
     dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
@@ -86,12 +86,12 @@ const Grades = () => {
   const onConfirmDelete = async (data) => {
     try {
       dispatch(removeGrade(data));
-      deleteGrades(data.id);
+      await deleteGrades(data.id);
       dispatchModelState({ type: CLOSE_MODAL });
       toastSuccess("Element supprimé");
     } catch (error) {
       console.log(error.message);
-      toastError("Element supprimé");
+      toastError();
     }
   };
 
