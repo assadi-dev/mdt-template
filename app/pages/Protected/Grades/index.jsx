@@ -23,6 +23,7 @@ import {
   initialStatePagination,
   paginateReducer,
 } from "./GrdesCategories/reducer/PaginateReducer";
+import { toastError, toastSuccess } from "../../../services/utils/alert";
 
 const Grades = () => {
   const dispatch = useDispatch();
@@ -87,8 +88,10 @@ const Grades = () => {
       dispatch(removeGrade(data));
       deleteGrades(data.id);
       dispatchModelState({ type: CLOSE_MODAL });
+      toastSuccess("Element supprimé");
     } catch (error) {
       console.log(error.message);
+      toastError("Element supprimé");
     }
   };
 

@@ -23,6 +23,7 @@ import {
   initialStatePagination,
   paginateReducer,
 } from "./reducer/PaginateReducer";
+import { toastError, toastSuccess } from "../../../../services/utils/alert";
 
 const GradeCategories = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,8 @@ const GradeCategories = () => {
           data={row.original}
           onEdit={handleClickEdit}
           onDelete={handleClicDelete}
+          canDelete={true}
+          canEdit={true}
         />
       ),
     },
@@ -85,8 +88,10 @@ const GradeCategories = () => {
         dispatchModelState({
           type: CLOSE_MODAL,
         });
+        toastSuccess("Element supprimé");
       } catch (error) {
         console.log(error.message);
+        toastError();
       }
     };
 

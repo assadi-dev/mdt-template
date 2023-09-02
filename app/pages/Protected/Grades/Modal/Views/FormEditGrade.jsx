@@ -16,6 +16,7 @@ import { fetchOnegGades, putGrades } from "../../helper";
 import { editGrade } from "../../../../../features/Grades/Grades.slice";
 import SpinnerButton from "../../../../../components/Shared/Loading/SpinnerButton";
 import { listsFactions } from "../../../../../config/factions";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 
 const FormEditGrade = ({ data, onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -77,7 +78,10 @@ const FormEditGrade = ({ data, onCloseModal, ...props }) => {
       dispatch(editGrade(dataToDispatch));
       await putGrades(data.id, { name, gradeCategory, category });
       onCloseModal();
-    } catch (error) {}
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    }
 
     toggleprocess();
   };

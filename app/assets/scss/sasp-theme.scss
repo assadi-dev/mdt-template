@@ -314,7 +314,7 @@ html:has(.theme-sasp)
 
     
   .theme-custom__menu {
-     padding: 0 5px;
+    /*  padding: 0 5px; */
        .theme-custom__option{
         background-color: #fff;
         color:#444;
@@ -325,12 +325,8 @@ html:has(.theme-sasp)
        {
         background-color: variables.$lspd-primary-color ;
         color: #fff;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -ms-border-radius: 3px;
-        -o-border-radius: 3px;
-}
+       
+        }
 
 
 

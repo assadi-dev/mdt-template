@@ -234,7 +234,7 @@ html:has(.theme-sasp) .theme-custom__control .theme-custom__single-value {
   color: inherit;
 }
 html:has(.theme-sasp) .theme-custom__menu {
-  padding: 0 5px;
+  /*  padding: 0 5px; */
 }
 html:has(.theme-sasp) .theme-custom__menu .theme-custom__option {
   background-color: #fff;
@@ -244,9 +244,4 @@ html:has(.theme-sasp) .theme-custom__menu .theme-custom__option {
 html:has(.theme-sasp) .theme-custom__menu .theme-custom-option-selected {
   background-color: #2B7DE9;
   color: #fff;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
 }/*# sourceMappingURL=sasp-theme.css.map */

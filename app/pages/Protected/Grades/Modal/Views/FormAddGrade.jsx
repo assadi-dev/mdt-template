@@ -18,6 +18,7 @@ import { addGradeCategory } from "../../../../../features/GradeCategories/GradeC
 import { postGrades } from "../../helper";
 import { addGrade } from "../../../../../features/Grades/Grades.slice";
 import { listsFactions } from "../../../../../config/factions";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 
 const FormAddCategory = ({ onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -67,10 +68,13 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
         dispatch(addGrade(dataToDispatch));
         setProcess((current) => (current = false));
         onCloseModal();
+        toastSuccess();
       }
     } catch (error) {
       console.log(error.message);
+      toastError();
     }
+    toggleprocess();
   };
 
   return (

@@ -19,3 +19,10 @@ export const cleanNameAgent = (firstname, lastname) => {
 export const userupdateApi = (id, data) => {
   return Api.put(`/users/${id}`, data);
 };
+
+export const upDateAgentData = (idUser, idAgent, userData, agentData) => {
+  const userPromise = Api.put(`/users/${idUser}`, userData);
+  const agentPromise = Api.put(`/agents/${idAgent}`, agentData);
+
+  return Promise.all([userPromise, agentPromise]);
+};

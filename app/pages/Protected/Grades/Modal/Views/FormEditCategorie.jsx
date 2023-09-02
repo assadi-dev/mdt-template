@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { fetchOneGradeCategory, putGradeCategories } from "../../helper";
 import { editGradeCategory } from "../../../../../features/GradeCategories/GradeCategories.slice";
 import { listsFactions } from "../../../../../config/factions";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 
 const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
   const [process, setProcess] = useState(false);
@@ -64,8 +65,10 @@ const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
       dispatch(editGradeCategory(toDispatch));
       await putGradeCategories(data.id, values);
       onCloseModal();
+      toastSuccess()
     } catch (error) {
       console.log(error.message);
+      toastError()
     }
     toggleprocess();
   };

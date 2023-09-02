@@ -25,36 +25,36 @@ import { useCallback } from "react";
 import { fetchGradesByFaction } from "../../../../../../hooks/ApiCall";
 import { useMemo } from "react";
 import SelectAsync from "../../../../../../components/SelectAsync";
+import { useDispatch } from "react-redux";
+import { udpateUser } from "../../../../../../features/Users/Users.slice";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
+import { upDateAgentData } from "../../helper";
+import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerButton";
 
 const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const defaultValues = {
     idDiscord: userData.idDiscord,
-    fistname: userData.firstname,
+    firstname: userData.firstname,
     name: userData.name,
     matricule: userData.matricule,
     phone: userData.phone,
     faction: userData.faction,
     grade: userData.grade,
+    gradeId: userData.gradeId,
     photo: "",
   };
   const [process, setProcess] = useState();
 
   const { data, status } = useGradesListoption(userData.faction);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-  console.log(status);
+  const dispatch = useDispatch();
 
-  const promiseGradeoption = () => {
-    return new Promise(async (resolve) => {
-      let { data } = await fetchGradesByFaction(userData.faction);
-      let clean = [...data].map((grade) => ({
-        label: grade.name,
-        value: grade.id,
-      }));
-      resolve(clean);
-    });
+  const handleSelectGrade = (grade) => {
+    setValue("grade", grade.label);
+    setValue("gradeId", grade.value);
   };
 
   const gradelistoptions = useMemo(() => {
@@ -77,13 +77,55 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const submitForm = (values) => {
-    console.log(values);
+  const toggleProcess = () => {
+    setProcess((current) => (current = !current));
   };
+
+  const submitForm = async (values) => {
+    toggleProcess();
+
+    try {
+      const idAgent = userData.idAgent;
+
+      let dataAgent = {
+        firstname: values.firstname,
+        name: values.name,
+        matricule: values.matricule,
+        grade: `/api/grades/${values.gradeId}`,
+      };
+
+      const idUser = userData.id;
+      let dataUser = {
+        idDiscord: values.idDiscord,
+      };
+
+      await upDateAgentData(idUser, idAgent, dataUser, dataAgent);
+
+      let payload = {
+        id: idUser,
+        idDiscord: values.idDiscord,
+        firstname: values.firstname,
+        name: values.name,
+        grade: values.grade,
+        gradeId: values.gradeId,
+        matricule: values.matricule,
+      };
+      dispatch(udpateUser(payload));
+      onCloseModal();
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    }
+
+    toggleProcess();
+  };
+
+  const defaultGrade = { label: userData.grade, value: userData.gradeId };
 
   return (
     <ModalEditUserContainer>
@@ -104,12 +146,12 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
                 <input
                   autoFocus
                   type="text"
-                  {...register("fistname", { required: true })}
+                  {...register("firstname", { required: true })}
                   placeholder="Son Prénom"
                 />
                 <ErrorSection>
                   <AnimatePresence>
-                    {errors.fistname && (
+                    {errors.firstname && (
                       <motion.small className="text-error">
                         Veuillez entrer le prénom
                       </motion.small>
@@ -127,9 +169,9 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
                 />
                 <ErrorSection>
                   <AnimatePresence>
-                    {errors.fistname && (
+                    {errors.name && (
                       <motion.small className="text-error">
-                        Veuillez entrer le prenom
+                        Veuillez entrer le nom
                       </motion.small>
                     )}
                   </AnimatePresence>
@@ -151,7 +193,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
             />
             <ErrorSection>
               <AnimatePresence>
-                {errors.fistname && (
+                {errors.matricule && (
                   <motion.small className="text-error">
                     Veuillez entrer le matricule
                   </motion.small>
@@ -164,9 +206,10 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
             <label htmlFor="grade">Grade</label>
 
             <SelectAsync
-              defaultOptions
+              defaultValue={defaultGrade}
               options={gradelistoptions}
-              isLoading={status == "pending"}
+              isLoading={status == "pending" && defaultGrade}
+              onChange={handleSelectGrade}
             />
 
             <ErrorSection>
