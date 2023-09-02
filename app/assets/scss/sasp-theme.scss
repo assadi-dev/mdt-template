@@ -59,7 +59,7 @@
 html:has(.theme-sasp){
 
     -ms-overflow-style: none;
-    scrollbar-color: variables.$sasp-primary-color ;
+    scrollbar-color: variables.$sasp-primary-color  rgba($color: variables.$sasp-primary-color, $alpha: 0.5) ;
     scrollbar-width: thin;
 
     ::-webkit-scrollbar {
@@ -132,6 +132,7 @@ html:has(.theme-sasp)
     }
 
     .dataTable-theme-color{
+        background-color: #444;
         & tbody tr {
             background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;
             &:hover{
@@ -140,7 +141,7 @@ html:has(.theme-sasp)
         
           }
          & tbody tr td {
-            background-color: rgba($color:  variables.$lspd-third-color, $alpha: 0.5) ;    
+            background-color: rgba($color:variables.$lspd-third-color, $alpha: 0.5) ;    
           }
     
         }

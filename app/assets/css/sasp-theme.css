@@ -56,7 +56,7 @@
 /** Scrollbar **/
 html:has(.theme-sasp) {
   -ms-overflow-style: none;
-  scrollbar-color: #969696;
+  scrollbar-color: #969696 rgba(150, 150, 150, 0.5);
   scrollbar-width: thin;
 }
 html:has(.theme-sasp) ::-webkit-scrollbar {
@@ -108,6 +108,9 @@ html:has(.theme-sasp) .bg-btn-alt-theme-color:hover {
 }
 html:has(.theme-sasp) .bg-btn-alt-theme-color:active {
   background-color: #131B26;
+}
+html:has(.theme-sasp) .dataTable-theme-color {
+  background-color: #444;
 }
 html:has(.theme-sasp) .dataTable-theme-color tbody tr {
   background-color: rgba(44, 55, 72, 0.5);
