@@ -119,6 +119,8 @@ class AuthenticationController extends AbstractController
                 return $this->gradeRepository->findOneBy(["name" => "aspirant"]);
             case 'doj':
                 return $this->gradeRepository->findOneBy(["name" => "avocat"]);
+            case 'sasp':
+                return $this->gradeRepository->findOneBy(["name" => "rookie"]);
 
 
         }
