@@ -1,7 +1,7 @@
 @use 'variables';
 
 
-.lspd, .bcso, .doj {
+.lspd, .bcso, .doj,.sasp {
 
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.9);
     position: relative;
@@ -83,7 +83,7 @@
 .sasp
 {
     &::before{
-        background: url("../img/sasp.png");
+       // background: url("../img/sasp.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

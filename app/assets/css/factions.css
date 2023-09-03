@@ -14,12 +14,12 @@
   font-size: 1.6rem;
 }
 
-.lspd, .bcso, .doj {
+.lspd, .bcso, .doj, .sasp {
   text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.9);
   position: relative;
   overflow: hidden;
 }
-.lspd::before, .bcso::before, .doj::before {
+.lspd::before, .bcso::before, .doj::before, .sasp::before {
   content: "";
   width: 100%;
   position: absolute;
@@ -32,7 +32,7 @@
   -ms-transition: all 0.35s;
   -o-transition: all 0.35s;
 }
-.lspd::after, .bcso::after, .doj::after {
+.lspd::after, .bcso::after, .doj::after, .sasp::after {
   content: "";
   background: rgba(23, 24, 30, 0.8);
   width: 100%;
@@ -74,7 +74,6 @@
 }
 
 .sasp::before {
-  background: url("../img/sasp.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
