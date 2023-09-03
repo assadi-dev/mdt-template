@@ -86,15 +86,28 @@ export const sidebarRoutes = [
 
   {
     name: "Supervision / Command staff",
-    childrens: [],
-  },
-  {
-    name: "Supervision / EM",
-    childrens: [],
+    childrens: [
+      {
+        name: "Comptabilité",
+        path: "/supervision-command-staff/comptabilite",
+      },
+      {
+        name: "Effectifs",
+        path: "/supervision-command-staff/effectifs",
+      },
+      {
+        name: "Gestion des comptes",
+        path: "/supervision-command-staff/gestion-des-comptes",
+      },
+    ],
   },
   {
     name: "Gestion des ressources",
     childrens: [],
+  },
+  {
+    name: "End of Watch",
+    path: "/end-of-watch",
   },
   {
     name: "Administrations",
