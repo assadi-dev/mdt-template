@@ -18,7 +18,9 @@ const SidebarItems = ({ item }) => {
   if (item.childrens) {
     return (
       <>
-        <SibartItemRow onClick={toggleOpen}>{item.name}</SibartItemRow>
+        <SibartItemRow className="sidebar-items" onClick={toggleOpen}>
+          {item.name}
+        </SibartItemRow>
         <AnimatePresence>
           {open && (
             <motion.div
@@ -50,16 +52,18 @@ const SidebarItems = ({ item }) => {
     return (
       <AnimatePresence>
         {item.path ? (
-          <SibartItemRow>
+          <SibartItemRow className="sidebar-items">
             <NavLink
               to={item.path}
-              className={(e) => (e.isActive ? "sidebar-selected" : "")}
+              className={(e) =>
+                e.isActive ? "sidebar-items sidebar-selected" : "sidebar-items"
+              }
             >
               {item.name}
             </NavLink>
           </SibartItemRow>
         ) : (
-          <SibartItemRow>{item.name}</SibartItemRow>
+          <SibartItemRow className="sidebar-items">{item.name}</SibartItemRow>
         )}
       </AnimatePresence>
     );
