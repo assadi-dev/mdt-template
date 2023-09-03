@@ -24,7 +24,7 @@ export const retrieveSubmitUseridentity = (userIdentity) => {
 
   const agent = userIdentity.split(" ");
   return {
-    firstname: firsLetterCapitalise(agent[0]),
-    name: firsLetterCapitalise(agent[1]),
+    firstname: firsLetterCapitalise(agent[0]).trim(),
+    name: firsLetterCapitalise(agent[1]).trim(),
   };
 };
