@@ -16,13 +16,13 @@ export const listsFactions = [
     short_name: "bcso",
     full_name: "Blaine County Sheriff Office",
     emblem: bcso_emblem,
-  },
+  },*/
   {
     id: uniqid(),
     short_name: "doj",
     full_name: "Departement of Justice",
     emblem: doj_emblem,
-  }, */
+  },
   {
     id: uniqid(),
     short_name: "sasp",

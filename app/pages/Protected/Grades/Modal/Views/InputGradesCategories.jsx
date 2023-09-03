@@ -49,7 +49,9 @@ const InputGradesCategories = ({
       let findGradeCat = result.find(
         (gradeCat) => gradeCat.value == defaultGradeCategory
       );
-      setValue("category", findGradeCat.label);
+      findGradeCat
+        ? setValue("category", findGradeCat.label)
+        : setValue && setValue("gradeCategory", result[0].value);
     } else if (result.length > 0) {
       result[0] && setValue && setValue("gradeCategory", result[0].value);
       result[0] && setValue && setValue("category", result[0].label);
