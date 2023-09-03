@@ -27,6 +27,27 @@ import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/C
 import AccesPermissions from "../pages/Protected/Administrations/AccesPermissions";
 import Users from "../pages/Protected/Administrations/Users";
 
+/** SUPERVISION / COMMAND STAFF */
+
+import Comptabilite from "../pages/Protected/CommandStaffSupervisor/Comptabilite";
+import Effectifs from "../pages/Protected/CommandStaffSupervisor/Effectifs";
+import GestionDesComptes from "../pages/Protected/CommandStaffSupervisor/GestionDesComptes";
+
+/** END - SUPERVISION / COMMAND STAFF */
+
+/** GESTION RESSOURCE **/
+
+import GestionCodePenal from "../pages/Protected/GestionRessources/GestionCodePenal";
+import GestionGrades from "../pages/Protected/GestionRessources/GestionGrades";
+
+/** END - GESTION RESSOURCE **/
+
+/** END OF WATCH */
+
+import EndOfWatch from "../pages/Protected/EndOfWatch";
+
+/** END **/
+
 /** OTHER***/
 import Grades from "../pages/Protected/Grades";
 import GradeCategories from "../pages/Protected/Grades/GrdesCategories";
@@ -58,4 +79,10 @@ export default {
   Grades,
   GradeCategories,
   Users,
+  Comptabilite,
+  Effectifs,
+  GestionDesComptes,
+  GestionCodePenal,
+  GestionGrades,
+  EndOfWatch,
 };

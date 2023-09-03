@@ -112,6 +112,36 @@ export const routing = [
         ],
       },
       {
+        path: "supervision-command-staff",
+        element: <Outlet />,
+        children: [
+          {
+            path: "comptabilite",
+            element: <Pages.Comptabilite />,
+          },
+          {
+            path: "effectifs",
+            element: <Pages.Effectifs />,
+          },
+          {
+            path: "gestion-des-comptes",
+            element: <Pages.GestionDesComptes />,
+          },
+        ],
+      },
+      {
+        path: "gestion-des-ressources",
+        element: <Outlet />,
+        children: [
+          { path: "gestion-code-penal", element: <Pages.GestionCodePenal /> },
+          { path: "gestion-grade", element: <Pages.GestionGrades /> },
+        ],
+      },
+      {
+        path: "end-of-watch",
+        element: <Pages.EndOfWatch />,
+      },
+      {
         path: "administrations",
         children: [
           {

@@ -106,11 +106,11 @@ export const sidebarRoutes = [
     childrens: [
       {
         name: "Gestion code penals",
-        path: "/gestion-des-ressources/code-penal",
+        path: "/gestion-des-ressources/gestion-code-penal",
       },
       {
         name: "Gestion des grades",
-        path: "/gestion-des-ressources/grade",
+        path: "/gestion-des-ressources/gestion-grade",
       },
     ],
   },
