@@ -104,7 +104,7 @@ const ListPageItems = ({ idGrade }) => {
       const data = { idGrade, body: { access: pageListes } };
       const res = await updatePermission(data);
       toastSuccess();
-      if (userIdGrade() != idGrade) dispatch(updateAccess(res.data));
+      if (userIdGrade() == idGrade) dispatch(updateAccess(res.data));
     } catch (error) {
       toastError();
     }
