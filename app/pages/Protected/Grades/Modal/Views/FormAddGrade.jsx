@@ -49,7 +49,7 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
     toggleprocess();
 
     const dataToSend = {
-      name: firsLetterCapitalise(values.name),
+      name: firsLetterCapitalise(values.name).trim(),
       gradeCategory: values.gradeCategory,
     };
 

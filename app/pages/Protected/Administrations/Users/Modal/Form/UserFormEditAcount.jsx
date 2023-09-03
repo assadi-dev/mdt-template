@@ -97,38 +97,37 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
       const idAgent = userData.idAgent;
 
       let dataAgent = {
-        firstname: values.firstname,
-        name: values.name,
-        matricule: values.matricule,
+        firstname: values.firstname.trim(),
+        name: values.name.trim(),
+        matricule: values.matricule.trim(),
         grade: `/api/grades/${values.gradeId}`,
       };
 
       const idUser = userData.id;
       let dataUser = {
-        idDiscord: values.idDiscord,
+        idDiscord: values.idDiscord.trim(),
       };
 
       await upDateAgentData(idUser, idAgent, dataUser, dataAgent);
 
       let payload = {
         id: idUser,
-        idDiscord: values.idDiscord,
-        firstname: values.firstname,
-        name: values.name,
+        idDiscord: values.idDiscord.trim(),
+        firstname: values.firstname.trim(),
+        name: values.name.trim(),
         grade: values.grade,
         gradeId: values.gradeId,
-        matricule: values.matricule,
+        matricule: values.matricule.trim(),
       };
       dispatch(udpateUser(payload));
 
       let updateUserCredential = {
-        firstname: "",
-        idDiscord: values.idDiscord,
-        firstname: values.firstname,
-        name: values.name,
+        idDiscord: values.idDiscord.trim(),
+        firstname: values.firstname.trim(),
+        name: values.name.trim(),
         grade: values.grade,
         idGrade: values.gradeId,
-        matricule: values.matricule,
+        matricule: values.matricule.trim(),
       };
       if (authenticateUser.id == idUser)
         dispatch(hydrateUser(updateUserCredential));

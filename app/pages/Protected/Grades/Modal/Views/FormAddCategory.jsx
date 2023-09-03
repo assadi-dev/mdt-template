@@ -43,8 +43,8 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
 
     try {
       const dataToSend = {
-        name: firsLetterCapitalise(values.name),
-        faction: values.faction,
+        name: firsLetterCapitalise(values.name).trim(),
+        faction: values.faction.trim(),
       };
 
       const res = await postGradeCategories(dataToSend);

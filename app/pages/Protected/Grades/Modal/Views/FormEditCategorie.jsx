@@ -62,13 +62,16 @@ const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
 
     try {
       let toDispatch = { id: data.id, ...values };
-      dispatch(editGradeCategory(toDispatch));
+
+      values["name"] = values["name"].trim();
+
       await putGradeCategories(data.id, values);
+      dispatch(editGradeCategory(toDispatch));
       onCloseModal();
-      toastSuccess()
+      toastSuccess();
     } catch (error) {
       console.log(error.message);
-      toastError()
+      toastError();
     }
     toggleprocess();
   };
@@ -107,7 +110,7 @@ const FormEditGradeCategorie = ({ data, onCloseModal, ...props }) => {
 
           <select type="text" {...register("faction", { required: true })}>
             {listsFactions.map((faction) => (
-              <option value={faction.short_name}>
+              <option key={faction.id} value={faction.short_name}>
                 {faction.short_name.toUpperCase()}
               </option>
             ))}
