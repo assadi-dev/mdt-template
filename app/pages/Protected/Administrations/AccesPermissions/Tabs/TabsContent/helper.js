@@ -55,37 +55,48 @@ export const retrievesAllName = () => {
 const extractPath = (routes) => {
   let final = [];
 
-  routes.childrens.forEach((route) => {
-    if (route.childrens) {
-      let res = extractNestedPath(route.childrens, "path");
-      if (res.length > 0) {
-        res.forEach((child) => {
+  routes.childrens
+    ? routes.childrens.forEach((route) => {
+        if (route.childrens) {
+          let res = extractNestedPath(route.childrens, "path");
+          if (res.length > 0) {
+            res.forEach((child) => {
+              let res = {
+                id: uniqid(),
+                name: child.name,
+                path: child.path,
+                isCanAdd: false,
+                isCanUpdate: false,
+                isCanDelete: false,
+                isShow: false,
+              };
+              final.push(res);
+            });
+          }
+        }
+        if (route.path) {
           let res = {
             id: uniqid(),
-            name: child.name,
-            path: child.path,
+            name: route.name,
+            path: route.path,
             isCanAdd: false,
             isCanUpdate: false,
             isCanDelete: false,
             isShow: false,
           };
           final.push(res);
-        });
-      }
-    }
-    if (route.path) {
-      let res = {
+        }
+      })
+    : final.push({
         id: uniqid(),
-        name: route.name,
-        path: route.path,
+        name: routes.name,
+        path: routes.path,
         isCanAdd: false,
         isCanUpdate: false,
         isCanDelete: false,
         isShow: false,
-      };
-      final.push(res);
-    }
-  });
+      });
+
   return final;
 };
 
@@ -112,5 +123,6 @@ function extractNestedPath(objet, propriete) {
     }
   }
 
+  console.log(valeurs);
   return valeurs;
 }
