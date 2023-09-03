@@ -103,7 +103,16 @@ export const sidebarRoutes = [
   },
   {
     name: "Gestion des ressources",
-    childrens: [],
+    childrens: [
+      {
+        name: "Gestion code penals",
+        path: "/gestion-des-ressources/code-penal",
+      },
+      {
+        name: "Gestion des grades",
+        path: "/gestion-des-ressources/grade",
+      },
+    ],
   },
   {
     name: "End of Watch",
