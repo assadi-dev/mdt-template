@@ -88,6 +88,10 @@ html:has(.theme-doj) ::-webkit-calendar-picker-indicator {
 }
 
 /** Title or Special elements **/
+html:has(.theme-doj) {
+  /*Dropdown select */
+  /** React Select **/
+}
 html:has(.theme-doj) .bg-selected-theme-color {
   background-color: #6A6A6A;
 }
@@ -188,9 +192,65 @@ html:has(.theme-doj) .modal-theme-color {
   border: 0.5px solid #6a6a6a;
   box-shadow: 0 0 8px rgba(106, 106, 106, 0.35);
 }
+@media screen and (min-width: 992px) {
+  html:has(.theme-doj) .dropdown-select-custom {
+    width: 200px;
+  }
+}
+html:has(.theme-doj) .dropdown-select-custom .Dropdown-control {
+  background-color: transparent;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+html:has(.theme-doj) .dropdown-select-custom .Dropdown-option {
+  background-color: rgba(106, 106, 106, 0);
+  color: #444;
+}
+html:has(.theme-doj) .dropdown-select-custom .Dropdown-option:hover {
+  background-color: #6a6a6a;
+  color: #fff;
+}
+html:has(.theme-doj) .theme-custom__control {
+  background-color: rgba(78, 78, 78, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+}
+html:has(.theme-doj) .theme-custom__control.theme-custom__control--is-focused {
+  border-color: #848484;
+  box-shadow: 0 0 18px rgba(106, 106, 106, 0.35);
+}
+html:has(.theme-doj) .theme-custom__control .theme-custom__indicator-separator {
+  display: none;
+}
+html:has(.theme-doj) .theme-custom__control .theme-custom__value-container {
+  color: inherit;
+}
+html:has(.theme-doj) .theme-custom__control .theme-custom__single-value {
+  color: inherit;
+}
+html:has(.theme-doj) .theme-custom__menu {
+  /*  padding: 0 5px; */
+}
+html:has(.theme-doj) .theme-custom__menu .theme-custom__option {
+  background-color: #fff;
+  color: #444;
+  cursor: pointer;
+}
+html:has(.theme-doj) .theme-custom__menu .theme-custom-option-selected {
+  background-color: #6A6A6A;
+  color: #fff;
+}
 html:has(.theme-doj) .theme-dashboard-card {
-  background-color: #131B26;
-  box-shadow: 5px 5px 12px 0px rgba(19, 27, 38, 0.25);
+  background-color: #4E4E4E;
+  box-shadow: 5px 5px 12px 0px rgba(78, 78, 78, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 html:has(.theme-doj) .theme-dashboard-card .info-card-title {
   color: #fff;
@@ -201,10 +261,11 @@ html:has(.theme-doj) .theme-dashboard-card .info-card-icon {
   border: 1px solid #fff;
 }
 html:has(.theme-doj) .theme-dashboard-card-table {
-  background-color: rgba(44, 55, 72, 0.5);
+  background-color: rgba(163, 163, 163, 0.5);
   box-shadow: 3px 3px 8px 0px rgba(19, 27, 38, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 html:has(.theme-doj) .theme-dashboard-card-table .card-table-header {
-  background-color: #131B26;
+  background-color: #4E4E4E;
   color: #fff;
 }/*# sourceMappingURL=doj-theme.css.map */
