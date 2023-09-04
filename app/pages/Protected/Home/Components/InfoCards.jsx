@@ -17,7 +17,7 @@ const InfoCards = ({ title, count = 0, loading = false, ...props }) => {
         <MonotoneClipoard />{" "}
       </InfoCardIcon>
       <InfoCardContent>
-        {loading ? <SpinnerLoading size={50} /> : count}
+        {loading ? <SpinnerLoading size={45} /> : count}
       </InfoCardContent>
     </InfoCardContainer>
   );

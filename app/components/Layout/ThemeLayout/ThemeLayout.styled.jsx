@@ -30,6 +30,6 @@ export const ThemeMainLayoutWrapper = styled.div`
   }
 `;
 
-export const MainContent = styled.div`
+export const MainContent = styled.main`
   padding: 1rem 1.4rem;
 `;

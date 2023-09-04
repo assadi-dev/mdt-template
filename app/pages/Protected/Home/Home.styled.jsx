@@ -14,7 +14,7 @@ export const RowHeaderCards = styled.div`
   justify-content: space-between;
 `;
 
-export const MainContent = styled.main`
+export const MainContent = styled.div`
   margin: 1.3rem 0;
   padding-top: 55px;
 `;
