@@ -12,8 +12,8 @@ import SpinnerLoading from "../../../../components/Shared/Loading/SpinnerLoading
 const InfoCards = ({ title, count = 0, loading = false, ...props }) => {
   return (
     <InfoCardContainer {...props}>
-      <InfoCardTitle>{title}</InfoCardTitle>
-      <InfoCardIcon>
+      <InfoCardTitle className="info-card-title">{title}</InfoCardTitle>
+      <InfoCardIcon className="info-card-icon">
         <MonotoneClipoard />{" "}
       </InfoCardIcon>
       <InfoCardContent>

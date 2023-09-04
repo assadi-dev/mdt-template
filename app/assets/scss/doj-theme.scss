@@ -233,6 +233,39 @@ html:has(.theme-doj)
     
 
 
+    
+    .theme-dashboard-card{
+        background-color: variables.$sasp-secondary-color;
+        box-shadow: 5px 5px 12px 0px rgba($color:  variables.$sasp-secondary-color, $alpha: 0.25);
+
+        .info-card-title
+        {
+            color: #fff;
+        }
+
+        .info-card-icon{
+            color: #fff;
+            background-color: rgba($color: #000000, $alpha: 0.5);
+            border: 1px solid #fff;
+        }
+
+
+    }
+
+    .theme-dashboard-card-table{
+        background-color: rgba($color:  variables.$sasp-third-color, $alpha: 0.5);
+        box-shadow: 3px 3px 8px 0px rgba($color:  variables.$sasp-secondary-color, $alpha: 0.8);
+
+
+
+        .card-table-header{
+            background-color:  variables.$sasp-secondary-color;
+            color: #fff;
+        }
+    }
+
+
+
 
 }
 

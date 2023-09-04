@@ -250,6 +250,14 @@ html:has(.theme-sasp) .theme-dashboard-card {
   background-color: #131B26;
   box-shadow: 5px 5px 12px 0px rgba(19, 27, 38, 0.25);
 }
+html:has(.theme-sasp) .theme-dashboard-card .info-card-title {
+  color: #fff;
+}
+html:has(.theme-sasp) .theme-dashboard-card .info-card-icon {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+}
 html:has(.theme-sasp) .theme-dashboard-card-table {
   background-color: rgba(44, 55, 72, 0.5);
   box-shadow: 3px 3px 8px 0px rgba(19, 27, 38, 0.8);

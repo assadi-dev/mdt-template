@@ -20,7 +20,6 @@ export const MainContent = styled.main`
 `;
 
 export const InfoCardContainer = styled.div`
-  background-color: #131b26;
   padding: 1.8rem;
   border-radius: 8px;
   height: 145px;
@@ -35,8 +34,7 @@ export const InfoCardIcon = styled.span`
   position: absolute;
   right: 15px;
   top: 15px;
-  color: #fff;
-  border: solid 1px #fff;
+
   border-radius: 100%;
   display: grid;
   place-items: center;
