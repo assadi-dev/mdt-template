@@ -245,4 +245,16 @@ html:has(.theme-sasp) .theme-custom__menu .theme-custom__option {
 html:has(.theme-sasp) .theme-custom__menu .theme-custom-option-selected {
   background-color: #2B7DE9;
   color: #fff;
+}
+html:has(.theme-sasp) .theme-dashboard-card {
+  background-color: #131B26;
+  box-shadow: 5px 5px 12px 0px rgba(19, 27, 38, 0.25);
+}
+html:has(.theme-sasp) .theme-dashboard-card-table {
+  background-color: rgba(44, 55, 72, 0.5);
+  box-shadow: 3px 3px 8px 0px rgba(19, 27, 38, 0.8);
+}
+html:has(.theme-sasp) .theme-dashboard-card-table .card-table-header {
+  background-color: #131B26;
+  color: #fff;
 }/*# sourceMappingURL=sasp-theme.css.map */
