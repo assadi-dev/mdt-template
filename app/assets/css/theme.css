@@ -76,10 +76,10 @@
   box-shadow: none !important;
 }
 .toggle-custom.react-toggle--checked .react-toggle-track {
-  background-color: #128D15 !important;
+  background-color: #198754 !important;
 }
 .toggle-custom.react-toggle--checked:hover .react-toggle-track {
-  background-color: #128D15 !important;
+  background-color: #198754 !important;
 }
 .toggle-custom.react-toggle--focus .react-toggle-thumb {
   box-shadow: none !important;
@@ -98,4 +98,20 @@
 /*   .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
     background-color: red !important;
   }
-   *//*# sourceMappingURL=theme.css.map */
+   */
+/**MDX Custom editor **/
+.theme-text-editor {
+  outline: initial;
+  border: initial;
+  list-style: initial;
+  text-decoration: initial;
+  list-style: initial;
+  font-weight: initial;
+}
+.theme-text-editor a {
+  text-decoration: initial;
+  list-style: initial;
+}
+.theme-text-editor strong {
+  font-weight: bold;
+}/*# sourceMappingURL=theme.css.map */

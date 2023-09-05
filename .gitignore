@@ -33,3 +33,4 @@ composer.lock
 package-lock.json
 ###< symfony/webpack-encore-bundle ###
 *.css.map
+app/assets/scss

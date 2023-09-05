@@ -52,7 +52,7 @@ export const ModalFooter = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-  padding: 1rem 2rem;
+  padding: 1.3rem 2rem;
   width: fit-content;
   border-radius: 5px;
   display: flex;

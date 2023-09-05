@@ -86,13 +86,13 @@
 
     &.react-toggle--checked{
         .react-toggle-track {
-            background-color: variablees.$green !important;
+            background-color: variables.$green !important;
         } 
            
         &:hover
         {
           .react-toggle-track {
-            background-color: variablees.$green !important;
+            background-color: variables.$green !important;
         } 
             
         }
@@ -126,3 +126,24 @@
     background-color: red !important;
   }
    */
+
+   /**MDX Custom editor **/
+
+   .theme-text-editor{
+
+
+    outline: initial;
+    border:initial;
+    list-style: initial;
+    text-decoration: initial;
+    list-style: initial;
+    font-weight: initial;
+
+    a{
+        text-decoration: initial;
+        list-style: initial;
+    }
+    strong{
+        font-weight: bold;
+    }
+   }
