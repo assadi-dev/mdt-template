@@ -52,7 +52,6 @@ html {
   list-style: none;
   scroll-behavior: smooth;
   font-family: var(--font-default), sans-serif;
-  font-weight: 500;
 }
 
 a {

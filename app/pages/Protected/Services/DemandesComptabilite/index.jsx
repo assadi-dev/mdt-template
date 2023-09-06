@@ -13,23 +13,11 @@ import {
   SubmitButton,
 } from "../../../../components/Forms/FormView.styled";
 import { useRef } from "react";
-import {
-  BoldItalicUnderlineToggles,
-  ListsToggle,
-  MDXEditor,
-  UndoRedo,
-  toolbarPlugin,
-} from "@mdxeditor/editor";
-
-import { headingsPlugin } from "@mdxeditor/editor/plugins/headings";
-import { listsPlugin } from "@mdxeditor/editor/plugins/lists";
-import { quotePlugin } from "@mdxeditor/editor/plugins/quote";
-import { thematicBreakPlugin } from "@mdxeditor/editor/plugins/thematic-break";
+import LexicalMarkdownEditor from "../../../../components/TextEditor/LexicalMarkdownEditor";
+import MarkdowTextEditor from "../../../../components/TextEditor/MarkdowTextEditor";
 
 const DemandeComptability = () => {
   const [process, setProcess] = useState(false);
-
-  const raisonTextRef = useRef(null);
 
   const handleChangeText = (value) => {
     console.log(value);
@@ -61,26 +49,15 @@ const DemandeComptability = () => {
               <label htmlFor="amount">Montant</label>
               <input id="amount" type="text" placeholder="1000" />
             </div>
-            <MDXEditor
-              contentEditableClassName="theme-text-editor"
-              markdown="hello world"
-              plugins={[
-                headingsPlugin(),
-                listsPlugin(),
-                quotePlugin(),
-                thematicBreakPlugin(),
-                toolbarPlugin({
-                  toolbarContents: () => (
-                    <>
-                      <UndoRedo />
-                      <BoldItalicUnderlineToggles />
-                      <ListsToggle />
-                    </>
-                  ),
-                }),
-              ]}
-            />
-
+            <div className="form-control">
+              {" "}
+              <label htmlFor="raison">Raison</label>
+              <MarkdowTextEditor
+                id="raison"
+                className="theme-text-editor"
+                getOutput={handleChangeText}
+              />
+            </div>
             <FormFooter>
               <SubmitButton className="bg-btn-alt-theme-color" type="submit">
                 Envoyer la demande

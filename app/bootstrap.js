@@ -9,4 +9,4 @@ import "../app/assets/css/bcso-theme.css";
 import "../app/assets/css/doj-theme.css";
 import "../app/assets/css/sasp-theme.css";
 import "react-toastify/dist/ReactToastify.css";
-import "../app/assets/css/mdx-theme-editor.css";
+import "../app/assets/css/lexical-theme-editor.css";

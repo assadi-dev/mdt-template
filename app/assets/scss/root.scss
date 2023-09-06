@@ -45,17 +45,17 @@ html {
     font-size: 62.5%;
 }
 
-* {
-    margin: 0;
-    padding: 0;
+*{
+     margin: 0;
+   padding: 0; 
     box-sizing: border-box;
-    text-decoration: none;
-    outline: none;
+   text-decoration: none;
+   outline: none;
     border: none;
-    list-style: none;
+    list-style: none; 
     scroll-behavior: smooth;
     font-family: var(--font-default), sans-serif;
-    font-weight: 500;
+  
 }
 
 a {
