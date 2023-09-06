@@ -35,10 +35,7 @@ const DemandeComptability = () => {
         <DemandeCompatibiliteFormContainer>
           <FormContainer className="form-theme-color">
             <div className="form-control">
-              <label htmlFor="subject">
-                {" "}
-                <strong>Objet de la demande</strong>{" "}
-              </label>
+              <label htmlFor="subject">Objet de la demande</label>
               <input id="subject" type="text" placeholder="Objet:" />
             </div>
             <div className="form-control">
