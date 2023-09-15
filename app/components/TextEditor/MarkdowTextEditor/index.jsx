@@ -11,10 +11,8 @@ import MenuBar from "./MenuBar";
 import { EditorContentContainer } from "./MarkdownTextEditor.styled";
 
 const MarkdowTextEditor = ({ getOutput, ...props }) => {
-  const [content, setContent] = useState("");
-
   const editor = useEditor({
-    content,
+    content: "",
     extensions,
     onUpdate({ editor }) {
       const markdownOutput = editor.storage.markdown.getMarkdown();
