@@ -15,10 +15,10 @@ Markdown.configure({
   transformCopiedText: true, // Copied text is transformed to markdown
 });
 
-Underline.configure({
+/* Underline.configure({
   HTMLAttributes: {
     class: "underline",
   },
-});
+}); */
 
-export const extensions = [StarterKit, Markdown, Strike, Underline];
+export const extensions = [StarterKit, Markdown, Underline];
