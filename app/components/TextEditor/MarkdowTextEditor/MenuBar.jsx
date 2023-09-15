@@ -42,7 +42,7 @@ const MenuBar = ({ editor }) => {
           style={{ textDecoration: "line-through" }}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
-          className={editor.isActive("strikethrough") ? "is-active" : ""}
+          className={editor.isActive("strike") ? "is-active" : ""}
         >
           ab
         </MenuBarBtn>

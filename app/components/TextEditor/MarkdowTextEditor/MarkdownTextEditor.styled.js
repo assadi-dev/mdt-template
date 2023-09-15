@@ -5,7 +5,7 @@ export const EditorContentContainer = styled.div`
   border: 1px solid #fff;
   overflow: hidden;
   .is-active {
-    color: red;
+    opacity: 1;
   }
   .tiptap {
     padding: 1.3rem;
