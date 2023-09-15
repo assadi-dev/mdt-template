@@ -4,16 +4,16 @@ import {
   FloatingMenu,
   BubbleMenu,
   EditorContent,
+  useEditor,
 } from "@tiptap/react";
 import { extensions } from "./configure";
-import { Editor } from "@tiptap/core";
 import MenuBar from "./MenuBar";
 import { EditorContentContainer } from "./MarkdownTextEditor.styled";
 
 const MarkdowTextEditor = ({ getOutput, ...props }) => {
   const [content, setContent] = useState("");
 
-  const editor = new Editor({
+  const editor = useEditor({
     content,
     extensions,
     onUpdate({ editor }) {
