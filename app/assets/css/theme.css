@@ -103,4 +103,7 @@
 .theme-text-editor {
   position: relative;
   margin: 25px 0;
+}
+.theme-text-editor .active {
+  color: #fff;
 }/*# sourceMappingURL=theme.css.map */

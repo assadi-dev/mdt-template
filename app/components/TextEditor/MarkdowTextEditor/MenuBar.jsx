@@ -29,6 +29,8 @@ const MenuBar = ({ editor }) => {
           type="button"
           style={{ textDecoration: "underline" }}
           className={editor.isActive("underline") ? "is-active" : ""}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          disabled={!editor.can().chain().focus().toggleUnderline().run()}
         >
           S
         </MenuBarBtn>

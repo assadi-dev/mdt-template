@@ -4,6 +4,9 @@ export const EditorContentContainer = styled.div`
   border-radius: 8px;
   border: 1px solid #fff;
   overflow: hidden;
+  .is-active {
+    color: red;
+  }
   .tiptap {
     padding: 1.3rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -12,6 +15,10 @@ export const EditorContentContainer = styled.div`
   }
   p {
     margin-bottom: 1em;
+  }
+
+  u {
+    text-decoration: underline;
   }
 
   ul,
@@ -32,10 +39,7 @@ export const EditorContentContainer = styled.div`
 
   & ul {
     li {
-      list-style: none;
-      ::before {
-        content: "-  ";
-      }
+      list-style: disc;
     }
   }
   & ol {

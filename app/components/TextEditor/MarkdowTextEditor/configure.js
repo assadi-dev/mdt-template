@@ -2,6 +2,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
 import Strike from "@tiptap/extension-strike";
 import ListItem from "@tiptap/extension-list-item";
+import Underline from "@tiptap/extension-underline";
 
 Markdown.configure({
   html: true, // Allow HTML input/output
@@ -14,4 +15,10 @@ Markdown.configure({
   transformCopiedText: true, // Copied text is transformed to markdown
 });
 
-export const extensions = [StarterKit, Markdown, Strike];
+Underline.configure({
+  HTMLAttributes: {
+    class: "underline",
+  },
+});
+
+export const extensions = [StarterKit, Markdown, Strike, Underline];
