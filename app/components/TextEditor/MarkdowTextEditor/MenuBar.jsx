@@ -4,6 +4,9 @@ import { BiUndo, BiRedo } from "react-icons/bi";
 import { BsListUl, BsListOl } from "react-icons/bs";
 
 const MenuBar = ({ editor }) => {
+  if (!editor) {
+    return null;
+  }
   return (
     <>
       <MenuBarRowBtn>
