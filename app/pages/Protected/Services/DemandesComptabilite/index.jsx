@@ -25,7 +25,7 @@ const DemandeComptability = () => {
 
   return (
     <DemandeCompatibiliteContainer>
-      <HeadertitlePage> Demande de comptabilité </HeadertitlePage>
+      {/*   <HeadertitlePage> Demande de comptabilité </HeadertitlePage> */}
       <RowHeaderAction>
         <PreviewBtn className="bg-btn-alt-theme-color">
           Aperçu du document
@@ -33,7 +33,7 @@ const DemandeComptability = () => {
       </RowHeaderAction>
       <DemandeCompatibiliteBody>
         <DemandeCompatibiliteFormContainer>
-          <FormContainer className="form-theme-color">
+          <FormContainer className="form-theme-color-alt">
             <div className="form-control">
               <label htmlFor="subject">Objet de la demande</label>
               <input id="subject" type="text" placeholder="Objet:" />
