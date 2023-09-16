@@ -10,8 +10,15 @@ import {
 } from "../../../../components/PageContainer";
 import { AddBtn } from "./Saisie.styled";
 import DataTable from "../../../../components/DataTable";
+import useModalState, { TOGGLE_MODAL } from "../../../../hooks/useModalState";
+import { createPortal } from "react-dom";
+import Modal from "../../../../components/Modal/Modal";
+import View from "./Modal/View";
 
 const Saisie = () => {
+  const { modalState, dispatchModalState, toggleModal, closeModal } =
+    useModalState();
+
   const {
     onPageChange,
     onPageTotalCountChange,
@@ -50,28 +57,53 @@ const Saisie = () => {
     },
   ];
 
+  /**Action btn **/
+  const handleClickAddbtn = () => {
+    toggleModal({ view: "add-saisie", data: null });
+  };
+
   return (
-    <PageContainer>
-      <RowAction style={{ height: "100px" }}>
-        <div></div>
-        <AddBtn className="bg-btn-alt-theme-color">Ajouter</AddBtn>
-      </RowAction>
-      <DataTable
-        columns={columns}
-        data={collections}
-        initialStatePagination={{
-          pageIndex,
-          pageSize,
-        }}
-        totalCount={totalCount}
-        manualPagination={true}
-        isLoading={false}
-        isSuccess={true}
-        onPageChange={onPageChange}
-        onPageTotalCountChange={onPageTotalCountChange}
-        onSearchValue={handleSearch}
-      />
-    </PageContainer>
+    <>
+      <PageContainer>
+        <RowAction style={{ height: "100px" }}>
+          <div></div>
+          <AddBtn
+            className="bg-btn-alt-theme-color"
+            onClick={handleClickAddbtn}
+          >
+            Ajouter
+          </AddBtn>
+        </RowAction>
+        <DataTable
+          columns={columns}
+          data={collections}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
+          manualPagination={true}
+          isLoading={false}
+          isSuccess={true}
+          onPageChange={onPageChange}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+        />
+      </PageContainer>
+
+      {modalState.isOpen
+        ? createPortal(
+            <Modal isOpen={modalState.isOpen}>
+              <View
+                view={modalState.view}
+                onCloseModal={closeModal}
+                data={modalState.data}
+              />
+            </Modal>,
+            document.body
+          )
+        : null}
+    </>
   );
 };
 

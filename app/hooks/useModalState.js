@@ -41,10 +41,27 @@ const useModalState = () => {
     dispatchModalState({ type: CLOSE_MODAL });
   };
 
+  /**
+   * Ouverture - Fermeture Modal
+   * @param {*} payloadData donnée à envoyée dan la modal
+   *
+   * ```js
+   * {view:"string", data: "" }
+   *
+   * ```
+   *
+   */
+  const toggleModal = (payloadData) => {
+    if (!payloadData) return;
+    const { view, data } = payloadData;
+    dispatchModalState({ type: TOGGLE_MODAL, payload: { view, data } });
+  };
+
   return {
     modalState,
     dispatchModalState,
     closeModal,
+    toggleModal,
   };
 };
 
