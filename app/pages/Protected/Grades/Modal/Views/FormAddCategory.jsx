@@ -57,7 +57,7 @@ const FormAddGrade = ({ onCloseModal, ...props }) => {
       };
       dispatch(addGradeCategory(dataToDispatch));
       onCloseModal();
-      toastSuccess;
+      toastSuccess();
     } catch (error) {
       console.log(error.message);
       toastError();

@@ -108,4 +108,16 @@
      object-fit: contain;
   max-width: 90%;
   max-height: 90%;
+}
+
+/** Style Markdown Prev **/
+.theme-markdownPreview {
+  background-color: transparent;
+  line-height: 1;
+}
+.theme-markdownPreview ul {
+  list-style: disc;
+}
+.theme-markdownPreview ol {
+  list-style: numeric;
 }/*# sourceMappingURL=theme.css.map */

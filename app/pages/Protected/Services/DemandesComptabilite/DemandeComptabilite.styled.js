@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  HeaderModal,
+  ModalFormContainer,
+} from "../../../../components/Forms/FormView.styled";
 
 export const DemandeCompatibiliteContainer = styled.div`
   padding: 2.2rem 1.3rem 1.3rem;
@@ -41,4 +45,31 @@ export const DemandeCompatibiliteFormContainer = styled.div`
 export const FormFooter = styled.div`
   display: grid;
   place-items: center;
+`;
+
+export const PreviewDocumentContainer = styled(ModalFormContainer)`
+  .agent,
+  .objet,
+  .date,
+  .montant {
+    margin-bottom: 1.8rem;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 72rem;
+    padding: 1.3rem;
+  }
+`;
+
+export const PreviewDocumentHeader = styled.div`
+  min-height: 10px;
+`;
+
+export const TextContent = styled.div`
+  margin: 1.6rem auto;
+  width: 100%;
+  min-height: 110px;
+  max-height: 245px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;

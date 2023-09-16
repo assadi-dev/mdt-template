@@ -140,3 +140,15 @@
    }
 }
 
+
+/** Style Markdown Prev **/
+.theme-markdownPreview{
+    background-color: transparent;
+    line-height: 1;
+    ul{
+        list-style: disc;
+     }
+     ol{
+        list-style: numeric;
+     }
+}
