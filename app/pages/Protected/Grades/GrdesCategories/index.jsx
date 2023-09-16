@@ -16,22 +16,21 @@ import {
 import View from "../Modal/View";
 import { removeGradeCaregory } from "../../../../features/GradeCategories/GradeCategories.slice";
 import { deleteGradeCategories } from "../helper";
-import {
-  PAGE_CHANGED,
-  SEARCH,
-  TOTAL_COUNT_CHANGED,
-  initialStatePagination,
-  paginateReducer,
-} from "./reducer/PaginateReducer";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
 import { defaultPageSize } from "../../../../config/constantes";
+import useModalState from "../../../../hooks/useModalState";
 
 const GradeCategories = () => {
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeCategoriesReducer
   );
+
+  //Gestion des view Modal
+  const { modalState, dispatchModalState } = useModalState();
+
+  //gestion des paginations
   const {
     onPageChange,
     onPageTotalCountChange,
@@ -75,7 +74,7 @@ const GradeCategories = () => {
   ];
 
   const handleClickEdit = (data) => {
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "edit-category", data },
     });
@@ -85,7 +84,7 @@ const GradeCategories = () => {
       try {
         const res = await deleteGradeCategories(data.id);
         dispatch(removeGradeCaregory(data));
-        dispatchModelState({
+        dispatchModalState({
           type: CLOSE_MODAL,
         });
         toastSuccess("Element supprimé");
@@ -96,24 +95,19 @@ const GradeCategories = () => {
     };
 
     data = { ...data, onConfirmDelete };
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "delete-category", data },
     });
   };
 
-  const [modalState, dispatchModelState] = useReducer(
-    modalStateReducer,
-    initialModalState
-  );
-
   const handleClickCloseModal = () => {
-    dispatchModelState({ type: CLOSE_MODAL });
+    dispatchModalState({ type: CLOSE_MODAL });
   };
 
   return (
     <>
-      <RowActionCategories dispatchModelState={dispatchModelState} />
+      <RowActionCategories dispatchModalState={dispatchModalState} />
       {
         <DataTable
           columns={columns}

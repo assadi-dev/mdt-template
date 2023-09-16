@@ -30,6 +30,7 @@ import {
 } from "./reducers/PaginationState.reducer";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
 import { defaultPageSize } from "../../../../config/constantes";
+import useModalState from "../../../../hooks/useModalState";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -60,10 +61,7 @@ const Users = () => {
     }
   };
 
-  const [modalState, dispatchModalState] = useReducer(
-    modalStateReducer,
-    initialModalState
-  );
+  const { modalState, dispatchModalState } = useModalState();
 
   const {
     onPageChange,

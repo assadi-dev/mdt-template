@@ -16,22 +16,19 @@ import Modal from "../../../components/Modal/Modal";
 import View from "./Modal/View";
 import { removeGrade } from "../../../features/Grades/Grades.slice";
 import { deleteGrades } from "./helper";
-import {
-  PAGE_CHANGED,
-  SEARCH,
-  TOTAL_COUNT_CHANGED,
-  initialStatePagination,
-  paginateReducer,
-} from "./GrdesCategories/reducer/PaginateReducer";
 import { toastError, toastSuccess } from "../../../services/utils/alert";
 import useCustomPagination from "../../../hooks/useCustomPagination";
 import { defaultPageSize } from "../../../config/constantes";
+import useModalState from "../../../hooks/useModalState";
 
 const Grades = () => {
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeReducer
   );
+
+  const { modalState, dispatchModalState } = useModalState();
+
   const {
     onPageChange,
     onPageTotalCountChange,
@@ -76,7 +73,7 @@ const Grades = () => {
   ];
 
   const handleClickEdit = (data) => {
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "edit-grade", data },
     });
@@ -87,7 +84,7 @@ const Grades = () => {
     try {
       dispatch(removeGrade(data));
       await deleteGrades(data.id);
-      dispatchModelState({ type: CLOSE_MODAL });
+      dispatchModalState({ type: CLOSE_MODAL });
       toastSuccess("Element supprimé");
     } catch (error) {
       console.log(error.message);
@@ -98,24 +95,19 @@ const Grades = () => {
   const handleClicDelete = (data) => {
     data = { ...data, onConfirmDelete };
 
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "delete-grade", data },
     });
   };
 
-  const [modalState, dispatchModelState] = useReducer(
-    modalStateReducer,
-    initialModalState
-  );
-
   const handleClickCloseModal = () => {
-    dispatchModelState({ type: CLOSE_MODAL });
+    dispatchModalState({ type: CLOSE_MODAL });
   };
 
   return (
     <>
-      <RowAction dispatchModelState={dispatchModelState} />
+      <RowAction dispatchModalState={dispatchModalState} />
       <DataTable
         columns={columns}
         data={collections}

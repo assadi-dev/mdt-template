@@ -10,27 +10,12 @@ import { TOGGLE_MODAL } from "./GrdesCategories/reducer/ModalReducer";
 import { useRef } from "react";
 import { useState } from "react";
 
-const RowAction = ({ dispatchModelState, onSearch }) => {
+const RowAction = ({ dispatchModalState, onSearch }) => {
   const handleClickAddGrade = () => {
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "add-grade", data: null },
     });
-  };
-
-  const searcInputRef = useRef(null);
-  const [timer, setTimer] = useState(null);
-
-  const handleChangeSearchInput = () => {
-    if (!searcInputRef.current) return;
-    let value = searcInputRef.current.value;
-    if (!onSearch) return;
-
-    clearTimeout(timer);
-    let newTimer = setTimeout(() => {
-      onSearch(value);
-    }, 500);
-    setTimer(newTimer);
   };
 
   return (

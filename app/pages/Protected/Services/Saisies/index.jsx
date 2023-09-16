@@ -52,7 +52,6 @@ const Saisie = () => {
 
   return (
     <PageContainer>
-      <h1>Saisie</h1>
       <RowAction style={{ height: "100px" }}>
         <div></div>
         <AddBtn className="bg-btn-alt-theme-color">Ajouter</AddBtn>

@@ -10,9 +10,9 @@ import { TOGGLE_MODAL } from "./reducer/ModalReducer";
 import { useRef } from "react";
 import { useState } from "react";
 
-const RowActionCategories = ({ dispatchModelState, onSearch }) => {
+const RowActionCategories = ({ dispatchModalState, onSearch }) => {
   const handleClickAddCategoryBtn = () => {
-    dispatchModelState({
+    dispatchModalState({
       type: TOGGLE_MODAL,
       payload: { view: "add-category", data: null },
     });
