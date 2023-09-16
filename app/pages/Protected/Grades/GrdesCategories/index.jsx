@@ -24,15 +24,22 @@ import {
   paginateReducer,
 } from "./reducer/PaginateReducer";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
 
 const GradeCategories = () => {
   const dispatch = useDispatch();
   const { collections, status, error } = useSelector(
     (state) => state.GradeCategoriesReducer
   );
-
-  const [{ pageIndex, pageSize, totalCount, search }, dispatchPaginate] =
-    useReducer(paginateReducer, initialStatePagination);
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(5, 0, 0, "");
 
   useEffect(() => {
     const payload = {
@@ -46,14 +53,6 @@ const GradeCategories = () => {
         onPageTotalCountChange(count);
       });
   }, [pageIndex, search]);
-
-  const onPageChange = (pageIndex) => {
-    dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
-  };
-
-  const onPageTotalCountChange = (count) => {
-    dispatchPaginate({ type: TOTAL_COUNT_CHANGED, payload: count });
-  };
 
   const columns = [
     { Header: "Nom", accessor: "name" },
@@ -109,10 +108,6 @@ const GradeCategories = () => {
 
   const handleClickCloseModal = () => {
     dispatchModelState({ type: CLOSE_MODAL });
-  };
-
-  const handleSearch = (value) => {
-    dispatchPaginate({ type: SEARCH, payload: value });
   };
 
   return (
