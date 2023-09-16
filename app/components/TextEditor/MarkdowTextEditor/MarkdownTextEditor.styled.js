@@ -11,7 +11,8 @@ export const EditorContentContainer = styled.div`
     overflow-y: auto;
     padding: 1.3rem;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 145px;
+    min-height: 145px;
+    max-height: 186px;
     width: 100%;
   }
   p {
