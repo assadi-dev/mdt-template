@@ -28,6 +28,7 @@ import {
   initialStatePagination,
   paginateReducer,
 } from "./reducers/PaginationState.reducer";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -63,8 +64,15 @@ const Users = () => {
     initialModalState
   );
 
-  const [{ pageIndex, pageSize, totalCount, search }, dispatchPaginate] =
-    useReducer(paginateReducer, initialStatePagination);
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(5, 0, 0, "");
 
   const handleClicEdit = (user) => {
     dispatchModalState({
@@ -149,18 +157,6 @@ const Users = () => {
       res && res.abort();
     };
   }, [pageIndex, search]);
-
-  const onPageChange = (pageIndex) => {
-    dispatchPaginate({ type: PAGE_CHANGED, payload: pageIndex + 1 });
-  };
-
-  const onPageTotalCountChange = (count) => {
-    dispatchPaginate({ type: TOTAL_COUNT_CHANGED, payload: count });
-  };
-
-  const handleSearch = (value) => {
-    dispatchPaginate({ type: SEARCH, payload: value });
-  };
 
   return (
     <MainContainer>

@@ -224,16 +224,17 @@ html:has(.theme-sasp) .input-theme-color svg {
 }
 html:has(.theme-sasp) .input-theme-color input {
   border-color: rgba(19, 27, 38, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 html:has(.theme-sasp) .input-theme-color input:focus {
   border-color: #131b26;
   box-shadow: 0 0 15px rgba(19, 27, 38, 0.15);
 }
 html:has(.theme-sasp) .input-theme-color input::-moz-placeholder {
-  color: rgba(19, 27, 38, 0.6);
+  color: rgba(19, 27, 38, 0.8);
 }
 html:has(.theme-sasp) .input-theme-color input::placeholder {
-  color: rgba(19, 27, 38, 0.6);
+  color: rgba(19, 27, 38, 0.8);
 }
 html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input {
   border: 1px solid rgba(43, 125, 233, 0.5);
@@ -271,7 +272,7 @@ html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-
   border: 1px solid rgba(19, 27, 38, 0.5);
   padding: 1rem;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   transition: all 0.25s;
   -webkit-transition: all 0.25s;
   -moz-transition: all 0.25s;
@@ -285,7 +286,7 @@ html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-
 }
 html:has(.theme-sasp) .form-theme-color-alt select:focus, html:has(.theme-sasp) .form-theme-color-alt input:focus {
   border: 1px solid #131b26;
-  box-shadow: 0 0 15px rgba(19, 27, 38, 0.15);
+  box-shadow: 0 0 15px rgba(19, 27, 38, 0.3);
 }
 html:has(.theme-sasp) .form-theme-color-alt select::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt input::-moz-placeholder {
   color: #969696;
