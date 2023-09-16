@@ -65,12 +65,12 @@ export const sidebarRoutes = [
         ],
       },
       {
+        name: "Plainte",
+        path: "/mdt/rapport/plainte",
+      },
+      {
         name: "Rapport",
         childrens: [
-          {
-            name: "Plainte",
-            path: "/mdt/rapport/plainte",
-          },
           {
             name: "Rapport Aspirant",
             path: "/mdt/rapport/rapport-aspirant",

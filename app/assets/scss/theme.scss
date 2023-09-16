@@ -128,3 +128,14 @@
    */
 
    /**MDX Custom editor **/
+
+
+   #ReactSimpleImageViewer{
+    z-index: 100;
+   & img{
+    object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
+ 
+   }
+}
