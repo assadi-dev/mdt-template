@@ -32,6 +32,7 @@
         "@tiptap/extension-underline": "^2.1.10",
         "@tiptap/react": "^2.1.8",
         "@tiptap/starter-kit": "^2.1.8",
+        "@uiw/react-markdown-preview": "^4.1.15",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
         "framer-motion": "^10.13.0",
