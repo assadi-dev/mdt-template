@@ -1,15 +1,15 @@
 import React from "react";
 import { AgentCardBody, AgentCardContainer } from "./Trombinoscop.styled";
 import PhotoAgent from "./Photo";
+import { user_female, user_male } from "../../../../config/constantes";
 
-const AgentCard = () => {
+const AgentCard = ({ agent }) => {
+  let gender = "male";
+  const noPhoto = gender == "male" ? user_male : user_female;
+
   return (
     <AgentCardContainer>
-      <PhotoAgent
-        src={
-          "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
-        }
-      />
+      <PhotoAgent src={noPhoto} />
       <AgentCardBody>
         <p className="agent">26-James-Morrison</p>
         <p className="grade">Capitain</p>
