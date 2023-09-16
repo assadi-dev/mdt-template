@@ -20,7 +20,7 @@ const DemandeComptability = () => {
   const [process, setProcess] = useState(false);
 
   const handleChangeText = (value) => {
-    console.log(value);
+    // console.log(value);
   };
 
   return (
