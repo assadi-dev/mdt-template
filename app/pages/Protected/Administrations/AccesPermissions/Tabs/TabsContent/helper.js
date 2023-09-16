@@ -123,6 +123,5 @@ function extractNestedPath(objet, propriete) {
     }
   }
 
-  console.log(valeurs);
   return valeurs;
 }

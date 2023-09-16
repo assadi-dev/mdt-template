@@ -29,6 +29,7 @@ import {
   paginateReducer,
 } from "./reducers/PaginationState.reducer";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../config/constantes";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const Users = () => {
     search,
     totalCount,
     pageSize,
-  } = useCustomPagination(5, 0, 0, "");
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const handleClicEdit = (user) => {
     dispatchModalState({

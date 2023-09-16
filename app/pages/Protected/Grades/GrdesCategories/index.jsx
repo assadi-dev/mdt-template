@@ -25,6 +25,7 @@ import {
 } from "./reducer/PaginateReducer";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../config/constantes";
 
 const GradeCategories = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const GradeCategories = () => {
     search,
     totalCount,
     pageSize,
-  } = useCustomPagination(5, 0, 0, "");
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   useEffect(() => {
     const payload = {

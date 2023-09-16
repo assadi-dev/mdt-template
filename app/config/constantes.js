@@ -29,3 +29,5 @@ export const API_INSTANCE = API_BASE_URL + "/api";
 export const blank_img = img_placeholder;
 export const user_male = unknown_male;
 export const user_female = unknown_female;
+
+export const defaultPageSize = 5;
