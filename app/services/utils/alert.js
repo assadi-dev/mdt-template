@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import uniqid from "uniqid";
 
-export const toastSuccess = (message = "Validé", toastId) => {
+export const toastSuccess = (message = "Enregistré", toastId) => {
   toastId = toastId ? toastId : uniqid();
 
   return toast.success(message, {
