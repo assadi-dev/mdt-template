@@ -100,4 +100,42 @@ body {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+/**Grid **/
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+.align-self-start {
+  align-self: start;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-end {
+  align-self: end;
+}
+
+/** Flex Positions **/
+.justiy-content-start {
+  justify-content: flex-start;
+}
+
+.justiy-content-center {
+  justify-content: center;
+}
+
+.justiy-content-end {
+  justify-content: flex-end;
 }/*# sourceMappingURL=root.css.map */
