@@ -39,9 +39,6 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
         </p>
       </Row>
 
-      <p>
-        <strong>Raison </strong>{" "}
-      </p>
       <TextContent>
         <MarkdownPreview className="theme-markdownPreview" source={raison} />
       </TextContent>
