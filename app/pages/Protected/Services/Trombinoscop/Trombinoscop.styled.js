@@ -63,10 +63,12 @@ export const AgentCardBody = styled.div`
 export const PhotoContainer = styled.div`
   margin: 1.8rem auto 1.8rem auto;
   width: fit-content;
+
   img {
     width: 150px;
     height: 150px;
     object-fit: contain;
     border-radius: 100%;
+    cursor: pointer;
   }
 `;

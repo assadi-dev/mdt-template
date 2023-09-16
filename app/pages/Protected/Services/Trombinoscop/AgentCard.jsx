@@ -8,7 +8,7 @@ const AgentCard = ({ agent }) => {
   const noPhoto = gender == "male" ? user_male : user_female;
 
   return (
-    <AgentCardContainer>
+    <AgentCardContainer className="theme-card-trombinoscop">
       <PhotoAgent src={noPhoto} />
       <AgentCardBody>
         <p className="agent">26-James-Morrison</p>

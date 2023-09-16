@@ -324,4 +324,8 @@ html:has(.theme-sasp) .theme-text-editor-alt {
 html:has(.theme-sasp) .theme-text-editor-alt:has(.ProseMirror-focused) {
   border: 1px solid #131b26;
   box-shadow: 0 0 15px rgba(19, 27, 38, 0.3);
+}
+html:has(.theme-sasp) .theme-card-trombinoscop {
+  background-color: #131b26;
+  border: 0.5px solid rgba(43, 125, 233, 0.31);
 }/*# sourceMappingURL=sasp-theme.css.map */

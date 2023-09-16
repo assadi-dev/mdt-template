@@ -442,6 +442,11 @@ html:has(.theme-sasp)
     
     }
 
+    .theme-card-trombinoscop{
+        background-color: rgba($color:  variables.$lspd-secondary-color, $alpha: 1);
+        border:0.5px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.31);
+    }
+
 
 
     
