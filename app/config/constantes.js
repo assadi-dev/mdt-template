@@ -30,4 +30,5 @@ export const blank_img = img_placeholder;
 export const user_male = unknown_male;
 export const user_female = unknown_female;
 
+/** Max items à affiché aux tableaux**/
 export const defaultPageSize = 5;

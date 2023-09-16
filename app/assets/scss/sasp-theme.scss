@@ -414,6 +414,34 @@ html:has(.theme-sasp)
 
     }
 
+        .theme-text-editor{
+            border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
+            position: relative;
+        
+            margin: 25px  0;
+    
+            &:has(.ProseMirror-focused){
+                border-color: rgba($color:  variables.$lspd-primary-color, $alpha: 1);
+                box-shadow: 0 0 15px rgba($color:  variables.$lspd-primary-color, $alpha: 0.15);
+            }
+        
+    
+    }
+
+
+    .theme-text-editor-alt{
+        border: 1px solid rgba($color:  variables.$sasp-secondary-color, $alpha: 0.5);
+        position: relative;
+    
+        margin: 25px  0;
+
+        &:has(.ProseMirror-focused){
+            border: 1px solid  rgba($color:  variables.$sasp-secondary-color, $alpha: 1);
+                box-shadow: 0 0 15px rgba($color:  variables.$sasp-secondary-color, $alpha: 0.3);
+        }
+    
+    }
+
 
 
     

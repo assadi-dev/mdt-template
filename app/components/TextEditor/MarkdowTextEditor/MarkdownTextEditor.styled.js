@@ -2,15 +2,16 @@ import styled from "styled-components";
 
 export const EditorContentContainer = styled.div`
   border-radius: 8px;
-  border: 1px solid #fff;
-  overflow: hidden;
+  overflow-x: hidden;
+
   .is-active {
     opacity: 1;
   }
   .tiptap {
+    overflow-y: auto;
     padding: 1.3rem;
     background-color: rgba(0, 0, 0, 0.5);
-    min-height: 145px;
+    height: 145px;
     width: 100%;
   }
   p {

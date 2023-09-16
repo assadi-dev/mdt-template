@@ -51,7 +51,7 @@ const DemandeComptability = () => {
               <label htmlFor="raison">Raison</label>
               <MarkdowTextEditor
                 id="raison"
-                className="theme-text-editor"
+                className="theme-text-editor-alt"
                 getOutput={handleChangeText}
               />
             </div>

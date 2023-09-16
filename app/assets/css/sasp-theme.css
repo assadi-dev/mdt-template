@@ -306,4 +306,22 @@ html:has(.theme-sasp) .form-theme-color-alt option {
   -ms-border-radius: 0px;
   -o-border-radius: 0px;
   font-size: 1.3rem;
+}
+html:has(.theme-sasp) .theme-text-editor {
+  border: 1px solid rgba(43, 125, 233, 0.5);
+  position: relative;
+  margin: 25px 0;
+}
+html:has(.theme-sasp) .theme-text-editor:has(.ProseMirror-focused) {
+  border-color: #2b7de9;
+  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+}
+html:has(.theme-sasp) .theme-text-editor-alt {
+  border: 1px solid rgba(19, 27, 38, 0.5);
+  position: relative;
+  margin: 25px 0;
+}
+html:has(.theme-sasp) .theme-text-editor-alt:has(.ProseMirror-focused) {
+  border: 1px solid #131b26;
+  box-shadow: 0 0 15px rgba(19, 27, 38, 0.3);
 }/*# sourceMappingURL=sasp-theme.css.map */

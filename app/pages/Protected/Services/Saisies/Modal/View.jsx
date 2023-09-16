@@ -2,17 +2,16 @@ import React from "react";
 import Add from "./Form/Add";
 
 const View = ({ view, data, onCloseModal }) => {
-  console.log(view);
   switch (view) {
     case "add-saisie":
-      return <Add onCloseModal={onCloseModal} />;
+      return <Add className="modal-theme-color" onCloseModal={onCloseModal} />;
     case "edit-saisie":
       break;
     case "delete-saisie":
       break;
 
     default:
-      break;
+      throw new Error(`Unhandled action view: ${type}`);
   }
 };
 
