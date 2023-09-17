@@ -25,16 +25,15 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
       <PreviewDocumentBody>
         <Row style={{ marginTop: "18px" }}>
           <p className="agent">
-            {" "}
             <strong>Agent: </strong> {agent}
-          </p>{" "}
+          </p>
         </Row>
         <Row>
           <p className="objet">
-            <strong>Objet: </strong> {objet}{" "}
+            <strong>Objet: </strong> {objet}
           </p>
         </Row>
-        <Row className="justiy-content-end ">
+        <Row className="justiy-content-end">
           <p className="date">{date}</p>
         </Row>
         <Row className="justiy-content-end">
