@@ -27,3 +27,9 @@ export const ActionButton = styled.button`
   border-radius: 5px;
   align-self: center;
 `;
+
+export const Button = styled.button`
+  padding: 1rem 1.3rem;
+  border-radius: 5px;
+  align-self: center;
+`;

@@ -121,6 +121,10 @@ body {
 
 /**Grid **/
 
+.d-grid{
+    display:grid;
+}
+
 .justify-self-start{
     justify-self: start;
 }
@@ -143,6 +147,9 @@ body {
 
 
 /** Flex Positions **/
+.d-flex{
+    display:flex;
+}
 .justiy-content-start{
     justify-content: flex-start;
 }

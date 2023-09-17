@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Row } from "../../../../components/PageContainer";
-import SearchInput from "../../../../components/DataTable/SearchInput";
+import SearchInputUser from "../../../../components/Forms/SearchBarUser";
 
 export const HeaderRow = styled(Row)`
   min-height: 55px;
@@ -9,7 +9,7 @@ export const HeaderRow = styled(Row)`
   margin-bottom: 2.3rem;
 `;
 
-export const TrombinoscopeSearchInput = styled(SearchInput)`
+export const TrombinoscopeSearchInput = styled(SearchInputUser)`
   width: 100%;
   @media screen and (min-width: 992px) {
     width: 42rem;

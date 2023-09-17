@@ -330,11 +330,14 @@ html:has(.theme-sasp)
 
     .form-theme-color{
      
-        select, input{
+        select, input,textarea{
              border: 1px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.5);
              padding: 1rem;
              width: 100%;
     
+             &::-webkit-calendar-picker-indicator{
+                filter: invert(1);
+             }
              &:focus{
                  border-color: rgba($color:  variables.$lspd-primary-color, $alpha: 1);
                  box-shadow: 0 0 15px rgba($color:  variables.$lspd-primary-color, $alpha: 0.15);
@@ -371,11 +374,15 @@ html:has(.theme-sasp)
 
     .form-theme-color-alt
     {
-        select, input{
+        select, input,textarea{
             border: 1px solid rgba($color:  variables.$sasp-secondary-color, $alpha: 0.5);
             padding: 1rem;
             width: 100%;
             background-color: rgba($color: #000000, $alpha: 0.1);
+
+            &::-webkit-calendar-picker-indicator{
+                filter: invert(1);
+             }
    
             &:focus{
                 border: 1px solid  rgba($color:  variables.$sasp-secondary-color, $alpha: 1);

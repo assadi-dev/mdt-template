@@ -236,7 +236,7 @@ html:has(.theme-sasp) .input-theme-color input::-moz-placeholder {
 html:has(.theme-sasp) .input-theme-color input::placeholder {
   color: rgba(19, 27, 38, 0.8);
 }
-html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input {
+html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input, html:has(.theme-sasp) .form-theme-color textarea {
   border: 1px solid rgba(43, 125, 233, 0.5);
   padding: 1rem;
   width: 100%;
@@ -251,7 +251,10 @@ html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-them
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-html:has(.theme-sasp) .form-theme-color select:focus, html:has(.theme-sasp) .form-theme-color input:focus {
+html:has(.theme-sasp) .form-theme-color select::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color input::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color textarea::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+html:has(.theme-sasp) .form-theme-color select:focus, html:has(.theme-sasp) .form-theme-color input:focus, html:has(.theme-sasp) .form-theme-color textarea:focus {
   border-color: #2b7de9;
   box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
 }
@@ -268,7 +271,7 @@ html:has(.theme-sasp) .form-theme-color option {
   -o-border-radius: 0px;
   font-size: 1.3rem;
 }
-html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-theme-color-alt input {
+html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-theme-color-alt input, html:has(.theme-sasp) .form-theme-color-alt textarea {
   border: 1px solid rgba(19, 27, 38, 0.5);
   padding: 1rem;
   width: 100%;
@@ -284,14 +287,17 @@ html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-html:has(.theme-sasp) .form-theme-color-alt select:focus, html:has(.theme-sasp) .form-theme-color-alt input:focus {
+html:has(.theme-sasp) .form-theme-color-alt select::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color-alt input::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color-alt textarea::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+html:has(.theme-sasp) .form-theme-color-alt select:focus, html:has(.theme-sasp) .form-theme-color-alt input:focus, html:has(.theme-sasp) .form-theme-color-alt textarea:focus {
   border: 1px solid #131b26;
   box-shadow: 0 0 15px rgba(19, 27, 38, 0.3);
 }
-html:has(.theme-sasp) .form-theme-color-alt select::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt input::-moz-placeholder {
+html:has(.theme-sasp) .form-theme-color-alt select::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt input::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt textarea::-moz-placeholder {
   color: #969696;
 }
-html:has(.theme-sasp) .form-theme-color-alt select::placeholder, html:has(.theme-sasp) .form-theme-color-alt input::placeholder {
+html:has(.theme-sasp) .form-theme-color-alt select::placeholder, html:has(.theme-sasp) .form-theme-color-alt input::placeholder, html:has(.theme-sasp) .form-theme-color-alt textarea::placeholder {
   color: #969696;
 }
 html:has(.theme-sasp) .form-theme-color-alt label {

@@ -169,3 +169,37 @@ export const ConfirmButton = styled.button`
   border-radius: 5px;
   text-transform: uppercase;
 `;
+
+//Search Input
+
+export const SearchInputContainer = styled.div`
+  position: relative;
+  width: 100%;
+  input {
+    padding: 1rem 1.2rem 1rem 35px;
+    width: 100%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 252, 255, 0.3);
+    height: 100%;
+    transition: all 0.35s;
+  }
+  @media screen and (min-width: 992px) {
+    width: 50%;
+  }
+`;
+
+export const IconInput = styled.span`
+  display: block;
+  left: 8px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  color: rgba(255, 252, 255, 0.3);
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
