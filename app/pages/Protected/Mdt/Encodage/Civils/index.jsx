@@ -14,34 +14,33 @@ import useModalState from "../../../../../hooks/useModalState";
 import { useCallback } from "react";
 
 const EncodageCivils = () => {
-  const { modalState, toggleModal } = useModalState();
+  const { modalState, closeModal, toggleModal } = useModalState();
 
   return (
     <>
       <PageContainer>
         <HeaderPage>
           <CivilSearchInput className="input-theme-color" />
-          <EncodeCivilBtn className="bg-btn-alt-theme-color">
+          <EncodeCivilBtn
+            className="bg-btn-alt-theme-color"
+            onClick={toggleModal}
+          >
             <AiOutlineUserAdd /> Encoder un civil
           </EncodeCivilBtn>
         </HeaderPage>
 
         <GridCivilCard></GridCivilCard>
       </PageContainer>
-      {
-        /* modalState.isOpen && */
+      {modalState.isOpen &&
         createPortal(
-          <Modal isOpen={true} onClose={toggleModal}>
+          <Modal isOpen={modalState.isOpen} onClose={closeModal}>
             {" "}
-            <View view={"add-civil"} onCloseModal={toggleModal} />
+            <View view={"add-civil"} onCloseModal={closeModal} />
           </Modal>,
           document.body
-        )
-      }
+        )}
     </>
   );
 };
 
 export default EncodageCivils;
-
-//modal-theme-color
