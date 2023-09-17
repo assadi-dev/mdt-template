@@ -40,14 +40,14 @@ class GradeApiController extends AbstractController
         try {
 
             $access = $this->gradeRepository->findAccessById($gradeId);
-
-            $response = $this->json($access, Response::HTTP_OK, []);
+            $result = json_encode($access, JSON_PRETTY_PRINT);
+            $response = new Response($result, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;
 
         } catch (\Throwable $th) {
 
             $result = json_encode(["message" => $th->getMessage()]);
-            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"], true);
         }
 
     }
@@ -102,13 +102,13 @@ class GradeApiController extends AbstractController
             $this->entityManager->flush();
             $access =  $gradeAccsess = $this->gradeRepository->findAccessById($idGrade);
             $result = json_encode($access);
-            $response = new Response($result, Response::HTTP_OK, [], true);
+            $response = new Response($result, Response::HTTP_OK, ["Content-Type" => "application/json"], true);
             return $response;
 
         } catch (\Throwable $th) {
 
             $result = json_encode(["message" => $th->getMessage()]);
-            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, [], true);
+            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"], true);
         }
 
     }

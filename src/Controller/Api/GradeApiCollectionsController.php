@@ -53,14 +53,14 @@ class GradeApiCollectionsController extends AbstractController
 
             $result = $this->gradeCategoryRepository->findGradeCategiesByPage($item_per_page, $page, $search);
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_OK, []);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;
 
         } catch (\Throwable $th) {
 
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
             return $response;
 
         }
@@ -87,14 +87,14 @@ class GradeApiCollectionsController extends AbstractController
 
             $result = $this->gradeRepository->findGradeByPage($item_per_page, $page, $search);
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_OK, []);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;
 
         } catch (\Throwable $th) {
             //throw $th;
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
             return $response;
         }
 
@@ -115,7 +115,7 @@ class GradeApiCollectionsController extends AbstractController
         } catch (\Throwable $th) {
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, [], true);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"], true);
             return $response;
         }
     }
@@ -135,7 +135,7 @@ class GradeApiCollectionsController extends AbstractController
         } catch (\Throwable $th) {
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
             return $response;
         }
 

@@ -40,14 +40,14 @@ class UserApiCollectionsController extends AbstractController
 
             $result =  $this->userRepository->findUserByPage($item_per_page, $page, $search);
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_OK, [],true);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"], true);
             return $response;
 
         } catch (\Throwable $th) {
             //throw $th;
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, [],true);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"], true);
             return $response;
         }
     }
