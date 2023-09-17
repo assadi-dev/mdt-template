@@ -1,7 +1,7 @@
 import React from "react";
 
 const RapportAspirant = () => {
-  return <div>Rapport Aspirant</div>;
+  return <div>Rapport Rookie</div>;
 };
 
 export default RapportAspirant;

@@ -86,7 +86,7 @@ export const routing = [
             path: "sheriff-academy",
             children: [
               {
-                path: "consultation-rapport-aspirant",
+                path: "consultation-rapport-rookie",
                 element: <Pages.ConsultationRapportAspirant />,
               },
             ],
@@ -100,7 +100,7 @@ export const routing = [
                 element: <Pages.Plainte />,
               },
               {
-                path: "rapport-aspirant",
+                path: "rapport-rookie",
                 element: <Pages.RapportAspirant />,
               },
               {

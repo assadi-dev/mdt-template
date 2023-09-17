@@ -72,8 +72,8 @@ export const sidebarRoutes = [
         name: "Rapport",
         childrens: [
           {
-            name: "Rapport Aspirant",
-            path: "/mdt/rapport/rapport-aspirant",
+            name: "Rapport Rookie",
+            path: "/mdt/rapport/rapport-rookie",
           },
           {
             name: "Rapport Incident",
