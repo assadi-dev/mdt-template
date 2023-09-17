@@ -40,14 +40,14 @@ class GradeApiController extends AbstractController
         try {
 
             $access = $this->gradeRepository->findAccessById($gradeId);
-            $result = json_encode($access);
-            $response = new Response($result, Response::HTTP_OK, [], true);
+
+            $response = $this->json($access, Response::HTTP_OK, []);
             return $response;
 
         } catch (\Throwable $th) {
 
             $result = json_encode(["message" => $th->getMessage()]);
-            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, [], true);
+            return  $response = new Response($result, Response::HTTP_INTERNAL_SERVER_ERROR, []);
         }
 
     }

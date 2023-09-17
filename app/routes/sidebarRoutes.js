@@ -99,6 +99,14 @@ export const sidebarRoutes = [
         name: "Gestion des comptes",
         path: "/supervision-command-staff/gestion-des-comptes",
       },
+      {
+        name: "Attribution d'armes",
+        path: "/supervision-command-staff/attribution-des-armes",
+      },
+      {
+        name: "Attribution des vehicules",
+        path: "/supervision-command-staff/attributions-des-vehicules",
+      },
     ],
   },
   {

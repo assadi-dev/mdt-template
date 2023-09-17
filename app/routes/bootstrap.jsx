@@ -19,6 +19,7 @@ import EncodageVehicules from "../pages/Protected/Mdt/Encodage/Vehicules";
 import EncodageArmes from "../pages/Protected/Mdt/Encodage/Armes";
 import PanicButton from "../pages/Protected/Mdt/PanicButton";
 import Plainte from "../pages/Protected/Mdt/Rapport/Plainte";
+import RapportRookie from "../pages/Protected/Mdt/Rapport/RapportRookie";
 import RapportAspirant from "../pages/Protected/Mdt/Rapport/RapportAspirant";
 import RapportIncident from "../pages/Protected/Mdt/Rapport/RapportIncident";
 import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
@@ -71,6 +72,7 @@ export default {
   EncodageArmes,
   PanicButton,
   Plainte,
+  RapportRookie,
   RapportAspirant,
   RapportIncident,
   ConsultationRapportRookie,

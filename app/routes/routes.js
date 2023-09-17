@@ -86,7 +86,7 @@ export const routing = [
             path: "sheriff-academy",
             children: [
               {
-                path: "consultation-rapport-rookie",
+                path: "consultation-rapport-aspirant",
                 element: <Pages.ConsultationRapportAspirant />,
               },
             ],
@@ -101,7 +101,7 @@ export const routing = [
               },
               {
                 path: "rapport-rookie",
-                element: <Pages.RapportAspirant />,
+                element: <Pages.RapportRookie />,
               },
               {
                 path: "rapport-incident",
@@ -125,6 +125,14 @@ export const routing = [
           },
           {
             path: "gestion-des-comptes",
+            element: <Pages.GestionDesComptes />,
+          },
+          {
+            path: "supervision-command-staff/attribution-des-armes",
+            element: <Pages.GestionDesComptes />,
+          },
+          {
+            path: "supervision-command-staff/attributions-des-vehicules",
             element: <Pages.GestionDesComptes />,
           },
         ],
