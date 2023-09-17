@@ -61,6 +61,12 @@ export const PreviewDocumentContainer = styled(ModalFormContainer)`
   }
 `;
 
+export const PreviewDocumentBody = styled.div`
+  @media screen {
+    padding: 1.3rem;
+  }
+`;
+
 export const PreviewDocumentHeader = styled.div`
   min-height: 10px;
 `;
