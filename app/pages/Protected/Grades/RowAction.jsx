@@ -10,14 +10,7 @@ import { TOGGLE_MODAL } from "./GrdesCategories/reducer/ModalReducer";
 import { useRef } from "react";
 import { useState } from "react";
 
-const RowAction = ({ dispatchModalState, onSearch }) => {
-  const handleClickAddGrade = () => {
-    dispatchModalState({
-      type: TOGGLE_MODAL,
-      payload: { view: "add-grade", data: null },
-    });
-  };
-
+const RowAction = ({ handleClickAddGrade, onSearch }) => {
   return (
     <RowActionContainer>
       <div></div>

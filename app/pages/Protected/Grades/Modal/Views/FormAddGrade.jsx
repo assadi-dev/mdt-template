@@ -111,7 +111,7 @@ const FormAddCategory = ({ onCloseModal, ...props }) => {
 
           <select type="text" {...register("faction", { required: true })}>
             {listsFactions.map((faction) => (
-              <option value={faction.short_name}>
+              <option key={faction.id} value={faction.short_name}>
                 {faction.short_name.toUpperCase()}
               </option>
             ))}

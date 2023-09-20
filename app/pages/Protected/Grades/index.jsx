@@ -27,7 +27,7 @@ const Grades = () => {
     (state) => state.GradeReducer
   );
 
-  const { modalState, dispatchModalState } = useModalState();
+  const { modalState, toggleModal, closeModal } = useModalState();
 
   const {
     onPageChange,
@@ -73,10 +73,7 @@ const Grades = () => {
   ];
 
   const handleClickEdit = (data) => {
-    dispatchModalState({
-      type: TOGGLE_MODAL,
-      payload: { view: "edit-grade", data },
-    });
+    toggleModal({ view: "edit-grade", data });
   };
 
   //Dispatch Delete
@@ -95,19 +92,20 @@ const Grades = () => {
   const handleClicDelete = (data) => {
     data = { ...data, onConfirmDelete };
 
-    dispatchModalState({
-      type: TOGGLE_MODAL,
-      payload: { view: "delete-grade", data },
-    });
+    toggleModal({ view: "delete-grade", data });
   };
 
   const handleClickCloseModal = () => {
-    dispatchModalState({ type: CLOSE_MODAL });
+    closeModal();
+  };
+
+  const handleClickAddGrade = () => {
+    toggleModal({ view: "add-grade", data: null });
   };
 
   return (
     <>
-      <RowAction dispatchModalState={dispatchModalState} />
+      <RowAction handleClickAddGrade={handleClickAddGrade} />
       <DataTable
         columns={columns}
         data={collections}
@@ -125,18 +123,16 @@ const Grades = () => {
         onSearchValue={handleSearch}
       />
 
-      {modalState.isOpen
-        ? createPortal(
-            <Modal isOpen={modalState.isOpen}>
-              <View
-                view={modalState.view}
-                onCloseModal={handleClickCloseModal}
-                data={modalState.data}
-              />
-            </Modal>,
-            document.body
-          )
-        : null}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <View
+            view={modalState.view}
+            onCloseModal={handleClickCloseModal}
+            data={modalState.data}
+          />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };

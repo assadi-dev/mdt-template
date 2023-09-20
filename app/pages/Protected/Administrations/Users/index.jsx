@@ -61,7 +61,7 @@ const Users = () => {
     }
   };
 
-  const { modalState, dispatchModalState } = useModalState();
+  const { modalState, toggleModal, closeModal } = useModalState();
 
   const {
     onPageChange,
@@ -74,13 +74,11 @@ const Users = () => {
   } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const handleClicEdit = (user) => {
-    dispatchModalState({
-      type: TOGGLE_MODAL,
-      payload: { view: "edit-user", data: user },
-    });
+    toggleModal({ view: "edit-user", data: user });
   };
 
-  const handleClickCloseModal = () => dispatchModalState({ type: CLOSE_MODAL });
+  const handleClickCloseModal = () =>
+    toggleModal({ view: modalState.view, data: modalState.data });
 
   const columns = [
     { Header: "Discord", accessor: "idDiscord" },
@@ -177,17 +175,16 @@ const Users = () => {
         onSearchValue={handleSearch}
       />
 
-      {modalState.isOpen &&
-        createPortal(
-          <Modal isOpen={modalState.isOpen} onClose={handleClickCloseModal}>
-            <View
-              view={modalState.view}
-              data={modalState.data}
-              onCloseModal={handleClickCloseModal}
-            />
-          </Modal>,
-          document.body
-        )}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen} onClose={handleClickCloseModal}>
+          <View
+            view={modalState.view}
+            data={modalState.data}
+            onCloseModal={handleClickCloseModal}
+          />
+        </Modal>,
+        document.body
+      )}
     </MainContainer>
   );
 };

@@ -126,18 +126,16 @@ const GradeCategories = () => {
           onSearchValue={handleSearch}
         />
       }
-      {modalState.isOpen
-        ? createPortal(
-            <Modal isOpen={modalState.isOpen}>
-              <View
-                view={modalState.view}
-                onCloseModal={handleClickCloseModal}
-                data={modalState.data}
-              />
-            </Modal>,
-            document.body
-          )
-        : null}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <View
+            view={modalState.view}
+            onCloseModal={handleClickCloseModal}
+            data={modalState.data}
+          />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };

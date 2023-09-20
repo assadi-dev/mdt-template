@@ -31,14 +31,12 @@ const EncodageCivils = () => {
 
         <GridCivilCard></GridCivilCard>
       </PageContainer>
-      {modalState.isOpen &&
-        createPortal(
-          <Modal isOpen={modalState.isOpen} onClose={closeModal}>
-            {" "}
-            <View view={"add-civil"} onCloseModal={closeModal} />
-          </Modal>,
-          document.body
-        )}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <View view={"add-civil"} onCloseModal={closeModal} />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };

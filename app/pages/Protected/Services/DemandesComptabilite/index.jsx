@@ -143,17 +143,16 @@ const DemandeComptability = () => {
         </DemandeCompatibiliteBody>
       </DemandeCompatibiliteContainer>
 
-      {modalState.isOpen &&
-        createPortal(
-          <Modal isOpen={modalState.isOpen} onClose={toggleModal}>
-            <PreviewDocument
-              previewData={{ ...getValues() }}
-              onCloseModal={toggleModal}
-              className="modal-theme-color"
-            />{" "}
-          </Modal>,
-          document.body
-        )}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen} onClose={toggleModal}>
+          <PreviewDocument
+            previewData={{ ...getValues() }}
+            onCloseModal={toggleModal}
+            className="modal-theme-color"
+          />{" "}
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };
