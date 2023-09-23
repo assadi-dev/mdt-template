@@ -1,24 +1,27 @@
 import React from "react";
-import DialogConfirm, {
-  confirm,
-} from "../../../../../components/Modal/DialogConfirm";
-import DialogConfirmComponent from "../../../../../components/Modal/DialogConfirm/DialogConfirmComponent";
+import { PageContainer } from "../../../../../components/PageContainer";
+import {
+  ArmesSearchInput,
+  EncodeArmesBtn,
+  GridArmesCard,
+  HeaderPage,
+} from "./Armes.styled";
+import { GiPistolGun } from "react-icons/gi";
 
 const EncodageArmes = () => {
-  const deleteToto = async () => {
-    if (await confirm()) {
-      console.log("yess");
-    }
-  };
-
   return (
-    <div>
-      Encodage Armes
-      <p>
-        <button onClick={deleteToto}>Delete</button>
-      </p>
-      <DialogConfirm labelConfirm={"Voulez vous supprimer cette armes ?"} />
-    </div>
+    <>
+      <PageContainer>
+        <HeaderPage>
+          <ArmesSearchInput className="input-theme-color" />
+          <EncodeArmesBtn className="bg-btn-alt-theme-color">
+            <GiPistolGun />
+            Encoder une arme
+          </EncodeArmesBtn>
+        </HeaderPage>
+        <GridArmesCard></GridArmesCard>
+      </PageContainer>
+    </>
   );
 };
 
