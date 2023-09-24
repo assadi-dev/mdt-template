@@ -203,3 +203,9 @@ export const IconInput = styled.span`
     height: 20px;
   }
 `;
+
+export const UploadFormZoneContainer = styled.div`
+  min-height: 85px;
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+`;

@@ -11,7 +11,7 @@ import Modal from "../../../../../components/Modal/Modal";
 import useProcess from "../../../../../hooks/useProcess";
 import useModalState from "../../../../../hooks/useModalState";
 import listOfView, { ENCODE_VEHICULE } from "./View/listOfView";
-import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalContent";
 
 const EncodageVehicules = () => {
   const { process, toggleProcess } = useProcess();
