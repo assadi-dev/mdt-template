@@ -22,6 +22,7 @@ import Plainte from "../pages/Protected/Mdt/Rapport/Plainte";
 import RapportRookie from "../pages/Protected/Mdt/Rapport/RapportRookie";
 import RapportAspirant from "../pages/Protected/Mdt/Rapport/RapportAspirant";
 import RapportIncident from "../pages/Protected/Mdt/Rapport/RapportIncident";
+import RapportIntervention from "../pages/Protected/Mdt/Rapport/RapportIntervention";
 import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
 import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
 /*** END - MDT***/
@@ -76,6 +77,7 @@ export default {
   Plainte,
   RapportRookie,
   RapportAspirant,
+  RapportIntervention,
   RapportIncident,
   ConsultationRapportRookie,
   ConsultationRapportAspirant,
