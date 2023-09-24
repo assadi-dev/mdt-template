@@ -6,12 +6,12 @@ import {
   HeaderPage,
   VehiculesSearchInput,
 } from "./Vehicules.styled";
-import ViewModalContent from "../../../../../components/Modal/ViewModalContent";
 import { createPortal } from "react-dom";
 import Modal from "../../../../../components/Modal/Modal";
 import useProcess from "../../../../../hooks/useProcess";
 import useModalState from "../../../../../hooks/useModalState";
 import listOfView, { ENCODE_VEHICULE } from "./View/listOfView";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 
 const EncodageVehicules = () => {
   const { process, toggleProcess } = useProcess();
@@ -37,7 +37,7 @@ const EncodageVehicules = () => {
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen}>
-          <ViewModalContent
+          <RenderModalFormContent
             view={modalState.view}
             enumOfView={listOfView}
             onCloseModal={closeModal}

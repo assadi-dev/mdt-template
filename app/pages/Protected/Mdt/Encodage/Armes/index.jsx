@@ -10,8 +10,9 @@ import { GiPistolGun } from "react-icons/gi";
 import Modal from "../../../../../components/Modal/Modal";
 import View from "./View";
 import useModalState from "../../../../../hooks/useModalState";
-import { ENCODE_ARMES } from "./View/listsOfView";
+import listOfView, { ENCODE_ARMES } from "./View/listsOfView";
 import { createPortal } from "react-dom";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 
 const EncodageArmes = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
@@ -38,7 +39,11 @@ const EncodageArmes = () => {
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>
-          <View view={modalState.view} onCloseModal={closeModal} />
+          <RenderModalFormContent
+            view={modalState.view}
+            enumOfView={listOfView}
+            onCloseModal={closeModal}
+          />
         </Modal>,
         document.body
       )}

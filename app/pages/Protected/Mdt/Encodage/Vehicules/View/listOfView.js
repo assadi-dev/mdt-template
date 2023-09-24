@@ -1,3 +1,4 @@
+import React from "react";
 import EncodeFormVehicule from "./Form/EncodeFormVehicule";
 
 export const ENCODE_VEHICULE = "encode-vehicule";
