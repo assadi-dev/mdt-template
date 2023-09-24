@@ -23,8 +23,8 @@ export const sidebarRoutes = [
         path: "/services/saisie",
       },
       {
-        name: "Encodage arme de service",
-        path: "/services/encodage-arme-de-service",
+        name: "Encodage arme de fonction",
+        path: "/services/encodage-arme-de-fonction",
       },
     ],
   },

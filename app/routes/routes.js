@@ -42,7 +42,7 @@ export const routing = [
             element: <Pages.Saisies />,
           },
           {
-            path: "encodage-arme-de-service",
+            path: "encodage-arme-de-fonction",
             element: <Pages.EncodageArmeFonction />,
           },
         ],
