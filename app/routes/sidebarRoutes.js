@@ -105,7 +105,7 @@ export const sidebarRoutes = [
       },
       {
         name: "Attribution des vehicules",
-        path: "/supervision-command-staff/attributions-des-vehicules",
+        path: "/supervision-command-staff/attribution-des-vehicules",
       },
     ],
   },

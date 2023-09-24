@@ -128,12 +128,12 @@ export const routing = [
             element: <Pages.GestionDesComptes />,
           },
           {
-            path: "supervision-command-staff/attribution-des-armes",
-            element: <Pages.GestionDesComptes />,
+            path: "attribution-des-armes",
+            element: <Pages.AttributionArmes />,
           },
           {
-            path: "supervision-command-staff/attributions-des-vehicules",
-            element: <Pages.GestionDesComptes />,
+            path: "attribution-des-vehicules",
+            element: <Pages.AttributionVehicules />,
           },
         ],
       },

@@ -33,6 +33,8 @@ import Users from "../pages/Protected/Administrations/Users";
 import Comptabilite from "../pages/Protected/CommandStaffSupervisor/Comptabilite";
 import Effectifs from "../pages/Protected/CommandStaffSupervisor/Effectifs";
 import GestionDesComptes from "../pages/Protected/CommandStaffSupervisor/GestionDesComptes";
+import AttributionArmes from "../pages/Protected/CommandStaffSupervisor/Attribution/AttributionArmes";
+import AttributionVehicules from "../pages/Protected/CommandStaffSupervisor/Attribution/AttributionVehicules";
 
 /** END - SUPERVISION / COMMAND STAFF */
 
@@ -86,5 +88,7 @@ export default {
   GestionDesComptes,
   GestionCodePenal,
   GestionGrades,
+  AttributionArmes,
+  AttributionVehicules,
   EndOfWatch,
 };
