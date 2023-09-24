@@ -27,7 +27,6 @@ export const SibarListCOntainer = styled.ul`
 `;
 
 export const SideBarItemsContainer = styled.div`
-  margin-bottom: 1rem;
   min-height: 25px;
   width: 100%;
   font-size: 1rem;
@@ -40,10 +39,10 @@ export const SibartItemRow = styled.li`
   width: 100%;
   height: auto;
   border-radius: 5px;
-  padding: 0 0.8rem;
+  padding: 0.8rem 0.8rem;
   overflow: hidden;
   position: relative;
-  margin-bottom: 1.2rem;
+
   letter-spacing: 0.6px;
 
   cursor: pointer;
@@ -59,7 +58,7 @@ export const DropDownSubItemsList = styled.ul`
   background-color: rgba(0, 0, 0, 0.25);
   color: #fff;
   padding: 0.9rem;
-  margin: 0.5rem 0 0.8rem 0;
+
   width: 100%;
   min-height: 25px;
   border-radius: 5px;
