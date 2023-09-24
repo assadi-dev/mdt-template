@@ -16,8 +16,7 @@ import Modal from "../../../../components/Modal/Modal";
 import View from "./Modal/View";
 
 const Saisie = () => {
-  const { modalState, dispatchModalState, toggleModal, closeModal } =
-    useModalState();
+  const { modalState, toggleModal, closeModal } = useModalState();
 
   const {
     onPageChange,
@@ -91,18 +90,16 @@ const Saisie = () => {
         />
       </PageContainer>
 
-      {modalState.isOpen
-        ? createPortal(
-            <Modal isOpen={modalState.isOpen}>
-              <View
-                view={modalState.view}
-                onCloseModal={closeModal}
-                data={modalState.data}
-              />
-            </Modal>,
-            document.body
-          )
-        : null}
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <View
+            view={modalState.view}
+            onCloseModal={closeModal}
+            data={modalState.data}
+          />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };
