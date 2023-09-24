@@ -42,8 +42,8 @@ export const routing = [
             element: <Pages.Saisies />,
           },
           {
-            path: "attribution-patrouilleur",
-            element: <Pages.AttributionPatrouilleurs />,
+            path: "encodage-arme-de-service",
+            element: <Pages.EncodageArmeService />,
           },
         ],
       },

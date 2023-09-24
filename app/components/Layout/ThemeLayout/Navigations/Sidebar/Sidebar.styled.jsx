@@ -21,8 +21,8 @@ export const SibarListCOntainer = styled.ul`
   overflow-y: auto;
   font-size: 1.38rem;
   .sidebar-selected {
-    padding: 0.6rem 0.8rem;
-    font-size: 1.42rem;
+    padding: 0.6rem;
+    font-size: 1.16rem;
   }
 `;
 
@@ -64,6 +64,6 @@ export const DropDownSubItemsList = styled.ul`
   border-radius: 5px;
   font-size: 1.16rem;
   li {
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 0.15rem;
   }
 `;

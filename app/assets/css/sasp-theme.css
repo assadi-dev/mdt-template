@@ -27,7 +27,7 @@
 .theme-sasp .sidebar .sidebar-selected, .theme-sasp .sidebar .active, .theme-sasp .sidebar .selected {
   background-color: #969696;
   color: #131B26;
-  font-weight: bold;
+  font-weight: bolder;
 }
 .theme-sasp .navbar {
   background-color: #767676;
