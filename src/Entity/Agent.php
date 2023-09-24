@@ -169,7 +169,7 @@ class Agent
 
     public function setDivision(?string $division): self
     {
-        $this->division= $division;
+        $this->division = $division;
 
         return $this;
     }
