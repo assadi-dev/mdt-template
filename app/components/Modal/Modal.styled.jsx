@@ -19,8 +19,8 @@ export const ModalOverlay = styled.div`
     margin-left: ${sidebarSize - 80}px;
   }
 
-  &::before {
-    content: " ";
+  &::after {
+    content: "";
     position: fixed;
     top: 0;
     bottom: 0;
@@ -28,6 +28,7 @@ export const ModalOverlay = styled.div`
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
+    transition: all 0.35s ease-out;
   }
 `;
 
