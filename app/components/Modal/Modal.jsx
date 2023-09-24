@@ -12,7 +12,7 @@ const Modal = ({ isOpen = false, onClose, children }) => {
   const animateModal = {
     hidden: {
       opacity: 0,
-      y: 100,
+      y: 160,
       transition: { duration: 0.35, ease: easeInOut },
     },
     show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: easeInOut } },
