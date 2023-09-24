@@ -64,7 +64,6 @@ export const DropDownSubItemsList = styled.ul`
   border-radius: 5px;
   font-size: 1.16rem;
   li {
-    margin-bottom: 0;
     padding: 0.6rem 0.8rem;
   }
 `;
