@@ -12,7 +12,7 @@ import DemandeComptaabilite from "../pages/Protected/Services/DemandesComptabili
 import Plaintes from "../pages/Protected/Services/Plaintes";
 import Saisies from "../pages/Protected/Services/Saisies";
 import AttributionPatrouilleurs from "../pages/Protected/Services/AttributionPatrouilleurs";
-import EncodageArmeService from "../pages/Protected/Services/EncodageArmeService";
+import EncodageArmeFonction from "../pages/Protected/Services/EncodageArmeFonction";
 /***END - Services***/
 /***MDT***/
 import EncodageCivils from "../pages/Protected/Mdt/Encodage/Civils";
@@ -71,7 +71,7 @@ export default {
   Plaintes,
   Saisies,
   AttributionPatrouilleurs,
-  EncodageArmeService,
+  EncodageArmeFonction,
   EncodageCivils,
   EncodageVehicules,
   EncodageArmes,

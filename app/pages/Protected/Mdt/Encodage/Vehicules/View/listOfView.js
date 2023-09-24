@@ -9,9 +9,3 @@ export default {
     element: EncodeFormVehicule,
   },
 };
-
-export const typeOfVehiculesEnum = [
-  { id: uniqid(), value: "berreta", label: "Berreta" },
-  { id: uniqid(), value: "glock", label: "Glock" },
-  { id: uniqid(), value: "petoir", label: "Pétoire" },
-];

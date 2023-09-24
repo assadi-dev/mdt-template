@@ -1,5 +1,5 @@
 import React from "react";
-import useProcess from "../../../../../../../hooks/useProcess";
+import useProcess from "../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
 import {
   FormContainer,
@@ -7,17 +7,16 @@ import {
   HeaderModal,
   ModalFooter,
   ModalFormContainer,
-  SubmitButton,
-} from "../../../../../../../components/Forms/FormView.styled";
-import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
-import { typeOfArmesEnum } from "../listsOfView";
-import SpinnerButton from "../../../../../../../components/Shared/Loading/SpinnerButton";
-import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
+} from "../../../../../../components/Forms/FormView.styled";
+import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
+import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
+import { typeOfArmesEnum } from "../../../../Mdt/Encodage/Armes/View/listsOfView";
 
-const EncodeArmeForm = ({ onCloseModal, ...props }) => {
+const EncodageArmeFonctionForm = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
 
   const defaultValues = {
+    matricule: "",
     name: "",
     firstname: "",
     typeArme: "",
@@ -39,10 +38,14 @@ const EncodeArmeForm = ({ onCloseModal, ...props }) => {
     <>
       <ModalFormContainer {...props} onSubmit={handleSubmit(submitFormArme)}>
         <HeaderModal>
-          <h2 className="form-title">Encoder une arme </h2>
+          <h2 className="form-title">Encoder une arme de fonction </h2>
           <CloseModalBtn className="close-section" onClick={onCloseModal} />
         </HeaderModal>
         <FormContainer className="form-theme-color">
+          <FormControl>
+            <label htmlFor="matricule">Matricule</label>
+            <input type="text" {...register("matricule", { required: true })} />
+          </FormControl>
           <FormControl>
             <label htmlFor="firstname">Prénom</label>
             <input type="text" {...register("firstname", { required: true })} />
@@ -83,4 +86,4 @@ const EncodeArmeForm = ({ onCloseModal, ...props }) => {
   );
 };
 
-export default EncodeArmeForm;
+export default EncodageArmeFonctionForm;

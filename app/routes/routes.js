@@ -43,7 +43,7 @@ export const routing = [
           },
           {
             path: "encodage-arme-de-service",
-            element: <Pages.EncodageArmeService />,
+            element: <Pages.EncodageArmeFonction />,
           },
         ],
       },
