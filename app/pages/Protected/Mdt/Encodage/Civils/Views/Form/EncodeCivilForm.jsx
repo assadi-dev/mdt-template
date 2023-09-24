@@ -20,7 +20,7 @@ import SpinnerButton from "../../../../../../../components/Shared/Loading/Spinne
 import useProcess from "../../../../../../../hooks/useProcess";
 import CivilFormPhoto from "./CivilFormphoto";
 
-const AddCivil = ({ onCloseModal, ...props }) => {
+const EncodeCivilForm = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
 
   const defaultValues = {
@@ -221,4 +221,4 @@ const AddCivil = ({ onCloseModal, ...props }) => {
   );
 };
 
-export default AddCivil;
+export default EncodeCivilForm;

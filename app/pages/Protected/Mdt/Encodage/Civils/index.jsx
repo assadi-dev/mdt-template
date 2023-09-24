@@ -9,12 +9,15 @@ import {
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { createPortal } from "react-dom";
 import Modal from "../../../../../components/Modal/Modal";
-import View from "./Views";
 import useModalState from "../../../../../hooks/useModalState";
-import { useCallback } from "react";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalContent";
+import listOfView, { ENCODE_CIVIL } from "./Views/listOfView";
 
 const EncodageCivils = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
+  const handleClickEncodeCivil = () => {
+    toggleModal({ view: ENCODE_CIVIL, data: null });
+  };
 
   return (
     <>
@@ -23,7 +26,7 @@ const EncodageCivils = () => {
           <CivilSearchInput className="input-theme-color" />
           <EncodeCivilBtn
             className="bg-btn-alt-theme-color"
-            onClick={toggleModal}
+            onClick={handleClickEncodeCivil}
           >
             <AiOutlineUserAdd /> Encoder un civil
           </EncodeCivilBtn>
@@ -33,7 +36,11 @@ const EncodageCivils = () => {
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen}>
-          <View view={"add-civil"} onCloseModal={closeModal} />
+          <RenderModalFormContent
+            view={modalState.view}
+            enumOfView={listOfView}
+            onCloseModal={closeModal}
+          />
         </Modal>,
         document.body
       )}

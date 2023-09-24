@@ -8,7 +8,6 @@ import {
 } from "./Armes.styled";
 import { GiPistolGun } from "react-icons/gi";
 import Modal from "../../../../../components/Modal/Modal";
-import View from "./View";
 import useModalState from "../../../../../hooks/useModalState";
 import listOfView, { ENCODE_ARMES } from "./View/listsOfView";
 import { createPortal } from "react-dom";
