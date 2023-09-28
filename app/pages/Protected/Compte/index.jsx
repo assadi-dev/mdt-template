@@ -12,13 +12,16 @@ import TabsHeader from "./Tabs/TabContent/TabsHeader";
 import { Outlet } from "react-router-dom";
 import { TabsContentContainer } from "./Compte.styled";
 
+import PhotoAgent from "./Tabs/TabContent/PhotoAgent";
+
 const Compte = () => {
   return (
     <PageContainer>
       <PageUserDetail>
         <AsideBarUser className="aside-agent-bg">
           <AsideBarUserDetail>
-            <div className="photo"></div>
+            <PhotoAgent />
+
             <UserDetail />
           </AsideBarUserDetail>
         </AsideBarUser>

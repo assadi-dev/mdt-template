@@ -1,3 +1,5 @@
+import { user_female, user_male } from "../../config/constantes";
+
 /**
  * Verifie si l'utilisateur posedde le role Admin
  * @param {array} roles
@@ -26,4 +28,12 @@ export const userGrade = () => {
 export const userIdGrade = () => {
   if (!usercredential) return;
   return usercredential.idGrade;
+};
+
+/**
+ * Affiche la photo en fonction du genre
+ * @param {String} gender  male | female
+ */
+export const noPhoto = (gender) => {
+  return gender == "male" ? user_male : user_female;
 };

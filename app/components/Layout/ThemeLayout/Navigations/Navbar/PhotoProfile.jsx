@@ -1,12 +1,12 @@
 import React from "react";
 import { Userphoto } from "./Navbar.styled";
 import { user_female, user_male } from "../../../../../config/constantes";
+import { noPhoto } from "../../../../../services/utils/user";
 
 const PhotoProfile = ({ photo, gender }) => {
-  const noPhoto = gender == "male" ? user_male : user_female;
   const style = photo
     ? { backgroundImage: `url(${photo})` }
-    : { backgroundImage: `url(${noPhoto})` };
+    : { backgroundImage: `url(${noPhoto(gender)})` };
 
   return <Userphoto style={style} />;
 };

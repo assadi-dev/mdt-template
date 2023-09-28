@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Agent;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Grade;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Agent>
@@ -39,28 +40,61 @@ class AgentRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Agent[] Returns an array of Agent objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Agent[] Returns an array of Agent objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Agent
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Agent
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+
+    public function finduAgentById($id)
+    {
+        $qb = $this->createQueryBuilder("a");
+        $qb->select(
+            "
+        a.id as idAgent, 
+        a.firstname,
+        a.lastname,
+        a.gender,
+        a.matricule,
+        a.phone,
+        a.faction,
+        a.division,
+        g.id as idGrade,
+        g.name as grade,
+        a.iban,
+        a.createdAt,
+        a.updatedAt"
+        )
+        ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->where("a.id =:id")
+        ->setParameter("id", $id)
+        ;
+        $result = $qb->getQuery()->getSingleResult();
+        return $result;
+
+    }
+
+
+
+
 }

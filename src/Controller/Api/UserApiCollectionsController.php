@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Repository\AgentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +15,13 @@ class UserApiCollectionsController extends AbstractController
     private $request;
     private $entityManager;
     private $userRepository;
+    private $agentRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository, AgentRepository $agentRepository)
     {
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
+        $this->agentRepository  = $agentRepository;
     }
 
     /**
@@ -49,6 +52,27 @@ class UserApiCollectionsController extends AbstractController
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"], true);
             return $response;
+        }
+    }
+
+
+    /**
+     * @Route("/api/agents/compte/{id}", name="app_get_agnet_profile",methods="GET" )
+     */
+    public function getuserAcompteData($id)
+    {
+        try {
+            $agent = $this->agentRepository->finduAgentById($id);
+
+
+
+            return $this->json($agent, Response::HTTP_OK);
+
+
+        } catch (\Throwable $th) {
+
+            $message = ["message" => $th->getMessage()];
+            return $this->json($message, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

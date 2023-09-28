@@ -39,7 +39,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
   const defaultValues = {
     idDiscord: userData.idDiscord,
     firstname: userData.firstname,
-    name: userData.name,
+    lastname: userData.lastname,
     matricule: userData.matricule,
     phone: userData.phone,
     faction: userData.faction,
@@ -98,7 +98,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
 
       let dataAgent = {
         firstname: values.firstname.trim(),
-        name: values.name.trim(),
+        lastname: values.lastname.trim(),
         matricule: values.matricule.trim(),
         grade: `/api/grades/${values.gradeId}`,
       };
@@ -114,7 +114,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
         id: idUser,
         idDiscord: values.idDiscord.trim(),
         firstname: values.firstname.trim(),
-        name: values.name.trim(),
+        lastname: values.lastname.trim(),
         grade: values.grade,
         gradeId: values.gradeId,
         matricule: values.matricule.trim(),
@@ -180,12 +180,12 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
 
                 <input
                   type="text"
-                  {...register("name", { required: true })}
+                  {...register("lastname", { required: true })}
                   placeholder="Son Nom"
                 />
                 <ErrorSection>
                   <AnimatePresence>
-                    {errors.name && (
+                    {errors.lastname && (
                       <motion.small className="text-error">
                         Veuillez entrer le nom
                       </motion.small>

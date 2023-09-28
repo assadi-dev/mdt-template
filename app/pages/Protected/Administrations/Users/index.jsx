@@ -87,7 +87,7 @@ const Users = () => {
       Header: "Agent",
       accessor: "agent",
       Cell: ({ row }) => {
-        return cleanNameAgent(row.original.firstname, row.original.name);
+        return cleanNameAgent(row.original.firstname, row.original.lastname);
       },
     },
     { Header: "grade", accessor: "grade" },
