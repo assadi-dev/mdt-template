@@ -64,6 +64,13 @@ const ListPageItems = ({ idGrade }) => {
     } catch (error) {}
   };
 
+  /**
+   * Fix difference des path avec la meme taille
+   */
+  const diff = pageListes
+    ? JSON.stringify(Object.values([...pageListes.map((page) => page.path)]))
+    : [];
+
   useEffect(() => {
     if (!idGrade) return;
     const controller = new AbortController();
@@ -75,7 +82,7 @@ const ListPageItems = ({ idGrade }) => {
     return () => {
       controller.abort();
     };
-  }, [idGrade, pageSelected, pageListes.length]);
+  }, [idGrade, pageSelected, diff]);
 
   const handleClickPageName = (page) => {
     setPageSelected((current) => (current = page));
