@@ -113,19 +113,20 @@ class UserRepository extends ServiceEntityRepository
         u.roles,u.isValidate,
         a.id as idAgent, 
         a.firstname,
-        a.lastname
+        a.lastname,
         a.matricule,
         a.phone,
         a.faction,
         a.createdAt,
         g.id as gradeId,
-        g.name as grade")
+        g.name as grade
+        ")
         ->leftJoin(Agent::class, "a", "WITH", "u.id=a.userAccount")
         ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
         ->orWhere($qb->expr()->like("u.username", ":search"))
         ->orWhere($qb->expr()->like("u.idDiscord", ":search"))
         ->orWhere($qb->expr()->like("a.firstname", ":search"))
-        ->orWhere($qb->expr()->like("a.name", ":search"))
+        ->orWhere($qb->expr()->like("a.lastname", ":search"))
         ->orWhere($qb->expr()->like(" a.matricule", ":search"))
         ->orWhere($qb->expr()->like("a.faction", ":search"))
         ->orWhere($qb->expr()->like("a.phone", ":search"))
