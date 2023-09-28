@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormBottom,
   PhoneContainer,
@@ -12,9 +12,24 @@ import {
 import ButtonWithLoader from "../../../../../components/Button/ButtonWithLoader";
 import useProcess from "../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { hydrateUser } from "../../../../../features/Authenticate/Athenticate.slice";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
+import { updateUser } from "../../helper";
 
 const InfoPersonel = () => {
   const { process, toggleProcess } = useProcess();
+
+  const {
+    idAgent,
+    iban,
+    division,
+    phone,
+    lastname,
+    firstname,
+    grade,
+    matricule,
+  } = useSelector((state) => state.AuthenticateReducer);
 
   const defaultValues = {
     lastname: "",
@@ -27,10 +42,62 @@ const InfoPersonel = () => {
 
   const required = true;
 
-  const { handleSubmit, register } = useForm({ defaultValues });
+  const { handleSubmit, register, reset } = useForm({ defaultValues });
+  const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  useEffect(() => {
+    reset({
+      ...defaultValues,
+      idAgent,
+      iban,
+      division,
+      phone,
+      lastname,
+      firstname,
+      grade,
+      matricule,
+    });
+  }, [idAgent]);
+
+  const onSubmit = async (values) => {
+    toggleProcess();
+    try {
+      const {
+        idAgent,
+        iban,
+        division,
+        phone,
+        lastname,
+        firstname,
+        grade,
+        matricule,
+      } = values;
+
+      const res = await updateUser(idAgent, {
+        iban,
+        division,
+        phone,
+        lastname,
+        firstname,
+
+        matricule,
+      });
+
+      dispatch(
+        hydrateUser({
+          iban,
+          division,
+          phone,
+          lastname,
+          firstname,
+          matricule,
+        })
+      );
+      toastSuccess("Profile mise à jour");
+    } catch (error) {
+      toastError();
+    }
+    toggleProcess();
   };
 
   return (

@@ -1,4 +1,5 @@
 import { user_female, user_male } from "../../config/constantes";
+import { firsLetterCapitalise } from "./textUtils";
 
 /**
  * Verifie si l'utilisateur posedde le role Admin
@@ -36,4 +37,14 @@ export const userIdGrade = () => {
  */
 export const noPhoto = (gender) => {
   return gender == "male" ? user_male : user_female;
+};
+
+export const cleanNameAgent = (firstname, lastname) => {
+  firstname = firstname ? firstname : "";
+  lastname = lastname ? lastname : "";
+
+  let fullname = `${firsLetterCapitalise(firstname)} ${firsLetterCapitalise(
+    lastname
+  )}`;
+  return fullname;
 };

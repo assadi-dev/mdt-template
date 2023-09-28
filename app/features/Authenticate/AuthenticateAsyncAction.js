@@ -19,7 +19,8 @@ export const getOwnerdAsync = createAsyncThunk(
       let telephone = res.data.agent.telephone;
       let idAgent = res.data.agent.id;
       let createdAt = res.data.createdAt;
-      let nameAgent = res.data.agent.name;
+      let lastname = res.data.agent.lastname;
+
       return {
         id,
         role,
@@ -29,7 +30,7 @@ export const getOwnerdAsync = createAsyncThunk(
         grade,
         telephone,
         idAgent,
-        nameAgent,
+        lastname,
         createdAt,
       };
     } catch (error) {

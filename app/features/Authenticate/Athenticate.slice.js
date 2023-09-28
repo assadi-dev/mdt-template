@@ -8,13 +8,15 @@ const initialState = {
   roles: ["ROLE_USER"],
   idAgent: "",
   firstname: "",
-  name: "",
+  lastname: "",
   matricule: "",
   phone: "",
   grade: "",
   division: "",
   isValidate: "",
   isLoggedIn: false,
+  iban: "",
+  division: "",
   error: "",
   gender: "",
   status: "idle",
@@ -31,9 +33,14 @@ export const AuthenticateSlice = createSlice({
       //console.log(state);
       return state;
     },
+    updateUser: (state, action) => {
+      const { payload } = action;
+      state = { ...state, ...payload };
+      return state;
+    },
   },
 });
 
-export const { hydrateUser } = AuthenticateSlice.actions;
+export const { hydrateUser, updateUser } = AuthenticateSlice.actions;
 
 export default AuthenticateSlice.reducer;

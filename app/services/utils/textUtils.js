@@ -36,3 +36,8 @@ export const firsLetterCapitalise = (string) => {
 export const textForNullValue = (value, text) => {
   if (!value || value == null || value == undefined) return text;
 };
+
+export const isNotAtribute = (value) => {
+  if (value === "" || value === null || value === undefined) return "N/A";
+  return value;
+};

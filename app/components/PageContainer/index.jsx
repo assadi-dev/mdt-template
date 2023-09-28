@@ -43,7 +43,7 @@ export const PageUserDetail = styled.div`
 `;
 
 export const AsideBarUser = styled.div`
-  width: 220px;
+  width: 240px;
   padding: 2.3rem 2rem;
   border-radius: 8px;
   min-height: 75vh;
@@ -56,6 +56,7 @@ export const AsideBarUserDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   .photo {
     width: 100%;
     height: auto;
@@ -71,6 +72,7 @@ export const AsideBarUserDetail = styled.div`
     font-weight: bolder;
     font-size: 1.3rem;
     margin: 2rem 0;
+    text-align: center;
     @media screen and (min-width: 992px) {
       font-size: 1.8rem;
     }
