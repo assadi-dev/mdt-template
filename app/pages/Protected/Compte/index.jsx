@@ -9,6 +9,8 @@ import {
 } from "../../../components/PageContainer";
 import UserDetail from "./UserDetail";
 import TabsHeader from "./Tabs/TabContent/TabsHeader";
+import { Outlet } from "react-router-dom";
+import { TabsContentContainer } from "./Compte.styled";
 
 const Compte = () => {
   return (
@@ -23,6 +25,9 @@ const Compte = () => {
         <div>
           <RowAction />
           <TabsHeader />
+          <TabsContentContainer>
+            <Outlet />
+          </TabsContentContainer>
         </div>
       </PageUserDetail>
     </PageContainer>

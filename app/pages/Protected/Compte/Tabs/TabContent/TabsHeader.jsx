@@ -1,5 +1,6 @@
 import React from "react";
 import { HeaderTabCivilSelect } from "../../Compte.styled";
+import { Link, NavLink } from "react-router-dom";
 
 const TabsHeader = ({ onSelect, ...props }) => {
   const handleSelect = (value) => {
@@ -10,30 +11,47 @@ const TabsHeader = ({ onSelect, ...props }) => {
 
   return (
     <HeaderTabCivilSelect className="header-tab-select-container">
-      <button
-        className="header-tab-btn bg-selected-theme-color"
-        onClick={() => handleSelect("info-personnel")}
+      <NavLink
+        to="info-personel"
+        className={(e) =>
+          e.isActive
+            ? "header-tab-btn bg-selected-theme-color"
+            : "header-tab-btn"
+        }
       >
         Info Personnel{" "}
-      </button>
-      <button
-        className="header-tab-btn"
-        onClick={() => handleSelect("permis-ppa")}
+      </NavLink>
+      <NavLink
+        to="permis-ppa"
+        className={(e) =>
+          e.isActive
+            ? "header-tab-btn bg-selected-theme-color"
+            : "header-tab-btn"
+        }
       >
         Permis / PPA{" "}
-      </button>
-      <button
-        className="header-tab-btn"
+      </NavLink>
+      <NavLink
+        to="armes-vehicule-attribue"
+        className={(e) =>
+          e.isActive
+            ? "header-tab-btn bg-selected-theme-color"
+            : "header-tab-btn"
+        }
         onClick={() => handleSelect("armes-vehicule-attribue")}
       >
         Arme et Véhicule attribué{" "}
-      </button>
-      <button
-        className="header-tab-btn"
-        onClick={() => handleSelect("sanction")}
+      </NavLink>
+      <NavLink
+        to="sanction"
+        className={(e) =>
+          e.isActive
+            ? "header-tab-btn bg-selected-theme-color"
+            : "header-tab-btn"
+        }
       >
         Sanction
-      </button>
+      </NavLink>
     </HeaderTabCivilSelect>
   );
 };

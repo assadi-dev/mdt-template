@@ -48,15 +48,21 @@ import GestionGrades from "../pages/Protected/GestionRessources/GestionGrades";
 /** END - GESTION RESSOURCE **/
 
 /** END OF WATCH */
-
 import EndOfWatch from "../pages/Protected/EndOfWatch";
-
 /** END **/
 
 /** OTHER***/
 import Grades from "../pages/Protected/Grades";
 import GradeCategories from "../pages/Protected/Grades/GrdesCategories";
 /**END - OTHER***/
+
+/** COMPTE */
+import InfoPersonel from "../pages/Protected/Compte/Tabs/TabContent/InfoPersonel";
+import PermisPPA from "../pages/Protected/Compte/Tabs/TabContent/PermisPPA";
+import ArmesVehiculeAttribue from "../pages/Protected/Compte/Tabs/TabContent/ArmesVehiculeAttribue";
+import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent";
+
+/** END **/
 
 export default {
   AuthLayout,
@@ -95,4 +101,8 @@ export default {
   AttributionArmes,
   AttributionVehicules,
   EndOfWatch,
+  InfoPersonel,
+  PermisPPA,
+  SanctionAgent,
+  ArmesVehiculeAttribue,
 };

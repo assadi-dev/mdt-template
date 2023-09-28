@@ -11,7 +11,7 @@ const DropDownUserList = () => {
     location.replace("/logout");
   };
   const goUserAccount = () => {
-    navigate("/mon-compte");
+    navigate("/mon-compte/info-personel");
   };
 
   return (

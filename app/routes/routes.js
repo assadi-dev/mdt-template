@@ -16,7 +16,28 @@ export const routing = [
         index: true,
         element: <Pages.Home />,
       },
-      { path: "mon-compte", element: <Pages.Compte /> },
+      {
+        path: "mon-compte",
+        element: <Pages.Compte />,
+        children: [
+          {
+            path: "info-personel",
+            element: <Pages.InfoPersonel />,
+          },
+          {
+            path: "permis-ppa",
+            element: <Pages.ArmesVehiculeAttribue />,
+          },
+          {
+            path: "armes-vehicule-attribue",
+            element: <Pages.PermisPPA />,
+          },
+          {
+            path: "sanction",
+            element: <Pages.SanctionAgent />,
+          },
+        ],
+      },
       {
         path: "services",
         element: <Outlet />,
