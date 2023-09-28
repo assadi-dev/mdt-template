@@ -168,7 +168,7 @@ html:has(.theme-sasp)
         }
           
 
-        .modal-theme-color{
+        .modal-theme-color,.form-bg-theme-color{
             background-color: rgba($color:  variables.$lspd-secondary-color, $alpha: 1);
             border:0.5px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.31);
             box-shadow: 0 0 8px rgba($color:  variables.$lspd-primary-color, $alpha: 0.35);

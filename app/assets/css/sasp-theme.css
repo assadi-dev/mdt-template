@@ -130,7 +130,7 @@ html:has(.theme-sasp) .paginate-btn {
 html:has(.theme-sasp) #pageIndex {
   background-color: #131B26;
 }
-html:has(.theme-sasp) .modal-theme-color {
+html:has(.theme-sasp) .modal-theme-color, html:has(.theme-sasp) .form-bg-theme-color {
   background-color: #131b26;
   border: 0.5px solid rgba(43, 125, 233, 0.31);
   box-shadow: 0 0 8px rgba(43, 125, 233, 0.35);
