@@ -127,7 +127,7 @@ const ListPageItems = ({ idGrade }) => {
           </SubmitButton>
         </RowStartEnd>
 
-        <HeaderPageSelect className="header-page-select-container">
+        <HeaderPageSelect className="header-tab-select-container">
           {pagesNameList
             ? pagesNameList.map((page) => (
                 <span

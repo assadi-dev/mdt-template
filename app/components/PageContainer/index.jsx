@@ -38,7 +38,7 @@ export const PageUserDetail = styled.div`
   width: 100%;
   @media screen and (min-width: 992px) {
     display: grid;
-    grid-template-columns: 450px 1fr;
+    grid-template-columns: 350px 1fr;
   }
 `;
 
@@ -47,6 +47,9 @@ export const AsideBarUser = styled.div`
   padding: 2.3rem 2rem;
   border-radius: 8px;
   min-height: 75vh;
+  @media screen and (min-width: 992px) {
+    padding: 2.3rem 3.2rem;
+  }
 `;
 
 export const AsideBarUserDetail = styled.div`
