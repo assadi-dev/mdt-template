@@ -79,7 +79,7 @@ class UserRepository extends ServiceEntityRepository
         u.roles,u.isValidate,
         a.id as idAgent, 
         a.firstname,
-        a.name,
+        a.lastname,
         a.gender,
         a.matricule,
         a.phone,
@@ -112,7 +112,7 @@ class UserRepository extends ServiceEntityRepository
         u.roles,u.isValidate,
         a.id as idAgent, 
         a.firstname,
-        a.name,
+        a.lastname
         a.matricule,
         a.phone,
         a.faction,

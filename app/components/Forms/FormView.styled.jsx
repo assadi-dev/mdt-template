@@ -70,11 +70,17 @@ export const FormContainer = styled.form`
   padding: 1.2rem;
   .form-control {
     margin-bottom: 1.3rem;
+    label {
+      font-size: 1.3rem;
+    }
   }
 `;
 
 export const FormControl = styled.div`
   margin-bottom: 1.3rem;
+  label {
+    font-size: 1.3rem;
+  }
 `;
 
 export const ModalFooter = styled.div`

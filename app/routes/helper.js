@@ -21,7 +21,7 @@ export const userRedirect = () => {
   }
 
   if (usercredential.hasOwnProperty("idDiscord")) {
-    let agentIdentity = `${usercredential.firstname} ${usercredential.name}`;
+    let agentIdentity = `${usercredential.firstname} ${usercredential.lastname}`;
     let faction = `${usercredential.faction}`;
     localStorage.setItem(
       USER_DATA_STORAGE,
