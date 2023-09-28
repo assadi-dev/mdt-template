@@ -74,6 +74,7 @@
 }
 
 .sasp::before {
+  background: url("../img/sasp-bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
