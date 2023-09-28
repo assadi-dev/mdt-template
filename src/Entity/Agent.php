@@ -6,10 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AgentRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
  *  @ApiResource()
+ * @UniqueEntity(fields="matricule", message="Ce numero matricule est déjà pris")
+ *
  */
 class Agent
 {
@@ -31,7 +34,7 @@ class Agent
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private $lastname;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -39,7 +42,7 @@ class Agent
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true,unique=true)
      */
     private $matricule;
 
@@ -59,7 +62,7 @@ class Agent
     private $faction;
 
     /**
-     * @ORM\Column(type="string", length=55, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $division;
 
