@@ -124,7 +124,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
       let updateUserCredential = {
         idDiscord: values.idDiscord.trim(),
         firstname: values.firstname.trim(),
-        name: values.name.trim(),
+        lastname: values.lastname.trim(),
         grade: values.grade,
         idGrade: values.gradeId,
         matricule: values.matricule.trim(),
@@ -135,6 +135,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
       onCloseModal();
       toastSuccess();
     } catch (error) {
+      console.log(error.message);
       toastError();
     }
 
