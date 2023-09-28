@@ -19,7 +19,7 @@ import DropDownContent from "./DropDownContent";
 
 const UserDropDown = () => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
-  const { photo, gender, name, firstname, grade, matricule, faction } =
+  const { photo, gender, lastname, firstname, grade, matricule, faction } =
     authenticateUser;
 
   const fullGrade = `${matricule ? matricule : "N/A"}-${grade ? grade : "N/A"}`;
@@ -56,7 +56,7 @@ const UserDropDown = () => {
         <div>
           <UsernameTextRow>
             <UsernameStyle className="agent-name">
-              {firstname} {name}
+              {firstname} {lastname}
             </UsernameStyle>
 
             <motion.span

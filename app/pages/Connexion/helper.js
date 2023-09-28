@@ -8,7 +8,7 @@ export const retrieveUseridentity = () => {
 
   const storage = JSON.parse(localStorage.getItem(USER_DATA_STORAGE));
   const agent = storage.agentIdentity.split(" ");
-  return { firstname: agent[0], name: agent[1] };
+  return { firstname: agent[0], lastname: agent[1] };
 };
 
 export const retrieveUserFaction = () => {
@@ -25,6 +25,6 @@ export const retrieveSubmitUseridentity = (userIdentity) => {
   const agent = userIdentity.split(" ");
   return {
     firstname: firsLetterCapitalise(agent[0]).trim(),
-    name: firsLetterCapitalise(agent[1]).trim(),
+    lastname: firsLetterCapitalise(agent[1]).trim(),
   };
 };

@@ -42,7 +42,7 @@ import { api_register } from "./helper";
 const RegisterCardBody = () => {
   const { faction } = useParams();
 
-  const { firstname, name } = retrieveUseridentity();
+  const { firstname, lastname } = retrieveUseridentity();
   const [isProcess, setIsProcess] = useState(false);
 
   const submitButtonRef = useRef(null);
@@ -52,13 +52,13 @@ const RegisterCardBody = () => {
     const res = await api_register(dataToSend);
 
     if (res) {
-      const { firstname, name, idAgent, gender, faction, phone } =
+      const { firstname, lastname, idAgent, gender, faction, phone } =
         await res.json();
 
       usercredential = {
         ...usercredential,
         firstname,
-        name,
+        lastname,
         idAgent,
         gender,
         faction,
@@ -76,7 +76,7 @@ const RegisterCardBody = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      agentIdentity: `${firstname} ${name}`,
+      agentIdentity: `${firstname} ${lastname}`,
       faction: faction.toLocaleUpperCase(),
     },
   });

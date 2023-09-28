@@ -42,7 +42,7 @@ class AuthenticationController extends AbstractController
 
             $idDiscord = $body["idDiscord"];
             $firstname = $body["firstname"];
-            $name = $body["name"];
+            $lastname = $body["lastname"];
             $faction = $body["faction"];
             $phone = $body["phone"];
             $gender = $body["gender"];
@@ -51,7 +51,7 @@ class AuthenticationController extends AbstractController
             $userAccount =  $this->userRepository->findOneBy(["idDiscord" => $idDiscord  ]);
             $agent = new Agent();
             $agent->setFirstname($firstname);
-            $agent->setName($name);
+            $agent->setLastname($lastname);
             $agent->setFaction($faction);
             $agent->setPhone($phone);
             $agent->setGender($gender);
@@ -100,10 +100,7 @@ class AuthenticationController extends AbstractController
     /**
      *@Route("/logout",name="app_logout",methods="GET")
      */
-    public function logout()
-    {
-
-    }
+    public function logout() {}
 
 
     /**
