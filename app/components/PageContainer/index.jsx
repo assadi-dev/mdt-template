@@ -33,3 +33,64 @@ export const Button = styled.button`
   border-radius: 5px;
   align-self: center;
 `;
+
+export const PageUserDetail = styled.div`
+  width: 100%;
+  @media screen and (min-width: 992px) {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+  }
+`;
+
+export const AsideBarUser = styled.div`
+  width: 220px;
+  padding: 2.3rem 2rem;
+  border-radius: 8px;
+  min-height: 75vh;
+`;
+
+export const AsideBarUserDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .photo {
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    aspect-ratio: 1;
+    border-radius: 8px;
+  }
+
+  .agent-name,
+  .civil-name {
+    font-weight: bolder;
+    font-size: 1.3rem;
+    margin: 2rem 0;
+    @media screen and (min-width: 992px) {
+      font-size: 1.8rem;
+    }
+  }
+
+  .info-detailed {
+    margin-top: 1.3rem;
+    font-size: 1.3rem;
+    li:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+
+    li {
+    }
+
+    p {
+      max-width: 100%;
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  .label {
+    font-weight: bold;
+    margin-right: 0.4rem;
+  }
+`;

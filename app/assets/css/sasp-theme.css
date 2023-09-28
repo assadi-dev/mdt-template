@@ -334,4 +334,10 @@ html:has(.theme-sasp) .theme-text-editor-alt:has(.ProseMirror-focused) {
 html:has(.theme-sasp) .theme-card-trombinoscop {
   background-color: #131b26;
   border: 0.5px solid rgba(43, 125, 233, 0.31);
+}
+html:has(.theme-sasp) .aside-agent-bg, html:has(.theme-sasp) .aside-civil-bg {
+  background-color: #131B26;
+}
+html:has(.theme-sasp) .aside-agent-bg .photo, html:has(.theme-sasp) .aside-civil-bg .photo {
+  border: 1px solid #2b7de9;
 }/*# sourceMappingURL=sasp-theme.css.map */

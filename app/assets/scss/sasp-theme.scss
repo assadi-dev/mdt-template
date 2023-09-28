@@ -25,6 +25,8 @@
 
     }
 
+
+
     .navbar{
         background-color: variables.$sasp-bg-color;
 
@@ -452,6 +454,14 @@ html:has(.theme-sasp)
     .theme-card-trombinoscop{
         background-color: rgba($color:  variables.$lspd-secondary-color, $alpha: 1);
         border:0.5px solid rgba($color:  variables.$lspd-primary-color, $alpha: 0.31);
+    }
+
+    .aside-agent-bg,.aside-civil-bg{
+        background-color: variables.$sasp-secondary-color;
+
+        .photo{
+            border: 1px solid rgba(variables.$lspd-primary-color, $alpha: 1);
+        }
     }
 
 
