@@ -6,6 +6,7 @@ import {
 } from "../../../../../components/PageContainer";
 import SearchInputUser from "../../../../../components/Forms/SearchBarUser";
 import { ModalFormContainer } from "../../../../../components/Forms/FormView.styled";
+import { Link } from "react-router-dom";
 
 export const HeaderPage = styled(Row)`
   min-height: 45px;
@@ -34,6 +35,11 @@ export const GridCivilCard = styled.div`
   justify-content: center;
   min-height: 150px;
   width: 100%;
+  padding-top: 2.3rem;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(auto-fit, 320px);
+    grid-gap: 1.6rem;
+  }
 `;
 
 /*** Form ****/
@@ -100,4 +106,30 @@ export const CivilFormPhotoContainer = styled.div`
   justify-self: center;
   font-style: italic;
   border-radius: 5px;
+`;
+
+/** CIVIL CARD **/
+
+export const CivilCardContainer = styled(Link)`
+  border-radius: 5px;
+  padding: 1.3rem;
+  display: flex;
+  grid-gap: 1.3rem;
+  width: 100%;
+`;
+
+export const CivilCardPhoto = styled.div`
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border-radius: 5px;
+`;
+
+export const CivilCardInfo = styled.div`
+  p:not(:last-of-type) {
+    margin-bottom: 1.3rem;
+  }
 `;

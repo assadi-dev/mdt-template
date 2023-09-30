@@ -16,6 +16,7 @@ import EncodageArmeFonction from "../pages/Protected/Services/EncodageArmeFoncti
 /***END - Services***/
 /***MDT***/
 import EncodageCivils from "../pages/Protected/Mdt/Encodage/Civils";
+import CivilCase from "../pages/Protected/Mdt/Encodage/Civils/CivilCase";
 import EncodageVehicules from "../pages/Protected/Mdt/Encodage/Vehicules";
 import EncodageArmes from "../pages/Protected/Mdt/Encodage/Armes";
 import PanicButton from "../pages/Protected/Mdt/PanicButton";
@@ -79,6 +80,7 @@ export default {
   AttributionPatrouilleurs,
   EncodageArmeFonction,
   EncodageCivils,
+  CivilCase,
   EncodageVehicules,
   EncodageArmes,
   PanicButton,

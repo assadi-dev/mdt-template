@@ -12,6 +12,7 @@ import Modal from "../../../../../components/Modal/Modal";
 import useModalState from "../../../../../hooks/useModalState";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalContent";
 import listOfView, { ENCODE_CIVIL } from "./Views/listOfView";
+import Cards from "./Cards";
 
 const EncodageCivils = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
@@ -28,11 +29,21 @@ const EncodageCivils = () => {
             className="bg-btn-alt-theme-color"
             onClick={handleClickEncodeCivil}
           >
-            <AiOutlineUserAdd /> Encoder un civil
+            <AiOutlineUserAdd />
+            Encoder un civil
           </EncodeCivilBtn>
         </HeaderPage>
 
-        <GridCivilCard></GridCivilCard>
+        <GridCivilCard>
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+          <Cards id={1} />
+        </GridCivilCard>
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

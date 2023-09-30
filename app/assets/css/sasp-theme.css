@@ -340,4 +340,8 @@ html:has(.theme-sasp) .aside-agent-bg, html:has(.theme-sasp) .aside-civil-bg {
 }
 html:has(.theme-sasp) .aside-agent-bg .photo, html:has(.theme-sasp) .aside-civil-bg .photo {
   border: 1px solid #2b7de9;
+}
+html:has(.theme-sasp) .bg-card-item {
+  background-color: #131B26;
+  box-shadow: 1px 1px 8px 3px rgba(0, 0, 0, 0.15);
 }/*# sourceMappingURL=sasp-theme.css.map */

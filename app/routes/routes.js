@@ -85,6 +85,10 @@ export const routing = [
                 element: <Pages.EncodageCivils />,
               },
               {
+                path: "civil/:idCivil",
+                element: <Pages.CivilCase />,
+              },
+              {
                 path: "vehicules",
                 element: <Pages.EncodageVehicules />,
               },

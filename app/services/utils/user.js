@@ -48,3 +48,13 @@ export const cleanNameAgent = (firstname, lastname) => {
   )}`;
   return fullname;
 };
+
+export const cleanNameUser = (firstname, lastname) => {
+  firstname = firstname ? firstname : "";
+  lastname = lastname ? lastname : "";
+
+  let fullname = `${firsLetterCapitalise(firstname)} ${firsLetterCapitalise(
+    lastname
+  )}`;
+  return fullname;
+};

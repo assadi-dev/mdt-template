@@ -48,7 +48,6 @@ const Compte = () => {
         <AsideBarUser className="aside-agent-bg">
           <AsideBarUserDetail>
             <PhotoAgent photo={photo} gender={gender} />
-
             <UserDetail />
           </AsideBarUserDetail>
         </AsideBarUser>
