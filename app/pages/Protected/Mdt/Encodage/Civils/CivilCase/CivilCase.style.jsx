@@ -92,24 +92,28 @@ export const RowButtonDocument = styled.div`
   grid-gap: 2.6rem;
 `;
 
-export const ButtonDocumentContainer = styled.div`
+export const ButtonDocumentContainer = styled.button`
   padding: 1rem;
-  width: 55px;
+  width: 75px;
   height: 55px;
   display: grid;
   place-items: center;
   border-radius: 5px;
   position: relative;
+  color: rgba(255, 255, 255, 0.5);
+
   svg {
     width: 35px;
     height: 35px;
   }
   &:hover {
+    color: rgba(255, 255, 255, 1);
+
     &::after {
       opacity: 1;
-
       visibility: visible;
       transform: translateY(35px);
+      font-size: 1.5rem;
     }
   }
   &::after {

@@ -3,10 +3,7 @@ import {
   firsLetterCapitalise,
   isNotAtribute,
 } from "../../../../../../services/utils/textUtils";
-import {
-  cleanNameAgent,
-  cleanNameUser,
-} from "../../../../../../services/utils/user";
+import { cleanNameUser } from "../../../../../../services/utils/user";
 import { Button } from "../../../../../../components/PageContainer";
 import { RowAction } from "./CivilCase.style";
 
