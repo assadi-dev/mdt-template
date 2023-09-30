@@ -7,6 +7,8 @@ import {
   cleanNameAgent,
   cleanNameUser,
 } from "../../../../../../services/utils/user";
+import { Button } from "../../../../../../components/PageContainer";
+import { RowAction } from "./CivilCase.style";
 
 const CivilDetail = ({ civilData, ...props }) => {
   const {
@@ -64,6 +66,9 @@ const CivilDetail = ({ civilData, ...props }) => {
           <p>{gender}</p>
         </li>
       </ul>
+      <RowAction>
+        <Button className="bg-btn-theme-color">Mettre à jour</Button>
+      </RowAction>
     </div>
   );
 };

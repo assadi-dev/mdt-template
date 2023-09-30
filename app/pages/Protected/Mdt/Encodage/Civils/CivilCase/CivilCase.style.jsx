@@ -70,6 +70,13 @@ export const AsideBarCivilDetail = styled.div`
   }
 `;
 
+export const RowAction = styled.div`
+  margin: 28px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 /** Main Section **/
 
 export const CivilMainSection = styled.div`
