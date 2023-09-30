@@ -82,6 +82,7 @@ export const RowButtonDocument = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-gap: 2.6rem;
 `;
 
 export const ButtonDocumentContainer = styled.div`
@@ -101,12 +102,14 @@ export const ButtonDocumentContainer = styled.div`
       opacity: 1;
 
       visibility: visible;
-      transform: translateY(50px);
+      transform: translateY(35px);
     }
   }
   &::after {
     content: "${(props) => (props.label ? props.label : " ")}";
     position: absolute;
+    bottom: 0;
+    transform: translateY(10px);
     z-index: -1;
     visibility: hidden;
     transition: all 0.25s;
