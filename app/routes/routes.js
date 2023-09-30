@@ -195,6 +195,7 @@ export const routing = [
         children: [
           { path: "gestion-code-penal", element: <Pages.GestionCodePenal /> },
           { path: "gestion-grade", element: <Pages.GestionGrades /> },
+          { path: "gestion-division", element: <Pages.GestionDivision /> },
         ],
       },
       {

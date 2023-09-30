@@ -56,6 +56,7 @@ import AttributionSanctions from "../pages/Protected/CommandStaffSupervisor/Attr
 
 import GestionCodePenal from "../pages/Protected/GestionRessources/GestionCodePenal";
 import GestionGrades from "../pages/Protected/GestionRessources/GestionGrades";
+import GestionDivision from "../pages/Protected/GestionRessources/GestionDivision";
 
 /** END - GESTION RESSOURCE **/
 
@@ -115,6 +116,7 @@ export default {
   GestionDesComptes,
   GestionCodePenal,
   GestionGrades,
+  GestionDivision,
   AttributionArmes,
   AttributionVehicules,
   AttributionSanctions,
