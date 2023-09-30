@@ -104,6 +104,10 @@ export const sidebarRoutes = [
         path: "/supervision-command-staff/gestion-des-comptes",
       },
       {
+        name: "Attribution des sanctions",
+        path: "/supervision-command-staff/attribution-des-sanctions",
+      },
+      {
         name: "Attribution d'armes",
         path: "/supervision-command-staff/attribution-des-armes",
       },

@@ -176,6 +176,10 @@ export const routing = [
             element: <Pages.GestionDesComptes />,
           },
           {
+            path: "attribution-des-sanctions",
+            element: <Pages.AttributionSanctions />,
+          },
+          {
             path: "attribution-des-armes",
             element: <Pages.AttributionArmes />,
           },

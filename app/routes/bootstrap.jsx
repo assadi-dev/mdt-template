@@ -48,6 +48,7 @@ import Effectifs from "../pages/Protected/CommandStaffSupervisor/Effectifs";
 import GestionDesComptes from "../pages/Protected/CommandStaffSupervisor/GestionDesComptes";
 import AttributionArmes from "../pages/Protected/CommandStaffSupervisor/Attribution/AttributionArmes";
 import AttributionVehicules from "../pages/Protected/CommandStaffSupervisor/Attribution/AttributionVehicules";
+import AttributionSanctions from "../pages/Protected/CommandStaffSupervisor/Attribution/Sanctions";
 
 /** END - SUPERVISION / COMMAND STAFF */
 
@@ -116,6 +117,7 @@ export default {
   GestionGrades,
   AttributionArmes,
   AttributionVehicules,
+  AttributionSanctions,
   EndOfWatch,
   InfoPersonel,
   PermisPPA,
