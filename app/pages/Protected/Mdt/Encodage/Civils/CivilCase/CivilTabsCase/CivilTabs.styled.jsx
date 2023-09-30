@@ -6,7 +6,7 @@ export const TabsBody = styled.div`
 `;
 
 export const CivilTabsHeaderSelect = styled(HeaderTabSelect)`
-  margin-top: 55px;
+  margin-top: 65px;
   .header-tab-btn {
     font-size: 1.3rem;
     font-weight: bolder;
