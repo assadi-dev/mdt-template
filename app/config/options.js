@@ -6,3 +6,22 @@ export const postesListes = [
   "Paleto Bay",
   "Sandy Shores",
 ];
+
+export const civilNavigation = [
+  {
+    label: "Avertissement",
+    link: "avertissement",
+  },
+  {
+    label: "Traffic",
+    link: "traffic",
+  },
+  {
+    label: "Rapport d'arrestation",
+    link: "rapport-d-arrestation",
+  },
+  {
+    label: "Dossier d'arrestation",
+    link: "dossier-d-arrestations",
+  },
+];

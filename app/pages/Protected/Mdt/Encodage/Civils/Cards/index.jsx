@@ -11,7 +11,7 @@ const Cards = ({ civilData, id, ...props }) => {
 
   return (
     <CivilCardContainer
-      to={`/mdt/encodage/civil/${id}`}
+      to={`/mdt/encodage/civil/${id}/avertissement`}
       className="bg-card-item"
       {...props}
     >

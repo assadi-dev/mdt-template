@@ -87,6 +87,25 @@ export const routing = [
               {
                 path: "civil/:idCivil",
                 element: <Pages.CivilCase />,
+
+                children: [
+                  {
+                    path: "avertissement",
+                    element: <Pages.TabAvertissement />,
+                  },
+                  {
+                    path: "traffic",
+                    element: <Pages.TabTraffic />,
+                  },
+                  {
+                    path: "rapport-d-arrestation",
+                    element: <Pages.TabRapportArrestation />,
+                  },
+                  {
+                    path: "dossier-d-arrestations",
+                    element: <Pages.TabDossierArrestation />,
+                  },
+                ],
               },
               {
                 path: "vehicules",

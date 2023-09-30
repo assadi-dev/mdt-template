@@ -180,3 +180,10 @@ export const IconInput = styled.span`
     height: 20px;
   }
 `;
+
+export const SpinnerLoaderContent = styled.div`
+  padding: 1rem;
+`;
+export const LoadingLabelMessage = styled.div`
+  margin-bottom: 0.5rem;
+`;

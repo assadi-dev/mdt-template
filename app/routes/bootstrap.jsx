@@ -28,6 +28,16 @@ import RapportIntervention from "../pages/Protected/Mdt/Rapport/RapportIntervent
 import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
 import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
 /*** END - MDT***/
+
+/** Civil Case **/
+
+import TabAvertissement from "../../app/pages/Protected/Mdt/Encodage/Civils/CivilCase/CivilTabsCase/Case/TabAvertissement";
+import TabTraffic from "../../app/pages/Protected/Mdt/Encodage/Civils/CivilCase/CivilTabsCase/Case/TabTraffic";
+import TabDossierArrestation from "../../app/pages/Protected/Mdt/Encodage/Civils/CivilCase/CivilTabsCase/Case/TabDossierArrestation";
+import TabRapportArrestation from "../../app/pages/Protected/Mdt/Encodage/Civils/CivilCase/CivilTabsCase/Case/TabRapportArrestation";
+
+/**END **/
+
 import AccesPermissions from "../pages/Protected/Administrations/AccesPermissions";
 import Users from "../pages/Protected/Administrations/Users";
 
@@ -81,6 +91,10 @@ export default {
   EncodageArmeFonction,
   EncodageCivils,
   CivilCase,
+  TabAvertissement,
+  TabTraffic,
+  TabRapportArrestation,
+  TabDossierArrestation,
   EncodageVehicules,
   EncodageArmes,
   PanicButton,

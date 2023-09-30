@@ -29,7 +29,7 @@ const TabsHeader = ({ onSelect, ...props }) => {
             : "header-tab-btn"
         }
       >
-        Permis / PPA{" "}
+        Formations{" "}
       </NavLink>
       <NavLink
         to="armes-vehicule-attribue"
