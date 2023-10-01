@@ -5,15 +5,20 @@ const useDelayed = (callback, ms) => {
 
   useEffect(() => {
     if (!callbackRef.current) return "no callback defined";
+    callbackRef.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    if (!ms) return "no time defined";
+
     const timer = setTimeout(() => {
-      callbackRef.current && callbackRef.current();
-      clearTimeout(timer);
+      callbackRef.current();
     }, ms);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [ms, callbackRef.current]);
+  }, [ms]);
 };
 
 export default useDelayed;
