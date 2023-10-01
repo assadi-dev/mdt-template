@@ -155,6 +155,10 @@ export const routing = [
                 path: "rapport-intervention",
                 element: <Pages.RapportIntervention />,
               },
+              {
+                path: "dossier-fusillade",
+                element: <Pages.Fusillade />,
+              },
             ],
           },
         ],

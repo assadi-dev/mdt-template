@@ -83,6 +83,10 @@ export const sidebarRoutes = [
             name: "Rapport Intervention",
             path: "/mdt/rapport/rapport-intervention",
           },
+          {
+            name: "Dossier Fusillade",
+            path: "/mdt/rapport/dossier-fusillade",
+          },
         ],
       },
     ],
