@@ -13,6 +13,16 @@
 }
 
 /**DataTable **/
+
+.bg-show-btn{
+    
+    background-color: variables.$primary-color;
+    &:hover{
+        background-color: darken( variables.$primary-color, 15%);
+        box-shadow: 0 0 8px rgba($color:  variables.$primary-color, $alpha: 0.8);
+    }
+}
+
 .bg-danger-btn{
     background-color: variables.$red;
     &:hover{
