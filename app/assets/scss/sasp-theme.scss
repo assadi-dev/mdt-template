@@ -471,5 +471,10 @@ html:has(.theme-sasp)
         box-shadow: 1px 1px 8px 3px rgba($color:  #000000, $alpha: 0.15);
     }
 
+    .theme-bg-tooltip{
+        background-color: variables.$sasp-secondary-color;
+        opacity: 1;
+    }
+
     
 }
