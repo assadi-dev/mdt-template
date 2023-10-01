@@ -66,7 +66,7 @@ export const TableAction = styled.div`
 `;
 
 export const ActionButton = styled.button`
-  width: 25px;
+  width: 28px;
   height: 25px;
   color: #fff;
   border-radius: 3px;
