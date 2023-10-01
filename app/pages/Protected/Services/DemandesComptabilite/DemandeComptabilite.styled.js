@@ -3,9 +3,29 @@ import {
   HeaderModal,
   ModalFormContainer,
 } from "../../../../components/Forms/FormView.styled";
+import { Link } from "react-router-dom";
+import { ActionButton } from "../../../../components/PageContainer";
 
 export const DemandeCompatibiliteContainer = styled.div`
-  padding: 2.2rem 1.3rem 1.3rem;
+  .table_omptablility {
+    th:not(:first-of-type),
+    td:not(:first-of-type) {
+      text-align: center !important;
+    }
+  }
+
+  .waiting {
+    background-color: var(--orange);
+    color: #111;
+  }
+  .rejected {
+    background-color: var(--red);
+    color: #fff;
+  }
+  .accepted {
+    color: #fff;
+    background-color: var(--green);
+  }
 `;
 
 export const HeadertitlePage = styled.div`
@@ -78,4 +98,21 @@ export const TextContent = styled.div`
   max-height: 245px;
   overflow-y: auto;
   overflow-x: hidden;
+`;
+
+export const AddDemandeBtn = styled(ActionButton)`
+  justify-self: end;
+`;
+
+export const StateIcon = styled.span`
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  svg {
+    width: 18px;
+    height: 18px;
+  }
 `;

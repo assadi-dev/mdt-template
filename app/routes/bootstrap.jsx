@@ -24,6 +24,7 @@ import Plainte from "../pages/Protected/Mdt/Rapport/Plainte";
 import RapportRookie from "../pages/Protected/Mdt/Rapport/RapportRookie";
 import RapportAspirant from "../pages/Protected/Mdt/Rapport/RapportAspirant";
 import RapportIncident from "../pages/Protected/Mdt/Rapport/RapportIncident";
+import Fusillade from "../pages/Protected/Mdt/Rapport/Fusillade";
 import RapportIntervention from "../pages/Protected/Mdt/Rapport/RapportIntervention";
 import ConsultationRapportRookie from "../pages/Protected/Mdt/PoliceAcademy/ConsultationRapportRookie";
 import ConsultationRapportAspirant from "../pages/Protected/Mdt/SheriffAcademy/ConsultationRapportAspirant";
@@ -105,6 +106,7 @@ export default {
   RapportAspirant,
   RapportIntervention,
   RapportIncident,
+  Fusillade,
   ConsultationRapportRookie,
   ConsultationRapportAspirant,
   AccesPermissions,
