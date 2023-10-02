@@ -4,7 +4,7 @@ import {
   PageContainer,
 } from "../../../../../components/PageContainer";
 
-export const RapportInterventionPageContainer = styled(PageContainer)`
+export const FusilladePageContainer = styled(PageContainer)`
   .table {
     th:not(:first-of-type),
     td:not(:first-of-type) {
@@ -13,6 +13,6 @@ export const RapportInterventionPageContainer = styled(PageContainer)`
   }
 `;
 
-export const AddBtnRapporIncident = styled(ActionButton)`
+export const AddDossierFusillade = styled(ActionButton)`
   justify-self: end;
 `;
