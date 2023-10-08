@@ -5,4 +5,38 @@ export const ComptabiliteCsPage = styled(PageContainer)`
   .row-action {
     height: 100px;
   }
+
+  .selected {
+    opacity: 1 !important;
+  }
+  .accepted-btn {
+    color: #fff;
+    background-color: var(--green);
+  }
+  .rejected-btn {
+    color: #fff;
+    background-color: var(--red);
+  }
+`;
+
+export const StateButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  opacity: 0.6;
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.6);
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  transition: all 0.35s;
 `;

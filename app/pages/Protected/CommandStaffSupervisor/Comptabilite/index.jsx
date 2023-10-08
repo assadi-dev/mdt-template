@@ -39,8 +39,8 @@ const Comptabilite = () => {
     },
     {
       Header: "Actions",
-      accessor: "",
-      Cell: ({ row }) => <ActionCell />,
+      accessor: "demandeState",
+      Cell: ({ value }) => <ActionCell demandeState={value} />,
     },
   ];
 
@@ -50,6 +50,7 @@ const Comptabilite = () => {
       agent: "Alyson Finley",
       objetDemande: "Remboursement Kevlar",
       amount: 1500,
+      demandeState: "rejected",
       createdAt: "30/09/2023 à 15:00",
     },
     {
@@ -57,6 +58,7 @@ const Comptabilite = () => {
       agent: "Alyson Finley",
       objetDemande: "Remboursement Voiture GND",
       amount: 3006,
+      demandeState: "accepted",
       createdAt: "30/09/2023 à 15:00",
     },
   ];
