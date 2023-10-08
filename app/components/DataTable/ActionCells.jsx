@@ -7,8 +7,8 @@ const ActionCells = ({
   data,
   canDelete = false,
   canEdit = false,
-  onEdit,
-  onDelete,
+  onEdit = () => {},
+  onDelete = () => {},
 }) => {
   const { id, name, faction } = data;
   const handleClickEdit = () => {
