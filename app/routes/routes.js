@@ -198,7 +198,20 @@ export const routing = [
         element: <Outlet />,
         children: [
           { path: "gestion-code-penal", element: <Pages.GestionCodePenal /> },
-          { path: "gestion-grade", element: <Pages.GestionGrades /> },
+          {
+            path: "gestion-grade",
+            element: <Pages.GestionGrades />,
+            children: [
+              {
+                path: "grades",
+                element: <Pages.Grades />,
+              },
+              {
+                path: "categories",
+                element: <Pages.GradeCategories />,
+              },
+            ],
+          },
           { path: "gestion-division", element: <Pages.GestionDivision /> },
         ],
       },

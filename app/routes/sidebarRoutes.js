@@ -130,7 +130,7 @@ export const sidebarRoutes = [
       },
       {
         name: "Gestion des grades",
-        path: "/gestion-des-ressources/gestion-grade",
+        path: "/gestion-des-ressources/gestion-grade/grades",
       },
       {
         name: "Gestion des divisions",
