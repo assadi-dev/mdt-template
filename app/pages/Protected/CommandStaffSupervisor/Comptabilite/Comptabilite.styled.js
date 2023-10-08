@@ -25,7 +25,7 @@ export const StateButton = styled.button`
   border-radius: 3px;
   display: grid;
   place-items: center;
-  opacity: 0.6;
+  opacity: 0.4;
   &:hover {
     opacity: 1;
   }
