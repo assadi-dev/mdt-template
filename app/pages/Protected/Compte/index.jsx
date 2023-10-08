@@ -26,7 +26,7 @@ const Compte = () => {
 
   const initUserData = async (signal) => {
     const res = await fetchUserData(idAgent, signal);
-    console.log(res.data);
+    // console.log(res.data);
     dispatch(hydrateUser(res.data));
   };
 

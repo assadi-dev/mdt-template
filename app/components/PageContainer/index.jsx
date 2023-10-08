@@ -23,15 +23,17 @@ export const RowAction = styled.div`
 `;
 
 export const ActionButton = styled.button`
-  padding: 1rem 1.3rem;
+  padding: 1rem 1.6rem;
   border-radius: 5px;
   align-self: center;
+  min-width: 100px;
 `;
 
 export const Button = styled.button`
-  padding: 1rem 1.3rem;
+  padding: 1rem 1.6rem;
   border-radius: 5px;
   align-self: center;
+  min-width: 100px;
 `;
 
 export const PageUserDetail = styled.div`

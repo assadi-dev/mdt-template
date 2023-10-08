@@ -83,6 +83,10 @@ export const sidebarRoutes = [
             name: "Rapport Intervention",
             path: "/mdt/rapport/rapport-intervention",
           },
+          {
+            name: "Dossier Fusillade",
+            path: "/mdt/rapport/dossier-fusillade",
+          },
         ],
       },
     ],
@@ -126,7 +130,7 @@ export const sidebarRoutes = [
       },
       {
         name: "Gestion des grades",
-        path: "/gestion-des-ressources/gestion-grade",
+        path: "/gestion-des-ressources/gestion-grade/grades",
       },
       {
         name: "Gestion des divisions",

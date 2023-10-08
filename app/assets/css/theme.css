@@ -22,6 +22,14 @@
 }
 
 /**DataTable **/
+.bg-show-btn {
+  background-color: #2B7DE9;
+}
+.bg-show-btn:hover {
+  background-color: #1359b5;
+  box-shadow: 0 0 8px rgba(43, 125, 233, 0.8);
+}
+
 .bg-danger-btn {
   background-color: #dc3545;
 }
@@ -120,4 +128,14 @@
 }
 .theme-markdownPreview ol {
   list-style: numeric;
+}
+
+/**Table**/
+.table-align-center-not-first th:not(:first-of-type),
+.table-align-center-not-first td:not(:first-of-type) {
+  text-align: center;
+}
+
+.row-action-page {
+  height: 100px;
 }/*# sourceMappingURL=theme.css.map */

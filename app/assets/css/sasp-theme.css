@@ -132,8 +132,8 @@ html:has(.theme-sasp) #pageIndex {
 }
 html:has(.theme-sasp) .modal-theme-color, html:has(.theme-sasp) .form-bg-theme-color {
   background-color: #131b26;
-  border: 0.5px solid rgba(43, 125, 233, 0.31);
-  box-shadow: 0 0 8px rgba(43, 125, 233, 0.35);
+  border: 1px solid #969696;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
 }
 @media screen and (min-width: 992px) {
   html:has(.theme-sasp) .dropdown-select-custom {
@@ -148,7 +148,7 @@ html:has(.theme-sasp) .dropdown-select-custom .Dropdown-control {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  border: 1px solid rgba(43, 125, 233, 0.5);
+  border: 1px solid rgba(150, 150, 150, 0.5);
   cursor: pointer;
 }
 html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option {
@@ -170,13 +170,13 @@ html:has(.theme-sasp) .table-page-access {
 }
 html:has(.theme-sasp) .theme-custom__control {
   background-color: transparent;
-  border: 1px solid rgba(43, 125, 233, 0.5);
+  border: 1px solid rgba(150, 150, 150, 0.5);
   color: #fff;
   cursor: pointer;
 }
 html:has(.theme-sasp) .theme-custom__control.theme-custom__control--is-focused {
-  border: 1px solid #2b7de9;
-  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+  border-color: #b0b0b0;
+  box-shadow: 0 0 15px rgba(150, 150, 150, 0.15);
 }
 html:has(.theme-sasp) .theme-custom__control .theme-custom__indicator-separator {
   display: none;
@@ -237,7 +237,7 @@ html:has(.theme-sasp) .input-theme-color input::placeholder {
   color: rgba(19, 27, 38, 0.8);
 }
 html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input, html:has(.theme-sasp) .form-theme-color textarea {
-  border: 1px solid rgba(43, 125, 233, 0.5);
+  border: 1px solid rgba(150, 150, 150, 0.5);
   padding: 1rem;
   width: 100%;
   transition: all 0.25s;
@@ -255,8 +255,8 @@ html:has(.theme-sasp) .form-theme-color select::-webkit-calendar-picker-indicato
   filter: invert(1);
 }
 html:has(.theme-sasp) .form-theme-color select:focus, html:has(.theme-sasp) .form-theme-color input:focus, html:has(.theme-sasp) .form-theme-color textarea:focus {
-  border-color: #2b7de9;
-  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+  border-color: #b0b0b0;
+  box-shadow: 0 0 15px rgba(150, 150, 150, 0.15);
 }
 html:has(.theme-sasp) .form-theme-color label {
   display: block;
@@ -314,13 +314,13 @@ html:has(.theme-sasp) .form-theme-color-alt option {
   font-size: 1.3rem;
 }
 html:has(.theme-sasp) .theme-text-editor {
-  border: 1px solid rgba(43, 125, 233, 0.5);
+  border: 1px solid rgba(150, 150, 150, 0.5);
   position: relative;
   margin: 25px 0;
 }
 html:has(.theme-sasp) .theme-text-editor:has(.ProseMirror-focused) {
-  border-color: #2b7de9;
-  box-shadow: 0 0 15px rgba(43, 125, 233, 0.15);
+  border-color: #b0b0b0;
+  box-shadow: 0 0 15px rgba(150, 150, 150, 0.15);
 }
 html:has(.theme-sasp) .theme-text-editor-alt {
   border: 1px solid rgba(19, 27, 38, 0.5);
@@ -344,4 +344,7 @@ html:has(.theme-sasp) .aside-agent-bg .photo, html:has(.theme-sasp) .aside-civil
 html:has(.theme-sasp) .bg-card-item {
   background-color: #131B26;
   box-shadow: 1px 1px 8px 3px rgba(0, 0, 0, 0.15);
+}
+html:has(.theme-sasp) .theme-bg-tooltip {
+  background-color: #131B26;
 }/*# sourceMappingURL=sasp-theme.css.map */

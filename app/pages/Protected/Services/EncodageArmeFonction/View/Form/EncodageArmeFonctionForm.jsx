@@ -31,7 +31,7 @@ const EncodageArmeFonctionForm = ({ onCloseModal, ...props }) => {
 
   const submitFormArme = (values) => {
     toggleProcess();
-    console.log(values);
+    // console.log(values);
   };
 
   return (

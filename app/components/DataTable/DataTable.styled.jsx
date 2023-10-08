@@ -52,6 +52,22 @@ export const Table = styled.table`
   .td-center {
     text-align: center;
   }
+
+  th:not(:first-of-type),
+  td:not(:first-of-type) {
+    text-align: center;
+  }
+
+  td {
+    max-width: 100px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:has(.Dropdown-root) {
+      overflow-x: initial;
+    }
+  }
 `;
 
 export const EmptyRowStyle = styled.td`
@@ -66,7 +82,7 @@ export const TableAction = styled.div`
 `;
 
 export const ActionButton = styled.button`
-  width: 25px;
+  width: 28px;
   height: 25px;
   color: #fff;
   border-radius: 3px;
