@@ -48,6 +48,15 @@ const Comptabilite = () => {
     {
       matricule: 209,
       agent: "Alyson Finley",
+      objetDemande: "Remboursement Voiture GND",
+      amount: 3006,
+      demandeState: "pending",
+      createdAt: "30/09/2023 à 15:00",
+    },
+
+    {
+      matricule: 209,
+      agent: "Alyson Finley",
       objetDemande: "Remboursement Kevlar",
       amount: 1500,
       demandeState: "rejected",
