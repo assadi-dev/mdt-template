@@ -52,6 +52,13 @@ export const Table = styled.table`
   .td-center {
     text-align: center;
   }
+
+  td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 export const EmptyRowStyle = styled.td`

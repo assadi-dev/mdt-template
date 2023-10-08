@@ -128,4 +128,14 @@
 }
 .theme-markdownPreview ol {
   list-style: numeric;
+}
+
+/**Table**/
+.table-align-center-not-first th:not(:first-of-type),
+.table-align-center-not-first td:not(:first-of-type) {
+  text-align: center;
+}
+
+.row-action-page {
+  height: 100px;
 }/*# sourceMappingURL=theme.css.map */
