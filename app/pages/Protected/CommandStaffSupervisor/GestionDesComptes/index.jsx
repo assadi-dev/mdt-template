@@ -1,11 +1,11 @@
 import React from "react";
 import { RowAction } from "../../../../components/PageContainer";
 import DataTable from "../../../../components/DataTable";
-import { GestionDesCompteoageContainer } from "./GestiondesCompte.styled";
 import useLoader from "../../../../hooks/useLoader";
 import useDelayed from "../../../../hooks/useDelayed";
 import ActionCells from "../../../../components/DataTable/ActionCells";
 import ActionValidate from "./ActionValidate";
+import { GestionDesCompteoageContainer } from "./GestionDesCompte.styled";
 
 const GestionDesComptes = () => {
   const { loaderState, toggleLoader } = useLoader();
