@@ -61,6 +61,7 @@ const AttributionSanctions = () => {
         </AddSanctionBtn>
       </RowAction>
       <DataTable
+        className="table-align-center-not-first"
         columns={COLUMNS}
         data={collections}
         isLoading={loaderState}
