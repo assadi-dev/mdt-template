@@ -53,6 +53,11 @@ export const Table = styled.table`
     text-align: center;
   }
 
+  th:not(:first-of-type),
+  td:not(:first-of-type) {
+    text-align: center;
+  }
+
   td {
     max-width: 100px;
     overflow: hidden;
