@@ -60,9 +60,13 @@ export const Table = styled.table`
 
   td {
     max-width: 100px;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    &:has(.Dropdown-root) {
+      overflow-x: initial;
+    }
   }
 `;
 
