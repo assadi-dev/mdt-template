@@ -32,7 +32,6 @@ const EncodeArmeForm = ({ onCloseModal, ...props }) => {
 
   const submitFormArme = (values) => {
     toggleProcess();
-    console.log(values);
   };
 
   return (

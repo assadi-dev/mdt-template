@@ -11,7 +11,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import { Row } from "../../../../components/PageContainer";
 
 const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
-  console.log(previewData);
+  //console.log(previewData);
   if (!previewData) return "donnée manquants";
 
   const { agent, objet, date, montant, raison } = previewData;

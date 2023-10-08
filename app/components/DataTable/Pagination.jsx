@@ -19,7 +19,7 @@ const Pagination = ({
 }) => {
   const handleChangePageIndex = (e) => {
     const value = e.target.value;
-    console.log(value);
+    // console.log(value);
     gotoPage(value);
   };
 

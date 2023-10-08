@@ -4,7 +4,6 @@ import { statelistIcon } from "./enum";
 import { Tooltip } from "react-tooltip";
 
 const StatusCell = ({ status }) => {
-  console.log(status);
   if (!status) {
     return (
       <StateIcon className={statelistIcon[0].name}>

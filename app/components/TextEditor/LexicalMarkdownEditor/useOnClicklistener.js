@@ -22,7 +22,6 @@ const useOnClicklistener = () => {
   const [selectedEventTypes, setSelectedEventTypes] = useState([]);
 
   const onClick = (event) => {
-    console.log("event is ", event);
     switch (event) {
       case "bold":
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
@@ -56,7 +55,7 @@ const useOnClicklistener = () => {
 
   const formatBulletList = () => {
     if (blockType !== "ul") {
-      console.log("dispatch command");
+      // console.log("dispatch command");
       editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
     } else {
       editor.dispatchCommand(REMOVE_LIST_COMMAND);

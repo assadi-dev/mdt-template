@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const TabsHeader = ({ onSelect, ...props }) => {
   const handleSelect = (value) => {
-    console.log(value);
     if (!onSelect) return;
     onSelect(section);
   };

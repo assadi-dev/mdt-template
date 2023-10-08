@@ -11,7 +11,7 @@ import AgentCard from "./AgentCard";
 
 const Trombinoscop = () => {
   const handeSearchinput = (value) => {
-    console.log(value);
+    // console.log(value);
   };
 
   return (
