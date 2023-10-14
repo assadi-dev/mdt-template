@@ -12,6 +12,7 @@ import useModalState from "../../../../../hooks/useModalState";
 import listOfView, { ENCODE_ARMES } from "./View/listsOfView";
 import { createPortal } from "react-dom";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalContent";
+import CardArmes from "./cardArmes";
 
 const EncodageArmes = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
@@ -34,7 +35,16 @@ const EncodageArmes = () => {
             Encoder une arme
           </EncodeArmesBtn>
         </HeaderPage>
-        <GridArmesCard></GridArmesCard>
+        <GridArmesCard>
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+        </GridArmesCard>
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>

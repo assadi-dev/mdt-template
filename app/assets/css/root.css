@@ -138,6 +138,10 @@ body {
   align-self: end;
 }
 
+.align-item-center {
+  align-items: center;
+}
+
 /** Flex Positions **/
 .d-flex {
   display: flex;

@@ -176,3 +176,49 @@
 .row-action-page {
     height: 100px;
   }
+
+  .text-ellipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  .panic-btn-activate{
+    background-color: rgba($color:  #820C0C, $alpha: 0.5);
+    border: 1px solid #820C0C;
+    text-shadow: 0px  3px 8px #000000;
+    &:hover{
+        background-color:#820C0C;
+    }
+
+
+
+   } 
+
+   .siren-animation {
+
+      path:first-of-type{
+        animation: alternate fadein 0.35s infinite ;
+        -webkit-animation: alternate fadein 0.35s infinite ;
+    }
+  
+  
+  
+
+   }
+
+
+
+   @keyframes fadein {
+    from {
+           
+        opacity:1 ;
+        
+    }
+   to {
+        opacity:0.5       
+    }
+    
+   }

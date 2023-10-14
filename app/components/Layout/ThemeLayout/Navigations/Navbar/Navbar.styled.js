@@ -15,7 +15,6 @@ export const NavbarWrapper = styled.nav`
 `;
 
 export const UserProfileContainer = styled.div`
-  max-width: 25%;
   justify-self: end;
   display: flex;
   grid-gap: 10px;
@@ -43,6 +42,11 @@ export const UserProfileContainer = styled.div`
     top: 130%;
     width: 100%;
   }
+`;
+
+export const EndWrapper = styled.div`
+  max-width: 25%;
+  align-items: center;
 `;
 
 export const UsernameStyle = styled.p`
@@ -115,4 +119,15 @@ export const UserDropDownListContentWrapper = styled.ul`
       }
     }
   }
+`;
+
+export const PanicButtonContainer = styled.div`
+  justify-self: end;
+  margin-right: 1.3rem;
+`;
+
+export const PanicButton = styled.button`
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  min-width: 80px;
 `;

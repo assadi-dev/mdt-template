@@ -72,6 +72,12 @@ Encore
 
   // uncomment if you use React
   .enableReactPreset()
+
+  .addLoader({
+    test: /\.(ogg|mp3|wav|mpe?g)$/i,
+    use: "file-loader",
+  })
+
   .addPlugin(new Dotenv({ path: "./.env", systemvars: true }));
 
 // uncomment to get integrity="..." attributes on your script & link tags
