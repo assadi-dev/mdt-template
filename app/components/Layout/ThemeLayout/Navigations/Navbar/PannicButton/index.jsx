@@ -12,7 +12,7 @@ const PanicButton = ({
   const [sound] = useState(new Audio(panicSoundEffect));
 
   const playSound = (e) => {
-    sound.volume = 0.25;
+    sound.volume = 0.015;
     sound.play();
   };
   const stopSound = (e) => {
