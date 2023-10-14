@@ -35,4 +35,6 @@ export const GridVehiculesCard = styled.div`
   justify-content: center;
   min-height: 150px;
   width: 100%;
+  grid-gap: 1.3rem;
+  grid-template-columns: repeat(auto-fit, 24rem);
 `;

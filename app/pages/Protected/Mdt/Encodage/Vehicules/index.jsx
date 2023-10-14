@@ -3,6 +3,7 @@ import { PageContainer } from "../../../../../components/PageContainer";
 import { MdOutlineDirectionsCar } from "react-icons/md";
 import {
   EncodeVehiculesBtn,
+  GridVehiculesCard,
   HeaderPage,
   VehiculesSearchInput,
 } from "./Vehicules.styled";
@@ -12,6 +13,7 @@ import useProcess from "../../../../../hooks/useProcess";
 import useModalState from "../../../../../hooks/useModalState";
 import listOfView, { ENCODE_VEHICULE } from "./View/listOfView";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalContent";
+import CardVehicule from "./CardVehicule";
 
 const EncodageVehicules = () => {
   const { process, toggleProcess } = useProcess();
@@ -19,6 +21,13 @@ const EncodageVehicules = () => {
 
   const handleClicEncodeVehicule = () => {
     toggleModal({ view: ENCODE_VEHICULE, data: null });
+  };
+
+  const vehiculeData = {
+    plaque: "123456",
+    type: "Buffalo",
+    lastname: "Nom",
+    firstname: "Prénom",
   };
 
   return (
@@ -34,6 +43,14 @@ const EncodageVehicules = () => {
             Encoder un véhicule
           </EncodeVehiculesBtn>
         </HeaderPage>
+        <GridVehiculesCard>
+          <CardVehicule vehiculeData={vehiculeData} />
+          <CardVehicule vehiculeData={vehiculeData} />
+          <CardVehicule vehiculeData={vehiculeData} />
+          <CardVehicule vehiculeData={vehiculeData} />
+          <CardVehicule vehiculeData={vehiculeData} />
+          <CardVehicule vehiculeData={vehiculeData} />
+        </GridVehiculesCard>
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

@@ -157,4 +157,13 @@ body {
 
 .justiy-content-end {
   justify-content: flex-end;
+}
+
+/** Text-format **/
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-lower {
+  text-transform: lowercase;
 }/*# sourceMappingURL=root.css.map */
