@@ -39,6 +39,7 @@ const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
   };
 
   const TITLE_MODAL = showPreview ? "Aperçu du document" : "Nouvelle demande";
+  const LABEL_BUTTON = showPreview ? "Nouvelle demande" : "Aperçu du document";
 
   return (
     <ModalFormContainer {...props}>
@@ -52,7 +53,7 @@ const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
           className="bg-btn-theme-color"
           onClick={handelShowpreview}
         >
-          Apercue du document
+          {LABEL_BUTTON}
         </Button>
       </PreviewRow>
       <AnimatePresence>
