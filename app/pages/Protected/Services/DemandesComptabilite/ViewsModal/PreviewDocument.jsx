@@ -16,7 +16,7 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
   //console.log(previewData);
   if (!previewData) return "donnée manquants";
 
-  const { agent, objet, date, montant, raison } = previewData;
+  const { agent, subject, date, montant, raison } = previewData;
 
   return (
     <motion.div
@@ -33,7 +33,7 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
         </Row>
         <Row>
           <p className="objet">
-            <strong>Objet: </strong> {objet}
+            <strong>Objet: </strong> {subject}
           </p>
         </Row>
         <Row className="justiy-content-end">
