@@ -10,9 +10,9 @@ import { extensions } from "./configure";
 import MenuBar from "./MenuBar";
 import { EditorContentContainer } from "./MarkdownTextEditor.styled";
 
-const MarkdowTextEditor = ({ getOutput, ...props }) => {
+const MarkdowTextEditor = ({ getOutput, defaultValue = "", ...props }) => {
   const editor = useEditor({
-    content: "",
+    content: defaultValue,
     extensions,
     onUpdate({ editor }) {
       const markdownOutput = editor.storage.markdown.getMarkdown();

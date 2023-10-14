@@ -13,9 +13,17 @@ const Modal = ({ isOpen = false, onClose, children }) => {
     hidden: {
       opacity: 0,
       y: 160,
-      transition: { duration: 0.35, ease: easeInOut },
+      transition: { duration: 0.35, ease: easeInOut, when: "beforeChildren" },
     },
-    show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: easeInOut } },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.35,
+        ease: easeInOut,
+        when: "afterChildren",
+      },
+    },
   };
 
   return (

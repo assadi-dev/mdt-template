@@ -14,7 +14,7 @@ export const DemandeCompatibiliteContainer = styled.div`
     }
   }
 
-  .waiting {
+  .pending {
     background-color: var(--orange);
     color: #111;
   }
@@ -82,7 +82,9 @@ export const PreviewDocumentContainer = styled(ModalFormContainer)`
 `;
 
 export const PreviewDocumentBody = styled.div`
+  min-height: 490px;
   @media screen {
+    min-height: 690px;
     padding: 1.3rem;
   }
 `;
@@ -92,12 +94,17 @@ export const PreviewDocumentHeader = styled.div`
 `;
 
 export const TextContent = styled.div`
-  margin: 1.6rem auto;
+  padding-top: 2rem;
+  margin-top: 3.5rem;
   width: 100%;
-  min-height: 110px;
-  max-height: 245px;
+  min-height: 220px;
+  max-height: 345px;
   overflow-y: auto;
   overflow-x: hidden;
+  @media screen and (min-width: 992px) {
+    min-height: 280px;
+    max-height: 545px;
+  }
 `;
 
 export const AddDemandeBtn = styled(ActionButton)`
@@ -115,4 +122,10 @@ export const StateIcon = styled.span`
     width: 18px;
     height: 18px;
   }
+`;
+
+export const PreviewRow = styled.div`
+  margin: 1.2rem 0;
+  display: flex;
+  justify-content: flex-end;
 `;

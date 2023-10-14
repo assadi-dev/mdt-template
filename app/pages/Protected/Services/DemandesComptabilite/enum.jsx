@@ -3,7 +3,7 @@ import { BsHourglassSplit, BsCheckLg } from "react-icons/bs";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 export const statelistIcon = [
   {
-    name: "waiting",
+    name: "pending",
     label: "En attente",
     icon: <BsHourglassSplit />,
   },

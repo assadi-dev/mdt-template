@@ -4,11 +4,13 @@ import {
   PreviewDocumentContainer,
   PreviewDocumentHeader,
   TextContent,
-} from "./DemandeComptabilite.styled";
-import { HeaderModal } from "../../../../components/Forms/FormView.styled";
-import CloseModalBtn from "../../../../components/Modal/CloseModalBtn";
+} from "../DemandeComptabilite.styled";
+import { HeaderModal } from "../../../../../components/Forms/FormView.styled";
+import CloseModalBtn from "../../../../../components/Modal/CloseModalBtn";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { Row } from "../../../../components/PageContainer";
+import { Row } from "../../../../../components/PageContainer";
+import { motion } from "framer-motion";
+import { formAnimate } from "./Animation";
 
 const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
   //console.log(previewData);
@@ -17,11 +19,12 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
   const { agent, objet, date, montant, raison } = previewData;
 
   return (
-    <PreviewDocumentContainer {...props}>
-      <HeaderModal className="mb-3">
-        <p className="form-title">Demande de comptabilité </p>
-        <CloseModalBtn className="close-section" onClick={onCloseModal} />
-      </HeaderModal>
+    <motion.div
+      variants={formAnimate}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
       <PreviewDocumentBody>
         <Row style={{ marginTop: "18px" }}>
           <p className="agent">
@@ -47,7 +50,7 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
           <MarkdownPreview className="theme-markdownPreview" source={raison} />
         </TextContent>
       </PreviewDocumentBody>
-    </PreviewDocumentContainer>
+    </motion.div>
   );
 };
 
