@@ -6,7 +6,7 @@ import {
 import CloseModalBtn from "../../../../../components/Modal/CloseModalBtn";
 import { useForm } from "react-hook-form";
 import { datetimeFormatISO8601 } from "../../../../../services/utils/dateFormat";
-import { PreviewRow } from "../DemandeComptabilite.styled";
+import { ModalBody, PreviewRow } from "../DemandeComptabilite.styled";
 import { Button } from "../../../../../components/PageContainer";
 import PreviewDocument from "./PreviewDocument";
 import { AddForm } from "./AddForm";
@@ -56,20 +56,22 @@ const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
           {LABEL_BUTTON}
         </Button>
       </PreviewRow>
-      <AnimatePresence>
-        {showPreview ? (
-          <PreviewDocument previewData={{ ...getValues() }} />
-        ) : (
-          <AddForm
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            setError={setError}
-            setValue={setValue}
-            getValues={getValues}
-          />
-        )}
-      </AnimatePresence>
+      <ModalBody>
+        <AnimatePresence>
+          {showPreview ? (
+            <PreviewDocument previewData={{ ...getValues() }} />
+          ) : (
+            <AddForm
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              setError={setError}
+              setValue={setValue}
+              getValues={getValues}
+            />
+          )}
+        </AnimatePresence>
+      </ModalBody>
     </ModalFormContainer>
   );
 };
