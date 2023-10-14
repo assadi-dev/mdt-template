@@ -129,3 +129,11 @@ export const PreviewRow = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const ModalBody = styled.div`
+  width: 100%;
+  min-height: 450px;
+  @media screen {
+    min-height: 605px;
+  }
+`;

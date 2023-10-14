@@ -11,6 +11,8 @@ import {
   HeaderPage,
 } from "./EncodageArmeFonction.styled";
 import { createPortal } from "react-dom";
+import { GridArmesCard } from "../../Mdt/Encodage/Armes/Armes.styled";
+import CardArmes from "../../Mdt/Encodage/Armes/cardArmes";
 
 const EncodageArmeFonction = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
@@ -31,6 +33,16 @@ const EncodageArmeFonction = () => {
             Encoder une arme
           </EncodeArmesBtn>
         </HeaderPage>
+        <GridArmesCard>
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+          <CardArmes />
+        </GridArmesCard>
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>
