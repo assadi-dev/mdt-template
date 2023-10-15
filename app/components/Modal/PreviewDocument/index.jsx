@@ -4,8 +4,8 @@ import {
   PreviewDocumentContainer,
 } from "./PreviewDocument.styled";
 
-const PreviewDocument = ({ title, children, onCloseModal, ...props }) => {
-  return <PreviewDocumentBody>{children}</PreviewDocumentBody>;
+const PreviewDocument = ({ children, ...props }) => {
+  return <PreviewDocumentBody {...props}>{children}</PreviewDocumentBody>;
 };
 
 export default PreviewDocument;
