@@ -9,6 +9,7 @@ import {
   DeleteRowBtn,
   DialogContent,
 } from "../../../../../../components/Modal/DialogConfirm/DialogueConfirm.styled";
+import DeleteConfirmForm from "../../../../../../components/Modal/DialogConfirm/DeleteConfirmForm";
 
 const ConfirmDelete = ({ payload, onCloseModal, ...props }) => {
   console.log(payload);
@@ -16,30 +17,12 @@ const ConfirmDelete = ({ payload, onCloseModal, ...props }) => {
     onCloseModal();
   };
   return (
-    <DeleteConfirm {...props}>
-      <HeaderModalDelete>
-        <CloseModalBtn className="close-section" onClick={onCloseModal} />
-      </HeaderModalDelete>
-      <DialogContent className="form-theme-color">
-        <p className="title">Voulez vous supprimer le rapport </p>
-        <DeleteRowBtn>
-          <ConfirmButton
-            className="bg-danger-btn"
-            type="submit"
-            onClick={onConfirm}
-          >
-            Confirmer
-          </ConfirmButton>
-          <ConfirmButton
-            className="bg-btn-theme-color"
-            type="button"
-            onClick={onCloseModal}
-          >
-            Annuler
-          </ConfirmButton>
-        </DeleteRowBtn>
-      </DialogContent>
-    </DeleteConfirm>
+    <DeleteConfirmForm
+      {...props}
+      text="Voulez vous supprimer le rapport"
+      onCancel={onCloseModal}
+      onCloseModal={onCloseModal}
+    ></DeleteConfirmForm>
   );
 };
 
