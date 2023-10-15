@@ -24,7 +24,6 @@ export const StatIconContainer = styled.span`
   display: grid;
   place-items: center;
   margin: 0 auto;
-  filter: drop-shadow(2px 1px 6px rgba(0, 0, 0, 1));
 `;
 
 export const CardAquisitionItem = styled.div`
