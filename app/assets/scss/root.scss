@@ -112,6 +112,10 @@ body {
 {
     text-align:center;
 }
+.text-right
+{
+    text-align:right;
+}
 
 .mx-auto
 {
@@ -171,4 +175,16 @@ body {
 }
 .text-lower{
     text-transform: lowercase;
+}
+
+
+/** Text-style **/
+
+.text-bold {
+
+font-weight: bold;
+}
+.text-bolder {
+
+font-weight: bolder;
 }

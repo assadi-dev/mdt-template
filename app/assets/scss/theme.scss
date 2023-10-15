@@ -210,6 +210,20 @@
    }
 
 
+   /**Acquisition **/
+
+   .good {
+    background-color: var(--green);
+    
+  }
+  .warning {
+   background-color: var(--orange);
+  }
+  .bad {
+   background-color: var(--red);
+  }
+
+
 
    @keyframes fadein {
     from {

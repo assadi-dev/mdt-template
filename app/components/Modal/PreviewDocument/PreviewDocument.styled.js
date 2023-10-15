@@ -1,12 +1,21 @@
 import styled from "styled-components";
-import { ModalContainer } from "../Modal.styled";
+import { ModalContainer } from "../../Forms/FormView.styled";
 
-export const PreviewDocumentBody = styled(ModalContainer)`
+export const PreviewDocumentContainer = styled(ModalContainer)`
   padding: 1rem;
   width: 100%;
 
   @media screen and (min-width: 992px) {
     width: 72rem;
+    padding: 1.3rem;
+  }
+`;
+
+export const PreviewDocumentBody = styled.div`
+  padding: 1rem;
+  width: 100%;
+
+  @media screen and (min-width: 992px) {
     padding: 1.3rem;
     min-height: 440px;
     margin: 1.3rem auto;
@@ -15,6 +24,10 @@ export const PreviewDocumentBody = styled(ModalContainer)`
 
 export const PreviewDocumentHeader = styled.div`
   min-height: 10px;
+  margin: 1.3rem auto;
+  p {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const TextContent = styled.div`

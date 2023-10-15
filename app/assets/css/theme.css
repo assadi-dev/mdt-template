@@ -161,6 +161,19 @@
   -webkit-animation: alternate fadein 0.35s infinite;
 }
 
+/**Acquisition **/
+.good {
+  background-color: var(--green);
+}
+
+.warning {
+  background-color: var(--orange);
+}
+
+.bad {
+  background-color: var(--red);
+}
+
 @keyframes fadein {
   from {
     opacity: 1;
