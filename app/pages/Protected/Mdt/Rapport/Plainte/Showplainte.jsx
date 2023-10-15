@@ -2,10 +2,21 @@ import React from "react";
 import ShowActionButton from "../../../../../components/Button/ShowActionButton";
 import { TableAction } from "../../../../../components/DataTable/DataTable.styled";
 
-const Showplainte = () => {
+const Showplainte = ({
+  plainte = null,
+  onShowPreviewPlainte = () => {},
+  ...props
+}) => {
+  const handleClickShowModal = () => {
+    onShowPreviewPlainte(plainte);
+  };
+
   return (
-    <TableAction>
-      <ShowActionButton className="bg-show-btn" />
+    <TableAction {...props}>
+      <ShowActionButton
+        className="bg-show-btn"
+        onClick={handleClickShowModal}
+      />
     </TableAction>
   );
 };

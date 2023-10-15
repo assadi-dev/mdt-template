@@ -58,3 +58,13 @@ export const cleanNameUser = (firstname, lastname) => {
   )}`;
   return fullname;
 };
+
+export const cleanAgentMatricule = (matricule, firsttname, lastname) => {
+  if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
+  return `N/A-${cleanNameUser(firsttname, lastname)}`;
+};
+
+export const cleanAgentNoMatricule = (matricule, firsttname, lastname) => {
+  if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
+  return `${cleanNameUser(firsttname, lastname)}`;
+};

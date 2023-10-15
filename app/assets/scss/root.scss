@@ -129,6 +129,7 @@ body {
     display:grid;
 }
 
+
 .justify-self-start{
     justify-self: start;
 }
@@ -165,6 +166,9 @@ body {
 }
 .justiy-content-end{
     justify-content: flex-end;
+}
+.justiy-content-between{
+    justify-content: space-between;
 }
 
 

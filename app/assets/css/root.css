@@ -163,6 +163,10 @@ body {
   justify-content: flex-end;
 }
 
+.justiy-content-between {
+  justify-content: space-between;
+}
+
 /** Text-format **/
 .text-upper {
   text-transform: uppercase;

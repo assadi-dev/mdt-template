@@ -41,19 +41,19 @@ const ShowRapport = ({ payload, onCloseModal, ...props }) => {
             <span className="text-bolder">Rookie concerné: </span> 03-Test Test
           </p>
         </Row>
-
-        <TitleAcquisition> Acquisition </TitleAcquisition>
-        <AcquisitionRowSection>
-          <RowAcquisition />
-        </AcquisitionRowSection>
-
-        <TextContent>
-          <MarkdownPreview
-            className="theme-markdownPreview"
-            source={commentaire}
-          />
-        </TextContent>
       </PreviewDocumentHeader>
+
+      <TitleAcquisition> Acquisition </TitleAcquisition>
+      <AcquisitionRowSection>
+        <RowAcquisition />
+      </AcquisitionRowSection>
+
+      <TextContent>
+        <MarkdownPreview
+          className="theme-markdownPreview"
+          source={commentaire}
+        />
+      </TextContent>
     </PreviewDocument>
   );
 };

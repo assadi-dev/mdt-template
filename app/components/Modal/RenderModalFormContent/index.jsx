@@ -21,7 +21,13 @@ const RenderModalFormContent = ({
   if (!enumOfView[view])
     throw new Error(`la vue ${view} est introuvable ou n'existe pas ! `);
   const Element = enumOfView[view].element;
-  return <Element className="modal-theme-color" onCloseModal={onCloseModal} />;
+  return (
+    <Element
+      className="modal-theme-color"
+      onCloseModal={onCloseModal}
+      payload={payload}
+    />
+  );
 };
 
 export default RenderModalFormContent;
