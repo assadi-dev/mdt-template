@@ -183,4 +183,9 @@ body {
 
 .text-bolder {
   font-weight: bolder;
+}
+
+/** Margin **/
+.mb-1 {
+  margin-bottom: 1rem;
 }/*# sourceMappingURL=root.css.map */

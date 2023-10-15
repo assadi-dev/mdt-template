@@ -3,6 +3,7 @@ import {
   ActionButton,
   PageContainer,
 } from "../../../../../components/PageContainer";
+import { TextContent } from "../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 
 export const RapportRookiePageContainer = styled(PageContainer)`
   .table {
@@ -13,6 +14,14 @@ export const RapportRookiePageContainer = styled(PageContainer)`
   }
 `;
 
+export const CommentTextContent = styled(TextContent)`
+  margin-top: 0;
+`;
+
 export const AddBtnRapportRookie = styled(ActionButton)`
   justify-self: end;
+`;
+
+export const AcuisitionSectionContainer = styled.div`
+  margin-top: 2.5rem;
 `;
