@@ -8,7 +8,7 @@ const ConsultationPlainte = ({ onCloseModal = () => {}, ...props }) => {
   return (
     <ModalContainer {...props}>
       <HeaderModal>
-        <h2>Consultation plaint</h2>
+        <h2>Consultation plainte</h2>
         <CloseModalBtn onClick={onCloseModal} />
       </HeaderModal>
     </ModalContainer>
