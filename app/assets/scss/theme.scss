@@ -1,132 +1,113 @@
-@use 'variables';
+@use "variables";
 
-.navbar{
- 
-    .agent-name
-    {
-        text-shadow:  0px 0px 1.8px rgba($color: #000000, $alpha: 1);
-    }
-    .agent.grade{
-        color: rgba(255, 255, 255, 0.5);
-    }
-
+.navbar {
+  .agent-name {
+    text-shadow: 0px 0px 1.8px rgba($color: #000000, $alpha: 1);
+  }
+  .agent.grade {
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 /**DataTable **/
 
-.bg-show-btn{
-    
-    background-color: variables.$primary-color;
-    &:hover{
-        background-color: darken( variables.$primary-color, 15%);
-        box-shadow: 0 0 8px rgba($color:  variables.$primary-color, $alpha: 0.8);
-    }
+.bg-show-btn {
+  background-color: variables.$primary-color;
+  &:hover {
+    background-color: darken(variables.$primary-color, 15%);
+    box-shadow: 0 0 8px rgba($color: variables.$primary-color, $alpha: 0.8);
+  }
 }
 
-.bg-danger-btn{
-    background-color: variables.$red;
-    &:hover{
-        background-color: darken(variables.$red, 15%);
-        box-shadow: 0 0 8px rgba($color: variables.$red, $alpha: 0.8);
-    }
+.bg-danger-btn {
+  background-color: variables.$red;
+  &:hover {
+    background-color: darken(variables.$red, 15%);
+    box-shadow: 0 0 8px rgba($color: variables.$red, $alpha: 0.8);
+  }
 }
 
 .btn-edit-table {
-    background: darken(variables.$teal, 10%);
-    border-radius: 3px;
-    display: grid;
-    place-items: center;
-    &:hover{
-        background-color: darken(variables.$teal, 18%);  
-    }
-    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
-    -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+  background: darken(variables.$teal, 10%);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  &:hover {
+    background-color: darken(variables.$teal, 18%);
+  }
+  filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+  -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
 }
-  .btn-delete-table {
-    background-color: darken(variables.$red, 10%);
-    border-radius: 3px;
-    display: grid;
-    place-items: center;
-    &:hover{
-        background-color: darken(variables.$red, 18%);
-      
-    }
-    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
-    -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
-}
-
-
-
-.paginate-btn[disabled]{
-    opacity: 0.3;
+.btn-delete-table {
+  background-color: darken(variables.$red, 10%);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  &:hover {
+    background-color: darken(variables.$red, 18%);
+  }
+  filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
+  -webkit-filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.4));
 }
 
-.dataTable-theme-color{
-    .empty-row, .loading-row{
-        td:first-of-type, td:last-of-type{
-            border-radius: 5px ;
-            -webkit-border-radius: 5px ;
-            -moz-border-radius: 5px ;
-            -ms-border-radius: 5px ;
-            -o-border-radius: 5px ;
-        }
-    }
+.paginate-btn[disabled] {
+  opacity: 0.3;
 }
 
-
-.toggle-custom
-{
- 
-
-    & .react-toggle-track
-    {
-        background-color: variables.$red;
+.dataTable-theme-color {
+  .empty-row,
+  .loading-row {
+    td:first-of-type,
+    td:last-of-type {
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
     }
-    &:hover
-    {
-      .react-toggle-track {
-        background-color: variables.$red !important;
-        }
-    }
-    &:active{
-        .react-toggle-thumb{
-            box-shadow: none !important;
-        }
-    }
-
-    &.react-toggle--checked{
-        .react-toggle-track {
-            background-color: variables.$green !important;
-        } 
-           
-        &:hover
-        {
-          .react-toggle-track {
-            background-color: variables.$green !important;
-        } 
-            
-        }
-    }
-
-    &.react-toggle--focus
-    {
-       & .react-toggle-thumb 
-       {
-        box-shadow:none !important
-       }
-    } 
-
-
+  }
 }
 
-
-.react--toggle-focus{
-    background-color: #444;
-    & .react-toggle-thumb  {
+.toggle-custom {
+  & .react-toggle-track {
+    background-color: variables.$red;
+  }
+  &:hover {
+    .react-toggle-track {
+      background-color: variables.$red !important;
+    }
+  }
+  &:active {
+    .react-toggle-thumb {
       box-shadow: none !important;
-     }
+    }
   }
 
+  &.react-toggle--checked {
+    .react-toggle-track {
+      background-color: variables.$green !important;
+    }
+
+    &:hover {
+      .react-toggle-track {
+        background-color: variables.$green !important;
+      }
+    }
+  }
+
+  &.react-toggle--focus {
+    & .react-toggle-thumb {
+      box-shadow: none !important;
+    }
+  }
+}
+
+.react--toggle-focus {
+  background-color: #444;
+  & .react-toggle-thumb {
+    box-shadow: none !important;
+  }
+}
 
 /* .toggle-custom.react-toggle--checked .react-toggle-track {
     background-color: #ab199f;
@@ -137,102 +118,87 @@
   }
    */
 
-   /**MDX Custom editor **/
+/**MDX Custom editor **/
 
-
-   #ReactSimpleImageViewer{
-    z-index: 100;
-   & img{
+#ReactSimpleImageViewer {
+  z-index: 100;
+  & img {
     object-fit: contain;
     max-width: 90%;
     max-height: 90%;
- 
-   }
+  }
 }
-
 
 /** Style Markdown Prev **/
-.theme-markdownPreview{
-    background-color: transparent;
-    line-height: 1;
-    ul{
-        list-style: disc;
-     }
-     ol{
-        list-style: numeric;
-     }
+.theme-markdownPreview {
+  background-color: transparent;
+  line-height: 1;
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: numeric;
+  }
 }
-
 
 /**Table**/
 
 .table-align-center-not-first {
-    th:not(:first-of-type),
-    td:not(:first-of-type) {
-      text-align: center;
-    }
+  th:not(:first-of-type),
+  td:not(:first-of-type) {
+    text-align: center;
+  }
 }
 
 .row-action-page {
-    height: 100px;
+  height: 100px;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.panic-btn-activate {
+  background-color: rgba($color: #820c0c, $alpha: 0.5);
+  border: 1px solid #820c0c;
+  text-shadow: 0px 3px 8px #000000;
+  &:hover {
+    background-color: #820c0c;
   }
+}
 
-  .text-ellipsis{
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
-    overflow-x: hidden;
+.siren-animation {
+  path:first-of-type {
+    animation: alternate fadein 0.35s infinite;
+    -webkit-animation: alternate fadein 0.35s infinite;
   }
+}
 
+/**Acquisition **/
 
-  .panic-btn-activate{
-    background-color: rgba($color:  #820C0C, $alpha: 0.5);
-    border: 1px solid #820C0C;
-    text-shadow: 0px  3px 8px #000000;
-    &:hover{
-        background-color:#820C0C;
-    }
+.good {
+  background-color: var(--green);
+}
+.warning {
+  background-color: var(--orange);
+}
+.bad {
+  background-color: var(--red);
+}
 
+legend {
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
 
-
-   } 
-
-   .siren-animation {
-
-      path:first-of-type{
-        animation: alternate fadein 0.35s infinite ;
-        -webkit-animation: alternate fadein 0.35s infinite ;
-    }
-  
-  
-  
-
-   }
-
-
-   /**Acquisition **/
-
-   .good {
-    background-color: var(--green);
-    
+@keyframes fadein {
+  from {
+    opacity: 1;
   }
-  .warning {
-   background-color: var(--orange);
+  to {
+    opacity: 0.5;
   }
-  .bad {
-   background-color: var(--red);
-  }
-
-
-
-   @keyframes fadein {
-    from {
-           
-        opacity:1 ;
-        
-    }
-   to {
-        opacity:0.5       
-    }
-    
-   }
+}

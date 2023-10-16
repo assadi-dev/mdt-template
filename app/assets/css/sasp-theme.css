@@ -24,7 +24,9 @@
   background-color: #131B26;
   min-height: 100vh;
 }
-.theme-sasp .sidebar .sidebar-selected, .theme-sasp .sidebar .active, .theme-sasp .sidebar .selected {
+.theme-sasp .sidebar .sidebar-selected,
+.theme-sasp .sidebar .active,
+.theme-sasp .sidebar .selected {
   background-color: #969696;
   color: #131B26;
   font-weight: bolder;
@@ -130,7 +132,8 @@ html:has(.theme-sasp) .paginate-btn {
 html:has(.theme-sasp) #pageIndex {
   background-color: #131B26;
 }
-html:has(.theme-sasp) .modal-theme-color, html:has(.theme-sasp) .form-bg-theme-color {
+html:has(.theme-sasp) .modal-theme-color,
+html:has(.theme-sasp) .form-bg-theme-color {
   background-color: #131b26;
   border: 1px solid #969696;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
@@ -162,7 +165,8 @@ html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option:hover {
 html:has(.theme-sasp) .listGradeItem_selected:before {
   background-color: #131B26 !important;
 }
-html:has(.theme-sasp) .header-page-select-container, html:has(.theme-sasp) .header-tab-select-container {
+html:has(.theme-sasp) .header-page-select-container,
+html:has(.theme-sasp) .header-tab-select-container {
   background-color: #131B26;
 }
 html:has(.theme-sasp) .table-page-access {
@@ -236,7 +240,9 @@ html:has(.theme-sasp) .input-theme-color input::-moz-placeholder {
 html:has(.theme-sasp) .input-theme-color input::placeholder {
   color: rgba(19, 27, 38, 0.8);
 }
-html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-theme-color input, html:has(.theme-sasp) .form-theme-color textarea {
+html:has(.theme-sasp) .form-theme-color select,
+html:has(.theme-sasp) .form-theme-color input,
+html:has(.theme-sasp) .form-theme-color textarea {
   border: 1px solid rgba(150, 150, 150, 0.5);
   padding: 1rem;
   width: 100%;
@@ -251,10 +257,14 @@ html:has(.theme-sasp) .form-theme-color select, html:has(.theme-sasp) .form-them
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-html:has(.theme-sasp) .form-theme-color select::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color input::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color textarea::-webkit-calendar-picker-indicator {
+html:has(.theme-sasp) .form-theme-color select::-webkit-calendar-picker-indicator,
+html:has(.theme-sasp) .form-theme-color input::-webkit-calendar-picker-indicator,
+html:has(.theme-sasp) .form-theme-color textarea::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
-html:has(.theme-sasp) .form-theme-color select:focus, html:has(.theme-sasp) .form-theme-color input:focus, html:has(.theme-sasp) .form-theme-color textarea:focus {
+html:has(.theme-sasp) .form-theme-color select:focus,
+html:has(.theme-sasp) .form-theme-color input:focus,
+html:has(.theme-sasp) .form-theme-color textarea:focus {
   border-color: #b0b0b0;
   box-shadow: 0 0 15px rgba(150, 150, 150, 0.15);
 }
@@ -271,7 +281,12 @@ html:has(.theme-sasp) .form-theme-color option {
   -o-border-radius: 0px;
   font-size: 1.3rem;
 }
-html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-theme-color-alt input, html:has(.theme-sasp) .form-theme-color-alt textarea {
+html:has(.theme-sasp) .form-theme-color fieldset {
+  border: 1px solid rgba(150, 150, 150, 0.5);
+}
+html:has(.theme-sasp) .form-theme-color-alt select,
+html:has(.theme-sasp) .form-theme-color-alt input,
+html:has(.theme-sasp) .form-theme-color-alt textarea {
   border: 1px solid rgba(19, 27, 38, 0.5);
   padding: 1rem;
   width: 100%;
@@ -287,17 +302,23 @@ html:has(.theme-sasp) .form-theme-color-alt select, html:has(.theme-sasp) .form-
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-html:has(.theme-sasp) .form-theme-color-alt select::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color-alt input::-webkit-calendar-picker-indicator, html:has(.theme-sasp) .form-theme-color-alt textarea::-webkit-calendar-picker-indicator {
+html:has(.theme-sasp) .form-theme-color-alt select::-webkit-calendar-picker-indicator,
+html:has(.theme-sasp) .form-theme-color-alt input::-webkit-calendar-picker-indicator,
+html:has(.theme-sasp) .form-theme-color-alt textarea::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
-html:has(.theme-sasp) .form-theme-color-alt select:focus, html:has(.theme-sasp) .form-theme-color-alt input:focus, html:has(.theme-sasp) .form-theme-color-alt textarea:focus {
+html:has(.theme-sasp) .form-theme-color-alt select:focus,
+html:has(.theme-sasp) .form-theme-color-alt input:focus,
+html:has(.theme-sasp) .form-theme-color-alt textarea:focus {
   border: 1px solid #131b26;
   box-shadow: 0 0 15px rgba(19, 27, 38, 0.3);
 }
 html:has(.theme-sasp) .form-theme-color-alt select::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt input::-moz-placeholder, html:has(.theme-sasp) .form-theme-color-alt textarea::-moz-placeholder {
   color: #969696;
 }
-html:has(.theme-sasp) .form-theme-color-alt select::placeholder, html:has(.theme-sasp) .form-theme-color-alt input::placeholder, html:has(.theme-sasp) .form-theme-color-alt textarea::placeholder {
+html:has(.theme-sasp) .form-theme-color-alt select::placeholder,
+html:has(.theme-sasp) .form-theme-color-alt input::placeholder,
+html:has(.theme-sasp) .form-theme-color-alt textarea::placeholder {
   color: #969696;
 }
 html:has(.theme-sasp) .form-theme-color-alt label {
@@ -312,6 +333,9 @@ html:has(.theme-sasp) .form-theme-color-alt option {
   -ms-border-radius: 0px;
   -o-border-radius: 0px;
   font-size: 1.3rem;
+}
+html:has(.theme-sasp) .form-theme-color-alt fieldset {
+  border: 1px solid rgba(19, 27, 38, 0.5);
 }
 html:has(.theme-sasp) .theme-text-editor {
   border: 1px solid rgba(150, 150, 150, 0.5);
@@ -335,10 +359,12 @@ html:has(.theme-sasp) .theme-card-trombinoscop {
   background-color: #131b26;
   border: 0.5px solid rgba(43, 125, 233, 0.31);
 }
-html:has(.theme-sasp) .aside-agent-bg, html:has(.theme-sasp) .aside-civil-bg {
+html:has(.theme-sasp) .aside-agent-bg,
+html:has(.theme-sasp) .aside-civil-bg {
   background-color: #131B26;
 }
-html:has(.theme-sasp) .aside-agent-bg .photo, html:has(.theme-sasp) .aside-civil-bg .photo {
+html:has(.theme-sasp) .aside-agent-bg .photo,
+html:has(.theme-sasp) .aside-civil-bg .photo {
   border: 1px solid #2b7de9;
 }
 html:has(.theme-sasp) .bg-card-item {
@@ -377,9 +403,9 @@ html:has(.theme-sasp) .bg-panic-button:active {
 }
 html:has(.theme-sasp) .panic-btn-activate {
   background-color: rgba(130, 12, 12, 0.5);
-  border: 1px solid #820C0C;
+  border: 1px solid #820c0c;
   text-shadow: 0px 3px 8px #000000;
 }
 html:has(.theme-sasp) .panic-btn-activate:hover {
-  background-color: #820C0C;
+  background-color: #820c0c;
 }/*# sourceMappingURL=sasp-theme.css.map */

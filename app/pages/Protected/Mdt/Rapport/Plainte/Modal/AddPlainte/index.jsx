@@ -19,7 +19,7 @@ const AddPlainte = ({ onCloseModal = () => {}, ...props }) => {
       </HeaderModal>
       <RowPreuveButton>
         <Button className="bg-btn-theme-color" type="button">
-          Voir les preuves
+          Ajouter des preuves
         </Button>
       </RowPreuveButton>
       <AddPlainteForm />

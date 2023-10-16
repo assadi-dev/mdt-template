@@ -27,7 +27,7 @@ const AcquisitionSection = () => {
 
   return (
     <AcuisitionSectionContainer>
-      <p className="text-center mb-3"> Acquisitions </p>
+      <legend className="text-center mb-3"> Acquisitions </legend>
       <RowAcquisition
         listAquisition={listAquisition}
         onClickAcuiqition={handleClickState}

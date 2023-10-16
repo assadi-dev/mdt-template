@@ -4,7 +4,6 @@ import {
   FormControl,
   HeaderModal,
   ModalFooter,
-  ModalFormContainer,
 } from "../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import { useForm } from "react-hook-form";
@@ -13,7 +12,10 @@ import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoad
 import { TextContent } from "../../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
 import AcquisitionSection from "./Form/AcquisitionSection";
-import { CommentTextContent } from "../RapportRookie.styled";
+import {
+  CommentTextContent,
+  RapporRookieModalCOntainer,
+} from "../RapportRookie.styled";
 
 const AddRapporRookieView = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
@@ -48,11 +50,12 @@ const AddRapporRookieView = ({ onCloseModal, ...props }) => {
   };
 
   const submit = (values) => {
+    toggleProcess();
     console.log(values);
   };
 
   return (
-    <ModalFormContainer onSubmit={handleSubmit(submit)} {...props}>
+    <RapporRookieModalCOntainer onSubmit={handleSubmit(submit)} {...props}>
       <HeaderModal>
         <h2 className="form-title">Ajouter un rapport</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
@@ -91,7 +94,7 @@ const AddRapporRookieView = ({ onCloseModal, ...props }) => {
           </ButtonWithLoader>
         </ModalFooter>
       </FormContainer>
-    </ModalFormContainer>
+    </RapporRookieModalCOntainer>
   );
 };
 
