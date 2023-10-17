@@ -11,6 +11,7 @@ import RenderModalFormContent from "../../../../../components/Modal/RenderModalF
 import useModalState from "../../../../../hooks/useModalState";
 import {
   ADD_RAPPORT_ROOKIE,
+  SHOW_RAPPORT_ROOKIE,
   listOfRapporRookieView,
 } from "./ModalView/listRapportView";
 import { createPortal } from "react-dom";
@@ -21,6 +22,13 @@ const RapportRookie = () => {
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_RAPPORT_ROOKIE,
+    });
+  };
+
+  const handlShowRapport = (rapport) => {
+    openModal({
+      view: SHOW_RAPPORT_ROOKIE,
+      data: rapport,
     });
   };
 
@@ -48,7 +56,7 @@ const RapportRookie = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: () => <ShowRapportRookie />,
+      Cell: () => <ShowRapportRookie onShowRapport={handlShowRapport} />,
     },
   ];
 

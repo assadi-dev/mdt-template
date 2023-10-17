@@ -150,7 +150,7 @@ html:has(.theme-sasp) {
   /*Dropdown select */
   .dropdown-select-custom {
     @media screen and (min-width: 992px) {
-      width: 200px;
+      width: 100%;
     }
 
     & .Dropdown-control {

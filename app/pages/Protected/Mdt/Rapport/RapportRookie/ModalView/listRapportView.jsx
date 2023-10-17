@@ -2,6 +2,7 @@ import React from "react";
 import AddRapporRookieView from "./AddRapporRookieView";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaExclamation, FaCheck } from "react-icons/fa6";
+import ShowpreviewRapportRookie from "./ShowpreviewRapportRookie";
 
 export const ADD_RAPPORT_ROOKIE = "add-rapport-rookie";
 export const SHOW_RAPPORT_ROOKIE = "show-rapport-rookie";
@@ -11,7 +12,7 @@ export const listOfRapporRookieView = {
     element: AddRapporRookieView,
   },
   "show-rapport-rookie": {
-    element: null,
+    element: ShowpreviewRapportRookie,
   },
 };
 

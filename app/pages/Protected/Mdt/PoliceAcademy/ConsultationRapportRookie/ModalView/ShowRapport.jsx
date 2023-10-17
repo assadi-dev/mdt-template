@@ -11,6 +11,7 @@ import {
   TitleAcquisition,
 } from "../ConsultationRapportRookie.styled";
 import RowAcquisition from "./RowAcquisition";
+import clsx from "clsx";
 
 const ShowRapport = ({ payload, onCloseModal, ...props }) => {
   const commentaire = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur vel aliquam illo officiis voluptatibus commodi? Sequi quibusdam earum labore, magnam molestiae excepturi iure consequatur quaerat nesciunt adipisci maiores est recusandae.
@@ -21,7 +22,7 @@ const ShowRapport = ({ payload, onCloseModal, ...props }) => {
     <PreviewDocument
       title="Consultation du rapport"
       onCloseModal={onCloseModal}
-      {...props}
+      className={clsx(props.className, "form-theme-color")}
     >
       <PreviewDocumentHeader>
         <div>
@@ -32,19 +33,17 @@ const ShowRapport = ({ payload, onCloseModal, ...props }) => {
             <span className="text-bolder">Type de patrouille: </span> patrouille
             test
           </p>
+          <p>
+            <span className="text-bolder">Rookie concerné: </span> 03-Test Test
+          </p>
         </div>
         <Row className="justiy-content-end">
           <p>2023-10-15 à 09:53</p>
         </Row>
-        <Row className="justiy-content-end">
-          <p>
-            <span className="text-bolder">Rookie concerné: </span> 03-Test Test
-          </p>
-        </Row>
       </PreviewDocumentHeader>
 
-      <TitleAcquisition> Acquisition </TitleAcquisition>
       <AcquisitionRowSection>
+        <TitleAcquisition> Acquisition </TitleAcquisition>
         <RowAcquisition />
       </AcquisitionRowSection>
 

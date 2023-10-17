@@ -10,12 +10,12 @@ const ActionCells = ({
   onEdit = () => {},
   onDelete = () => {},
 }) => {
-  const { id, name, faction } = data;
+  const payloads = { ...data };
   const handleClickEdit = () => {
-    onEdit({ id, name, faction });
+    onEdit(payloads);
   };
   const handleClicDelete = () => {
-    onDelete({ id, name, faction });
+    onDelete(payloads);
   };
 
   return (

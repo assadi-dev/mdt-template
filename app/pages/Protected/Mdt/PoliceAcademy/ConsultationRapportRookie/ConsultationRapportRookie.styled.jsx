@@ -9,13 +9,14 @@ export const ConsultationRapportRookieContainer = styled.div`
   }
 `;
 
-export const TitleAcquisition = styled.p`
-  margin-top: 2rem;
+export const TitleAcquisition = styled.legend`
   text-align: center;
+  margin-bottom: 1.3rem;
 `;
 
-export const AcquisitionRowSection = styled.div`
+export const AcquisitionRowSection = styled.fieldset`
   margin-top: 2.3rem;
   width: 100%;
   min-height: 15px;
+  border-radius: 8px;
 `;

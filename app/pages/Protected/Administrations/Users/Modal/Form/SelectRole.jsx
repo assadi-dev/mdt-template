@@ -18,16 +18,3 @@ const SelectRole = ({ ...props }) => {
 };
 
 export default SelectRole;
-
-const colourStyles = {
-  control: (styles) => {
-    return { ...styles, backgroundColor: "transparent", color: "#fff" };
-  },
-  input: (styles) => {
-    return { ...styles, backgroundColor: "transparent", color: "#fff" };
-  },
-
-  option: (styles, isSelected) => {
-    return { ...styles, backgroundColor: isSelected ? "green" : "#fff" };
-  },
-};

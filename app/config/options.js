@@ -25,3 +25,12 @@ export const civilNavigation = [
     link: "dossier-d-arrestations",
   },
 ];
+
+/**Categories du code penales */
+
+export const codePenalCategories = [
+  "Contravention",
+  "Délit mineur",
+  "Délit majeur",
+  "Crime",
+];

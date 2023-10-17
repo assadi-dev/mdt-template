@@ -140,7 +140,7 @@ html:has(.theme-sasp) .form-bg-theme-color {
 }
 @media screen and (min-width: 992px) {
   html:has(.theme-sasp) .dropdown-select-custom {
-    width: 200px;
+    width: 100%;
   }
 }
 html:has(.theme-sasp) .dropdown-select-custom .Dropdown-control {

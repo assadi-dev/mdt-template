@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ErrorSection,
   FormContainer,
   FormControl,
   HeaderModal,
@@ -64,6 +65,13 @@ const AddRapporRookieView = ({ onCloseModal, ...props }) => {
         <FormControl>
           <label htmlFor="">Matricule du Rookie</label>
           <input type="text" {...register("mariculeRookie")} />
+          <ErrorSection>
+            {errors.mariculeRookie && (
+              <small className="text-error">
+                Veuillez entrer le matricule rookie
+              </small>
+            )}
+          </ErrorSection>
         </FormControl>
         <FormControl>
           <label htmlFor="">Nom Prénom du Rookie</label>
