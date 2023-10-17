@@ -17,7 +17,7 @@ const FormRapportIncident = ({
   defaultValues = defaultFormValues,
   onSave = () => {},
 }) => {
-  const { process } = useProcess();
+  const { process, toggleProcess } = useProcess();
 
   const {
     register,
@@ -40,7 +40,12 @@ const FormRapportIncident = ({
       setError("corpsIncident");
       return false;
     }
-    onSave(values);
+    try {
+      toggleProcess();
+      onSave(values);
+    } catch (error) {
+      toggleProcess();
+    }
   };
 
   return (
