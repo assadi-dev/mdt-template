@@ -81,11 +81,13 @@ const Grades = () => {
     try {
       dispatch(removeGrade(data));
       await deleteGrades(data.id);
-      dispatchModalState({ type: CLOSE_MODAL });
+
       toastSuccess("Element supprimé");
     } catch (error) {
       console.log(error.message);
       toastError();
+    } finally {
+      closeModal();
     }
   };
 
