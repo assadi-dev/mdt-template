@@ -16,6 +16,18 @@ const DeleteConfirmForm = ({
   children,
   ...props
 }) => {
+  const cancelpromise = () =>
+    new Promise((resolve) => {
+      onCancel();
+      resolve("cancel");
+    });
+
+  const handleClickCancel = async () => {
+    cancelpromise().then((res) => {
+      onCloseModal();
+    });
+  };
+
   return (
     <DeleteConfirm {...props}>
       <HeaderModalDelete>
@@ -35,7 +47,7 @@ const DeleteConfirmForm = ({
           <ConfirmButton
             className="bg-btn-theme-color"
             type="button"
-            onClick={onCloseModal}
+            onClick={handleClickCancel}
           >
             Annuler
           </ConfirmButton>
