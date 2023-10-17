@@ -477,7 +477,7 @@ export const codePenalLists = [
     label: "Multiples amendes impayées",
     categorie: "Délit majeur",
     amount: 3,
-    peine: "00;30",
+    peine: "00:30",
   },
   {
     label: "Possession d’argent liquide > 4K sans justificatif",

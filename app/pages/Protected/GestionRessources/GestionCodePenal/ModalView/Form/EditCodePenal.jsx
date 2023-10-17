@@ -25,7 +25,10 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title">{MODAL_TITLE}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormCodePenal defaultValues={defaultValues} />
+      <FormCodePenal
+        labelValidation="Mettre à jour"
+        defaultValues={defaultValues}
+      />
     </ModalFormContainer>
   );
 };

@@ -1,14 +1,25 @@
 import React from "react";
 import {
-  AddDossierFusillade,
+  AddDossierFusilladeBtn,
   FusilladePageContainer,
 } from "./Fusillade.styled";
 import { RowAction } from "../../../../../components/PageContainer";
 import DataTable from "../../../../../components/DataTable";
 import ShowDossierFussilade from "./ShowDossierFussilade";
 import ActionCells from "../../../../../components/DataTable/ActionCells";
+import useModalState from "../../../../../hooks/useModalState";
+import Modal from "../../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
+import { createPortal } from "react-dom";
+import {
+  ADD_DOSSIER_FUSILLADE,
+  DELETE_DOSSIER_FUSILLADE,
+  listOfDossierFusilladeView,
+} from "./ModalView/ListDossierFusillade";
 
 const Fusillade = () => {
+  const { modalState, openModal, closeModal } = useModalState();
+
   const COLUMNS = [
     {
       Header: "Matricule",
@@ -35,12 +46,15 @@ const Fusillade = () => {
       Header: "Actions",
       accessor: "",
       Cell: ({ row }) => (
-        <ActionCells data={row.original} canDelete={true} canEdit={true} />
+        <ActionCells
+          data={row.original}
+          canDelete={true}
+          canEdit={true}
+          onDelete={() => handleClickDelete(row.original)}
+        />
       ),
     },
   ];
-
-  const handleClickAddbtn = () => {};
 
   const collections = [
     {
@@ -53,22 +67,51 @@ const Fusillade = () => {
     },
   ];
 
+  const handleClickAdd = () => {
+    openModal({
+      view: ADD_DOSSIER_FUSILLADE,
+    });
+  };
+
+  const handleClickDelete = (dossierFusillad) => {
+    openModal({
+      view: DELETE_DOSSIER_FUSILLADE,
+      data: dossierFusillad,
+    });
+  };
+
   return (
-    <FusilladePageContainer>
-      <RowAction style={{ height: "100px" }}>
-        <div></div>
-        <AddDossierFusillade className="bg-btn-alt-theme-color">
-          Ajouter
-        </AddDossierFusillade>
-      </RowAction>
-      <DataTable
-        className="table"
-        columns={COLUMNS}
-        isLoading={false}
-        isSuccess={true}
-        data={collections}
-      />
-    </FusilladePageContainer>
+    <>
+      <FusilladePageContainer>
+        <RowAction style={{ height: "100px" }}>
+          <div></div>
+          <AddDossierFusilladeBtn
+            className="bg-btn-alt-theme-color"
+            onClick={handleClickAdd}
+          >
+            Ajouter
+          </AddDossierFusilladeBtn>
+        </RowAction>
+        <DataTable
+          className="table"
+          columns={COLUMNS}
+          isLoading={false}
+          isSuccess={true}
+          data={collections}
+        />
+      </FusilladePageContainer>
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <RenderModalFormContent
+            view={modalState.view}
+            payload={modalState.data}
+            onCloseModal={closeModal}
+            enumOfView={listOfDossierFusilladeView}
+          />
+        </Modal>,
+        document.body
+      )}
+    </>
   );
 };
 

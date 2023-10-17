@@ -19,7 +19,10 @@ const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
         </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormRapportIncident defaultValues={defaultFormValues} />
+      <FormRapportIncident
+        labelSaveButton="Mettre à jour"
+        defaultValues={defaultFormValues}
+      />
     </ModalRapportIncident>
   );
 };

@@ -14,6 +14,7 @@ import useProcess from "../../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
 
 const FormRapportIncident = ({
+  labelSaveButton = "Ajouter",
   defaultValues = defaultFormValues,
   onSave = () => {},
 }) => {
@@ -110,7 +111,7 @@ const FormRapportIncident = ({
 
       <ModalFooter>
         <ButtonWithLoader
-          labelButton={"Encoder"}
+          labelButton={labelSaveButton}
           isLoading={process}
           className="bg-btn-theme-color"
           type="submit"
