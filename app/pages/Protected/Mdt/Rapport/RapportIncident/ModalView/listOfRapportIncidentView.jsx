@@ -1,9 +1,9 @@
 import React from "react";
-import AddRapportincident from "./Form/AddRapportincident";
+import AddRapportincident from "./Form/AddRapportIncident";
 import EditRapportIncident from "./Form/EditRapportIncident";
 import { FormContainer } from "../../../../../../components/Forms/FormView.styled";
 import PreviewRapportIncident from "./Form/PreviewRapportIncident";
-import DeleteRapportincident from "./Form/DeleteRapportincident";
+import DeleteRapportincident from "./Form/DeleteRapportIncident";
 
 export const ADD_RAPPORT_INCIDENT = "add-rapportIncident";
 export const EDIT_RAPPORT_INCIDENT = "edit-rapportIncident";

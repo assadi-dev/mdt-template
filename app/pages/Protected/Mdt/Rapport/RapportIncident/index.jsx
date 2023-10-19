@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  AddBtnRapportIncident,
-  RapportIncidentPageContainer,
-} from "./Rapportincident.styled";
+
 import { ActionButton } from "../../../../../components/DataTable/DataTable.styled";
 import { RowAction } from "../../../../../components/PageContainer";
 import DataTable from "../../../../../components/DataTable";
@@ -19,6 +16,10 @@ import { createPortal } from "react-dom";
 import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 import useModalState from "../../../../../hooks/useModalState";
+import {
+  AddBtnRapportIncident,
+  RapportIncidentPageContainer,
+} from "./Rapportincident.styled";
 
 const RapportIncident = () => {
   const { modalState, openModal, closeModal } = useModalState();

@@ -1,20 +1,19 @@
 import React from "react";
 import { defaultFormValues, inputOption } from "./helpers";
+import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
+import useProcess from "../../../../../../../hooks/useProcess";
+import { useForm } from "react-hook-form";
+import {
+  FormRapportInterventionContainer,
+  RapportTextEditor,
+} from "../../RapportIntervention.styled";
 import {
   ErrorSection,
   FormControl,
   ModalFooter,
 } from "../../../../../../../components/Forms/FormView.styled";
 
-import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
-import useProcess from "../../../../../../../hooks/useProcess";
-import { useForm } from "react-hook-form";
-import {
-  FormRapportIncidentContainer,
-  RapportTextEditor,
-} from "../../Rapportincident.styled";
-
-const FormRapportIncident = ({
+const FormRapportIntervention = ({
   labelSaveButton = "Ajouter",
   defaultValues = null,
   onSave = () => {},
@@ -50,10 +49,8 @@ const FormRapportIncident = ({
     }
   };
 
-  console.log(defaultValues);
-
   return (
-    <FormRapportIncidentContainer
+    <FormRapportInterventionContainer
       className="form-theme-color"
       onSubmit={handleSubmit(save)}
     >
@@ -120,8 +117,8 @@ const FormRapportIncident = ({
           type="submit"
         />
       </ModalFooter>
-    </FormRapportIncidentContainer>
+    </FormRapportInterventionContainer>
   );
 };
 
-export default FormRapportIncident;
+export default FormRapportIntervention;
