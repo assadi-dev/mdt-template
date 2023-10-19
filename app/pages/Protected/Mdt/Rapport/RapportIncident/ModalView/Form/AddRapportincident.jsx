@@ -3,6 +3,7 @@ import { ModalRapportIncident } from "../../Rapportincident.styled";
 import { HeaderModal } from "../../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import FormRapportIncident from "./FormRapportIncident";
+import { defaultFormValues } from "./helpers";
 
 const AddRapportincident = ({ onCloseModal, ...props }) => {
   return (

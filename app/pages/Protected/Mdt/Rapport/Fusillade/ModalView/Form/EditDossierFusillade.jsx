@@ -16,7 +16,10 @@ const EditDossierFusillade = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title">{TITLE_MODAL}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormDossiertFusillade labelSaveButton="mettre à jour" />
+      <FormDossiertFusillade
+        defaultValues={payload}
+        labelSaveButton="mettre à jour"
+      />
     </DossierFusilladeFormContainer>
   );
 };

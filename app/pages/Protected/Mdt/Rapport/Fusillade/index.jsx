@@ -36,7 +36,7 @@ const Fusillade = () => {
     },
     {
       Header: "N° du rapport",
-      accessor: "numeroRaport",
+      accessor: "numeroDossier",
     },
     {
       Header: "Rapport",
@@ -64,8 +64,26 @@ const Fusillade = () => {
       matricule: "103",
       agent: "Alyson Finley",
       createdAt: "01-10-2023 à 22:35",
-      numeroRaport: 25,
+      numeroDossier: 25,
       rapport: "",
+      firstGroupe: "groupe1",
+      secondGroupe: "groupe2",
+      lieux: "Central Park",
+      recit: "Ras",
+      saisies: [
+        {
+          id: 1456,
+          fullname: "Hernade Lucas",
+          saisie: "2 x pochon",
+          appartenance: "Ballas",
+        },
+        {
+          id: 1459,
+          fullname: "Hernade Martinez",
+          saisie: "25 x pochon",
+          appartenance: "Ballas",
+        },
+      ],
     },
   ];
 

@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 
 const FormRapportIncident = ({
   labelSaveButton = "Ajouter",
-  defaultValues = defaultFormValues,
+  defaultValues = null,
   onSave = () => {},
 }) => {
   const { process, toggleProcess } = useProcess();
@@ -29,7 +29,7 @@ const FormRapportIncident = ({
     clearErrors,
     reset,
     handleSubmit,
-  } = useForm({ defaultValues });
+  } = useForm({ defaultValues: { ...defaultFormValues, ...defaultValues } });
 
   const handleChangeRapport = (value) => {
     if (errors.corpsIncident) clearErrors("corpsIncident");
@@ -48,6 +48,8 @@ const FormRapportIncident = ({
       toggleProcess();
     }
   };
+
+  console.log(defaultValues);
 
   return (
     <FormRapportIncidentContainer

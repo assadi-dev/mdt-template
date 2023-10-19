@@ -6,11 +6,6 @@ import FormRapportIncident from "./FormRapportIncident";
 import { defaultFormValues } from "./helpers";
 
 const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
-  defaultFormValues.officierimplique = payload?.officierimplique;
-  defaultFormValues.numeraRapport = payload?.numeraRapport;
-  defaultFormValues.corpsIncident = payload?.corpsIncident;
-  defaultFormValues.corpsIncident = "Test Edit";
-
   return (
     <ModalRapportIncident {...props}>
       <HeaderModal>
@@ -21,7 +16,7 @@ const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
       </HeaderModal>
       <FormRapportIncident
         labelSaveButton="Mettre à jour"
-        defaultValues={defaultFormValues}
+        defaultValues={payload}
       />
     </ModalRapportIncident>
   );

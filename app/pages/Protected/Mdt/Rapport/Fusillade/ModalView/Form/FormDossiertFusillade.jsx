@@ -17,7 +17,7 @@ import InputSaisieAction from "./InputSaisieAction";
 import { defaultFormvalues } from "./formDefaultvalue";
 
 const FormDossiertFusillade = ({
-  defaultValues,
+  defaultValues = defaultFormvalues,
   labelSaveButton = "Ajouter",
   onSave = () => {},
 }) => {
@@ -28,7 +28,7 @@ const FormDossiertFusillade = ({
     formState: { errors },
     getValues,
     reset,
-  } = useForm({ defaultValues: defaultFormvalues });
+  } = useForm({ defaultValues: { ...defaultValues } });
 
   const handleFormSubmit = (values) => {
     onSave(values);
@@ -45,25 +45,25 @@ const FormDossiertFusillade = ({
     >
       <FormControl>
         <label htmlFor="">Lead Terrain</label>
-        <input />
+        <input {...register("agent")} />
       </FormControl>
       <RowGroupFusillade>
         <FormControl>
           <label htmlFor="">groupe 1</label>
-          <input />
+          <input {...register("firstGroupe")} />
         </FormControl>
         <FormControl>
           <label htmlFor="">groupe 2</label>
-          <input />
+          <input {...register("secondGroupe")} />
         </FormControl>
       </RowGroupFusillade>
       <FormControl>
         <label htmlFor="">lieu(x)</label>
-        <input />
+        <input {...register("lieux")} />
       </FormControl>
       <FormControl>
         <label htmlFor="">récit de l'intervention</label>
-        <textarea style={{ resize: "none" }} />
+        <textarea style={{ resize: "none" }} {...register("recit")} />
       </FormControl>
       <FormControl>
         <InputSaisieAction
