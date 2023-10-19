@@ -37,3 +37,68 @@ export const RowGroupFusillade = styled.div`
     }
   }
 `;
+
+export const RowSaisieDossierFusillade = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 0.5fr);
+  grid-gap: 1.3rem;
+`;
+
+export const SaisieListSection = styled.div`
+  padding: 1rem 0;
+`;
+
+export const RowInputSaisielistContainer = styled.ul`
+  overflow-y: auto;
+  min-height: 80px;
+  max-height: 240px;
+  transition: all 0.25s;
+
+  li {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    position: relative;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+`;
+
+export const RemoveRowSaisieButtonCol = styled.div`
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  justify-self: center;
+`;
+
+export const AddRowButton = styled.button`
+  display: flex;
+  grid-gap: 1rem;
+  align-items: center;
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+  :active {
+    opacity: 0.5;
+  }
+`;
+
+export const RemoveRowSaisieButton = styled.span`
+  display: grid;
+  place-content: center;
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+  justify-self: center;
+  svg {
+    width: 10px;
+    height: 10px;
+  }
+`;
+
+export const RowAddSaisiAction = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;

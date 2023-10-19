@@ -408,4 +408,21 @@ html:has(.theme-sasp) .panic-btn-activate {
 }
 html:has(.theme-sasp) .panic-btn-activate:hover {
   background-color: #820c0c;
+}
+html:has(.theme-sasp) .add-row-saisie-btn {
+  opacity: 0.5;
+}
+html:has(.theme-sasp) .add-row-saisie-btn:hover {
+  opacity: 1;
+}
+html:has(.theme-sasp) .add-row-saisie-btn:active {
+  opacity: 0.5;
+}
+html:has(.theme-sasp) .remove-row-saisie-btn {
+  opacity: 0.5;
+  background-color: #969696;
+  color: #131B26;
+}
+html:has(.theme-sasp) .remove-row-saisie-btn:hover {
+  opacity: 1;
 }/*# sourceMappingURL=sasp-theme.css.map */

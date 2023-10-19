@@ -4,16 +4,45 @@ import {
   FormControl,
   ModalFooter,
 } from "../../../../../../../components/Forms/FormView.styled";
-import { RowGroupFusillade } from "../../Fusillade.styled";
+import {
+  RowAddSaisiAction,
+  RowGroupFusillade,
+  RowInputSaisielistContainer,
+  RowSaisieDossierFusillade,
+} from "../../Fusillade.styled";
 import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
+import { useForm } from "react-hook-form";
+import RowInputSaisie from "./RowInputSaisie";
+import InputSaisieAction from "./InputSaisieAction";
+import { defaultFormvalues } from "./formDefaultvalue";
 
 const FormDossiertFusillade = ({
   defaultValues,
   labelSaveButton = "Ajouter",
-  onSave,
+  onSave = () => {},
 }) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    getValues,
+    reset,
+  } = useForm({ defaultValues: defaultFormvalues });
+
+  const handleFormSubmit = (values) => {
+    onSave(values);
+  };
+
+  const liseOfSaisie = (list) => {
+    console.log(list);
+  };
+
   return (
-    <FormContainer className="form-theme-color">
+    <FormContainer
+      className="form-theme-color"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       <FormControl>
         <label htmlFor="">Lead Terrain</label>
         <input />
@@ -37,7 +66,10 @@ const FormDossiertFusillade = ({
         <textarea style={{ resize: "none" }} />
       </FormControl>
       <FormControl>
-        <label htmlFor="">Saisie</label>
+        <InputSaisieAction
+          saisies={getValues("saisies")}
+          listSaisie={liseOfSaisie}
+        />
       </FormControl>
 
       <ModalFooter>

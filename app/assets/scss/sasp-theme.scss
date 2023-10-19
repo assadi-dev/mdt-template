@@ -488,4 +488,21 @@ html:has(.theme-sasp) {
       background-color: #820c0c;
     }
   }
+  .add-row-saisie-btn {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
+  .remove-row-saisie-btn {
+    opacity: 0.5;
+    background-color: variables.$sasp-primary-color;
+    color: variables.$sasp-secondary-color;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
