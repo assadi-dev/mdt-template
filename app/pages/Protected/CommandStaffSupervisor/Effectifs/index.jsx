@@ -93,9 +93,9 @@ const Effectifs = () => {
       photo:
         "https://static.wikia.nocookie.net/gtawiki/images/8/86/Jernigan-GTAV-SheriffDeputy-Portrait.png/revision/latest?cb=20180401093533",
       matricule: 109,
-      agent: "Catherine",
-      firstname: "Oconor",
-      lastname: "Marshall",
+      agent: "Catherine Oconor",
+      firstname: "Catherine",
+      lastname: "Oconor",
       phone: "555-456677",
       iban: "123456789",
       grade: "officier II",

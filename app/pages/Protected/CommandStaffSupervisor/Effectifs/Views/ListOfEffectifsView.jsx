@@ -1,5 +1,6 @@
 import React from "react";
 import EditEffectifView from "./EditEffectifView";
+import DeleteEffectifView from "./DeleteEffectifView";
 
 export const EDIT_EFFECTIF = "edit_effectif";
 export const DELETE_EFFECTIF = "delete_effectif";
@@ -9,7 +10,7 @@ export const listEffectifView = {
     element: EditEffectifView,
   },
   delete_effectif: {
-    element: null,
+    element: DeleteEffectifView,
   },
 };
 
