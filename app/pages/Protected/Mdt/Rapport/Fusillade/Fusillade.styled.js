@@ -46,13 +46,14 @@ export const RowSaisieDossierFusillade = styled.div`
 
 export const SaisieListSection = styled.div`
   padding: 1rem 0;
+  min-height: fit-content;
+  transition: all 0.25s;
 `;
 
 export const RowInputSaisielistContainer = styled.ul`
   overflow-y: auto;
-  min-height: 80px;
+  min-height: 100px;
   max-height: 240px;
-  transition: all 0.25s;
 
   li {
     display: grid;
@@ -84,7 +85,7 @@ export const AddRowButton = styled.button`
   }
 `;
 
-export const RemoveRowSaisieButton = styled.span`
+export const RemoveRowSaisieButton = styled.button`
   display: grid;
   place-content: center;
   border-radius: 100%;

@@ -65,6 +65,7 @@ const RowInputSaisie = ({
       </RowSaisieDossierFusillade>
       {onRemove && (
         <RemoveRowSaisieButton
+          type="button"
           className="remove-row-saisie-btn"
           onClick={handelClickRemove}
         >

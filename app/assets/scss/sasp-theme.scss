@@ -499,10 +499,13 @@ html:has(.theme-sasp) {
   }
   .remove-row-saisie-btn {
     opacity: 0.5;
-    background-color: variables.$sasp-primary-color;
+    background-color: #fff;
     color: variables.$sasp-secondary-color;
     &:hover {
       opacity: 1;
+    }
+    &:active {
+      opacity: 0.5;
     }
   }
 }

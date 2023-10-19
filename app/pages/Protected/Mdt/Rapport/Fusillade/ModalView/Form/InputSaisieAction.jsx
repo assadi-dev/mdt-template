@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   AddRowButton,
   RowAddSaisiAction,
@@ -9,16 +9,17 @@ import RowInputSaisie from "./RowInputSaisie";
 import { defaultSaisievalue } from "./formDefaultvalue";
 import uniqid from "uniqid";
 import { BsPlusCircleFill } from "react-icons/bs";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { listeSaisieAnimation } from "./Animation";
 
 const InputSaisieAction = ({ saisies = [], listSaisie = () => {} }) => {
-  const [saisieValue, setSaisieValue] = useState([defaultSaisievalue]);
-
-  useEffect(() => {
+  const [saisieValue, setSaisieValue] = useState((current) => {
     if (saisies.length > 0) {
-      setSaisieValue((current) => (current = saisies));
+      return saisies;
     }
-  }, [saisies]);
+
+    return [defaultSaisievalue];
+  });
 
   const handleClickAddRow = () => {
     setSaisieValue(
