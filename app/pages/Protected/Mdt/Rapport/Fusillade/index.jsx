@@ -14,6 +14,7 @@ import { createPortal } from "react-dom";
 import {
   ADD_DOSSIER_FUSILLADE,
   DELETE_DOSSIER_FUSILLADE,
+  EDIT_DOSSIER_FUSILLADE,
   listOfDossierFusilladeView,
 } from "./ModalView/ListDossierFusillade";
 
@@ -51,6 +52,7 @@ const Fusillade = () => {
           canDelete={true}
           canEdit={true}
           onDelete={() => handleClickDelete(row.original)}
+          onEdit={() => handleClickEdit(row.original)}
         />
       ),
     },
@@ -73,10 +75,16 @@ const Fusillade = () => {
     });
   };
 
-  const handleClickDelete = (dossierFusillad) => {
+  const handleClickDelete = (dossierFusillade) => {
     openModal({
       view: DELETE_DOSSIER_FUSILLADE,
-      data: dossierFusillad,
+      data: dossierFusillade,
+    });
+  };
+  const handleClickEdit = (dossierFusillade) => {
+    openModal({
+      view: EDIT_DOSSIER_FUSILLADE,
+      data: dossierFusillade,
     });
   };
 
