@@ -31,7 +31,6 @@ const Comptabilite = () => {
   };
 
   const handleClickStateDemande = (payload, state) => {
-    console.log(payload);
     setData((current) => {
       current = [...current].map((demande) => {
         if (demande.id == payload.id) {
