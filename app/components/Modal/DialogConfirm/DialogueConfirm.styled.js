@@ -77,7 +77,9 @@ export const ConfirmButton = styled.button`
 
 export const DialogContent = styled.div`
   padding: 1.2rem;
-  .title {
-    margin-bottom: 1.2rem;
-  }
+`;
+
+export const DialogtextTitle = styled.p`
+  text-align: center;
+  margin-bottom: 2.8rem;
 `;

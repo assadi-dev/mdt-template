@@ -4,6 +4,7 @@ import {
   DeleteConfirm,
   DeleteRowBtn,
   DialogContent,
+  DialogtextTitle,
   HeaderModalDelete,
 } from "./DialogueConfirm.styled";
 import CloseModalBtn from "../CloseModalBtn";
@@ -34,7 +35,8 @@ const DeleteConfirmForm = ({
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModalDelete>
       <DialogContent className="form-theme-color">
-        <p className="title">{text} </p>
+        <DialogtextTitle>{text} </DialogtextTitle>
+
         {children}
         <DeleteRowBtn>
           <ConfirmButton
