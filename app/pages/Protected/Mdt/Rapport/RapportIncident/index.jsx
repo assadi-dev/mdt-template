@@ -63,7 +63,7 @@ const RapportIncident = () => {
     },
     {
       Header: "N° de rapport",
-      accessor: "numeraRapport",
+      accessor: "numeroRapport",
     },
     {
       Header: "Rapport",
@@ -97,7 +97,7 @@ const RapportIncident = () => {
       agent: "Bob Marley",
       createdAt: "01/10/2023",
       raport: 1,
-      numeraRapport: "0001",
+      numeroRapport: "0001",
       officierimplique: "Taylor Moor, Mickel jackson",
       typeIncident: "usage d'arme à feu",
       emplacement: "central park",
