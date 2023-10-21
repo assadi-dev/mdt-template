@@ -16,6 +16,7 @@ import {
   ADD_RAPPORT_INTERVENTION,
   DELETE_RAPPORT_INTERVENTION,
   EDIT_RAPPORT_INTERVENTION,
+  SHOW_RAPPORT_INTERVENTION,
   listOfRapportInterventionView,
 } from "./ModalView/listOfRapportInterventionView";
 
@@ -42,7 +43,12 @@ const RapportIntervention = () => {
     {
       Header: "Rapport",
       accessor: "",
-      Cell: () => <ShowRapportIntervention />,
+      Cell: ({ row }) => (
+        <ShowRapportIntervention
+          raaportIntervention={row.original}
+          onShowRappprt={handleClickShowBtn}
+        />
+      ),
     },
     {
       Header: "Actions",
@@ -58,6 +64,13 @@ const RapportIntervention = () => {
       ),
     },
   ];
+
+  const handleClickShowBtn = (rapportIncident) => {
+    openModal({
+      view: SHOW_RAPPORT_INTERVENTION,
+      data: rapportIncident,
+    });
+  };
 
   const handleClickAddbtn = () => {
     openModal({
@@ -88,8 +101,8 @@ const RapportIntervention = () => {
       numeraRapport: "0001",
       officierimplique: "Taylor Moor, Mickel jackson",
       typeIncident: "usage d'arme à feu",
-      emplacement: "central park",
-      corpsIntervention: "test rapport intervention",
+      emplacement: "New York",
+      corpsIntervention: "test rapport intervention 22",
     },
     {
       id: 15,
