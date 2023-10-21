@@ -59,11 +59,25 @@ export const cleanNameUser = (firstname, lastname) => {
   return fullname;
 };
 
+/**
+ * Retourne le nom complet de l'agent avec matricule N/A si undefined
+ * @param {string} matricule
+ * @param {string} firsttname
+ * @param {string} lastname
+ * @returns
+ */
 export const cleanAgentMatricule = (matricule, firsttname, lastname) => {
   if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
   return `N/A-${cleanNameUser(firsttname, lastname)}`;
 };
 
+/**
+ * Retourne le nom complet de l'agent avec matricule null si undefined
+ * @param {string} matricule
+ * @param {string} firsttname
+ * @param {string} lastname
+ * @returns
+ */
 export const cleanAgentNoMatricule = (matricule, firsttname, lastname) => {
   if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
   return `${cleanNameUser(firsttname, lastname)}`;

@@ -1,10 +1,12 @@
 import React from "react";
-import {
-  HeaderModal,
-  ModalFormContainer,
-} from "../../../../../../../components/Forms/FormView.styled";
-import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import { retriveDocumentNum } from "../../../../../../../services/utils/rapport";
+import {
+  PreviewDocumentHeader,
+  TextContent,
+} from "../../../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
+import { Row } from "../../../../../../../components/PageContainer";
+import PreviewDocument from "../../../../../../../components/Modal/PreviewDocument";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const PreviewRapportIncident = ({
   payload,
@@ -15,13 +17,45 @@ const PreviewRapportIncident = ({
     payload?.numeroRapport
   )}`;
 
+  const AGENT_FULLNAME =
+    payload?.matricule + "-" + payload?.agent || "N/A-" + payload?.agent;
+
   return (
-    <ModalFormContainer {...props}>
-      <HeaderModal>
-        <h2 className="form-title">{TITLE_RAPPORT}</h2>
-        <CloseModalBtn className="close-section" onClick={onCloseModal} />
-      </HeaderModal>
-    </ModalFormContainer>
+    <PreviewDocument
+      title={TITLE_RAPPORT}
+      onCloseModal={onCloseModal}
+      {...props}
+    >
+      <PreviewDocumentHeader>
+        <p>
+          <span className="text-bolder">Agent: </span>
+          {AGENT_FULLNAME}
+        </p>
+        <p>
+          <span className="text-bolder">Officier impliqués: </span>
+          {payload?.officierimplique}
+        </p>
+        <Row className="justiy-content-between">
+          <p>
+            <span className="text-bolder">Emplacement: </span>
+            {payload?.emplacement}
+          </p>
+          <p>2023-10-15 à 18:34</p>
+        </Row>
+      </PreviewDocumentHeader>
+
+      <TextContent>
+        <p className="text-center mb-1">
+          <span className="text-bolder">Type d'incident: </span>
+          {payload?.typeIncident}
+        </p>
+        <p className="text-bold  mb-1">Corps de l'incident :</p>
+        <MarkdownPreview
+          className="theme-markdownPreview"
+          source={payload?.corpsIncident}
+        />
+      </TextContent>
+    </PreviewDocument>
   );
 };
 

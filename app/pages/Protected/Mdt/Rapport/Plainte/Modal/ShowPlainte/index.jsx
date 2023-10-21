@@ -25,12 +25,12 @@ const ShowPlainte = ({ onCloseModal = () => {}, payload, ...props }) => {
         </p>
         <p>
           <span className="text-bolder">Dépositaire: </span>
-          {payload?.matricule + "-" + payload?.depositaire}
+          {payload?.depositaire}
         </p>
         <Row className="justiy-content-between">
           <p>
             <span className="text-bolder">Accusé: </span>
-            {payload?.matricule + "-" + payload?.accused}
+            {payload?.accused}
           </p>
           <p>2023-10-15 à 18:34</p>
         </Row>
