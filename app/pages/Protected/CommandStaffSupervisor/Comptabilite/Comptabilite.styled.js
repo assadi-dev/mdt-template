@@ -26,13 +26,18 @@ export const StateButton = styled.button`
   display: grid;
   place-items: center;
   opacity: 0.4;
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 1;
   }
 
-  &:active {
-    transform: scale(0.6);
+  /*   &:active {
+    transform: scale(0.7);
   }
+ */
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   svg {
     width: 18px;
     height: 18px;
