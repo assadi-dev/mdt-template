@@ -27,4 +27,4 @@ export const defaultFormValue = {
   division: "",
 };
 
-export const Tabsheader = ["Formulaire", "Formations", "End of watch"];
+export const Tabsheader = ["Info", "Formations", "End of watch"];

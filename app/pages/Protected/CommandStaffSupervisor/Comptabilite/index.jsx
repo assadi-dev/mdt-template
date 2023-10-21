@@ -6,10 +6,24 @@ import useDelayed from "../../../../hooks/useDelayed";
 import useLoader from "../../../../hooks/useLoader";
 import ActionCell from "./ActionCell";
 import ShowDemandeComptability from "./ShowDemandeComptability";
+import { createPortal } from "react-dom";
+import Modal from "../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../components/Modal/RenderModalContent";
+import useModalState from "../../../../hooks/useModalState";
+import { SHOW_DEMANDE_COMPTABILITE, listOfView } from "./View/ListOfView";
 
 const Comptabilite = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
+  const { modalState, openModal, closeModal } = useModalState();
+
+  const handleShowRapport = (rapport) => {
+    console.log(rapport);
+    openModal({
+      view: SHOW_DEMANDE_COMPTABILITE,
+      data: rapport,
+    });
+  };
 
   const COLUMNS = [
     {
@@ -31,7 +45,12 @@ const Comptabilite = () => {
     {
       Header: "Rapport",
       accessor: "",
-      Cell: () => <ShowDemandeComptability />,
+      Cell: ({ row }) => (
+        <ShowDemandeComptability
+          rapport={row.original}
+          onShowDemande={handleShowRapport}
+        />
+      ),
     },
     {
       Header: "Date et Heure",
@@ -83,6 +102,17 @@ const Comptabilite = () => {
         manualPagination={true}
         isSuccess={!loaderState}
       />
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <RenderModalFormContent
+            view={modalState.view}
+            payload={modalState.data}
+            onCloseModal={closeModal}
+            enumOfView={listOfView}
+          />
+        </Modal>,
+        document.body
+      )}
     </ComptabiliteCsPage>
   );
 };
