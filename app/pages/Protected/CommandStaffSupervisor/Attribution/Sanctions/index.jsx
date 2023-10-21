@@ -12,7 +12,9 @@ import ShowSanction from "./ShowSanction";
 import useModalState from "../../../../../hooks/useModalState";
 import {
   ADD_ATTRIBUTION_SANCTION,
+  DELETE_ATTRIBUTION_SANCTION,
   EDIT_ATTRIBUTION_SANCTION,
+  SHOW_ATTRIBUTION_SANCTION,
   collections,
   listOfViewSanction,
 } from "./Views/listOfViews";
@@ -43,7 +45,11 @@ const AttributionSanctions = () => {
       Header: "Raison",
       accessor: "",
       Cell: ({ row }) => (
-        <ShowSanction className="bg-show-btn" sanctionData={row.original} />
+        <ShowSanction
+          className="bg-show-btn"
+          sanctionData={row.original}
+          onShowSanction={handleClikShowSanction}
+        />
       ),
     },
 
@@ -55,20 +61,34 @@ const AttributionSanctions = () => {
           data={row.original}
           canEdit={true}
           canDelete={true}
-          onEdit={handleClikAEditSanction}
+          onEdit={handleClikEditSanction}
+          onDelete={handleClikDeletSanction}
         />
       ),
     },
   ];
+
+  const handleClikShowSanction = (sanctionData) => {
+    openModal({
+      view: SHOW_ATTRIBUTION_SANCTION,
+      data: sanctionData,
+    });
+  };
 
   const handleClikAddSanction = () => {
     openModal({
       view: ADD_ATTRIBUTION_SANCTION,
     });
   };
-  const handleClikAEditSanction = (sanctionData) => {
+  const handleClikEditSanction = (sanctionData) => {
     openModal({
       view: EDIT_ATTRIBUTION_SANCTION,
+      data: sanctionData,
+    });
+  };
+  const handleClikDeletSanction = (sanctionData) => {
+    openModal({
+      view: DELETE_ATTRIBUTION_SANCTION,
       data: sanctionData,
     });
   };
