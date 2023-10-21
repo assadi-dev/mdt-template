@@ -9,10 +9,22 @@ import useLoader from "../../../../../hooks/useLoader";
 import DataTable from "../../../../../components/DataTable";
 import ActionCells from "../../../../../components/DataTable/ActionCells";
 import ShowSanction from "./ShowSanction";
+import useModalState from "../../../../../hooks/useModalState";
+import {
+  ADD_ATTRIBUTION_SANCTION,
+  EDIT_ATTRIBUTION_SANCTION,
+  collections,
+  listOfViewSanction,
+} from "./Views/listOfViews";
+import { createPortal } from "react-dom";
+import Modal from "../../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 
 const AttributionSanctions = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
+
+  const { modalState, openModal, closeModal } = useModalState();
 
   const COLUMNS = [
     {
@@ -30,33 +42,45 @@ const AttributionSanctions = () => {
     {
       Header: "Raison",
       accessor: "",
-      Cell: ({ row }) => <ShowSanction className="bg-show-btn" />,
+      Cell: ({ row }) => (
+        <ShowSanction className="bg-show-btn" sanctionData={row.original} />
+      ),
     },
 
     {
       Header: "Action",
       accessor: "",
       Cell: ({ row }) => (
-        <ActionCells data={row.original} canEdit={true} canDelete={true} />
+        <ActionCells
+          data={row.original}
+          canEdit={true}
+          canDelete={true}
+          onEdit={handleClikAEditSanction}
+        />
       ),
     },
   ];
-  const collections = [
-    {
-      id: 1,
-      agent: "jackson Marshall",
-      decideur: "Alyson Finley",
-      raison: "Uriner dans la voie publique",
 
-      createdAt: "08/10/2023",
-    },
-  ];
+  const handleClikAddSanction = () => {
+    openModal({
+      view: ADD_ATTRIBUTION_SANCTION,
+    });
+  };
+  const handleClikAEditSanction = (sanctionData) => {
+    openModal({
+      view: EDIT_ATTRIBUTION_SANCTION,
+      data: sanctionData,
+    });
+  };
 
   return (
     <AttributionSanctionPageContainer>
       <RowAction className="row-action-page">
         <div></div>
-        <AddSanctionBtn className="bg-btn-alt-theme-color">
+        <AddSanctionBtn
+          className="bg-btn-alt-theme-color"
+          onClick={handleClikAddSanction}
+        >
           Ajouter une sanction
         </AddSanctionBtn>
       </RowAction>
@@ -67,6 +91,18 @@ const AttributionSanctions = () => {
         isLoading={loaderState}
         isSuccess={!loaderState}
       />
+
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <RenderModalFormContent
+            view={modalState.view}
+            payload={modalState.data}
+            onCloseModal={closeModal}
+            enumOfView={listOfViewSanction}
+          />
+        </Modal>,
+        document.body
+      )}
     </AttributionSanctionPageContainer>
   );
 };
