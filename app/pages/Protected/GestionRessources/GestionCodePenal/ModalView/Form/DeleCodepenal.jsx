@@ -3,16 +3,17 @@ import DeleteConfirmForm from "../../../../../../components/Modal/DialogConfirm/
 
 const DeleCodepenal = ({ payload, ...props }) => {
   const confirmDelete = () => {
-    console.log(payload);
+    //console.log(payload);
   };
+
+  const TEXT_DELETE = `Voulez-vous supprimer  ${payload.label} ?`;
+
   return (
     <DeleteConfirmForm
-      text="Voulez-vous supprimer"
+      text={TEXT_DELETE}
       onConfirm={confirmDelete}
       {...props}
-    >
-      <p className="text-center my-1">{payload?.label} ?</p>
-    </DeleteConfirmForm>
+    ></DeleteConfirmForm>
   );
 };
 
