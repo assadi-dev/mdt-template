@@ -26,3 +26,5 @@ export const defaultFormValue = {
   grade: "",
   division: "",
 };
+
+export const Tabsheader = ["Formulaire", "Formations", "End of watch"];

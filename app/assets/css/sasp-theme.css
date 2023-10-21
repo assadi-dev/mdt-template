@@ -80,6 +80,8 @@ html:has(.theme-sasp) {
   /*Dropdown select */
   /** React Select **/
   /**Formulaire **/
+  /**Form tab **/
+  /*********/
 }
 html:has(.theme-sasp) .bg-selected-theme-color {
   background-color: #969696;
@@ -428,4 +430,19 @@ html:has(.theme-sasp) .remove-row-saisie-btn:hover {
 }
 html:has(.theme-sasp) .remove-row-saisie-btn:active {
   opacity: 0.5;
+}
+html:has(.theme-sasp) .form-tab-select .react-tabs__tab--selected {
+  border-radius: 5px;
+  padding: 0.5rem 1.3rem;
+  background-color: #969696;
+  color: #131B26;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transition: background 0.35s;
+  -webkit-transition: background 0.35s;
+  -moz-transition: background 0.35s;
+  -ms-transition: background 0.35s;
+  -o-transition: background 0.35s;
 }/*# sourceMappingURL=sasp-theme.css.map */

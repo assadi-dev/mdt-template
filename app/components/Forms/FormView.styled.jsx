@@ -1,3 +1,4 @@
+import { TabList } from "react-tabs";
 import styled from "styled-components";
 
 export const ModalContainer = styled.div`
@@ -215,3 +216,22 @@ export const UploadFormZoneContainer = styled.div`
   border: 1px dashed rgba(255, 255, 255, 0.5);
   border-radius: 8px;
 `;
+
+/******* Tabs ******/
+
+/* export const TabFormContainer = styled.div`` */
+
+export const TabsFormHeader = styled(TabList)`
+  display: flex;
+  grid-gap: 1rem;
+  font-size: 1.3rem;
+  align-items: center;
+  transition: all 0.25s;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 5px;
+  font-weight: 600;
+`;
+
+/**************/

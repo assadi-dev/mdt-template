@@ -1,15 +1,25 @@
 import styled from "styled-components";
 import { PageContainer } from "../../../../components/PageContainer";
-import { ModalFormContainer } from "../../../../components/Forms/FormView.styled";
+import {
+  FormContainer,
+  ModalFormContainer,
+} from "../../../../components/Forms/FormView.styled";
+import MarkdowTextEditor from "../../../../components/TextEditor/MarkdowTextEditor";
 
 export const EffectifPageContainer = styled(PageContainer)``;
 
 export const EffectModalCOntainer = styled(ModalFormContainer)`
+  min-height: 715px;
   .row-label {
     display: flex !important;
     align-items: center;
     grid-gap: 1rem;
   }
+
+  .tab-header-list {
+    margin: 1.3rem auto;
+  }
+
   @media screen and (min-width: 990px) {
     width: 72rem;
   }
@@ -43,6 +53,17 @@ export const PhotoAgent = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: 3px;
+`;
+
+/*** EOW ***/
+
+export const EowFormContainer = styled(FormContainer)`
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+export const TextEOWCOntent = styled(MarkdowTextEditor)`
+  margin: 0;
 `;
 
 /**** Form ****/
