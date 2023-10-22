@@ -1,10 +1,10 @@
 import React from "react";
 import DeleteConfirmForm from "../../../../../../../components/Modal/DialogConfirm/DeleteConfirmForm";
 
-const DeleteRapportincident = ({ payload, ...props }) => {
+const DeleteRapportIncident = ({ payload, ...props }) => {
   const TEXT_CONFIRM = `Voulez-vous supprimer le rapport n° ${payload?.numeraRapport}`;
 
   return <DeleteConfirmForm text={TEXT_CONFIRM} {...props}></DeleteConfirmForm>;
 };
 
-export default DeleteRapportincident;
+export default DeleteRapportIncident;
