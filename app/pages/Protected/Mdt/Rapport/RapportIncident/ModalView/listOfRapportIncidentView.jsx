@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< Updated upstream
 
+=======
+import AddRapportincident from "./Form/AddRapportincident";
+>>>>>>> Stashed changes
 import EditRapportIncident from "./Form/EditRapportIncident";
 import PreviewRapportIncident from "./Form/PreviewRapportIncident";
 import DeleteRapportIncident from "./Form/DeleteRapportIncident";
