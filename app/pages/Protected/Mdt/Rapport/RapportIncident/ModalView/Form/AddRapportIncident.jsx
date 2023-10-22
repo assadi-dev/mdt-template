@@ -5,11 +5,7 @@ import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import FormRapportIncident from "./FormRapportIncident";
 import { defaultFormValues } from "./helpers";
 
-<<<<<<< Updated upstream
 const AddRapportIncident = ({ onCloseModal, ...props }) => {
-=======
-const AddRapportincident = ({ onCloseModal, ...props }) => {
->>>>>>> Stashed changes
   return (
     <ModalRapportIncident {...props}>
       <HeaderModal>
@@ -21,8 +17,4 @@ const AddRapportincident = ({ onCloseModal, ...props }) => {
   );
 };
 
-<<<<<<< Updated upstream
 export default AddRapportIncident;
-=======
-export default AddRapportincident;
->>>>>>> Stashed changes

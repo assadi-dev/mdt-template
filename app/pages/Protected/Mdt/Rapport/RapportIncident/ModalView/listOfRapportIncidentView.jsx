@@ -2,7 +2,7 @@ import React from "react";
 import EditRapportIncident from "./Form/EditRapportIncident";
 import PreviewRapportIncident from "./Form/PreviewRapportIncident";
 import DeleteRapportIncident from "./Form/DeleteRapportIncident";
-import AddRapportIncident from "./Form/AddRapportincIdent";
+import AddRapportIncident from "./Form/AddRapportIncident";
 
 export const ADD_RAPPORT_INCIDENT = "add-rapportIncident";
 export const EDIT_RAPPORT_INCIDENT = "edit-rapportIncident";
