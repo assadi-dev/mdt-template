@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use App\Repository\PlaintsRepository;
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlaintsRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PlaintsRepository::class)
+ * @ApiResource()
  */
 class Plaints
 {
+    use TimestampableEntity;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +38,7 @@ class Plaints
     private $depositionText;
 
     /**
+     * @ORM\Column(name="idAgent")
      * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
