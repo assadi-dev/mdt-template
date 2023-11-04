@@ -27,7 +27,8 @@ const TrombinoscopSlice = createSlice({
       })
       .addCase(retrieveAgentTrombinoscopAsync.fulfilled, (state, action) => {
         const { payload } = action;
-        state.collections = payload;
+        state.collections = payload.data;
+        state.count = payload.count;
         state.status = "complete";
       });
   },

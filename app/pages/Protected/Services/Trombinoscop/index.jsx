@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useTransition } from "react";
+import React, { Suspense, useEffect, useState, useTransition } from "react";
 import { PageContainer, Row } from "../../../../components/PageContainer";
 import { FormControl } from "../../../../components/Forms/FormView.styled";
 import {
@@ -14,41 +14,46 @@ import { useDispatch, useSelector } from "react-redux";
 import retrieveAgentTrombinoscopAsync from "../../../../features/Trombinoscop/TrombinoscopAsync.action";
 import InfiniteScroll from "react-infinite-scroll-component";
 import TrombinoscopGrid from "./TrombinoscopGrid";
+import useDebounce from "../../../../hooks/useDebounce";
+import PaginationSection from "./PaginationSection";
 
 const Trombinoscop = () => {
   const dispatch = useDispatch();
-  const { collections, status, error } = useSelector(
+  const { collections, status, count, error } = useSelector(
     (state) => state.TrombinoscopReducer
   );
 
+  const [searchAgent, setSearchAgent] = useState("");
+  const { debouncedValue } = useDebounce(searchAgent, 500);
+  const ITEM_PER_PAGE = 10;
+
   const handeSearchinput = (value) => {
-    // console.log(value);
+    setSearchAgent(value);
+  };
+  const [pageIndex, setPageIndex] = useState(1);
+  const MAX_PAGE = Math.ceil(count / ITEM_PER_PAGE);
+
+  const handleSetPage = (increment) => {
+    setPageIndex((current) => (current += increment));
   };
 
-  const {
-    onPageChange,
-    onPageTotalCountChange,
-    handleSearch,
-    pageIndex,
-    search,
-    totalCount,
-    pageSize,
-  } = useCustomPagination(defaultPageSize, 0, 0, "");
-
   useEffect(() => {
+    console.log(debouncedValue);
     const payload = {
       page: pageIndex,
-      params: { item_per_page: pageSize, search: search },
+      params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
     };
-
-    const fetchTrombinoscopPromise = dispatch(
-      retrieveAgentTrombinoscopAsync(payload)
-    );
+    let fetchTrombinoscopPromise;
+    try {
+      fetchTrombinoscopPromise = dispatch(
+        retrieveAgentTrombinoscopAsync(payload)
+      );
+    } catch (error) {}
 
     return () => {
-      fetchTrombinoscopPromise.abort();
+      fetchTrombinoscopPromise?.abort();
     };
-  }, []);
+  }, [debouncedValue, pageIndex]);
 
   return (
     <PageContainer>
@@ -58,10 +63,20 @@ const Trombinoscop = () => {
           onSearchInput={handeSearchinput}
           placeholder="Rechercher"
         />
+        <PaginationSection
+          onNext={() => handleSetPage(1)}
+          onPrev={() => handleSetPage(-1)}
+          pageIndex={pageIndex}
+          maxPage={MAX_PAGE}
+        />
       </HeaderRow>
 
       {status == "complete" ? (
-        <TrombinoscopGrid status={status} collections={collections} />
+        <TrombinoscopGrid
+          status={status}
+          collections={collections}
+          searchAgent={searchAgent}
+        />
       ) : (
         "Chargement en cours"
       )}

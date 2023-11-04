@@ -6,6 +6,7 @@ use App\Entity\Agent;
 use App\Entity\Grade;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -117,6 +118,7 @@ class AgentRepository extends ServiceEntityRepository
         ->orWhere($qb->expr()->like("a.gender", ":search"))
         ->orWhere($qb->expr()->like("a.matricule", ":search"))
         ->orWhere($qb->expr()->like("a.phone", ":search"))
+        ->orWhere($qb->expr()->like("g.name", ":search"))
         ->setParameter("search", "%$search%")
         ->groupBy("a.id");
 
@@ -125,7 +127,15 @@ class AgentRepository extends ServiceEntityRepository
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
         $result = $qb->getQuery()->getResult();
-        return $result;
+        $query = $this->createQueryBuilder("a")->getQuery();
+        
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+
+
+        $result = $qb->getQuery()->getResult();
+        return ["count" => $count,"data" => $result];
     }
 
     function findAgentByPage($items_per_page = 5, $page = 1, $search)
@@ -167,8 +177,15 @@ class AgentRepository extends ServiceEntityRepository
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
+
+        $query = $this->createQueryBuilder("a")->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+
+
         $result = $qb->getQuery()->getResult();
-        return $result;
+        return ["count" => $count,"data" => $result];
     }
 
 

@@ -7,6 +7,8 @@ export const HeaderRow = styled(Row)`
   align-items: center;
   margin-top: 2rem;
   margin-bottom: 2.3rem;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 export const TrombinoscopeSearchInput = styled(SearchInputUser)`
@@ -71,4 +73,41 @@ export const PhotoContainer = styled.div`
     border-radius: 100%;
     cursor: pointer;
   }
+`;
+
+export const NoFounMessage = styled.p`
+  white-space: nowrap;
+`;
+
+//Pagination Section
+
+export const PaginationSectionContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-gap: 0.5rem;
+`;
+
+export const ButtonPagination = styled.button`
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 0 0.2rem;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+  &:active {
+    opacity: 0;
+  }
+  &:disabled {
+    opacity: 0.5 !important;
+  }
+`;
+
+export const PangIndicator = styled.div`
+  margin: 0 1rem;
+  padding: 1rem;
 `;
