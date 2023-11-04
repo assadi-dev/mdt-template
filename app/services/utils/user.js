@@ -66,9 +66,9 @@ export const cleanNameUser = (firstname, lastname) => {
  * @param {string} lastname
  * @returns
  */
-export const cleanAgentMatricule = (matricule, firsttname, lastname) => {
-  if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
-  return `N/A-${cleanNameUser(firsttname, lastname)}`;
+export const cleanAgentMatricule = (matricule, firstname, lastname) => {
+  if (matricule) return `${matricule}-${cleanNameUser(firstname, lastname)}`;
+  return `N/A-${cleanNameUser(firstname, lastname)}`;
 };
 
 /**
@@ -78,7 +78,7 @@ export const cleanAgentMatricule = (matricule, firsttname, lastname) => {
  * @param {string} lastname
  * @returns
  */
-export const cleanAgentNoMatricule = (matricule, firsttname, lastname) => {
-  if (matricule) return `${matricule}-${cleanNameUser(firsttname, lastname)}`;
-  return `${cleanNameUser(firsttname, lastname)}`;
+export const cleanAgentNoMatricule = (matricule, firstname, lastname) => {
+  if (matricule) return `${matricule}-${cleanNameUser(firstname, lastname)}`;
+  return `${cleanNameUser(firstname, lastname)}`;
 };
