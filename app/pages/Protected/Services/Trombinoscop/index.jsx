@@ -38,7 +38,6 @@ const Trombinoscop = () => {
   };
 
   useEffect(() => {
-    console.log(debouncedValue);
     const payload = {
       page: pageIndex,
       params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
