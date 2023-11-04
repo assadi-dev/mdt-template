@@ -14,6 +14,8 @@ import useModalState, { TOGGLE_MODAL } from "../../../../hooks/useModalState";
 import { createPortal } from "react-dom";
 import Modal from "../../../../components/Modal/Modal";
 import View from "./Modal/View";
+import ActionCells from "../../../../components/DataTable/ActionCells";
+import DepotBtn from "./Modal/DepotBtn";
 
 const Saisie = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
@@ -35,23 +37,24 @@ const Saisie = () => {
     };
   }, [pageIndex, search]);
 
-  const collections = [];
+  const collections = [
+    { agent: "tedd", date: "13-11-2023 à 10:15", post: "set" },
+  ];
   const columns = [
-    { Header: "Agent", accessor: "name" },
-    { Header: "Date de saisie", accessor: "faction" },
-    { Header: "Poste", accessor: "nb_grades" },
-    { Header: "Dépôt", accessor: "depot" },
+    { Header: "Agent", accessor: "agent" },
+    { Header: "Date de saisie", accessor: "date" },
+    { Header: "Poste", accessor: "post" },
+    {
+      Header: "Dépôt",
+      Cell: ({ row }) => (
+        <DepotBtn data={row.original} onClickShowDepot={handleClickShowDepot} />
+      ),
+    },
     {
       Header: "Action",
       accessor: "",
       Cell: ({ row }) => (
-        <ActionCells
-          data={row.original}
-          onEdit={handleClickEdit}
-          onDelete={handleClicDelete}
-          canDelete={true}
-          canEdit={true}
-        />
+        <ActionCells data={row.original} canDelete={true} canEdit={true} />
       ),
     },
   ];
@@ -59,6 +62,10 @@ const Saisie = () => {
   /**Action btn **/
   const handleClickAddbtn = () => {
     toggleModal({ view: "add-saisie", data: null });
+  };
+
+  const handleClickShowDepot = (data) => {
+    console.log(data);
   };
 
   return (

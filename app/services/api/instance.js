@@ -6,3 +6,9 @@ export const intance = axios.create({
 });
 
 export default intance;
+
+/**
+ * Agent IRI
+ * ``` api/agents/:idAgent ```
+ */
+export const agent_iri = `api/agents/`;
