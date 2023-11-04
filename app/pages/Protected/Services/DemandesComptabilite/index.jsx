@@ -12,8 +12,15 @@ import { PageContainer, RowAction } from "../../../../components/PageContainer";
 import StatusCell from "./StatusCell";
 import RenderModalFormContent from "../../../../components/Modal/RenderModalContent";
 import listOfView, { ADD_DEMANDE } from "./ViewsModal/listOfView";
+import { useDispatch, useSelector } from "react-redux";
 
 const DemandeComptability = () => {
+  const dispatch = useDispatch();
+
+  const { status, count } = useSelector(
+    (state) => state.AccountingRequestByPageReducer
+  );
+
   const { modalState, toggleModal, closeModal } = useModalState();
 
   const columns = [
