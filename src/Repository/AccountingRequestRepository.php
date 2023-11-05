@@ -81,14 +81,17 @@ public function findAccountingRequestByPage($items_per_page = 5, $page = 1, $sea
     a.gender,
     acq.subject,
     acq.reason,
+    acq.date,
     acq.amount,
-    acq.requestState"
+    acq.requestState,
+    acq.createdAt"
     )
     ->leftJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
     ->orWhere($qb->expr()->like("a.firstname", ":search"))
     ->orWhere($qb->expr()->like("a.lastname", ":search"))
     ->orWhere($qb->expr()->like("a.gender", ":search"))
     ->orWhere($qb->expr()->like("a.matricule", ":search"))
+    ->orWhere($qb->expr()->like("acq.date", ":search"))
     ->orWhere($qb->expr()->like("acq.amount", ":search"))
     ->orWhere($qb->expr()->like("acq.subject", ":search"))
      ->orWhere($qb->expr()->like("acq.requestState", ":search")) 
@@ -127,7 +130,8 @@ public function findAccountingRequestByPageForAgent($idAgent, $items_per_page = 
     acq.date,
     acq.reason,
     acq.amount,
-    acq.requestState"
+    acq.requestState,
+    acq.createdAt"
     )
     ->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
     ->where("a.id = :idAgent")

@@ -17,6 +17,8 @@ import { retrieveAccountingRequest } from "../../../../features/AccountingReques
 import { defaultPageSize } from "../../../../config/constantes";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
 import { cleanAgentNoMatricule } from "../../../../services/utils/user";
+import { toastError } from "../../../../services/utils/alert";
+import { ShowAgent } from "./helpers";
 
 const DemandeComptability = () => {
   const dispatch = useDispatch();
@@ -46,19 +48,17 @@ const DemandeComptability = () => {
       page: pageIndex,
       params: { item_per_page: pageSize, search: search },
     };
-    const fetchPromise = dispatch(retrieveAccountingRequest(payload));
+    try {
+      const fetchPromise = dispatch(retrieveAccountingRequest(payload));
+      onPageTotalCountChange(count);
 
-    if (collections.length > 0) onPageTotalCountChange(count);
-
-    return () => {
-      fetchPromise.abort();
-    };
+      return () => {
+        fetchPromise.abort();
+      };
+    } catch (error) {
+      toastError("Une erreur est survenue lors de la récuperation des données");
+    }
   }, [pageIndex, idAgent, search]);
-
-  const ShowAgent = (agent) => {
-    const { matricule, firstname, lastname } = agent;
-    return cleanAgentNoMatricule(matricule, firstname, lastname);
-  };
 
   const columns = [
     { Header: "Matricule", accessor: "matricule" },

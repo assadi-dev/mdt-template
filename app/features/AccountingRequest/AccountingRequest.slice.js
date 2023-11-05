@@ -21,9 +21,22 @@ const AccountingRequestByPage = createSlice({
       state.collections = updateState;
       state.collections.count = state.collections.count + 1;
     },
-    editAccountingRequestByPage: (state, action) => {},
+    editAccountingRequestByPage: (state, action) => {
+      const { payload } = action;
+      const updateState = [...state.collections].map((demande) => {
+        if (demande.id == payload.id) {
+          return { ...demande, ...payload };
+        }
+        return demande;
+      });
+
+      state.collections = updateState;
+    },
     deleteAccountingRequestByPage: (state, action) => {},
-    errorAccountingRequestByPage: (state, action) => {},
+    errorAccountingRequestByPage: (state, action) => {
+      state.error = action.payload;
+      state.status = "complete";
+    },
   },
   extraReducers: (builder) => {
     builder

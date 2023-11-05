@@ -45,7 +45,6 @@ export const AddForm = ({
       dispatch(addAccountingRequestByPage({ ...res.data, ...agent }));
       toastSuccess();
     } catch (error) {
-      console.log(error);
       toastError();
     } finally {
       toggleProcess();

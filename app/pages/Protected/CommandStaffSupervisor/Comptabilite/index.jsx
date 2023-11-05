@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ComptabiliteCsPage } from "./Comptabilite.styled";
 import { RowAction } from "../../../../components/PageContainer";
 import DataTable from "../../../../components/DataTable";
@@ -15,12 +15,30 @@ import {
   collections,
   listOfView,
 } from "./View/ListOfView";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../config/constantes";
+import { retrieveAccountingRequest } from "../../../../features/AccountingRequest/AccountingRequestAsyn.action";
+import { useDispatch, useSelector } from "react-redux";
+import { ShowAgent } from "../../Services/DemandesComptabilite/helpers";
+import { editAccountingRequestByPage } from "../../../../features/AccountingRequest/AccountingRequest.slice";
+import { toastError, toastSuccess } from "../../../../services/utils/alert";
+import { updateAccountingRequest } from "./helpers";
 
 const Comptabilite = () => {
-  const [data, setData] = useState(collections);
+  const dispatch = useDispatch();
+  const { collections, status, count } = useSelector(
+    (state) => state.AccountingRequestByPageReducer
+  );
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
-  const { endLoader, loaderState } = useLoader();
-  useDelayed(endLoader, 1000);
   const { modalState, openModal, closeModal } = useModalState();
 
   const handleShowRapport = (rapport) => {
@@ -30,17 +48,34 @@ const Comptabilite = () => {
     });
   };
 
-  const handleClickStateDemande = (payload, state) => {
-    setData((current) => {
-      current = [...current].map((demande) => {
-        if (demande.id == payload.id) {
-          return { ...demande, demandeState: state };
-        }
-        return demande;
-      });
-      return current;
-    });
+  const handleClickStateDemande = async (payload, state) => {
+    try {
+      let data = { ...payload, requestState: state };
+      await updateAccountingRequest(payload?.id, { requestState: state });
+      dispatch(editAccountingRequestByPage(data));
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    }
   };
+
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+
+      const fetchPromise = dispatch(retrieveAccountingRequest(payload));
+      onPageTotalCountChange(count);
+
+      return () => {
+        fetchPromise.abort();
+      };
+    } catch (error) {
+      toastError("Une erreur est survenue lors de la récuperation des données");
+    }
+  }, [search, pageIndex]);
 
   const COLUMNS = [
     {
@@ -49,11 +84,14 @@ const Comptabilite = () => {
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      Cell: ({ row }) => {
+        const { matricule, firstname, lastname } = row?.original;
+        return ShowAgent({ matricule, firstname, lastname });
+      },
     },
     {
       Header: "Objet de la demande",
-      accessor: "objetDemande",
+      accessor: "subject",
     },
     {
       Header: "Montant",
@@ -71,7 +109,7 @@ const Comptabilite = () => {
     },
     {
       Header: "Date et Heure",
-      accessor: "createdAt",
+      accessor: "date",
     },
     {
       Header: "Actions",
@@ -91,10 +129,18 @@ const Comptabilite = () => {
       <DataTable
         className="table-align-center-not-first"
         columns={COLUMNS}
-        data={data}
-        isLoading={loaderState}
+        data={collections}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
         manualPagination={true}
-        isSuccess={!loaderState}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

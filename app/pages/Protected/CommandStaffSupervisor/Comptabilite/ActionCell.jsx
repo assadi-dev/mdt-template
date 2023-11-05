@@ -10,14 +10,14 @@ const ActionCell = ({ demande, onSelectState = () => {} }) => {
   const VALIDATE_BTN_CLASS = [];
   const REJECTED_BTN_CLASS = [];
 
-  demande?.demandeState == "accepted"
+  demande?.requestState == "accepted"
     ? VALIDATE_BTN_CLASS.push("selected")
     : null;
-  demande?.demandeState == "rejected"
+  demande?.requestState == "rejected"
     ? REJECTED_BTN_CLASS.push("selected")
     : null;
 
-  const DISABLE_BTN = demande.demandeState != "pending";
+  const DISABLE_BTN = demande.requestState != "pending";
 
   return (
     <TableAction>

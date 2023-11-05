@@ -6,10 +6,17 @@ import {
 } from "../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 import { Row } from "../../../../../components/PageContainer";
 import MarkdownPreview from "@uiw/react-markdown-preview";
+import { ShowAgent } from "../../../Services/DemandesComptabilite/helpers";
 
 const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
-  const TITLE_DOCUMENT = `Demande comptabilité n° ${payload?.numeroDemandeComptabilite}`;
+  const TITLE_DOCUMENT = `Demande comptabilité n° ${
+    payload?.numeroDemandeComptabilite || ""
+  }`;
 
+  console.log(payload);
+  const { matricule, firstname, lastname } = payload;
+
+  const CLEAN_NAME_AGENT = ShowAgent({ matricule, firstname, lastname });
   return (
     <PreviewDocument
       title={TITLE_DOCUMENT}
@@ -19,16 +26,16 @@ const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
       <PreviewDocumentHeader>
         <Row style={{ marginTop: "18px" }}>
           <p className="agent">
-            <strong>Agent: </strong> {payload?.agent}
+            <strong>Agent: </strong> {CLEAN_NAME_AGENT}
           </p>
         </Row>
         <Row>
           <p className="objet">
-            <strong>Objet: </strong> {payload?.objetDemande}
+            <strong>Objet: </strong> {payload?.subject}
           </p>
         </Row>
         <Row className="justiy-content-end">
-          <p className="date">{payload?.createdAt}</p>
+          <p className="date">{payload?.date}</p>
         </Row>
         <Row className="justiy-content-end">
           <p className="montant">
@@ -41,7 +48,7 @@ const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
       <TextContent>
         <MarkdownPreview
           className="theme-markdownPreview"
-          source={payload?.raison}
+          source={payload?.reason}
         />
       </TextContent>
     </PreviewDocument>
