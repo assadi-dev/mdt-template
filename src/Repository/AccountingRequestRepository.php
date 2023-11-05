@@ -70,6 +70,7 @@ class AccountingRequestRepository extends ServiceEntityRepository
 
 public function findAccountingRequestByPage($items_per_page = 5, $page = 1, $search="")
 {
+
     $countResult = ($page - 1) * $items_per_page;
 
     $qb = $this->createQueryBuilder("acq");
@@ -110,29 +111,35 @@ public function findAccountingRequestByPage($items_per_page = 5, $page = 1, $sea
     return ["count" => $count,"data" => $result];
 
 }
-public function findAccountingRequestByPageForAgent($items_per_page = 5, $page = 1, $search="")
+public function findAccountingRequestByPageForAgent($idAgent, $items_per_page = 5, $page = 1, $search="")
 {
     $countResult = ($page - 1) * $items_per_page;
 
+
     $qb = $this->createQueryBuilder("acq");
     $qb->select("acq.id,
+    a.id as idAgent,
     a.matricule,
     a.firstname,
     a.lastname,
     a.gender,
     acq.subject,
+    acq.date,
     acq.reason,
     acq.amount,
     acq.requestState"
     )
-    ->leftJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
-    ->orWhere($qb->expr()->like("a.firstname", ":search"))
-    ->orWhere($qb->expr()->like("a.lastname", ":search"))
-    ->orWhere($qb->expr()->like("a.gender", ":search"))
-    ->orWhere($qb->expr()->like("a.matricule", ":search"))
-    ->orWhere($qb->expr()->like("acq.subject", ":search"))
-     ->orWhere($qb->expr()->like("acq.requestState", ":search")) 
+    ->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
+    ->where("a.id = :idAgent")
+    ->orHaving($qb->expr()->like("a.firstname", ":search"))
+    ->orHaving($qb->expr()->like("a.lastname", ":search"))
+    ->orHaving($qb->expr()->like("a.gender", ":search"))
+    ->orHaving($qb->expr()->like("acq.date", ":search"))
+    ->orHaving($qb->expr()->like("acq.amount", ":search"))
+    ->orHaving($qb->expr()->like("acq.subject", ":search"))
+    ->orHaving($qb->expr()->like("acq.requestState", ":search")) 
     ->setParameter("search", "%$search%")
+    ->setParameter("idAgent", $idAgent)
    ;
 
     $criteria = Criteria::create()

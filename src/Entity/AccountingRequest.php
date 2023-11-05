@@ -28,6 +28,11 @@ class AccountingRequest
     private $subject;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $date;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $reason;
@@ -43,10 +48,19 @@ class AccountingRequest
     private $requestState;
 
     /**
-     * @ORM\Column(name="idAgent")
+     * 
      * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
+
+
+    public function __construct()
+    {
+        $this->requestState = "pending";
+        
+    }
+
+
 
     public function getId(): ?int
     {
@@ -61,6 +75,17 @@ class AccountingRequest
     public function setSubject(string $subject): self
     {
         $this->subject = $subject;
+
+        return $this;
+    }
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

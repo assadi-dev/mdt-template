@@ -19,7 +19,7 @@ class AccountingRequestController extends AbstractController
     /**
      * @Route("api/accounting_requests/pagination/{page}", name="app_accounting_request_all", methods="GET" )
      */
-    public function index($page,Request $request)
+    public function get_all_request($page,Request $request)
     {
 
     try {
@@ -54,18 +54,31 @@ class AccountingRequestController extends AbstractController
     public function get_all_request_of_agent($page,$idAgent,Request $request)
     {
 
-        $item_per_page = $request->query->get("item_per_page");
-        $search =  $request->query->get("search");
-       
-        if(!isset($item_per_page)) {
-            $item_per_page = 5;
-        }
-        if(!isset($search)) {
-            $search = "";
-        }
+        try {
+            $item_per_page = $request->query->get("item_per_page");
+            $search =  $request->query->get("search");
+        
+            if(!isset($item_per_page)) {
+                $item_per_page = 5;
+            }
+            if(!isset($search)) {
+                $search = "";
+            }
 
 
-     $result =  $this->accountingRequestRepository->findAccountingRequestByPage($item_per_page, $page , $search,$idAgent);
+        $result =  $this->accountingRequestRepository->findAccountingRequestByPageForAgent($idAgent ,$item_per_page, $page , $search,$idAgent);
+        $content = json_encode($result);
+        $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+        return $response;
+
+
+
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+        }
 
     }
 }
