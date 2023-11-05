@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddDemandeBtn,
   DemandeCompatibiliteContainer,
@@ -13,53 +13,61 @@ import StatusCell from "./StatusCell";
 import RenderModalFormContent from "../../../../components/Modal/RenderModalContent";
 import listOfView, { ADD_DEMANDE } from "./ViewsModal/listOfView";
 import { useDispatch, useSelector } from "react-redux";
+import { retrieveAccountingRequest } from "../../../../features/AccountingRequest/AccountingRequestAsyn.action";
+import { defaultPageSize } from "../../../../config/constantes";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { cleanAgentNoMatricule } from "../../../../services/utils/user";
 
 const DemandeComptability = () => {
   const dispatch = useDispatch();
 
-  const { status, count } = useSelector(
+  const { collections, status, count } = useSelector(
     (state) => state.AccountingRequestByPageReducer
   );
+  const { idAgent } = useSelector((state) => state.AuthenticateReducer);
 
   const { modalState, toggleModal, closeModal } = useModalState();
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
+  useEffect(() => {
+    if (!idAgent) return;
+    const payload = {
+      idAgent,
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
+    const fetchPromise = dispatch(retrieveAccountingRequest(payload));
+
+    if (collections.length > 0) onPageTotalCountChange(count);
+
+    return () => {
+      fetchPromise.abort();
+    };
+  }, [pageIndex, idAgent, search, collections.length]);
+
+  const ShowAgent = (agent) => {
+    const { matricule, firstname, lastname } = agent;
+    return cleanAgentNoMatricule(matricule, firstname, lastname);
+  };
 
   const columns = [
     { Header: "Matricule", accessor: "matricule" },
-    { Header: "Agent", accessor: "agent" },
+    { Header: "Agent", Cell: ({ row }) => ShowAgent(row.original) },
     { Header: "Objet de la demande", accessor: "subject" },
     { Header: "Montant", accessor: "amount" },
-    { Header: "Date et Heures", accessor: "createdAt" },
+    { Header: "Date et Heures", accessor: "date" },
     {
       Header: "Status",
-      accessor: "status",
+      accessor: "requestState",
       Cell: ({ value }) => <StatusCell status={value} />,
-    },
-  ];
-
-  const collections = [
-    {
-      matricule: 123,
-      agent: "11-harry-cavil",
-      subject: "test",
-      amount: 22,
-      createdAt: "22-11-2023",
-      status: "pending",
-    },
-    {
-      matricule: 123,
-      agent: "11-harry-cavil",
-      subject: "test",
-      amount: 22,
-      createdAt: "22-11-2023",
-      status: "rejected",
-    },
-    {
-      matricule: 123,
-      agent: "11-harry-cavil",
-      subject: "test",
-      amount: 22,
-      createdAt: "22-11-2023",
-      status: "accepted",
     },
   ];
 
@@ -87,8 +95,16 @@ const DemandeComptability = () => {
             data={collections}
             className="table_omptablility"
             columns={columns}
-            isLoading={false}
-            isSuccess={true}
+            isLoading={status == "pending"}
+            isSuccess={status == "complete"}
+            onPageTotalCountChange={onPageTotalCountChange}
+            onSearchValue={handleSearch}
+            onPageChange={onPageChange}
+            initialStatePagination={{
+              pageIndex,
+              pageSize,
+            }}
+            totalCount={totalCount}
           />
         </DemandeCompatibiliteContainer>
       </PageContainer>
