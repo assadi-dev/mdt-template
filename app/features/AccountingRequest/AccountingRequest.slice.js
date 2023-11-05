@@ -14,7 +14,13 @@ const AccountingRequestByPage = createSlice({
   name: "AccountingRequestByPage",
   initialState,
   reducers: {
-    addAccountingRequestByPage: (state, action) => {},
+    addAccountingRequestByPage: (state, action) => {
+      const { payload } = action;
+      let updateState = [payload, ...state.collections];
+
+      state.collections = updateState;
+      state.collections.count = state.collections.count + 1;
+    },
     editAccountingRequestByPage: (state, action) => {},
     deleteAccountingRequestByPage: (state, action) => {},
     errorAccountingRequestByPage: (state, action) => {},

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   AddDemandeBtn,
   DemandeCompatibiliteContainer,
@@ -24,7 +24,9 @@ const DemandeComptability = () => {
   const { collections, status, count } = useSelector(
     (state) => state.AccountingRequestByPageReducer
   );
-  const { idAgent } = useSelector((state) => state.AuthenticateReducer);
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
 
   const { modalState, toggleModal, closeModal } = useModalState();
   const {
@@ -51,7 +53,7 @@ const DemandeComptability = () => {
     return () => {
       fetchPromise.abort();
     };
-  }, [pageIndex, idAgent, search, collections.length]);
+  }, [pageIndex, idAgent, search]);
 
   const ShowAgent = (agent) => {
     const { matricule, firstname, lastname } = agent;
@@ -74,7 +76,7 @@ const DemandeComptability = () => {
   const handleClickAdd = () => {
     toggleModal({
       view: ADD_DEMANDE,
-      data: null,
+      data: { idAgent, lastname, firstname, matricule },
     });
   };
 
