@@ -7,7 +7,7 @@ export const ServiceWeaponEncodingSlice = createSlice({
   initialState,
   reducers: {
     serviceWeaponEncodingError: (state, action) => {},
-    addServiceWeaponEncodingError: (state, action) => {
+    addServiceWeaponEncoding: (state, action) => {
       const { payload } = action;
 
       let newCollection = [...state.collections, payload];

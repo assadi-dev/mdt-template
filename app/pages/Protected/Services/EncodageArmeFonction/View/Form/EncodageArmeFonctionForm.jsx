@@ -11,9 +11,15 @@ import {
 import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
 import { typeOfArmesEnum } from "../../../../Mdt/Encodage/Armes/View/listsOfView";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
+import { useDispatch } from "react-redux";
 
-const EncodageArmeFonctionForm = ({ onCloseModal, ...props }) => {
+const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
   const { process, toggleProcess } = useProcess();
+  const dispatch = useDispatch();
 
   const defaultValues = {
     agent: `api/agents/`,
@@ -31,8 +37,19 @@ const EncodageArmeFonctionForm = ({ onCloseModal, ...props }) => {
   } = useForm({ defaultValues });
 
   const submitFormArme = (values) => {
-    toggleProcess();
-    // console.log(values);
+    try {
+      toggleProcess();
+
+      let payload = { ...values };
+
+      dispatch(addServiceWeaponEncoding(payload));
+      toastSuccess();
+    } catch (error) {
+      console.log(error);
+      toastError();
+    } finally {
+      toggleProcess();
+    }
   };
 
   return (

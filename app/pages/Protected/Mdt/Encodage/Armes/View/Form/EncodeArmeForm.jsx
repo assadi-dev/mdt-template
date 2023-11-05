@@ -13,15 +13,22 @@ import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import { typeOfArmesEnum } from "../listsOfView";
 import SpinnerButton from "../../../../../../../components/Shared/Loading/SpinnerButton";
 import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
+import { useDispatch } from "react-redux";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../../services/utils/alert";
 
-const EncodeArmeForm = ({ onCloseModal, ...props }) => {
+const EncodeArmeForm = ({ onCloseModal, payload, ...props }) => {
   const { process, toggleProcess } = useProcess();
 
+  const dispatch = useDispatch();
+
   const defaultValues = {
-    name: "",
+    civil: "",
     firstname: "",
-    typeArme: "",
-    numeroSerie: "",
+    lastname: "",
+    serialNumber: "",
   };
 
   const {
@@ -31,7 +38,17 @@ const EncodeArmeForm = ({ onCloseModal, ...props }) => {
   } = useForm({ defaultValues });
 
   const submitFormArme = (values) => {
-    toggleProcess();
+    try {
+      toggleProcess();
+
+      let payload = { ...values };
+
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    } finally {
+      toggleProcess();
+    }
   };
 
   return (
