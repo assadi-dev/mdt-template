@@ -9,6 +9,14 @@ export const HeaderPage = styled(Row)`
   grid-gap: 1.3rem;
 `;
 
+export const PaginatRow = styled(Row)`
+  min-height: 55px;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2rem auto;
+  grid-gap: 1rem;
+`;
+
 export const ArmesSearchInput = styled(SearchInput)`
   width: 100%;
   @media screen and (min-width: 992px) {

@@ -36,14 +36,15 @@ class ServiceWeaponEncoding
     private $type;
 
     /**
-     * @ORM\Column(name="idAgent")
-     * @ORM\ManyToMany(targetEntity=Agent::class)
+     * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
 
+
+
     public function __construct()
     {
-        $this->agent = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -75,27 +76,16 @@ class ServiceWeaponEncoding
         return $this;
     }
 
-    /**
-     * @return Collection<int, Agent>
-     */
-    public function getAgent(): Collection
+    public function getAgent(): ?Agent
     {
         return $this->agent;
     }
 
-    public function addAgent(Agent $agent): self
+    public function setAgent(?Agent $agent): self
     {
-        if (!$this->agent->contains($agent)) {
-            $this->agent[] = $agent;
-        }
+        $this->agent = $agent;
 
         return $this;
     }
 
-    public function removeAgent(Agent $agent): self
-    {
-        $this->agent->removeElement($agent);
-
-        return $this;
-    }
 }

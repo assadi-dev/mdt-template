@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PageContainer } from "../../../../components/PageContainer";
 import { GiPistolGun } from "react-icons/gi";
 import Modal from "../../../../components/Modal/Modal";
@@ -9,16 +9,58 @@ import {
   ArmesSearchInput,
   EncodeArmesBtn,
   HeaderPage,
+  PaginatRow,
 } from "./EncodageArmeFonction.styled";
 import { createPortal } from "react-dom";
 import { GridArmesCard } from "../../Mdt/Encodage/Armes/Armes.styled";
 import CardArmes from "../../Mdt/Encodage/Armes/cardArmes";
+import { useDispatch, useSelector } from "react-redux";
+import { toastError } from "../../../../services/utils/alert";
+import useDebounce from "../../../../hooks/useDebounce";
+import GridWeaponCard from "./View/GridWeaponCard";
+import PaginateOriginal from "../../../../components/Pagination/PaginateOriginal";
 
 const EncodageArmeFonction = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
-  const handleClickEncodeArme = () => {
-    toggleModal({ view: ENCODE_ARME_SERVICE, data: null });
+
+  const dispatch = useDispatch();
+
+  const [searchWeapon, setSearchWeapon] = useState("");
+  const { debouncedValue } = useDebounce(searchWeapon, 500);
+  const ITEM_PER_PAGE = 10;
+  const count = 25;
+
+  const handeSearchinput = (value) => {
+    setSearchWeapon(value);
   };
+  const [pageIndex, setPageIndex] = useState(1);
+  const MAX_PAGE = Math.ceil(count / ITEM_PER_PAGE);
+
+  const handleSetPage = (increment) => {
+    setPageIndex((current) => (current += increment));
+  };
+
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+
+  const handleClickEncodeArme = () => {
+    toggleModal({
+      view: ENCODE_ARME_SERVICE,
+      data: { idAgent, lastname, firstname, matricule },
+    });
+  };
+
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
+      };
+    } catch (error) {
+      toastError();
+    }
+  }, [pageIndex, searchWeapon]);
 
   return (
     <>
@@ -33,16 +75,10 @@ const EncodageArmeFonction = () => {
             Encoder une arme
           </EncodeArmesBtn>
         </HeaderPage>
-        <GridArmesCard>
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-          <CardArmes />
-        </GridArmesCard>
+        <PaginatRow>
+          <PaginateOriginal />
+        </PaginatRow>
+        <GridWeaponCard />
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>

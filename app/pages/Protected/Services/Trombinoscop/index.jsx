@@ -16,6 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import TrombinoscopGrid from "./TrombinoscopGrid";
 import useDebounce from "../../../../hooks/useDebounce";
 import PaginationSection from "./PaginationSection";
+import PaginateOriginal from "../../../../components/Pagination/PaginateOriginal";
 
 const Trombinoscop = () => {
   const dispatch = useDispatch();
@@ -38,20 +39,19 @@ const Trombinoscop = () => {
   };
 
   useEffect(() => {
-    const payload = {
-      page: pageIndex,
-      params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
-    };
-    let fetchTrombinoscopPromise;
     try {
-      fetchTrombinoscopPromise = dispatch(
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
+      };
+      const fetchTrombinoscopPromise = dispatch(
         retrieveAgentTrombinoscopAsync(payload)
       );
-    } catch (error) {}
 
-    return () => {
-      fetchTrombinoscopPromise?.abort();
-    };
+      return () => {
+        fetchTrombinoscopPromise?.abort();
+      };
+    } catch (error) {}
   }, [debouncedValue, pageIndex]);
 
   return (
@@ -65,7 +65,7 @@ const Trombinoscop = () => {
       </HeaderRow>
       <HeaderRow>
         <div></div>
-        <PaginationSection
+        <PaginateOriginal
           onNext={() => handleSetPage(1)}
           onPrev={() => handleSetPage(-1)}
           pageIndex={pageIndex}

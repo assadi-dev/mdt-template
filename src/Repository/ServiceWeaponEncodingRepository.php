@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Agent;
 use App\Entity\ServiceWeaponEncoding;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @extends ServiceEntityRepository<ServiceWeaponEncoding>
@@ -63,4 +66,52 @@ class ServiceWeaponEncodingRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function findByPagination($items_per_page,$page,$search)
+{
+
+    $countResult = ($page - 1) * $items_per_page;
+
+    $qb = $this->createQueryBuilder("we");
+
+    $qb->select("we.id,
+    we.serialNumber,
+    we.type,
+    we.createdAt,
+    a.id as idAgent,
+    a.matricule,
+    a.firstname,
+    a.gender,
+    a.lastname
+    ")
+    ->leftJoin(Agent::class, "a","WITH","a.id=we.agent")
+    ->orWhere($qb->expr()->like("we.serialNumber", ":search"))
+    ->orWhere($qb->expr()->like("we.type", ":search"))
+    ->orWhere($qb->expr()->like("a.firstname", ":search"))
+    ->orWhere($qb->expr()->like("a.lastname", ":search"))
+    ->orWhere($qb->expr()->like("a.gender", ":search"))
+    ->orWhere($qb->expr()->like("a.matricule", ":search"))
+    ->setParameter("search", "%$search%")
+    ->groupBy("we.id");
+    $criteria = Criteria::create()
+    ->setFirstResult($countResult)
+    ->setMaxResults($items_per_page);
+    $qb->addCriteria($criteria);
+    $result = $qb->getQuery()->getResult();
+    $query = $this->createQueryBuilder("a")->getQuery();
+    
+    $paginator = new Paginator($query, false);
+    $count =  $paginator->count();
+
+    $result = $qb->getQuery()->getResult();
+    return ["count" => $count,"data" => $result];
+    
+
+
+}
+
+
+
+
 }
