@@ -62,6 +62,9 @@ const Trombinoscop = () => {
           onSearchInput={handeSearchinput}
           placeholder="Rechercher"
         />
+      </HeaderRow>
+      <HeaderRow>
+        <div></div>
         <PaginationSection
           onNext={() => handleSetPage(1)}
           onPrev={() => handleSetPage(-1)}
