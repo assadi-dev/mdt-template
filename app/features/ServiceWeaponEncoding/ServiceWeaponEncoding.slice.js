@@ -7,9 +7,15 @@ export const ServiceWeaponEncodingSlice = createSlice({
   initialState,
   reducers: {
     serviceWeaponEncodingError: (state, action) => {},
-    addServiceWeaponEncodingError: (state, actio) => {},
-    updateServiceWeaponEncodingError: (state, actio) => {},
-    deleteServiceWeaponEncodingError: (state, actio) => {},
+    addServiceWeaponEncodingError: (state, action) => {
+      const { payload } = action;
+
+      let newCollection = [...state.collections, payload];
+      state.collections = newCollection;
+      state.count = state.count + 1;
+    },
+    updateServiceWeaponEncodingError: (state, action) => {},
+    deleteServiceWeaponEncodingError: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder
