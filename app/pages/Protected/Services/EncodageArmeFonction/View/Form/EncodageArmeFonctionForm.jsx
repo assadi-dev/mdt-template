@@ -16,11 +16,12 @@ const EncodageArmeFonctionForm = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
 
   const defaultValues = {
+    agent: `api/agents/`,
     matricule: "",
     name: "",
     firstname: "",
-    typeArme: "",
-    numeroSerie: "",
+    type: "",
+    serialNumber: "",
   };
 
   const {

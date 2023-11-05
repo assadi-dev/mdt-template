@@ -19,6 +19,7 @@ import { toastError } from "../../../../services/utils/alert";
 import useDebounce from "../../../../hooks/useDebounce";
 import GridWeaponCard from "./View/GridWeaponCard";
 import PaginateOriginal from "../../../../components/Pagination/PaginateOriginal";
+import { retieaveServiceWeaponEncodingAsync } from "../../../../features/ServiceWeaponEncoding/ServiceWeaponEncodingAsyncAction";
 
 const EncodageArmeFonction = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
@@ -28,7 +29,6 @@ const EncodageArmeFonction = () => {
   const [searchWeapon, setSearchWeapon] = useState("");
   const { debouncedValue } = useDebounce(searchWeapon, 500);
   const ITEM_PER_PAGE = 10;
-  const count = 25;
 
   const handeSearchinput = (value) => {
     setSearchWeapon(value);
@@ -42,6 +42,9 @@ const EncodageArmeFonction = () => {
 
   const { idAgent, lastname, firstname, matricule } = useSelector(
     (state) => state.AuthenticateReducer
+  );
+  const { collections, status, count } = useSelector(
+    (state) => state.ServiceWeaponEncodingReducer
   );
 
   const handleClickEncodeArme = () => {
@@ -57,6 +60,8 @@ const EncodageArmeFonction = () => {
         page: pageIndex,
         params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
       };
+
+      dispatch(retieaveServiceWeaponEncodingAsync(payload));
     } catch (error) {
       toastError();
     }
@@ -78,7 +83,7 @@ const EncodageArmeFonction = () => {
         <PaginatRow>
           <PaginateOriginal />
         </PaginatRow>
-        <GridWeaponCard />
+        <GridWeaponCard collections={collections} />
       </PageContainer>
       {createPortal(
         <Modal isOpen={modalState.isOpen} onClose={closeModal}>

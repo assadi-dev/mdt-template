@@ -78,12 +78,12 @@ public function findByPagination($items_per_page,$page,$search)
     $qb->select("we.id,
     we.serialNumber,
     we.type,
-    we.createdAt,
     a.id as idAgent,
     a.matricule,
     a.firstname,
+    a.lastname,
     a.gender,
-    a.lastname
+    we.createdAt
     ")
     ->leftJoin(Agent::class, "a","WITH","a.id=we.agent")
     ->orWhere($qb->expr()->like("we.serialNumber", ":search"))
