@@ -84,7 +84,11 @@ const EncodageArmeFonction = () => {
           </EncodeArmesBtn>
         </HeaderPage>
         <PaginatRow>
-          <PaginateOriginal maxPage={MAX_PAGE} />
+          <PaginateOriginal
+            maxPage={MAX_PAGE}
+            onPrev={() => handleSetPage(-1)}
+            onNext={() => handleSetPage(1)}
+          />
         </PaginatRow>
         <GridWeaponCard collections={collections} />
       </PageContainer>
