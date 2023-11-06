@@ -16,16 +16,18 @@ import {
   toastSuccess,
 } from "../../../../../../services/utils/alert";
 import { useDispatch } from "react-redux";
+import { addServiceWeaponEncoding } from "../../../../../../features/ServiceWeaponEncoding/ServiceWeaponEncoding.slice";
+import { postServiceWeaponEncoding } from "../../helpers";
 
 const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
   const { process, toggleProcess } = useProcess();
   const dispatch = useDispatch();
 
   const defaultValues = {
-    agent: `api/agents/`,
-    matricule: "",
-    name: "",
-    firstname: "",
+    agent: `api/agents/${payload?.idAgent}`,
+    matricule: payload?.matricule,
+    lastname: payload?.lastname,
+    firstname: payload?.firstname,
     type: "",
     serialNumber: "",
   };
@@ -36,19 +38,20 @@ const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const submitFormArme = (values) => {
+  const submitFormArme = async (values) => {
     try {
       toggleProcess();
 
       let payload = { ...values };
-
-      dispatch(addServiceWeaponEncoding(payload));
+      const res = await postServiceWeaponEncoding(payload);
+      dispatch(addServiceWeaponEncoding({ ...res.data, ...payload }));
       toastSuccess();
     } catch (error) {
       console.log(error);
       toastError();
     } finally {
       toggleProcess();
+      onCloseModal();
     }
   };
 
@@ -70,11 +73,11 @@ const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
           </FormControl>
           <FormControl>
             <label htmlFor="name">Nom</label>
-            <input type="text" {...register("name", { required: true })} />
+            <input type="text" {...register("lastname", { required: true })} />
           </FormControl>
           <FormControl>
-            <label htmlFor="typeArme">Type d'arme</label>
-            <select {...register("typeArme", { required: true })}>
+            <label htmlFor="type">Type d'arme</label>
+            <select {...register("type", { required: true })}>
               {typeOfArmesEnum.map((type) => (
                 <option key={type.id} value={type.value}>
                   {type.label}
@@ -83,10 +86,10 @@ const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
             </select>
           </FormControl>
           <FormControl>
-            <label htmlFor="numeroSerie">Numéro de série</label>
+            <label htmlFor="serialNumber">Numéro de série</label>
             <input
               type="text"
-              {...register("numeroSerie", { required: true })}
+              {...register("serialNumber", { required: true })}
             />
           </FormControl>
 

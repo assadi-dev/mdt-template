@@ -37,3 +37,8 @@ export const EncodeArmesBtn = styled(Button)`
     }
   }
 `;
+
+export const EmptyMessage = styled.p`
+  text-align: center;
+  margin: 1.3rem;
+`;

@@ -21,6 +21,8 @@ const PaginateOriginal = ({
 
   ...props
 }) => {
+  console.log(maxPage);
+
   const canPrev = Number(pageIndex) < 2;
   const canNext = Number(pageIndex) >= maxPage;
 

@@ -20,11 +20,18 @@ import useDebounce from "../../../../hooks/useDebounce";
 import GridWeaponCard from "./View/GridWeaponCard";
 import PaginateOriginal from "../../../../components/Pagination/PaginateOriginal";
 import { retieaveServiceWeaponEncodingAsync } from "../../../../features/ServiceWeaponEncoding/ServiceWeaponEncodingAsyncAction";
+import { postServiceWeaponEncoding } from "./helpers";
 
 const EncodageArmeFonction = () => {
   const { modalState, closeModal, toggleModal } = useModalState();
 
   const dispatch = useDispatch();
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+  const { collections, status, count } = useSelector(
+    (state) => state.ServiceWeaponEncodingReducer
+  );
 
   const [searchWeapon, setSearchWeapon] = useState("");
   const { debouncedValue } = useDebounce(searchWeapon, 500);
@@ -39,13 +46,6 @@ const EncodageArmeFonction = () => {
   const handleSetPage = (increment) => {
     setPageIndex((current) => (current += increment));
   };
-
-  const { idAgent, lastname, firstname, matricule } = useSelector(
-    (state) => state.AuthenticateReducer
-  );
-  const { collections, status, count } = useSelector(
-    (state) => state.ServiceWeaponEncodingReducer
-  );
 
   const handleClickEncodeArme = () => {
     toggleModal({
@@ -81,7 +81,7 @@ const EncodageArmeFonction = () => {
           </EncodeArmesBtn>
         </HeaderPage>
         <PaginatRow>
-          <PaginateOriginal />
+          <PaginateOriginal maxPage={MAX_PAGE} />
         </PaginatRow>
         <GridWeaponCard collections={collections} />
       </PageContainer>
@@ -91,6 +91,7 @@ const EncodageArmeFonction = () => {
             view={modalState.view}
             enumOfView={listOfView}
             onCloseModal={closeModal}
+            payload={modalState.data}
           />
         </Modal>,
         document.body
