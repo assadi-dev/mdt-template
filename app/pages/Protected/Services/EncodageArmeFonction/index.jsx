@@ -65,13 +65,16 @@ const EncodageArmeFonction = () => {
     } catch (error) {
       toastError();
     }
-  }, [pageIndex, searchWeapon]);
+  }, [pageIndex, debouncedValue]);
 
   return (
     <>
       <PageContainer>
         <HeaderPage>
-          <ArmesSearchInput className="input-theme-color" />
+          <ArmesSearchInput
+            className="input-theme-color"
+            onSearchInput={handeSearchinput}
+          />
           <EncodeArmesBtn
             className="bg-btn-alt-theme-color"
             onClick={handleClickEncodeArme}
