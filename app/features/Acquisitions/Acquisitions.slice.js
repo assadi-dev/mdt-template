@@ -14,10 +14,37 @@ export const AcquisitionSlice = createSlice({
   name: "Acquisitions",
   initialState,
   reducers: {
-    addAcquisitions: (state, action) => {},
-    updateAcquisitions: (state, action) => {},
-    deleteAcquisitions: (state, action) => {},
-    errorAcquisitions: (state, action) => {},
+    addAcquisitions: (state, action) => {
+      const { payload } = action;
+      let acquisitionAdded = [payload, ...state.collections];
+
+      state.collections = acquisitionAdded;
+      state.count = state.count + 1;
+    },
+    updateAcquisitions: (state, action) => {
+      const { payload } = action;
+
+      let acquisitionUpdated = [...state.payload].map((acquisition) => {
+        if (acquisition.id == payload.id) {
+          return { ...acquisition, ...payload };
+        }
+        return acquisition;
+      });
+      state.collections = acquisitionUpdated;
+    },
+    deleteAcquisitions: (state, action) => {
+      const { payload } = action;
+
+      let acquisitionRemoved = [...state.payload].filter(
+        (acquisition) => acquisition.id != payload.id
+      );
+
+      state.collections = acquisitionRemoved;
+      state.count = state.count - 1;
+    },
+    errorAcquisitions: (state, action) => {
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
