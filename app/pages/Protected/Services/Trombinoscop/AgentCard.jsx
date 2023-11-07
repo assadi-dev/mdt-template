@@ -2,18 +2,28 @@ import React from "react";
 import { AgentCardBody, AgentCardContainer } from "./Trombinoscop.styled";
 import PhotoAgent from "./Photo";
 import { user_female, user_male } from "../../../../config/constantes";
+import {
+  cleanAgentNoMatricule,
+  noPhoto,
+} from "../../../../services/utils/user";
 
 const AgentCard = ({ agent }) => {
-  let gender = "male";
-  const noPhoto = gender == "male" ? user_male : user_female;
+  let gender = agent?.gender;
+  const photo = noPhoto(gender);
+  const idAgent = agent?.idAgent;
+  const firstname = cleanAgentNoMatricule(
+    agent?.matricule,
+    agent?.firstname,
+    agent?.lastname
+  );
 
   return (
     <AgentCardContainer className="theme-card-trombinoscop">
-      <PhotoAgent src={noPhoto} />
+      <PhotoAgent src={photo} />
       <AgentCardBody>
-        <p className="agent">26-James-Morrison</p>
-        <p className="grade">Capitain</p>
-        <p className="phone">555-1456987</p>
+        <p className="agent">{firstname}</p>
+        <p className="grade">{agent?.grade}</p>
+        <p className="phone">{agent?.phone}</p>
       </AgentCardBody>
     </AgentCardContainer>
   );

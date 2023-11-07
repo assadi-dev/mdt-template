@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Agent;
 use App\Entity\Grade;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -94,6 +96,97 @@ class AgentRepository extends ServiceEntityRepository
 
     }
 
+    function findAgentForTrombinoscopByPage($items_per_page = 5, $page = 1, $search)
+    {
+
+        $countResult = ($page - 1) * $items_per_page;
+
+        $qb = $this->createQueryBuilder("a");
+        $qb->select(
+            "
+        a.id as idAgent, 
+        a.firstname,
+        a.lastname,
+        a.gender,
+        a.matricule,
+        a.phone,
+        g.name as grade"
+        )
+        ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->orWhere($qb->expr()->like("a.firstname", ":search"))
+        ->orWhere($qb->expr()->like("a.lastname", ":search"))
+        ->orWhere($qb->expr()->like("a.gender", ":search"))
+        ->orWhere($qb->expr()->like("a.matricule", ":search"))
+        ->orWhere($qb->expr()->like("a.phone", ":search"))
+        ->orWhere($qb->expr()->like("g.name", ":search"))
+        ->setParameter("search", "%$search%")
+        ->groupBy("a.id");
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $result = $qb->getQuery()->getResult();
+        $query = $this->createQueryBuilder("a")->getQuery();
+        
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+
+
+        $result = $qb->getQuery()->getResult();
+        return ["count" => $count,"data" => $result];
+    }
+
+    function findAgentByPage($items_per_page = 5, $page = 1, $search)
+    {
+
+        $countResult = ($page - 1) * $items_per_page;
+
+        $qb = $this->createQueryBuilder("a");
+        $qb->select(
+            "
+            a.id as idAgent, 
+            a.firstname,
+            a.lastname,
+            a.gender,
+            a.matricule,
+            a.phone,
+            a.faction,
+            a.division,
+            g.id as idGrade,
+            g.name as grade,
+            a.iban,
+            a.createdAt,
+            a.updatedAt"
+        )
+        ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->orWhere($qb->expr()->like("a.firstname", ":search"))
+        ->orWhere($qb->expr()->like("a.lastname", ":search"))
+        ->orWhere($qb->expr()->like("a.gender", ":search"))
+        ->orWhere($qb->expr()->like("a.matricule", ":search"))
+        ->orWhere($qb->expr()->like("a.phone", ":search"))
+        ->orWhere($qb->expr()->like("a.faction", ":search"))
+        ->orWhere($qb->expr()->like("a.division", ":search"))
+        ->orWhere($qb->expr()->like("g.name", ":search"))
+        ->orWhere($qb->expr()->like("a.iban", ":search"))
+        ->setParameter("search", "%$search%")
+        ->groupBy("u.id,a.id");
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+
+        $query = $this->createQueryBuilder("a")->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+
+
+        $result = $qb->getQuery()->getResult();
+        return ["count" => $count,"data" => $result];
+    }
 
 
 

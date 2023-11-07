@@ -14,9 +14,23 @@ import useModalState, { TOGGLE_MODAL } from "../../../../hooks/useModalState";
 import { createPortal } from "react-dom";
 import Modal from "../../../../components/Modal/Modal";
 import View from "./Modal/View";
+import ActionCells from "../../../../components/DataTable/ActionCells";
+import DepotBtn from "./Modal/DepotBtn";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveAcquisitionsAsync } from "../../../../features/Acquisitions/AcquisitionAsync";
+import { ShowAgent } from "./helpers";
 
 const Saisie = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
+  const { collections, status, error, count } = useSelector(
+    (state) => state.AcquisitionsReducer
+  );
+
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+
+  const dispatch = useDispatch();
 
   const {
     onPageChange,
@@ -29,28 +43,45 @@ const Saisie = () => {
   } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   useEffect(() => {
-    const payload = {
-      page: pageIndex,
-      params: { item_per_page: pageSize, search },
-    };
-  }, [pageIndex, search]);
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search },
+      };
 
-  const collections = [];
+      const AcquisitionfetchPromise = dispatch(
+        retrieveAcquisitionsAsync(payload)
+      );
+      onPageTotalCountChange(count);
+
+      return () => {
+        AcquisitionfetchPromise.abort();
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  }, [pageIndex, search, count]);
+
   const columns = [
-    { Header: "Agent", accessor: "name" },
-    { Header: "Date de saisie", accessor: "faction" },
-    { Header: "Poste", accessor: "nb_grades" },
-    { Header: "Dépôt", accessor: "depot" },
+    { Header: "Agent", Cell: ({ row }) => ShowAgent(row.original) },
+    { Header: "Date de saisie", accessor: "dateOfAcquisition" },
+    { Header: "Poste", accessor: "post" },
+    {
+      Header: "Dépôt",
+      Cell: ({ row }) => (
+        <DepotBtn data={row.original} onClickShowDepot={handleClickShowDepot} />
+      ),
+    },
     {
       Header: "Action",
       accessor: "",
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
-          onEdit={handleClickEdit}
-          onDelete={handleClicDelete}
           canDelete={true}
           canEdit={true}
+          onEdit={handleClickEditbtn}
+          onDelete={handleClickDeletebtn}
         />
       ),
     },
@@ -58,7 +89,19 @@ const Saisie = () => {
 
   /**Action btn **/
   const handleClickAddbtn = () => {
-    toggleModal({ view: "add-saisie", data: null });
+    const payload = { idAgent, lastname, firstname, matricule };
+    toggleModal({ view: "add-saisie", data: payload });
+  };
+  const handleClickEditbtn = (acquisition) => {
+    toggleModal({ view: "edit-saisie", data: acquisition });
+  };
+
+  const handleClickDeletebtn = (acquisition) => {
+    toggleModal({ view: "delete-saisie", data: acquisition });
+  };
+
+  const handleClickShowDepot = (data) => {
+    toggleModal({ view: "show-acquisition", data });
   };
 
   return (
@@ -82,8 +125,8 @@ const Saisie = () => {
           }}
           totalCount={totalCount}
           manualPagination={true}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
           onPageChange={onPageChange}
           onPageTotalCountChange={onPageTotalCountChange}
           onSearchValue={handleSearch}

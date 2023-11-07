@@ -16,7 +16,7 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
   //console.log(previewData);
   if (!previewData) return "donnée manquants";
 
-  const { agent, subject, date, montant, raison } = previewData;
+  const { agent, subject, date, amount, reason } = previewData;
 
   return (
     <motion.div
@@ -42,12 +42,12 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
         <Row className="justiy-content-end">
           <p className="montant">
             <strong>Montant: </strong>
-            {montant} $
+            {amount} $
           </p>
         </Row>
 
         <TextContent>
-          <MarkdownPreview className="theme-markdownPreview" source={raison} />
+          <MarkdownPreview className="theme-markdownPreview" source={reason} />
         </TextContent>
       </PreviewDocumentBody>
     </motion.div>

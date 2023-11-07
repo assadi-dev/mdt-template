@@ -10,27 +10,46 @@ import MarkdowTextEditor from "../../../../../components/TextEditor/MarkdowTextE
 import useProcess from "../../../../../hooks/useProcess";
 import { motion } from "framer-motion";
 import { formAnimate } from "./Animation";
+import { useDispatch } from "react-redux";
+import { addAccountingRequestByPage } from "../../../../../features/AccountingRequest/AccountingRequest.slice";
+import { postRequestAcuisition } from "./helpers";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 
 export const AddForm = ({
+  agent,
   register,
   handleSubmit,
   setValue,
   setError,
   errors,
   getValues,
+  onCloseModal = () => {},
 }) => {
   const { process, toggleProcess } = useProcess();
 
+  const dispatch = useDispatch();
+
   const handleChangeRaisonText = (value) => {
     // console.log(value);
-    if (errors.raison) clearErrors("raison");
-    setValue("raison", value);
+    if (errors.raison) clearErrors("reason");
+    setValue("reason", value);
   };
 
   const submitDemandeComptabity = async (values) => {
-    console.log(values);
-    if (!values.raison) return setError("raison", "erre");
-    toggleProcess();
+    try {
+      if (!values.reason) return setError("reason");
+      values.amount = parseFloat(values.amount).toString();
+
+      let payload = { ...values, ...agent };
+      const res = await postRequestAcuisition(payload);
+      dispatch(addAccountingRequestByPage({ ...res.data, ...agent }));
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    } finally {
+      toggleProcess();
+      onCloseModal();
+    }
   };
 
   return (
@@ -63,7 +82,7 @@ export const AddForm = ({
 
         <FormControl>
           <label htmlFor="date">Montant</label>
-          <input type="text" {...register("montant", { required: true })} />
+          <input type="text" {...register("amount", { required: true })} />
           <ErrorSection>
             {errors.montant && (
               <small className="text-error">
@@ -74,13 +93,13 @@ export const AddForm = ({
         </FormControl>
 
         <FormControl>
-          <label htmlFor="raison">Raison</label>
+          <label htmlFor="reason">Raison</label>
           <MarkdowTextEditor
-            id="raison"
+            id="reason"
             className="theme-text-editor"
             getOutput={handleChangeRaisonText}
             style={{ marginBottom: 0 }}
-            defaultValue={getValues("raison")}
+            defaultValue={getValues("reason")}
           />
           <ErrorSection>
             {errors.raison && (

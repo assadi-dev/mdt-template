@@ -6,16 +6,18 @@ import {
 } from "./CardArmes.styled";
 import { GunIcon } from "../../../../../../components/Svg/MDT.icon";
 
-const CardArmes = ({ armesData, ...props }) => {
+const CardArmes = ({ owner, ...props }) => {
+  const OWNER_NAME = `${owner?.firstname} ${owner?.lastname}`;
+
   return (
     <CardContainer className="bg-card-item-alt">
       <IconCardContainer className="bg-icon-card-item">
         <GunIcon />
       </IconCardContainer>
       <CardArmesBody>
-        <p>123456</p>
-        <p>Berretta</p>
-        <p>Nom Prenom</p>
+        <p>{owner?.serialNumber}</p>
+        <p>{owner?.type}</p>
+        <p>{OWNER_NAME}</p>
       </CardArmesBody>
     </CardContainer>
   );
