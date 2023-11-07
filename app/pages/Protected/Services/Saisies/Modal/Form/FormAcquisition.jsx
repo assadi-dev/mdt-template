@@ -17,7 +17,11 @@ import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerBu
 import useProcess from "../../../../../../hooks/useProcess";
 import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
 
-const FormAcquisition = ({ submitForm, defaultValue }) => {
+const FormAcquisition = ({
+  labelSubmitButton = "Valider",
+  submitForm,
+  defaultValue,
+}) => {
   const { process, toggleProcess } = useProcess();
 
   const defaultValues = {
@@ -101,7 +105,7 @@ const FormAcquisition = ({ submitForm, defaultValue }) => {
 
       <ModalFooter>
         <SubmitButton className="bg-btn-theme-color" type="submit">
-          Ajouter
+          {labelSubmitButton}
           {process && <SpinnerButton className="loading-process" />}
         </SubmitButton>
       </ModalFooter>
