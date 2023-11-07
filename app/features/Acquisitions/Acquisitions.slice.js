@@ -24,7 +24,7 @@ export const AcquisitionSlice = createSlice({
     updateAcquisitions: (state, action) => {
       const { payload } = action;
 
-      let acquisitionUpdated = [...state.payload].map((acquisition) => {
+      let acquisitionUpdated = [...state.collections].map((acquisition) => {
         if (acquisition.id == payload.id) {
           return { ...acquisition, ...payload };
         }

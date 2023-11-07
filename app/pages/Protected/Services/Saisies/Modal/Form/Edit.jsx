@@ -14,7 +14,10 @@ import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerBu
 import useProcess from "../../../../../../hooks/useProcess";
 import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
 import { useDispatch } from "react-redux";
-import { addAcquisitions } from "../../../../../../features/Acquisitions/Acquisitions.slice";
+import {
+  addAcquisitions,
+  updateAcquisitions,
+} from "../../../../../../features/Acquisitions/Acquisitions.slice";
 import { postAcquisitions } from "../../helpers";
 import {
   toastError,
@@ -23,6 +26,10 @@ import {
 import FormAcquisition from "./FormAcquisition";
 
 const Edit = ({ onCloseModal, payload, ...props }) => {
+  const dispatch = useDispatch();
+
+  const id = payload?.id;
+
   const defaultValues = {
     dateOfAcquisition: payload?.dateOfAcquisition,
     post: payload?.post,
@@ -39,15 +46,13 @@ const Edit = ({ onCloseModal, payload, ...props }) => {
         ...values,
       };
 
-      const res = await postAcquisitions(datatoSend);
+      // const res = await postAcquisitions(datatoSend);
       const payload = {
-        ...res.data,
-        firstname,
-        lastname,
-        matricule,
+        id,
+        ...values,
       };
 
-      dispatch(addAcquisitions(payload));
+      dispatch(updateAcquisitions(payload));
       toastSuccess();
     } catch (error) {
       console.log(error.message);
