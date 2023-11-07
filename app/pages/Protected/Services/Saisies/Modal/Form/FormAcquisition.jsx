@@ -21,9 +21,8 @@ const FormAcquisition = ({
   labelSubmitButton = "Valider",
   submitForm,
   defaultValue,
+  process = false,
 }) => {
-  const { process, toggleProcess } = useProcess();
-
   const defaultValues = {
     dateOfAcquisition: defaultValue?.dateOfAcquisition,
     post: defaultValue?.post,

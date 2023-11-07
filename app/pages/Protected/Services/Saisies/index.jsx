@@ -81,6 +81,7 @@ const Saisie = () => {
           canDelete={true}
           canEdit={true}
           onEdit={handleClickEditbtn}
+          onDelete={handleClickDeletebtn}
         />
       ),
     },
@@ -92,12 +93,14 @@ const Saisie = () => {
     toggleModal({ view: "add-saisie", data: payload });
   };
   const handleClickEditbtn = (acquisition) => {
-    const payload = { idAgent, lastname, firstname, matricule, ...acquisition };
-    toggleModal({ view: "edit-saisie", data: payload });
+    toggleModal({ view: "edit-saisie", data: acquisition });
+  };
+
+  const handleClickDeletebtn = (acquisition) => {
+    toggleModal({ view: "delete-saisie", data: acquisition });
   };
 
   const handleClickShowDepot = (data) => {
-    console.log(data);
     toggleModal({ view: "show-acquisition", data });
   };
 

@@ -50,7 +50,7 @@ const Edit = ({ onCloseModal, payload, ...props }) => {
       const payload = {
         id,
         ...values,
-        ...res,
+        ...res.data,
       };
 
       dispatch(updateAcquisitions(payload));
@@ -70,7 +70,11 @@ const Edit = ({ onCloseModal, payload, ...props }) => {
         <h2 className="form-title">Editer une saisie </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormAcquisition defaultValue={defaultValues} submitForm={submitForm} />
+      <FormAcquisition
+        process={process}
+        defaultValue={defaultValues}
+        submitForm={submitForm}
+      />
     </ContentContainer>
   );
 };

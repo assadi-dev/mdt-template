@@ -10,8 +10,6 @@ import { Row } from "../../../../../../components/PageContainer";
 import PreviewDocument from "../../../../../../components/Modal/PreviewDocument";
 
 const PreviewAcquisition = ({ payload, onCloseModal, ...props }) => {
-  console.log(payload);
-
   const { matricule, firstname, lastname } = payload;
 
   const TITLE_DOCUMENT = `Saisie`;

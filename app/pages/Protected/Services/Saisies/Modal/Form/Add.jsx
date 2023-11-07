@@ -74,6 +74,7 @@ const Add = ({ onCloseModal, payload, ...props }) => {
           <CloseModalBtn className="close-section" onClick={onCloseModal} />
         </HeaderModal>
         <FormAcquisition
+          process={process}
           defaultValue={defaultValues}
           submitForm={submitForm}
           idAgent={idAgent}

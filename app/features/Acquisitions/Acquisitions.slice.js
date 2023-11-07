@@ -32,10 +32,10 @@ export const AcquisitionSlice = createSlice({
       });
       state.collections = acquisitionUpdated;
     },
-    deleteAcquisitions: (state, action) => {
+    removeAcquisitions: (state, action) => {
       const { payload } = action;
 
-      let acquisitionRemoved = [...state.payload].filter(
+      let acquisitionRemoved = [...state.collections].filter(
         (acquisition) => acquisition.id != payload.id
       );
 
@@ -68,7 +68,7 @@ export const AcquisitionSlice = createSlice({
 export const {
   addAcquisitions,
   updateAcquisitions,
-  deleteAcquisitions,
+  removeAcquisitions,
   errorAcquisitions,
 } = AcquisitionSlice.actions;
 

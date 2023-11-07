@@ -2,6 +2,7 @@ import React from "react";
 import Add from "./Form/Add";
 import Edit from "./Form/Edit";
 import PreviewAcquisition from "./Form/PreviewAcquisition";
+import Delete from "./Form/Delete";
 
 const View = ({ view, data, onCloseModal }) => {
   switch (view) {
@@ -23,7 +24,13 @@ const View = ({ view, data, onCloseModal }) => {
       );
 
     case "delete-saisie":
-      break;
+      return (
+        <Delete
+          className="modal-theme-color"
+          payload={data}
+          onCloseModal={onCloseModal}
+        />
+      );
 
     case "show-acquisition":
       return (
