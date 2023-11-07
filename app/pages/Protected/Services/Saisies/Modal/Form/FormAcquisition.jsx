@@ -17,16 +17,10 @@ import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerBu
 import useProcess from "../../../../../../hooks/useProcess";
 import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
 
-const FormAcquisition = ({
-  idAgent,
-  submitForm,
-  defaultValue,
-  onCloseModal,
-}) => {
+const FormAcquisition = ({ submitForm, defaultValue }) => {
   const { process, toggleProcess } = useProcess();
 
   const defaultValues = {
-    agent: `api/agents/${idAgent}`,
     dateOfAcquisition: defaultValue?.dateOfAcquisition,
     post: defaultValue?.post,
     acquisitionDescription: defaultValue?.acquisitionDescription,
@@ -101,6 +95,7 @@ const FormAcquisition = ({
           id="acquisitionDescription"
           className="theme-text-editor"
           getOutput={handleGetDescription}
+          defaultValue={defaultValue?.acquisitionDescription}
         />
       </FormControl>
 

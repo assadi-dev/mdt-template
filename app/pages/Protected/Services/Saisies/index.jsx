@@ -76,7 +76,12 @@ const Saisie = () => {
       Header: "Action",
       accessor: "",
       Cell: ({ row }) => (
-        <ActionCells data={row.original} canDelete={true} canEdit={true} />
+        <ActionCells
+          data={row.original}
+          canDelete={true}
+          canEdit={true}
+          onEdit={handleClickEditbtn}
+        />
       ),
     },
   ];
@@ -85,6 +90,10 @@ const Saisie = () => {
   const handleClickAddbtn = () => {
     const payload = { idAgent, lastname, firstname, matricule };
     toggleModal({ view: "add-saisie", data: payload });
+  };
+  const handleClickEditbtn = (acquisition) => {
+    const payload = { idAgent, lastname, firstname, matricule, ...acquisition };
+    toggleModal({ view: "edit-saisie", data: payload });
   };
 
   const handleClickShowDepot = (data) => {
