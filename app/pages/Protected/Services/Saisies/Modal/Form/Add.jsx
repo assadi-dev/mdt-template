@@ -23,6 +23,7 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../services/utils/alert";
+import FormAcquisition from "./FormAcquisition";
 
 const Add = ({ onCloseModal, payload, ...props }) => {
   const dispatch = useDispatch();
@@ -35,14 +36,6 @@ const Add = ({ onCloseModal, payload, ...props }) => {
     post: "",
     acquisitionDescription: "",
   };
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm({ defaultValues });
 
   const { process, toggleProcess } = useProcess();
 
@@ -80,68 +73,11 @@ const Add = ({ onCloseModal, payload, ...props }) => {
           <h2 className="form-title">Ajouter une saisie </h2>
           <CloseModalBtn className="close-section" onClick={onCloseModal} />
         </HeaderModal>
-        <FormContainer
-          className="form-theme-color"
-          onSubmit={handleSubmit(submitForm)}
-        >
-          {/*           <FormControl>
-            <label htmlFor="agent">Agent</label>
-            <input
-              type="text"
-              {...register("agent", { required: true })}
-              placeholder="n°matricule, prénom et nom de l'agent. EX 102-john Doe"
-            />
-            <ErrorSection>
-              <AnimatePresence>
-                {errors.agent && (
-                  <motion.small className="text-error">
-                    Veuillez définir l'identité' de l'agent
-                  </motion.small>
-                )}
-              </AnimatePresence>
-            </ErrorSection>
-          </FormControl> */}
-
-          <FormControl>
-            <label htmlFor="dateOfAcquisition">Date et heure</label>
-            <input
-              type="text"
-              {...register("dateOfAcquisition", { required: true })}
-              placeholder="Date et heure du depot"
-            />
-            <ErrorSection>
-              <AnimatePresence>
-                {errors.date && (
-                  <motion.small className="text-error">
-                    Veuillez definir la date du dépot
-                  </motion.small>
-                )}
-              </AnimatePresence>
-            </ErrorSection>
-          </FormControl>
-
-          <FormControl>
-            <label htmlFor="post">Poste</label>
-            <select {...register("post", { required: true })}>
-              {postesListes.map((poste) => (
-                <option key={poste} value={poste}>
-                  {poste}
-                </option>
-              ))}
-            </select>
-          </FormControl>
-          <FormControl>
-            <label htmlFor="poste">Objets saisie</label>
-            <MarkdowTextEditor id="saisie" className="theme-text-editor" />
-          </FormControl>
-
-          <ModalFooter>
-            <SubmitButton className="bg-btn-theme-color" type="submit">
-              Ajouter
-              {process && <SpinnerButton className="loading-process" />}
-            </SubmitButton>
-          </ModalFooter>
-        </FormContainer>
+        <FormAcquisition
+          defaultValue={defaultValues}
+          submitForm={submitForm}
+          idAgent={idAgent}
+        />
       </ContentContainer>
     </>
   );
