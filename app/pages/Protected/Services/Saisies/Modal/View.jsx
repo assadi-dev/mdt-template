@@ -1,6 +1,7 @@
 import React from "react";
 import Add from "./Form/Add";
 import Edit from "./Form/Edit";
+import PreviewAcquisition from "./Form/PreviewAcquisition";
 
 const View = ({ view, data, onCloseModal }) => {
   switch (view) {
@@ -20,12 +21,20 @@ const View = ({ view, data, onCloseModal }) => {
           onCloseModal={onCloseModal}
         />
       );
-      break;
+
     case "delete-saisie":
       break;
 
+    case "show-acquisition":
+      return (
+        <PreviewAcquisition
+          className="modal-theme-color"
+          payload={data}
+          onCloseModal={onCloseModal}
+        />
+      );
     default:
-      throw new Error(`Unhandled action view: ${type}`);
+      throw new Error(`Unhandled action view: ${view}`);
   }
 };
 

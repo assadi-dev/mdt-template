@@ -13,7 +13,6 @@ const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
     payload?.numeroDemandeComptabilite || ""
   }`;
 
-  console.log(payload);
   const { matricule, firstname, lastname } = payload;
 
   const CLEAN_NAME_AGENT = ShowAgent({ matricule, firstname, lastname });
@@ -21,7 +20,7 @@ const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
     <PreviewDocument
       title={TITLE_DOCUMENT}
       onCloseModal={onCloseModal}
-      {...props}
+      className="modal-theme-color"
     >
       <PreviewDocumentHeader>
         <Row style={{ marginTop: "18px" }}>

@@ -98,6 +98,7 @@ const Saisie = () => {
 
   const handleClickShowDepot = (data) => {
     console.log(data);
+    toggleModal({ view: "show-acquisition", data });
   };
 
   return (
