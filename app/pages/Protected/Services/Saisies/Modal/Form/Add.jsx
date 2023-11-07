@@ -16,13 +16,24 @@ import { postesListes } from "../../../../../../config/options";
 import SpinnerButton from "../../../../../../components/Shared/Loading/SpinnerButton";
 import useProcess from "../../../../../../hooks/useProcess";
 import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
+import { useDispatch } from "react-redux";
+import { addAcquisitions } from "../../../../../../features/Acquisitions/Acquisitions.slice";
+import { postAcquisitions } from "../../helpers";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
 
-const Add = ({ onCloseModal, ...props }) => {
+const Add = ({ onCloseModal, payload, ...props }) => {
+  const dispatch = useDispatch();
+
+  const { idAgent, firstname, lastname, matricule } = payload;
+
   const defaultValues = {
-    agent: "",
-    date: "",
-    poste: "",
-    objetsaisie: "",
+    agent: `api/agents/${idAgent}`,
+    dateOfAcquisition: "",
+    post: "",
+    acquisitionDescription: "",
   };
 
   const {
@@ -35,8 +46,31 @@ const Add = ({ onCloseModal, ...props }) => {
 
   const { process, toggleProcess } = useProcess();
 
-  const submitForm = () => {
-    toggleProcess();
+  const submitForm = async (values) => {
+    try {
+      toggleProcess();
+
+      const datatoSend = {
+        ...values,
+      };
+
+      const res = await postAcquisitions(datatoSend);
+      const payload = {
+        ...res.data,
+        firstname,
+        lastname,
+        matricule,
+      };
+
+      dispatch(addAcquisitions(payload));
+      toastSuccess();
+    } catch (error) {
+      console.log(error.message);
+      toastError();
+    } finally {
+      toggleProcess();
+      onCloseModal();
+    }
   };
 
   return (
@@ -50,7 +84,7 @@ const Add = ({ onCloseModal, ...props }) => {
           className="form-theme-color"
           onSubmit={handleSubmit(submitForm)}
         >
-          <FormControl>
+          {/*           <FormControl>
             <label htmlFor="agent">Agent</label>
             <input
               type="text"
@@ -66,13 +100,13 @@ const Add = ({ onCloseModal, ...props }) => {
                 )}
               </AnimatePresence>
             </ErrorSection>
-          </FormControl>
+          </FormControl> */}
 
           <FormControl>
-            <label htmlFor="date">Date et heure</label>
+            <label htmlFor="dateOfAcquisition">Date et heure</label>
             <input
               type="text"
-              {...register("date", { required: true })}
+              {...register("dateOfAcquisition", { required: true })}
               placeholder="Date et heure du depot"
             />
             <ErrorSection>
@@ -87,8 +121,8 @@ const Add = ({ onCloseModal, ...props }) => {
           </FormControl>
 
           <FormControl>
-            <label htmlFor="poste">Poste</label>
-            <select {...register("poste", { required: true })}>
+            <label htmlFor="post">Poste</label>
+            <select {...register("post", { required: true })}>
               {postesListes.map((poste) => (
                 <option key={poste} value={poste}>
                   {poste}

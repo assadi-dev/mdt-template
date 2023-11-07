@@ -25,6 +25,11 @@ const Saisie = () => {
   const { collections, status, error, count } = useSelector(
     (state) => state.AcquisitionsReducer
   );
+
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+
   const dispatch = useDispatch();
 
   const {
@@ -55,7 +60,7 @@ const Saisie = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [pageIndex, search]);
+  }, [pageIndex, search, count]);
 
   const columns = [
     { Header: "Agent", Cell: ({ row }) => ShowAgent(row.original) },
@@ -78,7 +83,8 @@ const Saisie = () => {
 
   /**Action btn **/
   const handleClickAddbtn = () => {
-    toggleModal({ view: "add-saisie", data: null });
+    const payload = { idAgent, lastname, firstname, matricule };
+    toggleModal({ view: "add-saisie", data: payload });
   };
 
   const handleClickShowDepot = (data) => {
