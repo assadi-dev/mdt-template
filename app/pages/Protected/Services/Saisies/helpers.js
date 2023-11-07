@@ -13,3 +13,9 @@ export const ShowAgent = (agent) => {
 export const postAcquisitions = (data) => {
   return api.post(`/acquisitions`, data);
 };
+export const editAcquisitions = (id, data) => {
+  return api.put(`/acquisitions/${id}`, data);
+};
+export const deleteAcquisitions = (id) => {
+  return api.delete(`/acquisitions/${id}`);
+};

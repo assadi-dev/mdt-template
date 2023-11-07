@@ -18,7 +18,7 @@ import {
   addAcquisitions,
   updateAcquisitions,
 } from "../../../../../../features/Acquisitions/Acquisitions.slice";
-import { postAcquisitions } from "../../helpers";
+import { editAcquisitions, postAcquisitions } from "../../helpers";
 import {
   toastError,
   toastSuccess,
@@ -46,10 +46,11 @@ const Edit = ({ onCloseModal, payload, ...props }) => {
         ...values,
       };
 
-      // const res = await postAcquisitions(datatoSend);
+      const res = await editAcquisitions(id, datatoSend);
       const payload = {
         id,
         ...values,
+        ...res,
       };
 
       dispatch(updateAcquisitions(payload));
