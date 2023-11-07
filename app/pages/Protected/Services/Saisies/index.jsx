@@ -18,6 +18,7 @@ import ActionCells from "../../../../components/DataTable/ActionCells";
 import DepotBtn from "./Modal/DepotBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveAcquisitionsAsync } from "../../../../features/Acquisitions/AcquisitionAsync";
+import { ShowAgent } from "./helpers";
 
 const Saisie = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
@@ -46,6 +47,7 @@ const Saisie = () => {
       const AcquisitionfetchPromise = dispatch(
         retrieveAcquisitionsAsync(payload)
       );
+      onPageTotalCountChange(count);
 
       return () => {
         AcquisitionfetchPromise.abort();
@@ -56,8 +58,8 @@ const Saisie = () => {
   }, [pageIndex, search]);
 
   const columns = [
-    { Header: "Agent", accessor: "agent" },
-    { Header: "Date de saisie", accessor: "date" },
+    { Header: "Agent", Cell: ({ row }) => ShowAgent(row.original) },
+    { Header: "Date de saisie", accessor: "dateOfAcquisition" },
     { Header: "Poste", accessor: "post" },
     {
       Header: "Dépôt",

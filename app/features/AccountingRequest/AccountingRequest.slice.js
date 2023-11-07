@@ -45,6 +45,7 @@ const AccountingRequestByPage = createSlice({
       })
       .addCase(retrieveAccountingRequest.pending, (state, action) => {
         state.status = "pending";
+        state.error = "";
       })
       .addCase(retrieveAccountingRequest.fulfilled, (state, action) => {
         state.status = "complete";

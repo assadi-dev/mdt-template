@@ -32,7 +32,6 @@ export const AcquisitionSlice = createSlice({
       .addCase(retrieveAcquisitionsAsync.fulfilled, (state, action) => {
         const { payload } = action;
         state.status = "complete";
-        state.error = "";
         state.collections = payload.data;
         state.count = payload.count;
       });
