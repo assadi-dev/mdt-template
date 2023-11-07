@@ -16,9 +16,15 @@ import Modal from "../../../../components/Modal/Modal";
 import View from "./Modal/View";
 import ActionCells from "../../../../components/DataTable/ActionCells";
 import DepotBtn from "./Modal/DepotBtn";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveAcquisitionsAsync } from "../../../../features/Acquisitions/AcquisitionAsync";
 
 const Saisie = () => {
   const { modalState, toggleModal, closeModal } = useModalState();
+  const { collections, status, error, count } = useSelector(
+    (state) => state.AcquisitionsReducer
+  );
+  const dispatch = useDispatch();
 
   const {
     onPageChange,
@@ -31,15 +37,24 @@ const Saisie = () => {
   } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   useEffect(() => {
-    const payload = {
-      page: pageIndex,
-      params: { item_per_page: pageSize, search },
-    };
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search },
+      };
+
+      const AcquisitionfetchPromise = dispatch(
+        retrieveAcquisitionsAsync(payload)
+      );
+
+      return () => {
+        AcquisitionfetchPromise.abort();
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }, [pageIndex, search]);
 
-  const collections = [
-    { agent: "tedd", date: "13-11-2023 à 10:15", post: "set" },
-  ];
   const columns = [
     { Header: "Agent", accessor: "agent" },
     { Header: "Date de saisie", accessor: "date" },
@@ -89,8 +104,8 @@ const Saisie = () => {
           }}
           totalCount={totalCount}
           manualPagination={true}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
           onPageChange={onPageChange}
           onPageTotalCountChange={onPageTotalCountChange}
           onSearchValue={handleSearch}
