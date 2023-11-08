@@ -44,6 +44,7 @@ const Add = ({ onCloseModal, payload, ...props }) => {
       toggleProcess();
 
       const datatoSend = {
+        agent: `api/agents/${idAgent}`,
         ...values,
       };
 
