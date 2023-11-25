@@ -124,6 +124,98 @@ class CivilRepository extends ServiceEntityRepository
 
     }
 
+    public function findByPaginationLight($items_per_page = 5, $page = 1, $search)
+    {
+        try {
+            $countResult = ($page - 1) * $items_per_page;
+            $qb = $this->createQueryBuilder("c");
+            $qb->select(
+                "
+            c.id, 
+            c.firstname,
+            c.lastname,
+            c.phone,
+            c.createdAt
+           "
+            )
+            ->orWhere($qb->expr()->like("c.firstname", ":search"))
+            ->orWhere($qb->expr()->like("c.lastname", ":search"))
+            ->orWhere($qb->expr()->like("c.gender", ":search"))
+            ->orWhere($qb->expr()->like("c.job", ":search"))
+            ->orWhere($qb->expr()->like("c.phone", ":search"))
+            ->orWhere($qb->expr()->like("c.affiliation", ":search"))
+            ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
+            ->setParameter("search", "%$search%")
+            ->orderBy("c.createdAt", "DESC")
+            ;
+
+
+            $criteria = Criteria::create()
+            ->setFirstResult($countResult)
+            ->setMaxResults($items_per_page);
+
+            $qb->addCriteria($criteria);
+            $result = $qb->getQuery()->getResult();
+
+            //Otention du nombre total d'items
+            $query = $this->createQueryBuilder("c")->getQuery();
+            $paginator = new Paginator($query, false);
+            $count =  $paginator->count();
+
+            return  ["count" => $count,"data" => $result];
+
+        } catch (\Throwable $th) {
+            $message = $th->getMessage();
+            throw new \Exception($message);
+        }
+
+
+
+
+    }
+    public function findOneCivil($identificationNumber)
+    {
+        try {
+
+            $qb = $this->createQueryBuilder("c");
+            $qb->select(
+                "
+                c.id, 
+                c.firstname,
+                c.lastname,
+                c.birthdate,
+                c.hairColor,
+                c.gender,
+                c.job,
+                c.affiliation,
+                c.ppa,
+                c.driveLicence,
+                c.phone,
+                c.identificationNumber,
+                c.createdAt,
+                c.updatedAt
+           "
+            )
+            ->where("c.identificationNumber = :identificationNumber")
+            ->setParameter("identificationNumber", $identificationNumber)
+
+            ;
+
+
+            $result = $qb->getQuery()->getResult();
+
+            return $result;
+
+        } catch (\Throwable $th) {
+            $message = $th->getMessage();
+            throw new \Exception($message);
+        }
+
+
+
+
+    }
+
 
 
 
