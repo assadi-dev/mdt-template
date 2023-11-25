@@ -65,7 +65,7 @@ const EncodageArmeFonction = () => {
     } catch (error) {
       toastError();
     }
-  }, [pageIndex, debouncedValue]);
+  }, [pageIndex, debouncedValue, count]);
 
   return (
     <>
