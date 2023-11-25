@@ -58,7 +58,7 @@ const DemandeComptability = () => {
     } catch (error) {
       toastError("Une erreur est survenue lors de la récuperation des données");
     }
-  }, [pageIndex, idAgent, search]);
+  }, [pageIndex, idAgent, search, count]);
 
   const columns = [
     { Header: "Matricule", accessor: "matricule" },
