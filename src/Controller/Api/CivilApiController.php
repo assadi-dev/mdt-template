@@ -54,7 +54,7 @@ class CivilApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/civil/{identification}", name="app_get_civils_pagination", methods="GET" )
+     * @Route("/api/civil/{identification}", name="app_get_civil_by_identificationn", methods="GET" )
      */
     public function get_one_civiByIdentification($identification)
     {
