@@ -164,7 +164,7 @@ class Civil
     }
     public function getEthnie(): ?string
     {
-        return $this->nationality;
+        return $this->ethnie;
     }
 
     public function setEthnie(string $ethnie): self
