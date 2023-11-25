@@ -20,31 +20,23 @@ import SpinnerButton from "../../../../../../../components/Shared/Loading/Spinne
 import useProcess from "../../../../../../../hooks/useProcess";
 import CivilFormPhoto from "./CivilFormphoto";
 
-const EncodeCivilForm = ({ onCloseModal, ...props }) => {
+const EncodeCivilForm = ({
+  onCloseModal,
+  defaultValues,
+  onSubmit,
+  ...props
+}) => {
   const { process, toggleProcess } = useProcess();
-
-  const defaultValues = {
-    name: "",
-    firstname: "",
-    birthOfDate: "",
-    adress: "",
-    phone: "",
-    nationality: "",
-    affiliation: "",
-    job: "",
-    hairColor: "",
-    ethnie: "",
-    licence: "none",
-    gender: "homme",
-    identification: "",
-    ppa: "non",
-  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues });
+
+  const submitCivil = (values) => {
+    onSubmit(values);
+  };
 
   return (
     <ContentContainer {...props}>

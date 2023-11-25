@@ -1,4 +1,8 @@
 import * as yup from "yup";
+import {
+  positivNumberMessage,
+  requiredMessage,
+} from "../../config/ValidationMessage";
 
 yup.setLocale({
   mixed: {
@@ -7,12 +11,12 @@ yup.setLocale({
 });
 
 export const registerShcema = yup.object().shape({
-  agentIdentity: yup.string().required("Ce champs est obligatoire"),
-  faction: yup.string().required("Ce champs est obligatoire"),
-  phone: yup.string().required("Ce champs est obligatoire"),
+  agentIdentity: yup.string().required(requiredMessage),
+  faction: yup.string().required(requiredMessage),
+  phone: yup.string().required(requiredMessage),
   matricule: yup
     .number()
-    .required("Ce champs est obligatoire")
-    .positive("Le matricule doit étre un nombre positif"),
-  gender: yup.string().required("Ce champs est obligatoire"),
+    .required(requiredMessage)
+    .positive(`Le matricule ${positivNumberMessage}`),
+  gender: yup.string().required(requiredMessage),
 });

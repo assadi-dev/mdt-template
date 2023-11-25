@@ -34,11 +34,12 @@ class CivilsFixtures extends Fixture
 
         $gender = $faker->randomElement(["male","female"]);
 
-        $ppa = $faker->randomElement([true,false]);
+        $ppa = $faker->boolean();
         $driveLicence = $faker->randomElement(['none','valid','suspend','invalid']);
         $phone = $faker->randomNumber(5, true);
         $identification = uniqid();
-        $isWanted = $faker->randomElement([false,true]);
+        $isWanted = $faker->boolean();
+        $ethnie = $faker->randomElement(['Caucasien','Afro','Hispanique']);
 
         $civil->setFirstname($faker->firstNameMale())->setLastname($faker->lastName())->setGender("male");
 
@@ -57,6 +58,8 @@ class CivilsFixtures extends Fixture
         ->setPhone("555-" . $phone)
         ->setIdentificationNumber($identification)
         ->setAddress($faker->address())
+        ->setNationality($faker->countryISOAlpha3())
+        ->setEthnie($ethnie)
         ->setIsWanted($isWanted)
         ;
 

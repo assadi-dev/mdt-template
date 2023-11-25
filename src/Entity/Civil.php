@@ -40,6 +40,16 @@ class Civil
     private $birthdate;
 
     /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $nationality;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $ethnie;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     private $hairColor;
@@ -138,6 +148,28 @@ class Civil
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
+
+        return $this;
+    }
+    public function getNationality(): ?string
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(string $nationality): self
+    {
+        $this->nationality = $nationality;
+
+        return $this;
+    }
+    public function getEthnie(): ?string
+    {
+        return $this->nationality;
+    }
+
+    public function setEthnie(string $ethnie): self
+    {
+        $this->ethnie = $ethnie;
 
         return $this;
     }
