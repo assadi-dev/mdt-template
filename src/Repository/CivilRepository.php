@@ -96,7 +96,8 @@ class CivilRepository extends ServiceEntityRepository
             ->orWhere($qb->expr()->like("c.affiliation", ":search"))
             ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
             ->setParameter("search", "%$search%")
-            ->groupBy("c.id");
+            ->orderBy("c.createdAt", "DESC")
+            ;
 
 
             $criteria = Criteria::create()
