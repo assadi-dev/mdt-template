@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchWeaponCivilCollection } from "./helpers";
+import {} from "./helpers";
 
-export const retieaveWeaponEncodingAsync = createAsyncThunk(
+export const fetchVehicleCivilCollectionAsync = createAsyncThunk(
   "WeaponEncoding/fetcCollections",
   async (payload) => {
     try {
