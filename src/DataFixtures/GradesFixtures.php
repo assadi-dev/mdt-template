@@ -34,6 +34,7 @@ class GradesFixtures extends Fixture
             ["name" => "Rookie","gradeCategory" => "State Officier","faction" => "sasp"]
         ];
 
+
         foreach ($categories as  $value) {
             $gradeCategory = new GradeCategory();
             $gradeCategory->setName($value["name"]);
