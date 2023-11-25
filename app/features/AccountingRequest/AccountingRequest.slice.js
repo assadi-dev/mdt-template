@@ -19,7 +19,7 @@ const AccountingRequestByPage = createSlice({
       let updateState = [payload, ...state.collections];
 
       state.collections = updateState;
-      state.collections.count = state.collections.count + 1;
+      state.count = state.count + 1;
     },
     editAccountingRequestByPage: (state, action) => {
       const { payload } = action;
