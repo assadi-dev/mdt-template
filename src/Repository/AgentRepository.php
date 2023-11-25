@@ -96,7 +96,49 @@ class AgentRepository extends ServiceEntityRepository
 
     }
 
-    function findAgentForTrombinoscopByPage($items_per_page = 5, $page = 1, $search)
+
+    public function findAgentByMatricule($matricule)
+    {
+        try {
+            $qb = $this->createQueryBuilder("a");
+            $qb->select(
+                "
+            a.id as idAgent, 
+            a.firstname,
+            a.lastname,
+            a.gender,
+            a.matricule,
+            a.phone,
+            a.faction,
+            a.division,
+            g.id as idGrade,
+            g.name as grade,
+            a.iban,
+            a.createdAt,
+            a.updatedAt"
+            )
+            ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+            ->where("a.matricule =:matricule")
+            ->setParameter("matricule", $matricule)
+            ;
+            $result = $qb->getQuery()->getSingleResult();
+            return $result;
+        } catch (\Throwable $th) {
+            if(!isset($result)) {
+                throw new \Exception("agent introuvable");
+            }
+        }
+
+
+
+
+
+    }
+
+
+
+
+    public function findAgentForTrombinoscopByPage($items_per_page = 5, $page = 1, $search)
     {
 
         $countResult = ($page - 1) * $items_per_page;
@@ -128,7 +170,7 @@ class AgentRepository extends ServiceEntityRepository
         $qb->addCriteria($criteria);
         $result = $qb->getQuery()->getResult();
         $query = $this->createQueryBuilder("a")->getQuery();
-        
+
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
@@ -138,7 +180,7 @@ class AgentRepository extends ServiceEntityRepository
         return ["count" => $count,"data" => $result];
     }
 
-    function findAgentByPage($items_per_page = 5, $page = 1, $search)
+    public function findAgentByPage($items_per_page = 5, $page = 1, $search)
     {
 
         $countResult = ($page - 1) * $items_per_page;
