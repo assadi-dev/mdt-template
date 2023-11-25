@@ -36,7 +36,6 @@ class CivilApiController extends AbstractController
             }
 
             $result = $this->civilRepository->findByPagination($item_per_page, $page, $search);
-
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;

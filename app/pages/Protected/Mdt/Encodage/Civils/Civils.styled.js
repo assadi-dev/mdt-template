@@ -133,3 +133,16 @@ export const CivilCardInfo = styled.div`
     margin-bottom: 1.3rem;
   }
 `;
+
+export const NoFounMessage = styled.p`
+  white-space: nowrap;
+`;
+
+export const HeaderRow = styled(Row)`
+  min-height: 55px;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2.3rem;
+  justify-content: space-between;
+  width: 100%;
+`;

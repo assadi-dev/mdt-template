@@ -43,7 +43,7 @@ class CivilsFixtures extends Fixture
         $civil->setFirstname($faker->firstNameMale())->setLastname($faker->lastName())->setGender("male");
 
         if($gender == "female") {
-            $civil->setFirstname($faker->firstNameMale())->setLastname($faker->lastName())->setGender("female");
+            $civil->setFirstname($faker->firstNameFemale())->setLastname($faker->lastName())->setGender("female");
         }
 
 

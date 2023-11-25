@@ -7,6 +7,7 @@ import TrombinoscopReducer from "./Trombinoscop/Trombinoscop.slice";
 import AccountingRequestByPageReducer from "./AccountingRequest/AccountingRequest.slice";
 import ServiceWeaponEncodingReducer from "./ServiceWeaponEncoding/ServiceWeaponEncoding.slice";
 import AcquisitionsReducer from "./Acquisitions/Acquisitions.slice";
+import CivilsReducer from "./Civils/Civils.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -18,6 +19,7 @@ const RootReducers = {
   AccountingRequestByPageReducer,
   ServiceWeaponEncodingReducer,
   AcquisitionsReducer,
+  CivilsReducer,
 };
 
 export default RootReducers;
