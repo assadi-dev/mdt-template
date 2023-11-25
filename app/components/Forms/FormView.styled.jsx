@@ -105,6 +105,7 @@ export const SubmitButton = styled.button`
 export const ErrorSection = styled.div`
   margin-top: 1rem;
   min-height: 3px;
+  transition: all 0.35s;
 `;
 
 export const DeleteConfirm = styled.div`
