@@ -49,6 +49,9 @@ const EncodageCivils = () => {
     setPageIndex((current) => MAX_PAGE);
   };
 
+  const handeSearchinput = (value) => {
+    setSearchCivil(value);
+  };
   useEffect(() => {
     const payload = {
       page: pageIndex,
@@ -66,7 +69,10 @@ const EncodageCivils = () => {
     <>
       <PageContainer>
         <HeaderPage>
-          <CivilSearchInput className="input-theme-color" />
+          <CivilSearchInput
+            className="input-theme-color"
+            onSearchInput={handeSearchinput}
+          />
           <EncodeCivilBtn
             className="bg-btn-alt-theme-color"
             onClick={handleClickEncodeCivil}
