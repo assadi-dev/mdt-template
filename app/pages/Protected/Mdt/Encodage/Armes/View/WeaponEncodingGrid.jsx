@@ -8,8 +8,8 @@ const WeaponEncodingGrid = ({
   searchValue = "",
 }) => {
   const noFoundMessage = searchValue
-    ? "  Désolé Aucun ne correpond à votre recherche"
-    : "Auncun agent inscrit";
+    ? "  Désolé Aucun arme ne correpond à votre recherche"
+    : "Auncun arme inscrit";
 
   return (
     <>

@@ -8,9 +8,12 @@ const CivilGridCollection = ({
   searchCivil = "",
 }) => {
   const noFoundMessage = searchCivil ? (
-    <NoFounMessage> Désolé Aucun ne correpond à votre recherche</NoFounMessage>
+    <NoFounMessage>
+      {" "}
+      Désolé Aucun civil ne correpond à votre recherche
+    </NoFounMessage>
   ) : (
-    "Auncun agent inscrit"
+    "Auncun civil inscrit"
   );
 
   return (

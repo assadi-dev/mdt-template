@@ -8,8 +8,8 @@ const VehicleEncodingGrid = ({
   searchValue,
 }) => {
   const noFoundMessage = searchValue
-    ? "  Désolé Aucun ne correpond à votre recherche"
-    : "Auncun agent inscrit";
+    ? "  Désolé Aucun véhicule ne correpond à votre recherche"
+    : "Auncun vehicule inscrit";
 
   return (
     <>
