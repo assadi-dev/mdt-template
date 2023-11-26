@@ -10,5 +10,5 @@ export const initialState = {
 };
 
 export const fetchVehicleCivilCollection = (page, params) => {
-  return Api.get(`/${page}`, { params });
+  return Api.get(`/vehicle_encoding/pagination/${page}`, { params });
 };
