@@ -2,6 +2,7 @@ import React from "react";
 import useProcess from "../../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
 import {
+  ErrorSection,
   FormContainer,
   FormControl,
   HeaderModal,
@@ -18,82 +19,40 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
+import { weaponEncodingResolver } from "../schema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import WeaponForm from "./WeaponForm";
+import { saveEncodingWeapon } from "../../helpers";
+import { encodeCivilWeapon } from "../../../../../../../features/WeaponEncoding/WeaponEncoding.slice";
 
 const EncodeArmeForm = ({ onCloseModal, payload, ...props }) => {
   const { process, toggleProcess } = useProcess();
 
   const dispatch = useDispatch();
 
-  const defaultValues = {
-    civil: "",
-    firstname: "",
-    lastname: "",
-    serialNumber: "",
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ defaultValues });
-
-  const submitFormArme = (values) => {
+  const submitFormArme = async (values) => {
     try {
       toggleProcess();
-
       let payload = { ...values };
-
+      const res = await saveEncodingWeapon(payload);
+      dispatch(encodeCivilWeapon(res.data));
       toastSuccess();
     } catch (error) {
       toastError();
     } finally {
       toggleProcess();
+      onCloseModal();
     }
   };
 
   return (
     <>
-      <ModalFormContainer {...props} onSubmit={handleSubmit(submitFormArme)}>
+      <ModalFormContainer {...props}>
         <HeaderModal>
           <h2 className="form-title">Encoder une arme </h2>
           <CloseModalBtn className="close-section" onClick={onCloseModal} />
         </HeaderModal>
-        <FormContainer className="form-theme-color">
-          <FormControl>
-            <label htmlFor="firstname">Prénom</label>
-            <input type="text" {...register("firstname", { required: true })} />
-          </FormControl>
-          <FormControl>
-            <label htmlFor="name">Nom</label>
-            <input type="text" {...register("name", { required: true })} />
-          </FormControl>
-          <FormControl>
-            <label htmlFor="typeArme">Type d'arme</label>
-            <select {...register("typeArme", { required: true })}>
-              {typeOfArmesEnum.map((type) => (
-                <option key={type.id} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
-            </select>
-          </FormControl>
-          <FormControl>
-            <label htmlFor="numeroSerie">Numéro de série</label>
-            <input
-              type="text"
-              {...register("numeroSerie", { required: true })}
-            />
-          </FormControl>
-
-          <ModalFooter>
-            <ButtonWithLoader
-              labelButton={"Encoder"}
-              isLoading={process}
-              className="bg-btn-theme-color"
-              type="submit"
-            />
-          </ModalFooter>
-        </FormContainer>
+        <WeaponForm process={process} submitForm={submitFormArme} />
       </ModalFormContainer>
     </>
   );
