@@ -75,7 +75,7 @@ const Comptabilite = () => {
     } catch (error) {
       toastError("Une erreur est survenue lors de la récuperation des données");
     }
-  }, [search, pageIndex]);
+  }, [search, pageIndex, count]);
 
   const COLUMNS = [
     {
