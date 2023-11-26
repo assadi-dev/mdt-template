@@ -1,11 +1,11 @@
 import React from "react";
-import { GridArmesCard } from "../Armes.styled";
-import CardArmes from "../cardArmes";
+import { GridVehiculesCard } from "../Vehicules.styled";
+import CardVehicule from "../CardVehicule";
 
-const WeaponEncodingGrid = ({
+const VehicleEncodingGrid = ({
   collections = [],
   status = "pending",
-  searchValue = "",
+  searchValue,
 }) => {
   const noFoundMessage = searchValue
     ? "  Désolé Aucun ne correpond à votre recherche"
@@ -14,11 +14,11 @@ const WeaponEncodingGrid = ({
   return (
     <>
       {status == "complete" && collections.lengt > 0 ? (
-        <GridArmesCard>
+        <GridVehiculesCard>
           {collections.map((owner) => (
-            <CardArmes key={owner?.id} owner={owner} />
+            <CardVehicule key={owner.id} vehiculeData={owner} />
           ))}
-        </GridArmesCard>
+        </GridVehiculesCard>
       ) : (
         noFoundMessage
       )}
@@ -26,4 +26,4 @@ const WeaponEncodingGrid = ({
   );
 };
 
-export default WeaponEncodingGrid;
+export default VehicleEncodingGrid;

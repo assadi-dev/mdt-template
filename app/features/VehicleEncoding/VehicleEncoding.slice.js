@@ -6,7 +6,12 @@ export const VehicleEncodingSlice = createSlice({
   name: "VehicleEncoding",
   initialState: initialState,
   reducers: {
-    encodeCivilVehicle: (state, action) => {},
+    encodeCivilVehicle: (state, action) => {
+      const { payload } = action;
+      const vehicleEncodding = [payload, ...state.collections];
+      state.collections = vehicleEncodding;
+      state.count = state.count + 1;
+    },
     updateCivilVehicle: (state, action) => {},
     deleteCivilVehicle: (state, action) => {},
   },

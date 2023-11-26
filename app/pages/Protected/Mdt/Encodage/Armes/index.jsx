@@ -50,7 +50,7 @@ const EncodageArmes = () => {
     setPageIndex((current) => MAX_PAGE);
   };
 
-  const handeSearchinput = (value) => {
+  const handleSearchinput = (value) => {
     setSearchWeapon(value);
   };
 
@@ -71,7 +71,10 @@ const EncodageArmes = () => {
     <>
       <PageContainer>
         <HeaderPage>
-          <ArmesSearchInput className="input-theme-color" />
+          <ArmesSearchInput
+            className="input-theme-color"
+            onSearchInput={handleSearchinput}
+          />
           <EncodeArmesBtn
             className="bg-btn-alt-theme-color"
             onClick={handleClickEncodeArme}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Row } from "../../../../../../components/PageContainer";
 
 export const CardContainer = styled.div`
   border-radius: 8px;
