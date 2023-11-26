@@ -21,6 +21,8 @@ const WeaponForm = ({ process = false, submitForm = () => {} }) => {
     setError,
     getValues,
     clearErrors,
+    watch,
+    reset,
 
     formState: { errors },
   } = useForm({ resolver: yupResolver(weaponEncodingResolver) });
@@ -38,6 +40,9 @@ const WeaponForm = ({ process = false, submitForm = () => {} }) => {
         setValue("civil", `/api/civils/${civil.id}`);
       }
     } catch (error) {
+      setValue("lastname", "");
+      setValue("firstname", "");
+      setValue("civil", null);
       setError("identificationNumber", {
         message: "Aucun civil correspond à ce numero d'identification",
       });
@@ -45,6 +50,13 @@ const WeaponForm = ({ process = false, submitForm = () => {} }) => {
   };
 
   const submitValue = (values) => {
+    if (!getValues("civil")) {
+      setError("identificationNumber", {
+        message: "Aucun civil correspond à ce numero d'identification",
+      });
+      return;
+    }
+
     submitForm(values);
   };
 
@@ -68,24 +80,28 @@ const WeaponForm = ({ process = false, submitForm = () => {} }) => {
           )}
         </ErrorSection>
       </FormControl>
-      <FormControl>
-        <label htmlFor="firstname">Prénom</label>
-        <input type="text" {...register("firstname")} />
-        <ErrorSection>
-          {errors.firstname && (
-            <small className="text-error">{errors.firstname.message}</small>
-          )}
-        </ErrorSection>
-      </FormControl>
-      <FormControl>
-        <label htmlFor="lastname">Nom</label>
-        <input type="text" {...register("lastname")} />
-        <ErrorSection>
-          {errors.lastname && (
-            <small className="text-error">{errors.lastname.message}</small>
-          )}
-        </ErrorSection>
-      </FormControl>
+      {watch("firstname") && (
+        <FormControl>
+          <label htmlFor="firstname">Prénom</label>
+          <input type="text" {...register("firstname")} readOnly />
+          <ErrorSection>
+            {errors.firstname && (
+              <small className="text-error">{errors.firstname.message}</small>
+            )}
+          </ErrorSection>
+        </FormControl>
+      )}
+      {watch("firstname") && (
+        <FormControl>
+          <label htmlFor="lastname">Nom</label>
+          <input type="text" {...register("lastname")} readOnly />
+          <ErrorSection>
+            {errors.lastname && (
+              <small className="text-error">{errors.lastname.message}</small>
+            )}
+          </ErrorSection>
+        </FormControl>
+      )}
       <FormControl>
         <label htmlFor="type">Type d'arme</label>
         <select {...register("type", { required: true })}>
