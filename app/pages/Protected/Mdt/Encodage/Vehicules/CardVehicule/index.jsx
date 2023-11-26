@@ -16,7 +16,7 @@ const CardVehicule = ({ vehiculeData, ...props }) => {
         <VehicleIcon />
       </IconCardContainer>
       <CardVehiculesBody>
-        <p>{vehiculeData?.plaque} </p>
+        <p>{vehiculeData?.immatriculation} </p>
         <p className="text-upper">{vehiculeData?.type}</p>
         <p>{`${vehiculeData?.firstname}  ${vehiculeData?.lastname}`}</p>
       </CardVehiculesBody>

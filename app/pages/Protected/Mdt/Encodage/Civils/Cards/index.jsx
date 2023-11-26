@@ -5,9 +5,15 @@ import {
   CivilCardPhoto,
 } from "../Civils.styled";
 import { noPhoto } from "../../../../../../services/utils/user";
+import { firsLetterCapitalise } from "../../../../../../services/utils/textUtils";
 
-const Cards = ({ civilData, id, ...props }) => {
-  const style = { backgroundImage: `url(${noPhoto("male")})` };
+const Cards = ({ civilData, ...props }) => {
+  const { id, firstname, lastname, phone, gender } = civilData;
+
+  const style = { backgroundImage: `url(${noPhoto(gender)})` };
+
+  const FIRSTNAME = firsLetterCapitalise(firstname);
+  const LASTNAME = lastname.toUpperCase();
 
   return (
     <CivilCardContainer
@@ -17,9 +23,9 @@ const Cards = ({ civilData, id, ...props }) => {
     >
       <CivilCardPhoto style={style}></CivilCardPhoto>
       <CivilCardInfo>
-        <p>NOM</p>
-        <p>Prénom</p>
-        <p>555-123456</p>
+        <p>{LASTNAME}</p>
+        <p>{FIRSTNAME}</p>
+        <p>{phone}</p>
       </CivilCardInfo>
     </CivilCardContainer>
   );

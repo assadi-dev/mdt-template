@@ -83,6 +83,8 @@ class AcquisitionRepository extends ServiceEntityRepository
         ->orWhere($qb->expr()->like("ac.dateOfAcquisition", ":search"))
         ->orWhere($qb->expr()->like("ac.post", ":search"))
         ->setParameter("search", "%$search%")
+        ->orderBy("ac.createdAt", "DESC")
+
         ;
 
         $result = $qb->getQuery()->getResult();

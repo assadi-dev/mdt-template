@@ -87,7 +87,6 @@ export const routing = [
               {
                 path: "civil/:idCivil",
                 element: <Pages.CivilCase />,
-
                 children: [
                   {
                     path: "avertissement",

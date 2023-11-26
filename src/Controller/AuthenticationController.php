@@ -46,15 +46,17 @@ class AuthenticationController extends AbstractController
             $faction = $body["faction"];
             $phone = $body["phone"];
             $gender = $body["gender"];
+            $matricule = $body["matricule"];
 
 
             $userAccount =  $this->userRepository->findOneBy(["idDiscord" => $idDiscord  ]);
             $agent = new Agent();
-            $agent->setFirstname($firstname);
-            $agent->setLastname($lastname);
-            $agent->setFaction($faction);
-            $agent->setPhone($phone);
-            $agent->setGender($gender);
+            $agent->setFirstname($firstname)
+            ->setLastname($lastname)
+            ->setMatricule($matricule)
+            ->setFaction($faction)
+            ->setPhone($phone)
+            ->setGender($gender);
             $grade = $this->getRookieGrade($faction);
             if(isset($grade)) {
                 $agent->setGrade($grade);

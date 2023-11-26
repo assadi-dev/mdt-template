@@ -38,3 +38,12 @@ export const GridArmesCard = styled.div`
   grid-gap: 1.3rem;
   grid-template-columns: repeat(auto-fit, 24rem);
 `;
+
+export const HeaderRow = styled(Row)`
+  min-height: 55px;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2.3rem;
+  justify-content: space-between;
+  width: 100%;
+`;

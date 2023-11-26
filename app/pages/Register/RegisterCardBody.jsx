@@ -38,6 +38,8 @@ import { textForNullValue } from "../../services/utils/textUtils";
 import Info from "./Info";
 import SpinnerButton from "../../components/Shared/Loading/SpinnerButton";
 import { api_register } from "./helper";
+import { registerShcema } from "./schema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const RegisterCardBody = () => {
   const { faction } = useParams();
@@ -79,6 +81,7 @@ const RegisterCardBody = () => {
       agentIdentity: `${firstname} ${lastname}`,
       faction: faction.toLocaleUpperCase(),
     },
+    resolver: yupResolver(registerShcema),
   });
 
   const onSubmit = async (data) => {
@@ -90,12 +93,22 @@ const RegisterCardBody = () => {
       setIsProcess((current) => !current);
       const { idDiscord } = usercredential;
 
+      // console.log(data);
+
       let cleanAgent = retrieveSubmitUseridentity(data.agentIdentity);
       let faction = data.faction.toLowerCase();
       let phone = data.phone ? data.phone : textForNullValue(data.phone, "N/A");
       let gender = data.gender;
+      let matricule = data.matricule;
 
-      let dataToSend = { idDiscord, ...cleanAgent, faction, phone, gender };
+      let dataToSend = {
+        idDiscord,
+        ...cleanAgent,
+        faction,
+        phone,
+        gender,
+        matricule,
+      };
 
       try {
         registration(dataToSend);
@@ -124,6 +137,35 @@ const RegisterCardBody = () => {
               </span>
               <input
                 type="text"
+                name="matricule"
+                id="matricule"
+                placeholder="N°Matricule"
+                {...register("matricule")}
+              />
+            </InputConnextionWrapper>
+            <ErrorMessage>
+              <AnimatePresence>
+                {errors.matricule && (
+                  <motion.p
+                    variants={ErrorConnexionApparition}
+                    initial="hidden"
+                    animate="show"
+                    exit="hidden"
+                  >
+                    {errors.matricule.message}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </ErrorMessage>
+          </FormControl>
+          <FormControl>
+            <InputConnextionWrapper>
+              <span>
+                {" "}
+                <FiUser />
+              </span>
+              <input
+                type="text"
                 name="agentIdentity"
                 id="agentIdentity"
                 placeholder="Prénom et Nom"
@@ -139,7 +181,7 @@ const RegisterCardBody = () => {
                     animate="show"
                     exit="hidden"
                   >
-                    Ce champs est obligatoire
+                    {errors.agentIdentity.message}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -171,7 +213,7 @@ const RegisterCardBody = () => {
                     animate="show"
                     exit="hidden"
                   >
-                    Ce champs est obligatoire
+                    {errors.gender.message}
                   </motion.p>
                 )}
               </AnimatePresence>
@@ -203,7 +245,7 @@ const RegisterCardBody = () => {
                     animate="show"
                     exit="hidden"
                   >
-                    Ce champs est obligatoire
+                    {errors.phone.message}
                   </motion.p>
                 )}
               </AnimatePresence>

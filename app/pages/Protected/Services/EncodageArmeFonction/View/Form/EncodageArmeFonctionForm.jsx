@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useProcess from "../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
 import {
@@ -18,6 +18,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addServiceWeaponEncoding } from "../../../../../../features/ServiceWeaponEncoding/ServiceWeaponEncoding.slice";
 import { postServiceWeaponEncoding } from "../../helpers";
+import useGetAgentByMatricule from "../../../../../../hooks/useGetAgentByMatricule";
 
 const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
   const { process, toggleProcess } = useProcess();
@@ -35,19 +36,29 @@ const EncodageArmeFonctionForm = ({ onCloseModal, payload, ...props }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
+    getValues,
   } = useForm({ defaultValues });
+
+  const { fetchData } = useGetAgentByMatricule();
 
   const submitFormArme = async (values) => {
     try {
       toggleProcess();
 
-      let payload = { ...values };
+      const agent = await fetchData(values.matricule);
+      let payload = {
+        ...values,
+        firstname: agent?.firstname,
+        lastname: agent?.lastname,
+        agent: `api/agents/${agent?.idAgent}`,
+      };
       const res = await postServiceWeaponEncoding(payload);
       dispatch(addServiceWeaponEncoding({ ...res.data, ...payload }));
       toastSuccess();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toastError();
     } finally {
       toggleProcess();
