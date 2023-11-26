@@ -1,5 +1,6 @@
 import { user_female, user_male } from "../../config/constantes";
 import { firsLetterCapitalise } from "./textUtils";
+import Api from "../api/instance";
 
 /**
  * Verifie si l'utilisateur posedde le role Admin
@@ -81,4 +82,13 @@ export const cleanAgentMatricule = (matricule, firstname, lastname) => {
 export const cleanAgentNoMatricule = (matricule, firstname, lastname) => {
   if (matricule) return `${matricule}-${cleanNameUser(firstname, lastname)}`;
   return `${cleanNameUser(firstname, lastname)}`;
+};
+
+/**
+ * Recuperation des données de l'utilisateur à partir de son numero d'identification
+ * @param {string} identification numero d'identification
+ * @returns
+ */
+export const fetchUserbyIdentification = (identification) => {
+  return Api.get(`/civil/identification/${identification}`);
 };

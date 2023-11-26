@@ -29,7 +29,7 @@ const EncodeFormVehicule = ({ onCloseModal, ...props }) => {
           <h2 className="form-title">Encoder un véhicule </h2>
           <CloseModalBtn className="close-section" onClick={onCloseModal} />
         </HeaderModal>
-        <VehicleEncodingForm process={process} />
+        <VehicleEncodingForm process={process} submitForm={submitFormArme} />
       </ModalFormContainer>
     </>
   );

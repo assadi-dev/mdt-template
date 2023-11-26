@@ -10,6 +10,7 @@ export const defaultValues = {
 };
 
 export const vehicleEncodingSchema = yup.object().shape({
+  identificationNumber: yup.string().required(requiredMessage),
   lastname: yup.string().required(requiredMessage),
   firstname: yup.string().required(requiredMessage),
   type: yup.string().required(requiredMessage),

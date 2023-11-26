@@ -11,7 +11,7 @@ import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithL
 import { weaponEncodingResolver } from "../schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import debounce from "debounce";
-import { fetchUserbyIdentification } from "../../helpers";
+import { fetchUserbyIdentification } from "../../../../../../../services/utils/user";
 
 const WeaponForm = ({ process = false, submitForm = () => {} }) => {
   const {
@@ -26,6 +26,7 @@ const WeaponForm = ({ process = false, submitForm = () => {} }) => {
 
     formState: { errors },
   } = useForm({ resolver: yupResolver(weaponEncodingResolver) });
+
   const handleChangeIdentification = async (e) => {
     const value = e.target.value;
     errors.identificationNumber && clearErrors("identificationNumber");
