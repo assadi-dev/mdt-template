@@ -6,7 +6,7 @@ export const retieaveWeaponEncodingAsync = createAsyncThunk(
   async (payload) => {
     try {
       const { page, params } = payload;
-      const res = await fetchWeaponCivilCollection();
+      const res = await fetchWeaponCivilCollection(page, params);
       return res.data;
     } catch (error) {
       console.log(error.message);

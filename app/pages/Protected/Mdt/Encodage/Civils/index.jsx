@@ -63,7 +63,7 @@ const EncodageCivils = () => {
     return () => {
       promiseRef.current?.abort();
     };
-  }, [pageIndex, debouncedValue]);
+  }, [pageIndex, debouncedValue, count]);
 
   return (
     <>

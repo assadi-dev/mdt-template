@@ -10,5 +10,5 @@ export const initialState = {
 };
 
 export const fetchWeaponCivilCollection = (page, params) => {
-  return Api.get(`/${page}`, { params });
+  return Api.get(`/weapon_encoding/pagination/${page}`, { params });
 };

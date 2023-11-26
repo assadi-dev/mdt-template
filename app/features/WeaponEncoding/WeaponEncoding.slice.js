@@ -6,7 +6,12 @@ export const WeaponEncodingSlice = createSlice({
   name: "WeaponEncoding",
   initialState: initialState,
   reducers: {
-    encodeCivilWeapon: (state, action) => {},
+    encodeCivilWeapon: (state, action) => {
+      const { payload } = action;
+      const encodedAdded = [payload, ...state.collections];
+      state.collections = encodedAdded;
+      state.count = state.count + 1;
+    },
     updateCivilWeapon: (state, action) => {},
     deleteCivilWeapon: (state, action) => {},
   },
