@@ -54,14 +54,14 @@ class CivilApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/civil/{identification}", name="app_get_civil_by_identificationn", methods="GET" )
+     * @Route("/api/civil/identification/{identification}", name="app_get_civil_by_identificationn", methods="GET" )
      */
     public function get_one_civiByIdentification($identification)
     {
 
         try {
 
-            $result = $this->civilRepository->findOneCivil($identification);
+            $result = $this->civilRepository->findOneCivilByIdentification($identification);
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;

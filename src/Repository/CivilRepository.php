@@ -173,7 +173,7 @@ class CivilRepository extends ServiceEntityRepository
 
 
     }
-    public function findOneCivil($identificationNumber)
+    public function findOneCivilByIdentification($identificationNumber)
     {
         try {
 
@@ -202,7 +202,7 @@ class CivilRepository extends ServiceEntityRepository
             ;
 
 
-            $result = $qb->getQuery()->getResult();
+            $result = $qb->getQuery()->getSingleResult();
 
             return $result;
 
