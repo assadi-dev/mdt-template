@@ -31,7 +31,6 @@ const VehicleEncodingForm = ({ process = false, submitForm = () => {} }) => {
     try {
       if (!value) return;
       const res = await fetchUserbyIdentification(value);
-      console.log(res);
 
       if (res.data?.id) {
         const civil = res.data;

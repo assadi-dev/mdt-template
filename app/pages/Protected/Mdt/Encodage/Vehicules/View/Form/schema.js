@@ -3,6 +3,7 @@ import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 export const defaultValues = {
   civil: "",
+  identificationNumber: "",
   lastname: "",
   firstname: "",
   typeVehicules: "",

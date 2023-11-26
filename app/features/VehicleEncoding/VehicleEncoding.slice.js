@@ -25,7 +25,7 @@ export const VehicleEncodingSlice = createSlice({
         state.error = action.error.message;
         state.status = "complete";
       })
-      .addCase(fetchVehicleCivilCollectionAsync, (state, action) => {
+      .addCase(fetchVehicleCivilCollectionAsync.fulfilled, (state, action) => {
         const { payload } = action;
         state.collections = payload.data;
         state.status = "complete";

@@ -13,7 +13,7 @@ const VehicleEncodingGrid = ({
 
   return (
     <>
-      {status == "complete" && collections.lengt > 0 ? (
+      {status == "complete" && collections.length > 0 ? (
         <GridVehiculesCard>
           {collections.map((owner) => (
             <CardVehicule key={owner.id} vehiculeData={owner} />

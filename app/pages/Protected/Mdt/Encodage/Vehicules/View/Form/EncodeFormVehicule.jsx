@@ -6,19 +6,30 @@ import {
   HeaderModal,
   ModalFormContainer,
 } from "../../../../../../../components/Forms/FormView.styled";
-
+import { useDispatch } from "react-redux";
 import VehicleEncodingForm from "./VehicleEncodingForm";
+import { encodeCivilVehicle } from "../../../../../../../features/VehicleEncoding/VehicleEncoding.slice";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../../services/utils/alert";
+import { saveVehicleEncoding } from "../../helpers";
 
 const EncodeFormVehicule = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
+  const dispatch = useDispatch();
 
-  const submitFormArme = (values) => {
+  const submitFormArme = async (values) => {
     try {
       toggleProcess();
-      console.log(values);
+      const res = await saveVehicleEncoding(values);
+      dispatch(encodeCivilVehicle(res.data));
+      toastSuccess();
     } catch (error) {
+      toastError();
     } finally {
       toggleProcess();
+      onCloseModal();
     }
   };
 

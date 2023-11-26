@@ -23,7 +23,6 @@ import VehicleEncodingGrid from "./View/VehicleEncodingGrid";
 import { fetchVehicleCivilCollectionAsync } from "../../../../../features/VehicleEncoding/VehicleEncodingAsyncAction";
 
 const EncodageVehicules = () => {
-  const { process, toggleProcess } = useProcess();
   const { modalState, toggleModal, closeModal } = useModalState();
 
   const handleClicEncodeVehicule = () => {
@@ -66,7 +65,7 @@ const EncodageVehicules = () => {
     promiseRef.current = dispatch(fetchVehicleCivilCollectionAsync(payload));
 
     return () => {
-      // promiseRef.current?.abort();
+      promiseRef.current?.abort();
     };
   }, [pageIndex, debouncedValue, count]);
 
@@ -98,13 +97,13 @@ const EncodageVehicules = () => {
           />
         </HeaderRow>
         {status == "pending" ? (
+          "Chargement en cours"
+        ) : (
           <VehicleEncodingGrid
             collections={collections}
             status={status}
             searchValue={debouncedValue}
           />
-        ) : (
-          "Chargement en cours"
         )}
       </PageContainer>
       {createPortal(
