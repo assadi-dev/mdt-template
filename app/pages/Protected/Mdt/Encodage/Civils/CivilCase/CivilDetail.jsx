@@ -3,7 +3,10 @@ import {
   firsLetterCapitalise,
   isNotAtribute,
 } from "../../../../../../services/utils/textUtils";
-import { cleanNameUser } from "../../../../../../services/utils/user";
+import {
+  cleanGender,
+  cleanNameUser,
+} from "../../../../../../services/utils/user";
 import { Button } from "../../../../../../components/PageContainer";
 import { RowAction } from "./CivilCase.style";
 import { formatDatefrWithoutHour } from "../../../../../../services/utils/dateFormat";
@@ -67,7 +70,7 @@ const CivilDetail = ({ civilData, ...props }) => {
         </li>
         <li>
           <p className="label">Genre</p>
-          <p>{gender}</p>
+          <p>{cleanGender(gender)}</p>
         </li>
       </ul>
       <RowAction>
