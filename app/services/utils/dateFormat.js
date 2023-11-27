@@ -31,3 +31,13 @@ export const datetimeFormatFr = (date = "") => {
 export const datetimeFormatWithSec = (date = "") => {
   return format(new Date(date), "dd-MM-yyyy  HH:mm:ss");
 };
+
+/**
+ * Retourne la date au format suivant DD-MM-YYYY
+ * @param {*} date
+ * @returns
+ */
+export const formatDatefrWithoutHour = (date) => {
+  if (!date) return "";
+  return format(new Date(date), "dd-MM-yyyy");
+};

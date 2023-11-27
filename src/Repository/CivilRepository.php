@@ -135,6 +135,7 @@ class CivilRepository extends ServiceEntityRepository
             c.firstname,
             c.lastname,
             c.phone,
+            c.gender,
             c.createdAt
            "
             )
