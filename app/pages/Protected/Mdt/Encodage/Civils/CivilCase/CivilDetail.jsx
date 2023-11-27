@@ -6,19 +6,22 @@ import {
 import { cleanNameUser } from "../../../../../../services/utils/user";
 import { Button } from "../../../../../../components/PageContainer";
 import { RowAction } from "./CivilCase.style";
+import { formatDatefrWithoutHour } from "../../../../../../services/utils/dateFormat";
 
 const CivilDetail = ({ civilData, ...props }) => {
   const {
+    id,
     firstname,
     lastname,
-    birth,
+    birthdate,
+    identificationNumber,
     address,
     phone,
-    apartenance,
+    affiliation,
     job,
     hairColor,
     nationality,
-    ethni,
+    ethnie,
     gender,
   } = civilData;
 
@@ -27,8 +30,12 @@ const CivilDetail = ({ civilData, ...props }) => {
       <p className="civil-name">{cleanNameUser(firstname, lastname)}</p>
       <ul className="info-detailed">
         <li>
+          <p className="label">N° Identification</p>
+          <p>{isNotAtribute(identificationNumber)}</p>
+        </li>
+        <li>
           <p className="label">Née le</p>
-          <p>{isNotAtribute(birth)}</p>
+          <p>{isNotAtribute(formatDatefrWithoutHour(birthdate))}</p>
         </li>
         <li>
           <p className="label">Addresse</p>
@@ -40,7 +47,7 @@ const CivilDetail = ({ civilData, ...props }) => {
         </li>
         <li>
           <p className="label">Appartenance</p>
-          <p>{isNotAtribute(apartenance)}</p>
+          <p>{isNotAtribute(affiliation)}</p>
         </li>
         <li>
           <p className="label">Emploie</p>
@@ -56,7 +63,7 @@ const CivilDetail = ({ civilData, ...props }) => {
         </li>
         <li>
           <p className="label">Ethnie</p>
-          <p>{ethni}</p>
+          <p>{ethnie}</p>
         </li>
         <li>
           <p className="label">Genre</p>

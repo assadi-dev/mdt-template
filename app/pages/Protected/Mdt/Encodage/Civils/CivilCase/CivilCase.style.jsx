@@ -30,7 +30,7 @@ export const AsideBarCivilDetail = styled.div`
 
   .photo {
     width: 100%;
-    height: auto;
+    height: 180px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,6 +38,18 @@ export const AsideBarCivilDetail = styled.div`
     border-radius: 8px;
   }
 
+  .photo-loader {
+    border-radius: 8px;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(9.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    border-radius: 8px;
+  }
   .civil-name {
     font-weight: bolder;
     font-size: 1.3rem;
@@ -125,5 +137,17 @@ export const ButtonDocumentContainer = styled.button`
     visibility: hidden;
     transition: all 0.25s;
     opacity: 0;
+  }
+`;
+
+export const CivilDetailLoaderContainer = styled.div`
+  margin: 1.2rem 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 992px) {
+    min-height: 450px;
   }
 `;

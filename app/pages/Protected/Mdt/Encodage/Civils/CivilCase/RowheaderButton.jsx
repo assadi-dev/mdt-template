@@ -11,7 +11,11 @@ import {
 } from "../../../../../../components/Svg/MDT.icon";
 import ButtonDocument from "./ButtonDocument";
 
-const RowheaderButton = () => {
+const RowheaderButton = ({ civilData, status }) => {
+  if (!status == "complete") return;
+
+  const { isWanted, driveLicence, ppa } = civilData;
+
   return (
     <RowButtonDocument>
       <ButtonDocumentContainer

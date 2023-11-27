@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { retrieveAllCivilAsync } from "./CivilsAsyncAction";
+import {
+  retrieveAllCivilAsync,
+  retrieveOneCivilAsync,
+} from "./CivilsAsyncAction";
 
 const initialState = {
   collections: [],
@@ -8,6 +11,7 @@ const initialState = {
   status: "idle",
   count: 0,
   error: "",
+  selected: {},
 };
 
 const CivilSlice = createSlice({
@@ -35,6 +39,9 @@ const CivilSlice = createSlice({
       state.collections = updateCivil;
     },
     deleteCivil: (state, action) => {},
+    removeCivilSelected: (state) => {
+      state.selected = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,9 +58,25 @@ const CivilSlice = createSlice({
         state.status = "complete";
         state.error = action.error.message;
       });
+
+    builder
+      .addCase(retrieveOneCivilAsync.pending, (state, action) => {
+        state.status = "pending";
+        state.error = "";
+      })
+      .addCase(retrieveOneCivilAsync.rejected, (state, action) => {
+        state.status = "completed";
+        state.error = action.error.message;
+      })
+      .addCase(retrieveOneCivilAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.status = "complete";
+        state.selected = payload;
+      });
   },
 });
 
-export const { setError, encodeCivil, editCivil } = CivilSlice.actions;
+export const { setError, encodeCivil, editCivil, removeCivilSelected } =
+  CivilSlice.actions;
 
 export default CivilSlice.reducer;
