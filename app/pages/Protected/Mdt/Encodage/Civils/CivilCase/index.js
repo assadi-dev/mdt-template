@@ -45,9 +45,8 @@ const CivilCase = () => {
           <AsideBarCivilLoader />
         )}
         <CivilMainSection>
-          {status == "complete" && (
-            <RowheaderButton status={status} civilData={selected} />
-          )}
+          <RowheaderButton status={status} civilData={selected} />
+
           <CivilTabsHeader idCivil={idCivil} listeNav={civilNavigation} />
           <TabsBody>
             <Outlet />

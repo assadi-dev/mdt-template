@@ -12,8 +12,6 @@ import {
 import ButtonDocument from "./ButtonDocument";
 
 const RowheaderButton = ({ civilData, status }) => {
-  if (!status == "complete") return;
-
   const { isWanted, driveLicence, ppa } = civilData;
 
   return (
