@@ -92,3 +92,7 @@ export const cleanAgentNoMatricule = (matricule, firstname, lastname) => {
 export const fetchUserbyIdentification = (identification) => {
   return Api.get(`/civil/identification/${identification}`);
 };
+
+export const cleanGender = (gender) => {
+  return gender == "male" ? "Homme" : "Femme";
+};
