@@ -9,11 +9,15 @@ const useGradesListoption = (faction) => {
   });
 
   const fetchData = async (signal) => {
-    const res = await fetchGradesByFaction(faction, signal);
-    setState(
-      (current) =>
-        (current = { ...current, data: res.data, status: "fullfilled" })
-    );
+    try {
+      const res = await fetchGradesByFaction(faction, signal);
+    } catch (error) {
+    } finally {
+      setState(
+        (current) =>
+          (current = { ...current, data: res.data, status: "fullfilled" })
+      );
+    }
   };
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const useGradesListoption = (faction) => {
     const signal = controller.signal;
     fetchData(signal);
     return () => {
-      controller.abort();
+      controller?.abort();
     };
   }, [faction]);
 
