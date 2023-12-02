@@ -21,11 +21,11 @@ const ShowPlainte = ({ onCloseModal = () => {}, payload, ...props }) => {
       <PreviewDocumentHeader>
         <p>
           <span className="text-bolder">Agent: </span>
-          {payload?.matricule + "-" + payload?.agent}
+          {payload?.agent}
         </p>
         <p>
           <span className="text-bolder">Dépositaire: </span>
-          {payload?.depositaire}
+          {payload?.depository}
         </p>
         <Row className="justiy-content-between">
           <p>
@@ -40,7 +40,7 @@ const ShowPlainte = ({ onCloseModal = () => {}, payload, ...props }) => {
         <p className="depot-title">Depot :</p>
         <MarkdownPreview
           className="theme-markdownPreview"
-          source={deposition}
+          source={payload?.depositionText}
         />
       </DepotTextContent>
     </PreviewDocument>

@@ -47,5 +47,5 @@ export const isNotAtribute = (value) => {
  * @param {number} number
  */
 export const rapportNumberPrefixer = (number) => {
-  return number.padStart(4, "0");
+  return number.toString().padStart(5, "0");
 };

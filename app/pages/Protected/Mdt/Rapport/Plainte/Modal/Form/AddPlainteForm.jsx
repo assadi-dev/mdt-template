@@ -9,17 +9,20 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
+import { addPlaint } from "../../../../../../../features/Plaints/Plaints.slice";
 
 const AddPlainteForm = ({ onCloseModal = () => {} }) => {
   const { process, toggleProcess } = useProcess();
   const { idAgent, lastname, firstname, matricule } = useSelector(
     (state) => state.AuthenticateReducer
   );
+  const dispatch = useDispatch();
 
   const savePlainte = async (values) => {
     toggleProcess();
     try {
-      await postSavePlainte(values);
+      const result = await postSavePlainte(values);
+      dispatch(addPlaint(result));
       onCloseModal();
       toastSuccess();
     } catch (error) {

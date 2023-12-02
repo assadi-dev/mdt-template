@@ -22,6 +22,7 @@ import { retieavePlaintsAsync } from "../../../../../features/Plaints/PaintsAsyn
 import useCustomPagination from "../../../../../hooks/useCustomPagination";
 import { defaultPageSize } from "../../../../../config/constantes";
 import { toastError } from "../../../../../services/utils/alert";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
 
 const Plainte = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -51,12 +52,16 @@ const Plainte = () => {
     {
       Header: "N° Dossier",
       accessor: "id",
-      Cell: (value) => rapportNumberPrefixer(value),
+      Cell: ({ value }) => rapportNumberPrefixer(value),
     },
     { Header: "Agent", accessor: "agent" },
-    { Header: "Dépositaire", accessor: "depositaire" },
+    { Header: "Dépositaire", accessor: "depository" },
     { Header: "Accusé", accessor: "accused" },
-    { Header: "Date et Heure", accessor: "createdAt" },
+    {
+      Header: "Date et Heure",
+      accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value.date),
+    },
     {
       Header: "Action",
       accessor: "",
@@ -90,7 +95,7 @@ const Plainte = () => {
     return () => {
       fetchPromise.current?.abort();
     };
-  }, [count]);
+  }, [pageIndex, count, search]);
 
   const handleClickAddbtn = () => {
     openModal({
