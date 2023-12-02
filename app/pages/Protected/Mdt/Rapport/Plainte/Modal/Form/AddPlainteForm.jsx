@@ -31,7 +31,7 @@ const AddPlainteForm = ({ onCloseModal = () => {} }) => {
 
   const defaultvalues = {
     ...plaintDefaultValues,
-    agent: "/" + agent_iri + idAgent,
+    agent: agent_iri + idAgent,
   };
   return (
     <FormPlainte
