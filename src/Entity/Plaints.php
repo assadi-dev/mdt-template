@@ -23,7 +23,7 @@ class Plaints
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable="yes")
+     * @ORM\Column(type="string", length=25,nullable=true)
      */
     private $numeroPlaint;
 

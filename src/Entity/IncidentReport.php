@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\IncidentReportRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\IncidentReportRepository;
 
 /**
  * @ORM\Entity(repositoryClass=IncidentReportRepository::class)
+ * @ApiResource()
  */
 class IncidentReport
 {
@@ -21,6 +23,11 @@ class IncidentReport
      * @ORM\Column(type="string", length=255)
      */
     private $officerImplicated;
+
+    /**
+     * @ORM\Column(type="string", length=25,nullable=true)
+     */
+    private $numeroReport;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -103,6 +110,20 @@ class IncidentReport
     public function setAgent(?Agent $agent): self
     {
         $this->agent = $agent;
+
+        return $this;
+    }
+
+
+    public function getNumeroReport(): ?string
+    {
+        return $this->numeroReport;
+    }
+
+
+    public function setNumeroReport(string $numeroReport): self
+    {
+        $this->numeroReport = $numeroReport;
 
         return $this;
     }

@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InterventionReportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=InterventionReportRepository::class)
+ * @ApiResource()
  */
 class InterventionReport
 {
@@ -25,9 +27,14 @@ class InterventionReport
     private $officiersImplicated;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $interventionType;
+
+    /**
+     * @ORM\Column(type="string", length=25,nullable=true)
+     */
+    private $numeroReport;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -125,4 +132,20 @@ class InterventionReport
 
         return $this;
     }
+
+
+
+    public function getNumeroReport(): ?string
+    {
+        return $this->numeroReport;
+    }
+
+
+    public function setNumeroReport(string $numeroReport): self
+    {
+        $this->numeroReport = $numeroReport;
+
+        return $this;
+    }
+
 }
