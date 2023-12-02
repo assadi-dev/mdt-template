@@ -23,6 +23,11 @@ class Plaints
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable="yes")
+     */
+    private $numeroPlaint;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     private $depository;
@@ -50,6 +55,7 @@ class Plaints
     public function __construct()
     {
         $this->isClassifield = false;
+
     }
 
 
@@ -123,4 +129,16 @@ class Plaints
     }
 
 
+
+    public function getNumeroPlaint(): ?string
+    {
+        return $this->numeroPlaint;
+    }
+
+    public function setNumeroPlaint(string $numeroPlaint): self
+    {
+        $this->numeroPlaint = $numeroPlaint;
+
+        return $this;
+    }
 }
