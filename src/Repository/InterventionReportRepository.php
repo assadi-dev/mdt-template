@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\InterventionReport;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<InterventionReport>
@@ -39,28 +41,73 @@ class InterventionReportRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return InterventionReport[] Returns an array of InterventionReport objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return InterventionReport[] Returns an array of InterventionReport objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('i.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?InterventionReport
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?InterventionReport
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+
+    public function findByPagination($item_per_page, $page, $search)
+    {
+        $countResult = ($page - 1) * $item_per_page;
+        $qb = $this->createQueryBuilder("int");
+
+        $qb->select("
+        int.id,
+        int.numeroReport,
+        int.officerImplicated,
+        int.interventionType,CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
+        int.createdAt")
+        ->leftJoin(Agent::class, "a", "WITH", "a.id=inc.agent")
+
+        ->orHaving($qb->expr()->like("int.numeroReport", ":search"))
+        ->orHaving($qb->expr()->like("int.officerImplicated", ":search"))
+        ->orHaving($qb->expr()->like("int.incidentType", ":search"))
+        ->orHaving($qb->expr()->like("int.createdAt", ":search"))
+        ->orHaving($qb->expr()->like("agent", ":search"))
+
+
+        ->setParameter("search", "%$search%")
+        ->orderBy("int.createdAt", "DESC")
+        ->groupBy("int.id")
+        ;
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($item_per_page);
+        $qb->addCriteria($criteria);
+
+        $incidentReportQuery = $qb->getQuery();
+        $paginator = new Paginator($incidentReportQuery, false);
+        $incidentReport = $qb->getQuery()->getResult();
+        $count =  $paginator->count();
+
+
+        $result =  $incidentReport;
+
+
+        return  ["count" =>  $count,"data" => $result];
+    }
+
+
 }

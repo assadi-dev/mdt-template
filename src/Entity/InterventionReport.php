@@ -49,7 +49,7 @@ class InterventionReport
     private $commentText;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Agent::class)
+     * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
 

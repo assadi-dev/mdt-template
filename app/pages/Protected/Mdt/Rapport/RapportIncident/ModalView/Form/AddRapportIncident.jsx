@@ -23,9 +23,9 @@ const AddRapportIncident = ({ onCloseModal, ...props }) => {
     try {
       const agent = agent_iri + idAgent;
       const body = { ...values, agent };
-      console.log(body);
+
       const res = await saveCreateRapportIncident(body);
-      dispatch(addIncidentReport(res));
+      dispatch(addIncidentReport(res.data));
       toastSuccess();
       onCloseModal();
     } catch (error) {
