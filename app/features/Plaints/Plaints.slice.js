@@ -9,7 +9,7 @@ const PlaintSlice = createSlice({
     addPlaint: (state, action) => {
       const { payload } = action;
       const plaintAdded = [payload, ...state.collections];
-      state.collections = plaintAdded;
+      // state.collections = plaintAdded;
       state.count = state.count + 1;
     },
     updatePlaint: (state, action) => {

@@ -8,5 +8,5 @@ export const initialState = {
 };
 
 export const fetchPlaintsCollections = (page, params) => {
-  return Api.get(`/plaints/pagination/${page}`);
+  return Api.get(`/plaints/pagination/${page}`, { params });
 };
