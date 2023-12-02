@@ -158,7 +158,7 @@ class AccountingRequestRepository extends ServiceEntityRepository
         $result = $qb->getQuery()->getResult();
 
 
-        $query = $this->createQueryBuilder("acq") ->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")->where("a.id = :idAgent") ->setParameter("idAgent", $idAgent)->getQuery();
+        $query = $this->createQueryBuilder("acq")->select("acq.id")->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")->where("a.id = :idAgent") ->setParameter("idAgent", $idAgent)->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
