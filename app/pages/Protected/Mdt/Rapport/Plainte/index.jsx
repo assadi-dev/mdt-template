@@ -21,8 +21,10 @@ import { rapportNumberPrefixer } from "../../../../../services/utils/textUtils";
 import { retieavePlaintsAsync } from "../../../../../features/Plaints/PaintsAsyncAction";
 import useCustomPagination from "../../../../../hooks/useCustomPagination";
 import { defaultPageSize } from "../../../../../config/constantes";
-import { toastError } from "../../../../../services/utils/alert";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
+import { updatePlaint } from "../../../../../features/Plaints/Plaints.slice";
+import { updateSavePlainte } from "./helpers";
 
 const Plainte = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -46,6 +48,18 @@ const Plainte = () => {
       view: SHOW_PLAINTE,
       data: plainte,
     });
+  };
+
+  const toogleClassifield = async (value) => {
+    try {
+      const id = value.id;
+      const body = { isClassifield: value.isClassifield };
+      updateSavePlainte(id, body);
+      toastSuccess("Affaire classé");
+      dispatch(updatePlaint(value));
+    } catch (error) {
+      toastError();
+    }
   };
 
   const COLUMNS = [
@@ -74,8 +88,15 @@ const Plainte = () => {
     },
     {
       Header: "Affaire classé",
-      accessor: "",
-      Cell: () => <StatePlainte className="toggle-custom" />,
+      accessor: "isClassifield",
+      Cell: ({ row }) => (
+        <StatePlainte
+          plainte={row?.original}
+          defaultChecked={row?.original?.isClassifield}
+          className="toggle-custom"
+          onChange={toogleClassifield}
+        />
+      ),
     },
   ];
   const fetchPromise = React.useRef(null);

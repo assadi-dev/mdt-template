@@ -2,15 +2,22 @@ import React from "react";
 import { TableAction } from "../../../../../components/DataTable/DataTable.styled";
 import Toggle from "react-toggle";
 
-const StatePlainte = ({ defaultChecked, onChange, ...props }) => {
+const StatePlainte = ({ plainte, defaultChecked, onChange, ...props }) => {
+  const handleChange = (e) => {
+    const value = e.target.checked;
+
+    onChange({ id: plainte?.id, isClassifield: value });
+  };
+
   return (
     <TableAction>
       <Toggle
         id="validate-status"
         defaultChecked={defaultChecked}
         aria-labelledby="validate-label"
-        onChange={onChange}
+        onChange={handleChange}
         {...props}
+        disabled={defaultChecked}
       />{" "}
     </TableAction>
   );

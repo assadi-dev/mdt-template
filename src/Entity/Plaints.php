@@ -38,9 +38,20 @@ class Plaints
     private $depositionText;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isClassifield;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
+
+    public function __construct()
+    {
+        $this->isClassifield = false;
+    }
+
 
     public function getId(): ?int
     {
@@ -83,6 +94,22 @@ class Plaints
         return $this;
     }
 
+
+
+    public function getIsClassifield(): ?bool
+    {
+        return $this->isClassifield;
+    }
+
+
+    public function setIsClassifield(bool $isClassifield): self
+    {
+        $this->isClassifield = $isClassifield;
+
+        return $this;
+    }
+
+
     public function getAgent(): ?Agent
     {
         return $this->agent;
@@ -94,4 +121,6 @@ class Plaints
 
         return $this;
     }
+
+
 }
