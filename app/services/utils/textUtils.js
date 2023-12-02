@@ -41,3 +41,11 @@ export const isNotAtribute = (value) => {
   if (value === "" || value === null || value === undefined) return "N/A";
   return value;
 };
+
+/**
+ * Ajoute des zéro avant les numéro ex:0004
+ * @param {number} number
+ */
+export const rapportNumberPrefixer = (number) => {
+  return number.padStart(4, "0");
+};

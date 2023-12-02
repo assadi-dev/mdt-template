@@ -22,7 +22,7 @@ const AddPlainte = ({ onCloseModal = () => {}, ...props }) => {
           Ajouter des preuves
         </Button>
       </RowPreuveButton>
-      <AddPlainteForm />
+      <AddPlainteForm onCloseModal={onCloseModal} />
     </ModalFormContainer>
   );
 };

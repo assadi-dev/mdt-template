@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AddBtn, PlaintPageContainer } from "./Plainte.styled";
 import {
   ActionButton,
@@ -16,9 +16,29 @@ import {
   ListPlaintModalView,
   SHOW_PLAINTE,
 } from "./Modal/ListPlaintModalView";
+import { useDispatch, useSelector } from "react-redux";
+import { rapportNumberPrefixer } from "../../../../../services/utils/textUtils";
+import { retieavePlaintsAsync } from "../../../../../features/Plaints/PaintsAsyncAction";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../../config/constantes";
+import { toastError } from "../../../../../services/utils/alert";
 
 const Plainte = () => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const { collections, status, error, count } = useSelector(
+    (state) => state.PlaintsReducer
+  );
+  const dispatch = useDispatch();
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const showPlainte = (plainte) => {
     openModal({
@@ -28,7 +48,11 @@ const Plainte = () => {
   };
 
   const COLUMNS = [
-    { Header: "Matricule", accessor: "matricule" },
+    {
+      Header: "N° Dossier",
+      accessor: "id",
+      Cell: (value) => rapportNumberPrefixer(value),
+    },
     { Header: "Agent", accessor: "agent" },
     { Header: "Dépositaire", accessor: "depositaire" },
     { Header: "Accusé", accessor: "accused" },
@@ -49,17 +73,24 @@ const Plainte = () => {
       Cell: () => <StatePlainte className="toggle-custom" />,
     },
   ];
+  const fetchPromise = React.useRef(null);
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
 
-  const collections = [
-    {
-      id: 1,
-      matricule: "23",
-      agent: "Alyson Finley",
-      depositaire: "Alvaro Martinez",
-      accused: "Pedro Alonzo",
-      createdAt: "30/09/2023 à 14:43",
-    },
-  ];
+    try {
+      fetchPromise.current = dispatch(retieavePlaintsAsync(payload));
+      onPageTotalCountChange(count);
+    } catch (error) {
+      toastError(error.message);
+    }
+
+    return () => {
+      fetchPromise.current?.abort();
+    };
+  }, [count]);
 
   const handleClickAddbtn = () => {
     openModal({
@@ -84,8 +115,16 @@ const Plainte = () => {
           data={collections}
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </PlaintPageContainer>
       {createPortal(
