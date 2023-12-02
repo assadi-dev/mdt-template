@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use ORM\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaintsRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -38,7 +38,6 @@ class Plaints
     private $depositionText;
 
     /**
-     * @ORM\Column(name="idAgent")
      * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
