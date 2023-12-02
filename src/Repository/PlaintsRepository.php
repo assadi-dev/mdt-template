@@ -73,8 +73,8 @@ class PlaintsRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("p");
         $countResult = ($page - 1) * $items_per_page;
 
-        $qb->select("p.id,p.depository,p.accused,p.createdAt")
-        ->leftJoin(Agent::class, "a", "WITH", "a.id=p.id")
+        $qb->select("p.id,p.depository,p.accused, CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,  p.createdAt")
+        ->leftJoin(Agent::class, "a", "WITH", "a.id=p.agent")
         ->orHaving($qb->expr()->like("p.depository", ":search"))
         ->orHaving($qb->expr()->like("p.accused", ":search"))
         ->orHaving($qb->expr()->like("p.createdAt", ":search"))
@@ -93,10 +93,8 @@ class PlaintsRepository extends ServiceEntityRepository
         $paginator = new Paginator($plaintsQuery, false);
         $count =  $paginator->count();
 
-        $agent =  $this->createQueryBuilder("p")->select("a.id,a.matricule,a.lastname,a.firstname")
-         ->leftJoin(Agent::class, "a", "WITH", "a.id=p.id")->getQuery()->getResult();
 
-        $result =  $plaints["agent"] = $agent;
+        $result =  $plaints;
 
 
         return  ["count" =>  $count,"data" => $result];
