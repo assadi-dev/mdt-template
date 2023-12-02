@@ -32,7 +32,7 @@ class IncidentReport
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $interventionType;
+    private $incidentType;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -66,14 +66,14 @@ class IncidentReport
         return $this;
     }
 
-    public function getInterventionType(): ?string
+    public function getIncidentType(): ?string
     {
-        return $this->interventionType;
+        return $this->incidentType;
     }
 
-    public function setInterventionType(string $interventionType): self
+    public function setIncidentType(string $incidentType): self
     {
-        $this->interventionType = $interventionType;
+        $this->incidentType = $incidentType;
 
         return $this;
     }
