@@ -65,8 +65,7 @@ const Plainte = () => {
   const COLUMNS = [
     {
       Header: "N° Dossier",
-      accessor: "id",
-      Cell: ({ value }) => rapportNumberPrefixer(value),
+      accessor: "numeroPlaint",
     },
     { Header: "Agent", accessor: "agent" },
     { Header: "Dépositaire", accessor: "depository" },
