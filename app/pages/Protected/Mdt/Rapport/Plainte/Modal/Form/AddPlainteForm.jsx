@@ -22,7 +22,8 @@ const AddPlainteForm = ({ onCloseModal = () => {} }) => {
     toggleProcess();
     try {
       const result = await postSavePlainte(values);
-      dispatch(addPlaint(result));
+      const agent = `${matricule}-${firstname} ${lastname}`;
+      dispatch(addPlaint({ ...result, agent }));
       onCloseModal();
       toastSuccess();
     } catch (error) {
