@@ -83,7 +83,6 @@ class InterventionReportRepository extends ServiceEntityRepository
         CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
         int.createdAt")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=int.agent")
-
         ->orHaving($qb->expr()->like("int.numeroReport", ":search"))
         ->orHaving($qb->expr()->like("int.officiersImplicated", ":search"))
         ->orHaving($qb->expr()->like("int.interventionType", ":search"))
