@@ -232,5 +232,39 @@ class AgentRepository extends ServiceEntityRepository
     }
 
 
+    public function findAgentListByGrade($grade)
+    {
+
+        try {
+            $qb = $this->createQueryBuilder("a");
+            $qb->select(
+                "
+            a.id as idAgent, 
+            a.firstname,
+            a.lastname,
+            a.gender,
+            a.matricule,
+            a.faction,
+            g.name as grade
+             "
+            )
+            ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+            ->where("g.name = :grade")
+            ->setParameter("grade", $grade)
+
+
+            ;
+            $result = $qb->getQuery()->getResult();
+            return $result;
+
+        } catch (\Throwable $th) {
+            if(!isset($result)) {
+                throw new \Exception("agent introuvable");
+            }
+        }
+
+    }
+
+
 
 }
