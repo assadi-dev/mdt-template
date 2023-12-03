@@ -4,7 +4,7 @@ export const RowAcquisitionContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   grid-gap: 1rem;
-  margin-top: 1.3rem;
+  margin-top: 1rem;
 
   .good {
     color: #fff;
@@ -18,8 +18,8 @@ export const RowAcquisitionContainer = styled.div`
 `;
 
 export const StatIconContainer = styled.button`
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 100%;
   display: flex;
   align-items: center;
@@ -30,13 +30,13 @@ export const StatIconContainer = styled.button`
 
 export const CardAquisitionItem = styled.div`
   width: 145px;
-  height: 62px;
+  height: 52px;
   display: grid;
   text-align: center;
   margin-bottom: 1rem;
   p {
     white-space: nowrap;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   svg {

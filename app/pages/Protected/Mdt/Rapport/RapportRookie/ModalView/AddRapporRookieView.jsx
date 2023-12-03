@@ -1,107 +1,37 @@
 import React from "react";
-import {
-  ErrorSection,
-  FormContainer,
-  FormControl,
-  HeaderModal,
-  ModalFooter,
-} from "../../../../../../components/Forms/FormView.styled";
+import { HeaderModal } from "../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
-import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import useProcess from "../../../../../../hooks/useProcess";
-import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
-import { TextContent } from "../../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
-import MarkdowTextEditor from "../../../../../../components/TextEditor/MarkdowTextEditor";
-import AcquisitionSection from "./Form/AcquisitionSection";
-import {
-  CommentTextContent,
-  RapporRookieModalCOntainer,
-} from "../RapportRookie.styled";
+
+import { RapporRookieModalCOntainer } from "../RapportRookie.styled";
+import RapportRookieForm from "./Form/RapportRookieForm";
 
 const AddRapporRookieView = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    setError,
-    clearErrors,
-  } = useForm({
-    defaultValues: {
-      idAgent: null,
-      mariculeRookie: "",
-      nameRookie: "",
-      typePatrouille: "",
-      comment: "",
-      relationCivil: "bad",
-      controlRoutier: "bad",
-      procedure: "bad",
-      conduite: "bad",
-      deontologie: "bad",
-      respectHierarchie: "bad",
-      terrain: "bad",
-      callRadio: "bad",
-    },
-  });
-
-  const handlegetCommentaire = (value) => {
-    errors.comment && clearErrors("comment");
-    setValue("comment", value);
-  };
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
 
   const submit = (values) => {
-    toggleProcess();
-    console.log(values);
+    try {
+      toggleProcess();
+      values.idAgent = idAgent;
+
+      console.log(values);
+    } catch (error) {
+    } finally {
+      toggleProcess();
+    }
   };
 
   return (
-    <RapporRookieModalCOntainer onSubmit={handleSubmit(submit)} {...props}>
+    <RapporRookieModalCOntainer {...props}>
       <HeaderModal>
         <h2 className="form-title">Ajouter un rapport</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormContainer className="form-theme-color">
-        <FormControl>
-          <label htmlFor="">Matricule du Rookie</label>
-          <input type="text" {...register("mariculeRookie")} />
-          <ErrorSection>
-            {errors.mariculeRookie && (
-              <small className="text-error">
-                Veuillez entrer le matricule rookie
-              </small>
-            )}
-          </ErrorSection>
-        </FormControl>
-        <FormControl>
-          <label htmlFor="">Nom Prénom du Rookie</label>
-          <input type="text" {...register("nameRookie")} />
-        </FormControl>
-        <FormControl>
-          <label htmlFor="">Type de patrouille</label>
-          <input type="text" {...register("typePatrouille")} />
-        </FormControl>
-
-        <AcquisitionSection />
-
-        <CommentTextContent>
-          <p className="mb-1">Commentaire</p>
-          <MarkdowTextEditor
-            className="theme-text-editor"
-            getOutput={handlegetCommentaire}
-          />
-        </CommentTextContent>
-
-        <ModalFooter>
-          <ButtonWithLoader
-            isLoading={process}
-            className="bg-btn-theme-color"
-            type="submit"
-          >
-            Ajouter
-          </ButtonWithLoader>
-        </ModalFooter>
-      </FormContainer>
+      <RapportRookieForm process={process} submitValue={submit} />
     </RapporRookieModalCOntainer>
   );
 };
