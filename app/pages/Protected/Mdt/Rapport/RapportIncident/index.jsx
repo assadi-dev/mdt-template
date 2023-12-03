@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ActionButton } from "../../../../../components/DataTable/DataTable.styled";
 import { RowAction } from "../../../../../components/PageContainer";
@@ -20,9 +20,29 @@ import {
   AddBtnRapportIncident,
   RapportIncidentPageContainer,
 } from "./Rapportincident.styled";
+import { retrieveIncidentActionAsync } from "../../../../../features/IncidentReport/IncidentAsyncAction";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../../config/constantes";
+import { useDispatch, useSelector } from "react-redux";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
 
 const RapportIncident = () => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const { collections, status, error, count } = useSelector(
+    (state) => state.IncidentReportReducer
+  );
+
+  const dispatch = useDispatch();
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const handleClickShowBtn = (rapportIncident) => {
     openModal({
@@ -50,8 +70,8 @@ const RapportIncident = () => {
 
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° de rapport",
+      accessor: "numeroReport",
     },
     {
       Header: "Agent",
@@ -60,11 +80,9 @@ const RapportIncident = () => {
     {
       Header: "Date et heure de l'incident",
       accessor: "createdAt",
+      Cell: ({ value }) => (value?.date ? datetimeFormatFr(value.date) : ""),
     },
-    {
-      Header: "N° de rapport",
-      accessor: "numeroRapport",
-    },
+
     {
       Header: "Rapport",
       accessor: "raport",
@@ -89,21 +107,22 @@ const RapportIncident = () => {
       ),
     },
   ];
+  const fetchPromise = React.useRef(null);
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
 
-  const collections = [
-    {
-      id: 12,
-      matricule: 129,
-      agent: "Bob Marley",
-      createdAt: "01/10/2023",
-      raport: 1,
-      numeroRapport: "0001",
-      officierimplique: "Taylor Moor, Mickel jackson",
-      typeIncident: "usage d'arme à feu",
-      emplacement: "central park",
-      corpsIncident: "Conduite dangereuse",
-    },
-  ];
+      fetchPromise.current = dispatch(retrieveIncidentActionAsync(payload));
+      onPageTotalCountChange(count);
+    } catch (error) {}
+
+    return () => {
+      fetchPromise.current?.abort();
+    };
+  }, [count, pageIndex, search]);
 
   return (
     <>
@@ -122,8 +141,16 @@ const RapportIncident = () => {
           data={collections}
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </RapportIncidentPageContainer>
       {createPortal(

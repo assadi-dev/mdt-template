@@ -97,6 +97,7 @@ class CivilRepository extends ServiceEntityRepository
             ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
             ->setParameter("search", "%$search%")
             ->orderBy("c.createdAt", "DESC")
+            ->groupBy("c.id")
             ;
 
 
@@ -105,13 +106,13 @@ class CivilRepository extends ServiceEntityRepository
             ->setMaxResults($items_per_page);
 
             $qb->addCriteria($criteria);
-            $result = $qb->getQuery()->getResult();
-
+            
             //Otention du nombre total d'items
-            $query = $this->createQueryBuilder("c")->getQuery();
+            $query = $qb->getQuery();
             $paginator = new Paginator($query, false);
             $count =  $paginator->count();
-
+            
+            $result = $qb->getQuery()->getResult();
             return  ["count" => $count,"data" => $result];
 
         } catch (\Throwable $th) {
@@ -148,6 +149,7 @@ class CivilRepository extends ServiceEntityRepository
             ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
             ->setParameter("search", "%$search%")
             ->orderBy("c.createdAt", "DESC")
+            ->groupBy("c.id")
             ;
 
 
@@ -156,13 +158,13 @@ class CivilRepository extends ServiceEntityRepository
             ->setMaxResults($items_per_page);
 
             $qb->addCriteria($criteria);
-            $result = $qb->getQuery()->getResult();
+
 
             //Otention du nombre total d'items
-            $query = $this->createQueryBuilder("c")->getQuery();
+            $query = $qb->getQuery();
             $paginator = new Paginator($query, false);
             $count =  $paginator->count();
-
+            $result = $qb->getQuery()->getResult();
             return  ["count" => $count,"data" => $result];
 
         } catch (\Throwable $th) {
@@ -203,7 +205,7 @@ class CivilRepository extends ServiceEntityRepository
             ;
 
 
-            $result = $qb->getQuery()->getSingleResult();
+            $result = $qb->getQuery()->getSingleResult(3);
 
             return $result;
 

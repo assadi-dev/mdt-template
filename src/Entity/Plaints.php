@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-
+use ORM\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaintsRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -23,6 +23,11 @@ class Plaints
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=25,nullable=true)
+     */
+    private $numeroPlaint;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     private $depository;
@@ -38,10 +43,21 @@ class Plaints
     private $depositionText;
 
     /**
-     * @ORM\Column(name="idAgent")
+     * @ORM\Column(type="boolean")
+     */
+    private $isClassifield;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Agent::class)
      */
     private $agent;
+
+    public function __construct()
+    {
+        $this->isClassifield = false;
+
+    }
+
 
     public function getId(): ?int
     {
@@ -84,6 +100,22 @@ class Plaints
         return $this;
     }
 
+
+
+    public function getIsClassifield(): ?bool
+    {
+        return $this->isClassifield;
+    }
+
+
+    public function setIsClassifield(bool $isClassifield): self
+    {
+        $this->isClassifield = $isClassifield;
+
+        return $this;
+    }
+
+
     public function getAgent(): ?Agent
     {
         return $this->agent;
@@ -92,6 +124,20 @@ class Plaints
     public function setAgent(?Agent $agent): self
     {
         $this->agent = $agent;
+
+        return $this;
+    }
+
+
+
+    public function getNumeroPlaint(): ?string
+    {
+        return $this->numeroPlaint;
+    }
+
+    public function setNumeroPlaint(string $numeroPlaint): self
+    {
+        $this->numeroPlaint = $numeroPlaint;
 
         return $this;
     }

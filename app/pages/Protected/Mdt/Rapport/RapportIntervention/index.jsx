@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddBtnRapporIncident,
   AddBtnRapporIntervention,
@@ -19,14 +19,37 @@ import {
   SHOW_RAPPORT_INTERVENTION,
   listOfRapportInterventionView,
 } from "./ModalView/listOfRapportInterventionView";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultPageSize } from "../../../../../config/constantes";
+import { retrieveInterventionActionAsync } from "../../../../../features/interventionReport/interventionReportAsyncAction";
 
 const RapportIntervention = () => {
   const { modalState, openModal, closeModal } = useModalState();
 
+  const { collections, status, error, count } = useSelector(
+    (state) => state.InterventionReportReducer
+  );
+
+  const dispatch = useDispatch();
+
+  const fetchPromise = useRef();
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° du rapport",
+      accessor: "numeroReport",
     },
     {
       Header: "Agent",
@@ -35,11 +58,9 @@ const RapportIntervention = () => {
     {
       Header: "Date et heure d'intervention",
       accessor: "createdAt",
+      Cell: ({ value }) => (value?.date ? datetimeFormatFr(value?.date) : ""),
     },
-    {
-      Header: "N° du rapport",
-      accessor: "numeroRaport",
-    },
+
     {
       Header: "Rapport",
       accessor: "",
@@ -90,34 +111,21 @@ const RapportIntervention = () => {
     });
   };
 
-  const collections = [
-    {
-      id: 15,
-      matricule: "103",
-      agent: "Alyson Finley",
-      createdAt: "01-10-2023 à 22:35",
-      numeroRaport: 25,
-      raport: 1,
-      numeraRapport: "0001",
-      officierimplique: "Taylor Moor, Mickel jackson",
-      typeIncident: "usage d'arme à feu",
-      emplacement: "New York",
-      corpsIntervention: "test rapport intervention 22",
-    },
-    {
-      id: 15,
-      matricule: "106",
-      agent: "Alyson Finley",
-      createdAt: "01-10-2023 à 22:35",
-      numeroRaport: 25,
-      raport: 18,
-      numeraRapport: "0001",
-      officierimplique: "Taylor Moor, Mickel jackson",
-      typeIncident: "usage d'arme à feu",
-      emplacement: "central park",
-      corpsIntervention: "test rapport intervention",
-    },
-  ];
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+
+      fetchPromise.current = dispatch(retrieveInterventionActionAsync(payload));
+      onPageTotalCountChange(count);
+
+      return () => {
+        fetchPromise.current?.abort();
+      };
+    } catch (error) {}
+  }, [pageIndex, count, search]);
 
   return (
     <RapportInterventionPageContainer>
@@ -133,9 +141,17 @@ const RapportIntervention = () => {
       <DataTable
         className="table"
         columns={COLUMNS}
-        isLoading={false}
-        isSuccess={true}
         data={collections}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
 
       {createPortal(

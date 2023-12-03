@@ -3,9 +3,37 @@ import { ModalRapportIncident } from "../../Rapportincident.styled";
 import { HeaderModal } from "../../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import FormRapportIncident from "./FormRapportIncident";
-import { defaultFormValues } from "./helpers";
+import { defaultFormValues, saveUpdateRapportIncident } from "./helpers";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../../services/utils/alert";
+import useProcess from "../../../../../../../hooks/useProcess";
+import { useDispatch } from "react-redux";
+import { editIncidentReport } from "../../../../../../../features/IncidentReport/IncidentReport.slice";
 
 const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
+  const { process, toggleProcess } = useProcess();
+  const dispatch = useDispatch();
+
+  const saveIncidentRepport = async (values) => {
+    try {
+      toggleProcess();
+      const id = values.id;
+      delete values.agent;
+      delete values.createdAt;
+      dispatch(editIncidentReport(values));
+      await saveUpdateRapportIncident(id, values);
+
+      onCloseModal();
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    } finally {
+      toggleProcess();
+    }
+  };
+
   return (
     <ModalRapportIncident {...props}>
       <HeaderModal>
@@ -17,6 +45,8 @@ const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
       <FormRapportIncident
         labelSaveButton="Mettre à jour"
         defaultValues={payload}
+        submitValue={saveIncidentRepport}
+        process={process}
       />
     </ModalRapportIncident>
   );

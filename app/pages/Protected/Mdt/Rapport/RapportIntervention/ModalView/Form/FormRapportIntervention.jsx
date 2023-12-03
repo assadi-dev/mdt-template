@@ -1,5 +1,9 @@
 import React from "react";
-import { defaultFormValues, inputOption } from "./helpers";
+import {
+  defaultFormValues,
+  inputOption,
+  interventionReportResolver,
+} from "./helpers";
 import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
 import useProcess from "../../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
@@ -12,14 +16,14 @@ import {
   FormControl,
   ModalFooter,
 } from "../../../../../../../components/Forms/FormView.styled";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const FormRapportIntervention = ({
   labelSaveButton = "Ajouter",
-  defaultValues = null,
-  onSave = () => {},
+  defaultValues = defaultFormValues,
+  process = false,
+  submitValues = () => {},
 }) => {
-  const { process, toggleProcess } = useProcess();
-
   const {
     register,
     getValues,
@@ -29,24 +33,23 @@ const FormRapportIntervention = ({
     clearErrors,
     reset,
     handleSubmit,
-  } = useForm({ defaultValues: { ...defaultFormValues, ...defaultValues } });
+  } = useForm({
+    defaultValues,
+    resolver: yupResolver(interventionReportResolver),
+  });
 
   const handleChangeRapport = (value) => {
-    if (errors.corpsIncident) clearErrors("corpsIncident");
-    setValue("corpsIncident", value);
+    if (errors.commentText) clearErrors("commentText");
+    setValue("commentText", value);
   };
 
   const save = (values) => {
-    if (!values.corpsIncident) {
-      setError("corpsIncident");
+    if (!values.commentText) {
+      setError("commentText");
       return false;
     }
-    try {
-      toggleProcess();
-      onSave(values);
-    } catch (error) {
-      toggleProcess();
-    }
+
+    submitValues(values);
   };
 
   return (
@@ -55,43 +58,37 @@ const FormRapportIntervention = ({
       onSubmit={handleSubmit(save)}
     >
       <FormControl>
-        <label htmlFor="officierimplique">Officiers impliqués</label>
-        <input
-          type="text"
-          {...register("officierimplique", inputOption)}
-          autoFocus
-        />
+        <label htmlFor="officiersImplicated">Officiers impliqués</label>
+        <input type="text" {...register("officiersImplicated")} autoFocus />
         <ErrorSection>
-          {errors.officierimplique && (
+          {errors.officiersImplicated && (
             <small className="text-error">
-              veuillez renseigner les officiers impliqués
+              {errors.officiersImplicated.message}
             </small>
           )}
         </ErrorSection>
       </FormControl>
       <FormControl>
-        <label htmlFor="typeIncident">Type d'incident</label>
+        <label htmlFor="interventionType">Type d'incident</label>
         <input
           type="text"
           placeholder="Ex: usage d'arme à feu"
-          {...register("typeIncident", inputOption)}
+          {...register("interventionType")}
         />
         <ErrorSection>
-          {errors.typeIncident && (
+          {errors.interventionType && (
             <small className="text-error">
-              veuillez renseigner le type d'incident
+              {errors.interventionType.message}
             </small>
           )}
         </ErrorSection>
       </FormControl>
       <FormControl>
-        <label htmlFor="emplacement">Emplacement D'incident</label>
-        <input type="text" {...register("emplacement", inputOption)} />
+        <label htmlFor="location">Emplacement D'incident</label>
+        <input type="text" {...register("location")} />
         <ErrorSection>
-          {errors.emplacement && (
-            <small className="text-error">
-              veuillez renseigner l'emplacement
-            </small>
+          {errors.location && (
+            <small className="text-error">{errors.location.message}</small>
           )}
         </ErrorSection>
       </FormControl>
@@ -100,11 +97,11 @@ const FormRapportIntervention = ({
         <RapportTextEditor
           className="theme-text-editor"
           getOutput={handleChangeRapport}
-          defaultValue={getValues("corpsIncident")}
+          defaultValue={getValues("commentText")}
         />
         <ErrorSection>
-          {errors.corpsIncident && (
-            <small className="text-error">veuillez remplir le corps</small>
+          {errors.commentText && (
+            <small className="text-error">{errors.commentText.message}</small>
           )}
         </ErrorSection>
       </FormControl>

@@ -7,15 +7,14 @@ import {
 import { Row } from "../../../../../../../components/PageContainer";
 import { retriveDocumentNum } from "../../../../../../../services/utils/rapport";
 import MarkdownPreview from "@uiw/react-markdown-preview";
+import { datetimeFormatFr } from "../../../../../../../services/utils/dateFormat";
 
 const PreviewRapportIntervention = ({ payload, onCloseModal, ...props }) => {
   const TITLE_RAPPORT = `Rapport incident ${retriveDocumentNum(
-    payload?.numeroRapport
+    payload?.numeroReport
   )}`;
 
-  const AGENT_FULLNAME =
-    payload?.matricule + "-" + payload?.agent || "N/A-" + payload?.agent;
-
+  const AGENT_FULLNAME = payload?.agent;
   return (
     <PreviewDocument
       title={TITLE_RAPPORT}
@@ -29,14 +28,14 @@ const PreviewRapportIntervention = ({ payload, onCloseModal, ...props }) => {
         </p>
         <p>
           <span className="text-bolder">Officier impliqués: </span>
-          {payload?.officierimplique}
+          {payload?.officiersImplicated}
         </p>
         <Row className="justiy-content-between">
           <p>
             <span className="text-bolder">Emplacement: </span>
-            {payload?.emplacement}
+            {payload?.location}
           </p>
-          <p>2023-10-15 à 18:34</p>
+          <p>{datetimeFormatFr(payload?.createdAt?.date)}</p>
         </Row>
       </PreviewDocumentHeader>
 
@@ -48,7 +47,7 @@ const PreviewRapportIntervention = ({ payload, onCloseModal, ...props }) => {
         <p className="text-bold  mb-1">Corps de l'incident :</p>
         <MarkdownPreview
           className="theme-markdownPreview"
-          source={payload?.corpsIntervention}
+          source={payload?.commentText}
         />
       </TextContent>
     </PreviewDocument>

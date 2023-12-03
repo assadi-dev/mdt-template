@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AddBtn, PlaintPageContainer } from "./Plainte.styled";
 import {
   ActionButton,
@@ -16,9 +16,32 @@ import {
   ListPlaintModalView,
   SHOW_PLAINTE,
 } from "./Modal/ListPlaintModalView";
+import { useDispatch, useSelector } from "react-redux";
+import { rapportNumberPrefixer } from "../../../../../services/utils/textUtils";
+import { retieavePlaintsAsync } from "../../../../../features/Plaints/PaintsAsyncAction";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { defaultPageSize } from "../../../../../config/constantes";
+import { toastError, toastSuccess } from "../../../../../services/utils/alert";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
+import { updatePlaint } from "../../../../../features/Plaints/Plaints.slice";
+import { updateSavePlainte } from "./helpers";
 
 const Plainte = () => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const { collections, status, error, count } = useSelector(
+    (state) => state.PlaintsReducer
+  );
+  const dispatch = useDispatch();
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const showPlainte = (plainte) => {
     openModal({
@@ -27,12 +50,31 @@ const Plainte = () => {
     });
   };
 
+  const toogleClassifield = async (value) => {
+    try {
+      const id = value.id;
+      const body = { isClassifield: value.isClassifield };
+      updateSavePlainte(id, body);
+      toastSuccess("Affaire classé");
+      dispatch(updatePlaint(value));
+    } catch (error) {
+      toastError();
+    }
+  };
+
   const COLUMNS = [
-    { Header: "Matricule", accessor: "matricule" },
+    {
+      Header: "N° Dossier",
+      accessor: "numeroPlaint",
+    },
     { Header: "Agent", accessor: "agent" },
-    { Header: "Dépositaire", accessor: "depositaire" },
+    { Header: "Dépositaire", accessor: "depository" },
     { Header: "Accusé", accessor: "accused" },
-    { Header: "Date et Heure", accessor: "createdAt" },
+    {
+      Header: "Date et Heure",
+      accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value.date),
+    },
     {
       Header: "Action",
       accessor: "",
@@ -45,21 +87,35 @@ const Plainte = () => {
     },
     {
       Header: "Affaire classé",
-      accessor: "",
-      Cell: () => <StatePlainte className="toggle-custom" />,
+      accessor: "isClassifield",
+      Cell: ({ row }) => (
+        <StatePlainte
+          plainte={row?.original}
+          defaultChecked={row?.original?.isClassifield}
+          className="toggle-custom"
+          onChange={toogleClassifield}
+        />
+      ),
     },
   ];
+  const fetchPromise = React.useRef(null);
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
 
-  const collections = [
-    {
-      id: 1,
-      matricule: "23",
-      agent: "Alyson Finley",
-      depositaire: "Alvaro Martinez",
-      accused: "Pedro Alonzo",
-      createdAt: "30/09/2023 à 14:43",
-    },
-  ];
+    try {
+      fetchPromise.current = dispatch(retieavePlaintsAsync(payload));
+      onPageTotalCountChange(count);
+    } catch (error) {
+      toastError(error.message);
+    }
+
+    return () => {
+      fetchPromise.current?.abort();
+    };
+  }, [pageIndex, count, search]);
 
   const handleClickAddbtn = () => {
     openModal({
@@ -84,8 +140,16 @@ const Plainte = () => {
           data={collections}
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </PlaintPageContainer>
       {createPortal(

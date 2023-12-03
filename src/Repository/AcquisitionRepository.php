@@ -84,23 +84,24 @@ class AcquisitionRepository extends ServiceEntityRepository
         ->orWhere($qb->expr()->like("ac.post", ":search"))
         ->setParameter("search", "%$search%")
         ->orderBy("ac.createdAt", "DESC")
+        ->groupBy("ac.id")
 
         ;
 
-        $result = $qb->getQuery()->getResult();
+
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($item_per_page);
         $qb->addCriteria($criteria);
 
-        $result = $qb->getQuery()->getResult();
+        // $result = $qb->getQuery()->getResult();
 
 
-        $query = $this->createQueryBuilder("a")->getQuery();
+        $query = $qb->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
-
+        $result =  $query->getResult();
         return ["count" => $count,"data" => $result];
 
     }

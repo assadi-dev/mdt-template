@@ -24,7 +24,7 @@ export const ServiceWeaponEncodingSlice = createSlice({
         state.error = "";
       })
       .addCase(retieaveServiceWeaponEncodingAsync.rejected, (state, action) => {
-        state.state = "complete";
+        state.state = "rejected";
         state.error = action.error.message;
       })
       .addCase(
