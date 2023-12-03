@@ -37,6 +37,7 @@ const DeleteRapportIncident = ({ payload, onCloseModal, ...props }) => {
       onConfirm={handleConfirm}
       text={TEXT_CONFIRM}
       process={process}
+      onCloseModal={onCloseModal}
       {...props}
     ></DeleteConfirmForm>
   );
