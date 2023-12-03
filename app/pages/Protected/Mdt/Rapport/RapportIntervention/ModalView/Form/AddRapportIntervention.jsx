@@ -11,6 +11,7 @@ import {
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
 import { addInterventionReport } from "../../../../../../../features/interventionReport/InterventionReport.slice";
+import { saveCreateRapportIntervention } from "./helpers";
 
 const AddRapportIntervention = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
@@ -19,16 +20,17 @@ const AddRapportIntervention = ({ onCloseModal, ...props }) => {
   );
   const dispatch = useDispatch();
 
-  const save = (values) => {
+  const save = async (values) => {
     try {
       toggleProcess();
       const agent = agent_iri + idAgent;
       const body = { ...values, agent };
+
+      const res = await saveCreateRapportIntervention(body);
       const payload = {
-        ...body,
+        ...res.data,
         agent: `${matricule}-${firstname} ${lastname}`,
       };
-
       dispatch(addInterventionReport(payload));
       toastSuccess();
       onCloseModal();

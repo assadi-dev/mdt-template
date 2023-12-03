@@ -28,12 +28,12 @@ const PreviewRapportIntervention = ({ payload, onCloseModal, ...props }) => {
         </p>
         <p>
           <span className="text-bolder">Officier impliqués: </span>
-          {payload?.officierimplique}
+          {payload?.officiersImplicated}
         </p>
         <Row className="justiy-content-between">
           <p>
             <span className="text-bolder">Emplacement: </span>
-            {payload?.emplacement}
+            {payload?.location}
           </p>
           <p>{datetimeFormatFr(payload?.createdAt?.date)}</p>
         </Row>
@@ -47,7 +47,7 @@ const PreviewRapportIntervention = ({ payload, onCloseModal, ...props }) => {
         <p className="text-bold  mb-1">Corps de l'incident :</p>
         <MarkdownPreview
           className="theme-markdownPreview"
-          source={payload?.corpsIntervention}
+          source={payload?.commentText}
         />
       </TextContent>
     </PreviewDocument>

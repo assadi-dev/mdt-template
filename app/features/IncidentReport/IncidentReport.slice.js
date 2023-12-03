@@ -8,6 +8,8 @@ const IncidentReportSlice = createSlice({
   reducers: {
     addIncidentReport: (state, action) => {
       const { payload } = action;
+      const collectionUpdated = [payload, ...state.collections];
+      state.collections = collectionUpdated;
       state.count = state.count + 1;
     },
     editIncidentReport: (state, action) => {
