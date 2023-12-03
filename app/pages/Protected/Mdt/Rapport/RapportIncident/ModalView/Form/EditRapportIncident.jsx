@@ -6,6 +6,8 @@ import FormRapportIncident from "./FormRapportIncident";
 import { defaultFormValues } from "./helpers";
 
 const EditRapportIncident = ({ payload, onCloseModal, ...props }) => {
+  console.log(payload);
+
   return (
     <ModalRapportIncident {...props}>
       <HeaderModal>

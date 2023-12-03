@@ -6,3 +6,7 @@ export const initialState = {
   error: "",
   count: 0,
 };
+
+export const fetchIncidentReportCollection = (page, params) => {
+  return Api.get(`/incident_reports/pagination/${page}`, { params });
+};

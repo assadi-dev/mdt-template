@@ -75,6 +75,8 @@ class IncidentReportRepository extends ServiceEntityRepository
         $qb->select("inc.id,
         inc.numeroReport,
         inc.officerImplicated,
+        inc.commentText,
+        inc.location
         CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
         inc.incidentType,
         inc.createdAt")

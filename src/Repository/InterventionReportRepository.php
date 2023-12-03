@@ -76,7 +76,10 @@ class InterventionReportRepository extends ServiceEntityRepository
         int.id,
         int.numeroReport,
         int.officerImplicated,
-        int.interventionType,CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
+        int.interventionType,
+        inc.commentText,
+        inc.location,
+        CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
         int.createdAt")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=inc.agent")
 

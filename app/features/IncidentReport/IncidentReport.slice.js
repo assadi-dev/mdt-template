@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./helpers";
-//import { retrievesGradesPaginationAsync } from "./GradesAsync.action";
+import { retrieveIncidentActionAsync } from "./IncidentAsyncAction";
 
 const IncidentReportSlice = createSlice({
   name: "IncidentReport",
@@ -13,6 +13,25 @@ const IncidentReportSlice = createSlice({
     editIncidentReport: (state, action) => {},
     deleteIncidentReport: (state, action) => {},
     errorIncidentReport: (state, action) => {},
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(retrieveIncidentActionAsync.pending, (state, action) => {
+        state.status = "pending";
+        state.error = null;
+      })
+      .addCase(retrieveIncidentActionAsync.rejected, (state, action) => {
+        const { error } = action;
+        state.status = "complete";
+        state.error = error.message;
+      })
+      .addCase(retrieveIncidentActionAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.status = "complete";
+        state.collections = payload?.data;
+        state.count = payload?.count;
+      });
   },
 });
 
