@@ -92,7 +92,7 @@ class PlaintsRepository extends ServiceEntityRepository
         $qb->addCriteria($criteria);
 
         $plaintsQuery = $qb->getQuery();
-        $plaints = $plaintsQuery->getScalarResult();
+        $plaints = $plaintsQuery->getResult();
         $paginator = new Paginator($plaintsQuery, false);
         $count =  $paginator->count();
 

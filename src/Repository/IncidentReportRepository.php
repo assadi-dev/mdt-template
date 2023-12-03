@@ -98,7 +98,7 @@ class IncidentReportRepository extends ServiceEntityRepository
         $qb->addCriteria($criteria);
         $incidentReportQuery = $qb->getQuery();
         $paginator = new Paginator($incidentReportQuery, false);
-        $incidentReport = $qb->getQuery()->getScalarResult();
+        $incidentReport = $qb->getQuery()->getResult();
         $count =  $paginator->count();
         $result =  $incidentReport;
         return  ["count" =>  $count,"data" => $result];

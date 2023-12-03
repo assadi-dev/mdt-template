@@ -92,7 +92,7 @@ class AgentRepository extends ServiceEntityRepository
         ->where("a.id =:id")
         ->setParameter("id", $id)
         ;
-        $result = $qb->getQuery()->getSingleResult(Query::HYDRATE_SCALAR);
+        $result = $qb->getQuery()->getSingleResult();
         return $result;
 
     }
@@ -122,7 +122,7 @@ class AgentRepository extends ServiceEntityRepository
             ->where("a.matricule =:matricule")
             ->setParameter("matricule", $matricule)
             ;
-            $result = $qb->getQuery()->getSingleResult(Query::HYDRATE_SCALAR);
+            $result = $qb->getQuery()->getSingleResult();
             return $result;
         } catch (\Throwable $th) {
             if(!isset($result)) {

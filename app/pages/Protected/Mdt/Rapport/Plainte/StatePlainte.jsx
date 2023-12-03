@@ -2,7 +2,12 @@ import React from "react";
 import { TableAction } from "../../../../../components/DataTable/DataTable.styled";
 import Toggle from "react-toggle";
 
-const StatePlainte = ({ plainte, defaultChecked, onChange, ...props }) => {
+const StatePlainte = ({
+  plainte,
+  defaultChecked = false,
+  onChange,
+  ...props
+}) => {
   const handleChange = (e) => {
     const value = e.target.checked;
 

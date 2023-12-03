@@ -88,13 +88,13 @@ class CivilRepository extends ServiceEntityRepository
             c.createdAt,
             c.updatedAt"
             )
-            ->orHaving($qb->expr()->like("c.firstname", ":search"))
-            ->orHaving($qb->expr()->like("c.lastname", ":search"))
-            ->orHaving($qb->expr()->like("c.gender", ":search"))
-            ->orHaving($qb->expr()->like("c.job", ":search"))
-            ->orHaving($qb->expr()->like("c.phone", ":search"))
-            ->orHaving($qb->expr()->like("c.affiliation", ":search"))
-            ->orHaving($qb->expr()->like("c.identificationNumber", ":search"))
+            ->orWhere($qb->expr()->like("c.firstname", ":search"))
+            ->orWhere($qb->expr()->like("c.lastname", ":search"))
+            ->orWhere($qb->expr()->like("c.gender", ":search"))
+            ->orWhere($qb->expr()->like("c.job", ":search"))
+            ->orWhere($qb->expr()->like("c.phone", ":search"))
+            ->orWhere($qb->expr()->like("c.affiliation", ":search"))
+            ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
             ->setParameter("search", "%$search%")
             ->orderBy("c.createdAt", "DESC")
             ->groupBy("c.id")
@@ -106,13 +106,13 @@ class CivilRepository extends ServiceEntityRepository
             ->setMaxResults($items_per_page);
 
             $qb->addCriteria($criteria);
-            $result = $qb->getQuery()->getScalarResult();
-
+            
             //Otention du nombre total d'items
-            $query = $this->createQueryBuilder("c")->getQuery();
+            $query = $qb->getQuery();
             $paginator = new Paginator($query, false);
             $count =  $paginator->count();
-
+            
+            $result = $qb->getQuery()->getResult();
             return  ["count" => $count,"data" => $result];
 
         } catch (\Throwable $th) {
@@ -164,7 +164,7 @@ class CivilRepository extends ServiceEntityRepository
             $query = $qb->getQuery();
             $paginator = new Paginator($query, false);
             $count =  $paginator->count();
-            $result = $qb->getQuery()->getScalarResult();
+            $result = $qb->getQuery()->getResult();
             return  ["count" => $count,"data" => $result];
 
         } catch (\Throwable $th) {

@@ -102,7 +102,7 @@ class WeaponEncodingRepository extends ServiceEntityRepository
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
-        $result = $qb->getQuery()->getScalarResult();
+        $result = $qb->getQuery()->getResult();
         return ["count" => $count,"data" => $result];
 
 
