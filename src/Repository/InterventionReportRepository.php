@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Agent;
 use App\Entity\InterventionReport;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -75,21 +76,19 @@ class InterventionReportRepository extends ServiceEntityRepository
         $qb->select("
         int.id,
         int.numeroReport,
-        int.officerImplicated,
+        int.officiersImplicated,
         int.interventionType,
         int.commentText,
         int.location,
         CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
         int.createdAt")
-        ->leftJoin(Agent::class, "a", "WITH", "a.id=inc.agent")
+        ->leftJoin(Agent::class, "a", "WITH", "a.id=int.agent")
 
         ->orHaving($qb->expr()->like("int.numeroReport", ":search"))
-        ->orHaving($qb->expr()->like("int.officerImplicated", ":search"))
-        ->orHaving($qb->expr()->like("int.incidentType", ":search"))
+        ->orHaving($qb->expr()->like("int.officiersImplicated", ":search"))
+        ->orHaving($qb->expr()->like("int.interventionType", ":search"))
         ->orHaving($qb->expr()->like("int.createdAt", ":search"))
         ->orHaving($qb->expr()->like("agent", ":search"))
-
-
         ->setParameter("search", "%$search%")
         ->orderBy("int.createdAt", "DESC")
         ->groupBy("int.id")
@@ -100,13 +99,13 @@ class InterventionReportRepository extends ServiceEntityRepository
         ->setMaxResults($item_per_page);
         $qb->addCriteria($criteria);
 
-        $incidentReportQuery = $qb->getQuery();
-        $paginator = new Paginator($incidentReportQuery, false);
-        $incidentReport = $qb->getQuery()->getResult();
+        $interventionReportQuery = $qb->getQuery();
+        $paginator = new Paginator($interventionReportQuery, false);
+        $interventionReport = $qb->getQuery()->getResult();
         $count =  $paginator->count();
 
 
-        $result =  $incidentReport;
+        $result =  $interventionReport;
 
 
         return  ["count" =>  $count,"data" => $result];
