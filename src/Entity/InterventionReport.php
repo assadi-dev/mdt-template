@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\InterventionReportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -111,26 +110,15 @@ class InterventionReport
         return $this;
     }
 
-    /**
-     * @return Collection<int, Agent>
-     */
-    public function getAgent(): Collection
+
+    public function getAgent(): ?Agent
     {
         return $this->agent;
     }
 
-    public function addAgent(Agent $agent): self
+    public function setAgent(?Agent $agent): self
     {
-        if (!$this->agent->contains($agent)) {
-            $this->agent[] = $agent;
-        }
-
-        return $this;
-    }
-
-    public function removeAgent(Agent $agent): self
-    {
-        $this->agent->removeElement($agent);
+        $this->agent = $agent;
 
         return $this;
     }

@@ -12,7 +12,7 @@ import VehicleEncodingReducer from "./VehicleEncoding/VehicleEncoding.slice";
 import WeaponEncodingReducer from "./WeaponEncoding/WeaponEncoding.slice";
 import PlaintsReducer from "./Plaints/Plaints.slice";
 import IncidentReportReducer from "./IncidentReport/IncidentReport.slice";
-import IncterventionReportReducer from "./interventionReport/InterventionReport.slice";
+import InterventionReportReducer from "./interventionReport/InterventionReport.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -29,7 +29,7 @@ const RootReducers = {
   VehicleEncodingReducer,
   PlaintsReducer,
   IncidentReportReducer,
-  IncterventionReportReducer,
+  InterventionReportReducer,
 };
 
 export default RootReducers;

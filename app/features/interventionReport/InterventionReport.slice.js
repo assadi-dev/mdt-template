@@ -8,10 +8,33 @@ const InterventionReportSlice = createSlice({
   reducers: {
     addInterventionReport: (state, action) => {
       const { payload } = action;
+
+      const collectionUpdated = [payload, ...state.collections];
+      state.collections = collectionUpdated;
       state.count = state.count + 1;
     },
-    editInterventionReport: (state, action) => {},
-    deleteInterventionReport: (state, action) => {},
+    editInterventionReport: (state, action) => {
+      const { payload } = action;
+
+      const collectionUpdated = [...state.collections].map(
+        (interventionRepport) => {
+          if (interventionRepport.id == payload.id) {
+            return { ...interventionRepport, ...payload };
+          }
+          return interventionRepport;
+        }
+      );
+      state.collections = collectionUpdated;
+    },
+    deleteInterventionReport: (state, action) => {
+      const { payload } = action;
+
+      const collectionUpdated = [...state.collections].filter(
+        (interventionRepport) => interventionRepport.id != payload.id
+      );
+      state.collections = collectionUpdated;
+      state.count = state.count - 1;
+    },
     errorInterventionReport: (state, action) => {},
   },
   extraReducers: (builder) => {
