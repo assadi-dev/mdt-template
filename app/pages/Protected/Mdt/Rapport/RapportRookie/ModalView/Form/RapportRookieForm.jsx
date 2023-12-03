@@ -11,7 +11,10 @@ import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithL
 import { TextContent } from "../../../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 import MarkdowTextEditor from "../../../../../../../components/TextEditor/MarkdowTextEditor";
 import AcquisitionSection from "../Form/AcquisitionSection";
-import { CommentTextContent } from "../../RapportRookie.styled";
+import {
+  CommentTextContent,
+  ReportRookieModalFooter,
+} from "../../RapportRookie.styled";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   rookieReportFormValues,
@@ -91,7 +94,7 @@ const RapportRookieForm = ({
         )}
       </ErrorSection>
 
-      <ModalFooter>
+      <ReportRookieModalFooter>
         <ButtonWithLoader
           isLoading={process}
           className="bg-btn-theme-color"
@@ -99,7 +102,7 @@ const RapportRookieForm = ({
         >
           Ajouter
         </ButtonWithLoader>
-      </ModalFooter>
+      </ReportRookieModalFooter>
     </FormContainer>
   );
 };

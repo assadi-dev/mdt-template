@@ -4,7 +4,10 @@ import {
   PageContainer,
 } from "../../../../../components/PageContainer";
 import { TextContent } from "../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
-import { ModalFormContainer } from "../../../../../components/Forms/FormView.styled";
+import {
+  ModalFooter,
+  ModalFormContainer,
+} from "../../../../../components/Forms/FormView.styled";
 
 export const RapportRookiePageContainer = styled(PageContainer)`
   .table {
@@ -16,6 +19,10 @@ export const RapportRookiePageContainer = styled(PageContainer)`
 `;
 
 export const RapporRookieModalCOntainer = styled(ModalFormContainer)`
+  .theme-text-editor {
+    margin-top: 0 !important;
+  }
+
   @media screen and (min-width: 992px) {
     width: 72rem;
   }
@@ -23,6 +30,8 @@ export const RapporRookieModalCOntainer = styled(ModalFormContainer)`
 
 export const CommentTextContent = styled(TextContent)`
   margin-top: 0;
+  min-height: auto;
+  font-size: 1.3rem;
 `;
 
 export const AddBtnRapportRookie = styled(ActionButton)`
@@ -32,4 +41,8 @@ export const AddBtnRapportRookie = styled(ActionButton)`
 export const AcuisitionSectionContainer = styled.fieldset`
   margin-top: 1.5rem;
   border-radius: 8px;
+`;
+
+export const ReportRookieModalFooter = styled(ModalFooter)`
+  margin: 0;
 `;
