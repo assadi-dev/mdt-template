@@ -73,6 +73,9 @@ export const ConfirmButton = styled.button`
   transition: all 0.35s;
   border-radius: 5px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  grid-gap: 0.5rem;
 `;
 
 export const DialogContent = styled.div`

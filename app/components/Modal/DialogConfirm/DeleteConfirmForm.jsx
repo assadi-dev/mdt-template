@@ -8,6 +8,7 @@ import {
   HeaderModalDelete,
 } from "./DialogueConfirm.styled";
 import CloseModalBtn from "../CloseModalBtn";
+import SpinnerButton from "../../Shared/Loading/SpinnerButton";
 
 const DeleteConfirmForm = ({
   text = "",
@@ -15,6 +16,7 @@ const DeleteConfirmForm = ({
   onCancel = () => {},
   onCloseModal = () => {},
   children,
+  process = false,
   ...props
 }) => {
   const cancelpromise = () =>
@@ -45,6 +47,7 @@ const DeleteConfirmForm = ({
             onClick={onConfirm}
           >
             Confirmer
+            {process && <SpinnerButton />}
           </ConfirmButton>
           <ConfirmButton
             className="bg-btn-theme-color"

@@ -22,7 +22,16 @@ const IncidentReportSlice = createSlice({
 
       state.collections = collectionsUpdated;
     },
-    deleteIncidentReport: (state, action) => {},
+    deleteIncidentReport: (state, action) => {
+      const { payload } = action;
+
+      const collectionsUpdated = [...state.collections].filter(
+        (indentRepport) => indentRepport.id != payload.id
+      );
+
+      state.collections = collectionsUpdated;
+      state.count = state.count - 1;
+    },
     errorIncidentReport: (state, action) => {},
   },
 

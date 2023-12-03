@@ -116,6 +116,7 @@ const RapportIncident = () => {
       };
 
       fetchPromise.current = dispatch(retrieveIncidentActionAsync(payload));
+      onPageTotalCountChange(count);
     } catch (error) {}
 
     return () => {
