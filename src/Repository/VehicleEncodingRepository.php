@@ -83,25 +83,25 @@ class VehicleEncodingRepository extends ServiceEntityRepository
         ve.createdAt
 ")
     ->leftJoin(Civil::class, "c", "WITH", "c.id=ve.civil")
-    ->orWhere($qb->expr()->like("ve.immatriculation", ":search"))
-    ->orWhere($qb->expr()->like("ve.type", ":search"))
-    ->orWhere($qb->expr()->like("c.firstname", ":search"))
-    ->orWhere($qb->expr()->like("c.lastname", ":search"))
-    ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
+    ->orHaving($qb->expr()->like("ve.immatriculation", ":search"))
+    ->orHaving($qb->expr()->like("ve.type", ":search"))
+    ->orHaving($qb->expr()->like("c.firstname", ":search"))
+    ->orHaving($qb->expr()->like("c.lastname", ":search"))
+    ->orHaving($qb->expr()->like("c.identificationNumber", ":search"))
     ->orderBy("ve.createdAt", "DESC")
+    ->groupBy("ve.id")
     ->setParameter("search", "%$search%");
 
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
-        $result = $qb->getQuery()->getResult();
-        $query = $this->createQueryBuilder("a")->getQuery();
+        $query =  $qb->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getScalarResult();
         return ["count" => $count,"data" => $result];
     }
 

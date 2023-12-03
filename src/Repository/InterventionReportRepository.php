@@ -100,7 +100,7 @@ class InterventionReportRepository extends ServiceEntityRepository
 
         $interventionReportQuery = $qb->getQuery();
         $paginator = new Paginator($interventionReportQuery, false);
-        $interventionReport = $qb->getQuery()->getResult();
+        $interventionReport = $qb->getQuery()->getScalarResult();
         $count =  $paginator->count();
 
 

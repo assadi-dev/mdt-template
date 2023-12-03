@@ -8,5 +8,5 @@ export const initialState = {
 };
 
 export const fetchinterventionReportCollection = (page, params) => {
-  return Api.get(`/interventions_reports/pagination${page}`, { params });
+  return Api.get(`/intervention_reports/pagination/${page}`, { params });
 };

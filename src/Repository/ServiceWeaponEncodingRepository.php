@@ -86,12 +86,12 @@ class ServiceWeaponEncodingRepository extends ServiceEntityRepository
     we.createdAt
     ")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=we.agent")
-        ->orWhere($qb->expr()->like("we.serialNumber", ":search"))
-        ->orWhere($qb->expr()->like("we.type", ":search"))
-        ->orWhere($qb->expr()->like("a.firstname", ":search"))
-        ->orWhere($qb->expr()->like("a.lastname", ":search"))
-        ->orWhere($qb->expr()->like("a.gender", ":search"))
-        ->orWhere($qb->expr()->like("a.matricule", ":search"))
+        ->orHaving($qb->expr()->like("we.serialNumber", ":search"))
+        ->orHaving($qb->expr()->like("we.type", ":search"))
+        ->orHaving($qb->expr()->like("a.firstname", ":search"))
+        ->orHaving($qb->expr()->like("a.lastname", ":search"))
+        ->orHaving($qb->expr()->like("a.gender", ":search"))
+        ->orHaving($qb->expr()->like("a.matricule", ":search"))
         ->orderBy("we.createdAt", "DESC")
         ->setParameter("search", "%$search%")
         ->groupBy("we.id");
@@ -99,13 +99,12 @@ class ServiceWeaponEncodingRepository extends ServiceEntityRepository
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
-        $result = $qb->getQuery()->getResult();
-        $query = $this->createQueryBuilder("a")->getQuery();
+        $query = $qb->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getScalarResult();
         return ["count" => $count,"data" => $result];
 
 

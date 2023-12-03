@@ -88,16 +88,17 @@ class AccountingRequestRepository extends ServiceEntityRepository
     acq.createdAt"
         )
         ->leftJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
-        ->orWhere($qb->expr()->like("a.firstname", ":search"))
-        ->orWhere($qb->expr()->like("a.lastname", ":search"))
-        ->orWhere($qb->expr()->like("a.gender", ":search"))
-        ->orWhere($qb->expr()->like("a.matricule", ":search"))
-        ->orWhere($qb->expr()->like("acq.date", ":search"))
-        ->orWhere($qb->expr()->like("acq.amount", ":search"))
-        ->orWhere($qb->expr()->like("acq.subject", ":search"))
-         ->orWhere($qb->expr()->like("acq.requestState", ":search"))
-        ->setParameter("search", "%$search%")
+        ->orHaving($qb->expr()->like("a.firstname", ":search"))
+        ->orHaving($qb->expr()->like("a.lastname", ":search"))
+        ->orHaving($qb->expr()->like("a.gender", ":search"))
+        ->orHaving($qb->expr()->like("a.matricule", ":search"))
+        ->orHaving($qb->expr()->like("acq.date", ":search"))
+        ->orHaving($qb->expr()->like("acq.amount", ":search"))
+        ->orHaving($qb->expr()->like("acq.subject", ":search"))
         ->orderBy("acq.createdAt", "DESC")
+         ->orHaving($qb->expr()->like("acq.requestState", ":search"))
+        ->setParameter("search", "%$search%")
+
         ;
 
         $criteria = Criteria::create()
@@ -105,7 +106,7 @@ class AccountingRequestRepository extends ServiceEntityRepository
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
 
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getScalarResult();
 
 
         $query = $this->createQueryBuilder("a")->getQuery();
@@ -124,17 +125,17 @@ class AccountingRequestRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("acq");
         $qb->select(
             "acq.id,
-    a.id as idAgent,
-    a.matricule,
-    a.firstname,
-    a.lastname,
-    a.gender,
-    acq.subject,
-    acq.date,
-    acq.reason,
-    acq.amount,
-    acq.requestState,
-    acq.createdAt"
+        a.id as idAgent,
+        a.matricule,
+        a.firstname,
+        a.lastname,
+        a.gender,
+        acq.subject,
+        acq.date,
+        acq.reason,
+        acq.amount,
+        acq.requestState,
+        acq.createdAt"
         )
         ->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")
         ->where("a.id = :idAgent")
@@ -144,10 +145,13 @@ class AccountingRequestRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("acq.date", ":search"))
         ->orHaving($qb->expr()->like("acq.amount", ":search"))
         ->orHaving($qb->expr()->like("acq.subject", ":search"))
+        ->groupBy("acq.id")
+        ->orderBy("acq.createdAt", "DESC")
         ->orHaving($qb->expr()->like("acq.requestState", ":search"))
         ->setParameter("search", "%$search%")
         ->setParameter("idAgent", $idAgent)
-        ->orderBy("acq.createdAt", "DESC")
+
+
         ;
 
         $criteria = Criteria::create()
@@ -155,13 +159,12 @@ class AccountingRequestRepository extends ServiceEntityRepository
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
 
-        $result = $qb->getQuery()->getResult();
-
-
-        $query = $this->createQueryBuilder("acq")->select("acq.id")->innerJoin(Agent::class, "a", "WITH", "acq.agent=a.id")->where("a.id = :idAgent") ->setParameter("idAgent", $idAgent)->getQuery();
+        $query = $qb->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
+
+        $result = $query->getScalarResult();
 
         return ["count" => $count,"data" => $result];
 

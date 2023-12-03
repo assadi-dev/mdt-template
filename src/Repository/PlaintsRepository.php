@@ -4,10 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Agent;
 use App\Entity\Plaints;
+use Doctrine\ORM\Query;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Plaints>
@@ -91,7 +92,7 @@ class PlaintsRepository extends ServiceEntityRepository
         $qb->addCriteria($criteria);
 
         $plaintsQuery = $qb->getQuery();
-        $plaints = $plaintsQuery->getResult();
+        $plaints = $plaintsQuery->getScalarResult();
         $paginator = new Paginator($plaintsQuery, false);
         $count =  $paginator->count();
 

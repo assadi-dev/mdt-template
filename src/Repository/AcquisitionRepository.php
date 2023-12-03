@@ -87,13 +87,13 @@ class AcquisitionRepository extends ServiceEntityRepository
 
         ;
 
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getScalarResult();
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($item_per_page);
         $qb->addCriteria($criteria);
 
-        $result = $qb->getQuery()->getResult();
+        // $result = $qb->getQuery()->getResult();
 
 
         $query = $this->createQueryBuilder("a")->getQuery();

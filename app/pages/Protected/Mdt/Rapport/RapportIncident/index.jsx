@@ -80,7 +80,7 @@ const RapportIncident = () => {
     {
       Header: "Date et heure de l'incident",
       accessor: "createdAt",
-      Cell: ({ value }) => datetimeFormatFr(value.date),
+      Cell: ({ value }) => (value?.date ? datetimeFormatFr(value.date) : ""),
     },
 
     {

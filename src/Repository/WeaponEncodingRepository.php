@@ -85,11 +85,11 @@ class WeaponEncodingRepository extends ServiceEntityRepository
             we.createdAt
     ")
         ->leftJoin(Civil::class, "c", "WITH", "c.id=we.civil")
-        ->orWhere($qb->expr()->like("we.serialNumber", ":search"))
-        ->orWhere($qb->expr()->like("we.type", ":search"))
-        ->orWhere($qb->expr()->like("c.firstname", ":search"))
-        ->orWhere($qb->expr()->like("c.lastname", ":search"))
-        ->orWhere($qb->expr()->like("c.identificationNumber", ":search"))
+        ->orHaving($qb->expr()->like("we.serialNumber", ":search"))
+        ->orHaving($qb->expr()->like("we.type", ":search"))
+        ->orHaving($qb->expr()->like("c.firstname", ":search"))
+        ->orHaving($qb->expr()->like("c.lastname", ":search"))
+        ->orHaving($qb->expr()->like("c.identificationNumber", ":search"))
         ->orderBy("we.createdAt", "DESC")
         ->setParameter("search", "%$search%")
         ->groupBy("we.id");
@@ -97,13 +97,12 @@ class WeaponEncodingRepository extends ServiceEntityRepository
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
-        $result = $qb->getQuery()->getResult();
-        $query = $this->createQueryBuilder("a")->getQuery();
+        $query = $qb->getQuery();
 
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
-        $result = $qb->getQuery()->getResult();
+        $result = $qb->getQuery()->getScalarResult();
         return ["count" => $count,"data" => $result];
 
 

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Agent>
@@ -91,7 +92,7 @@ class AgentRepository extends ServiceEntityRepository
         ->where("a.id =:id")
         ->setParameter("id", $id)
         ;
-        $result = $qb->getQuery()->getSingleResult();
+        $result = $qb->getQuery()->getSingleResult(Query::HYDRATE_SCALAR);
         return $result;
 
     }
@@ -121,7 +122,7 @@ class AgentRepository extends ServiceEntityRepository
             ->where("a.matricule =:matricule")
             ->setParameter("matricule", $matricule)
             ;
-            $result = $qb->getQuery()->getSingleResult();
+            $result = $qb->getQuery()->getSingleResult(Query::HYDRATE_SCALAR);
             return $result;
         } catch (\Throwable $th) {
             if(!isset($result)) {
