@@ -140,8 +140,16 @@ const RapportIncident = () => {
           data={collections}
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </RapportIncidentPageContainer>
       {createPortal(
