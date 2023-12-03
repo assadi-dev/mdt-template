@@ -28,7 +28,7 @@ const EditRapportIntervention = ({ payload, onCloseModal, ...props }) => {
       const res = await saveUpdateRapportIntervention(id, body);
 
       dispatch(editInterventionReport(values));
-      props.onCloseModal();
+      onCloseModal();
       toastSuccess();
       onCloseModal();
     } catch (error) {
