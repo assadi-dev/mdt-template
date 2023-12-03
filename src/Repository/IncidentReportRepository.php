@@ -76,7 +76,7 @@ class IncidentReportRepository extends ServiceEntityRepository
         inc.numeroReport,
         inc.officerImplicated,
         inc.commentText,
-        inc.location
+        inc.location,
         CONCAT(a.matricule ,'-',a.firstname,' ',a.lastname) as agent,
         inc.incidentType,
         inc.createdAt")
