@@ -10,7 +10,18 @@ const IncidentReportSlice = createSlice({
       const { payload } = action;
       state.count = state.count + 1;
     },
-    editIncidentReport: (state, action) => {},
+    editIncidentReport: (state, action) => {
+      const { payload } = action;
+
+      const collectionsUpdated = [...state.collections].map((indentRepport) => {
+        if (indentRepport.id == payload.id) {
+          return { ...indentRepport, ...payload };
+        }
+        return indentRepport;
+      });
+
+      state.collections = collectionsUpdated;
+    },
     deleteIncidentReport: (state, action) => {},
     errorIncidentReport: (state, action) => {},
   },

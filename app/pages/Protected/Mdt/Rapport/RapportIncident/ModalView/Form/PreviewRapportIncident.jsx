@@ -33,7 +33,7 @@ const PreviewRapportIncident = ({
         </p>
         <p>
           <span className="text-bolder">Officier impliqués: </span>
-          {payload?.officierimplique}
+          {payload?.officerImplicated}
         </p>
         <Row className="justiy-content-between">
           <p>
