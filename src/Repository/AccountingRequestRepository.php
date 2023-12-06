@@ -73,6 +73,7 @@ class AccountingRequestRepository extends ServiceEntityRepository
 
         $countResult = ($page - 1) * $items_per_page;
 
+
         $qb = $this->createQueryBuilder("acq");
         $qb->select(
             "acq.id,
@@ -147,7 +148,7 @@ class AccountingRequestRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("acq.subject", ":search"))
         ->groupBy("acq.id")
         ->orderBy("acq.createdAt", "DESC")
-        ->orWhere($qb->expr()->like("acq.requestState", ":search"))
+        ->orHaving($qb->expr()->like("acq.requestState", ":search"))
         ->setParameter("search", "%$search%")
         ->setParameter("idAgent", $idAgent)
 
