@@ -23,42 +23,42 @@ class ReportRookieAcquisition
     private $id;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $civilRelationship;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $roadControl;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $procedures;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $drive;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $deontology;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $respctingHierarchy;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $spotArea;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('bad','warning','good')")
+     * @ORM\Column(type="smallint")
      */
     private $callRadio;
 

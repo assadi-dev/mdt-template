@@ -83,6 +83,10 @@ const RapportRookieForm = ({
     });
   }, [data]);
 
+  const handleClickAcquistion = (acquisitions) => {
+    setValue("acquisitions", acquisitions);
+  };
+
   return (
     <FormContainer className="form-theme-color" onSubmit={handleSubmit(submit)}>
       <FormControl>
@@ -111,7 +115,7 @@ const RapportRookieForm = ({
         </ErrorSection>
       </FormControl>
 
-      <AcquisitionSection />
+      <AcquisitionSection getAcuisitionValue={handleClickAcquistion} />
 
       <CommentTextContent>
         <p className="mb-1">Commentaire</p>
