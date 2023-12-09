@@ -20,7 +20,7 @@ export const rookieReportFormValues = {
 };
 
 export const rookieReportResolver = yup.object().shape({
-  matriculeRookie: yup.string().required(requiredMessage),
+  rookie: yup.string().required(requiredMessage),
   patrolType: yup.string().required(requiredMessage),
   comment: yup.string().required(requiredMessage),
 });
