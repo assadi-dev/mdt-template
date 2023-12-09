@@ -47,10 +47,17 @@ class RookieReport
     private $acquisitions;
 
     /**
-     * @ORM\OneToOne(targetEntity=Agent::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Agent::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $rookie;
+
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
 
     public function getNumeroReport(): ?string
     {
@@ -123,6 +130,8 @@ class RookieReport
 
         return $this;
     }
+
+
 
 
 

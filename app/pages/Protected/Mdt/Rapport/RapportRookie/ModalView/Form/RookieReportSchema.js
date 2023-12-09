@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 export const rookieReportFormValues = {
+  agent: "",
   agentFullname: "",
   rookieFullname: "",
   rookie: "",

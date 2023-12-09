@@ -6,6 +6,11 @@ import useProcess from "../../../../../../hooks/useProcess";
 
 import { RapporRookieModalCOntainer } from "../RapportRookie.styled";
 import RapportRookieForm from "./Form/RapportRookieForm";
+import { saveCreateRapportRookie } from "./Form/helpers";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
 
 const AddRapporRookieView = ({ onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
@@ -13,13 +18,21 @@ const AddRapporRookieView = ({ onCloseModal, ...props }) => {
     (state) => state.AuthenticateReducer
   );
 
-  const submit = (values) => {
+  const submit = async (values) => {
     try {
       toggleProcess();
-      values.idAgent = idAgent;
+      values.agent = `api/agents/${idAgent}`;
+      values.agentFullname = `${matricule}-${firstname} ${lastname}`;
+      const acquisition = values.acquisitions;
+      delete values.acquisitions;
+      const report = values;
 
-      console.log(values);
+      const data = await saveCreateRapportRookie(report, acquisition);
+      console.log(data);
+      onCloseModal();
+      toastSuccess();
     } catch (error) {
+      toastError();
     } finally {
       toggleProcess();
     }
