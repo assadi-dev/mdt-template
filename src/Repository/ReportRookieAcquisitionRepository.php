@@ -81,7 +81,7 @@ class ReportRookieAcquisitionRepository extends ServiceEntityRepository
         ->andWhere('r.id = :id')
         ->setParameter('id', $id)
         ->getQuery()
-        ->getResult();
+        ->getSingleResult();
     }
 
 

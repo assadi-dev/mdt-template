@@ -89,6 +89,7 @@ const RapportRookie = () => {
     };
 
     dispatch(retieaveRookieReportAsync(payload));
+    onPageTotalCountChange(count);
   }, [pageIndex, count, search]);
 
   return (
