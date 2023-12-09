@@ -14,10 +14,10 @@ const RookieReportSlice = createSlice({
     setErrorRookieReport: (state, action) => {
       state.error = action.payload;
     },
-    remoeRookieReport: (state, action) => {
+    removeRookieReport: (state, action) => {
       const { payload } = action;
-      const collectionUpdated = [...state.collection].filter(
-        (report) => !report.includes(payload)
+      const collectionUpdated = [...state.collections].filter(
+        (report) => !payload.includes(report.id)
       );
       state.collections = collectionUpdated;
       state.count = state.count - 1;
@@ -41,6 +41,7 @@ const RookieReportSlice = createSlice({
   },
 });
 
-export const { addRookieReport } = RookieReportSlice.actions;
+export const { addRookieReport, removeRookieReport } =
+  RookieReportSlice.actions;
 
 export default RookieReportSlice.reducer;

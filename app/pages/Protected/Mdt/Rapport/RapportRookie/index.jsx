@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddBtnRapportRookie,
   RapportRookiePageContainer,
@@ -37,6 +37,8 @@ const RapportRookie = () => {
     totalCount,
     pageSize,
   } = useCustomPagination(defaultPageSize, 0, 0, "");
+
+  const PromiseRef = useRef(new AbortController());
 
   const handleClickAddbtn = () => {
     openModal({
@@ -90,6 +92,10 @@ const RapportRookie = () => {
 
     dispatch(retieaveRookieReportAsync(payload));
     onPageTotalCountChange(count);
+
+    return () => {
+      PromiseRef.current?.abort();
+    };
   }, [pageIndex, count, search]);
 
   return (

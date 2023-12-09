@@ -11,6 +11,6 @@ export const fetchRookieReportsCollections = (page, params) => {
   return Api.get(`/rookie_reports/pagination/${page}`, { params });
 };
 
-export const delete_rookieReports_collections = (id) => {
+export const delete_rookieReports = (id) => {
   return Api.delete(`rookie_reports/${id}`);
 };
