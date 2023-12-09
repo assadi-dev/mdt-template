@@ -41,10 +41,10 @@ const RapportRookieForm = ({
     setValue("comment", value);
   };
 
-  const handleSelectRookie = (value) => {
+  const handleSelectRookie = (selected) => {
     errors.rookie && clearErrors("rookie");
-    console.log(value);
-    //setValue("rookie")
+    setValue("rookie", selected.value);
+    setValue("rookieFullname", selected.label);
   };
 
   const submit = (values) => {
@@ -52,6 +52,7 @@ const RapportRookieForm = ({
       setError("comment", { message: requiredMessage });
       return;
     }
+
     submitValue(values);
   };
 
@@ -94,10 +95,8 @@ const RapportRookieForm = ({
           onChange={handleSelectRookie}
         />
         <ErrorSection>
-          {errors.matriculeRookie && (
-            <small className="text-error">
-              {errors.matriculeRookie.message}
-            </small>
+          {errors.rookie && (
+            <small className="text-error">{errors.rookie.message}</small>
           )}
         </ErrorSection>
       </FormControl>
