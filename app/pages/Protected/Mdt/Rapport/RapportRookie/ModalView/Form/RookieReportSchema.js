@@ -2,8 +2,8 @@ import * as yup from "yup";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 export const rookieReportFormValues = {
-  matriculeRookie: "",
-  rookieName: "",
+  agentFullname: "",
+  rookieFullname: "",
   rookie: "",
   patrolType: "",
   comment: "",
