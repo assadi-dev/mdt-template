@@ -6,6 +6,8 @@ use ApiPlatform\Symfony\EventListener\EventPriorities;
 use App\Entity\IncidentReport;
 use App\Entity\InterventionReport;
 use App\Entity\Plaints;
+use App\Entity\RookieReport;
+use App\Repository\RookieReportRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +29,10 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
             KernelEvents::VIEW => [
             ['onCreatePlaint', EventPriorities::POST_WRITE],
             ['onCreateRapportIncident', EventPriorities::POST_WRITE],
-            ['onCreateRapportIntervention', EventPriorities::POST_WRITE]],
+            ['onCreateRapportIntervention', EventPriorities::POST_WRITE],
+            ['onCreateRapportRookie', EventPriorities::POST_WRITE]
+        ],
+
 
         ];
     }
@@ -43,7 +48,7 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
         }
 
         $id = $entity->getId();
-        $numero = str_pad($id, 5, "0", STR_PAD_LEFT);
+        $numero = $this->generate_reportNumber($id);
         $entity->setNumeroPlaint($numero);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
@@ -60,7 +65,7 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
         }
 
         $id = $entity->getId();
-        $numero = str_pad($id, 5, "0", STR_PAD_LEFT);
+        $numero = $this->generate_reportNumber($id);
         $entity->setNumeroReport($numero);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
@@ -76,10 +81,37 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
         }
 
         $id = $entity->getId();
-        $numero = str_pad($id, 5, "0", STR_PAD_LEFT);
+        $numero = $this->generate_reportNumber($id);
         $entity->setNumeroReport($numero);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
     }
+
+    public function onCreateRapportRookie(ViewEvent $event): void
+    {
+
+        $entity = $event->getControllerResult();
+        $method = $event->getRequest()->getMethod();
+
+        if (!$entity instanceof RookieReport || Request::METHOD_POST !== $method) {
+            return;
+        }
+
+
+
+        $id = $id = $entity->getId();
+        $numero = $this->generate_reportNumber($id);
+        $entity->setNumeroReport($numero);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+    }
+
+
+
+    private function generate_reportNumber($number): string
+    {
+        return str_pad($number, 5, "0", STR_PAD_LEFT);
+    }
+
 }
