@@ -73,7 +73,12 @@ const RapportRookie = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: () => <ShowRapportRookie onShowRapport={handlShowRapport} />,
+      Cell: ({ row }) => (
+        <ShowRapportRookie
+          rapportRookie={row?.original}
+          onShowRapport={handlShowRapport}
+        />
+      ),
     },
   ];
 

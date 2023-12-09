@@ -17,7 +17,7 @@ const ShowpreviewRapportRookie = ({ payload, onCloseModal, ...props }) => {
   const commentaire = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur vel aliquam illo officiis voluptatibus commodi? Sequi quibusdam earum labore, magnam molestiae excepturi iure consequatur quaerat nesciunt adipisci maiores est recusandae.
     Recusandae quisquam culpa possimus aliquid deleniti, perspiciatis nam odio doloribus nesciunt architecto voluptatibus repellendus eos quam unde ratione neque iure modi dicta natus rem ducimus omnis impedit. Nam, ab veritatis!
     Distinctio quidem quibusdam, eos quos quia iusto culpa maiores expedita magni qui! Dolorem maxime repellat dolorum corporis omnis voluptatum amet quam provident? Necessitatibus autem odio fuga! Dolorum maxime placeat ducimus?`;
-
+  console.log(payload);
   return (
     <PreviewDocument
       title="Consultation du rapport"

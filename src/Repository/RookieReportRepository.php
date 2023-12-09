@@ -3,11 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\Agent;
+use App\Entity\Acquisition;
 use App\Entity\RookieReport;
+use App\Entity\ReportRookieAcquisition;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Serializer\SerializerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<RookieReport>
@@ -19,9 +22,14 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class RookieReportRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $reportRookieAcquisitionRepository;
+    private $serializer;
+
+    public function __construct(ManagerRegistry $registry, ReportRookieAcquisitionRepository $reportRookieAcquisitionRepository, SerializerInterface $serializer)
     {
         parent::__construct($registry, RookieReport::class);
+        $this->serializer = $serializer;
+        $this->reportRookieAcquisitionRepository = $reportRookieAcquisitionRepository;
     }
 
     public function add(RookieReport $entity, bool $flush = false): void
@@ -80,10 +88,12 @@ class RookieReportRepository extends ServiceEntityRepository
          CONCAT(ro.matricule ,'-',ro.firstname,' ',ro.lastname) as rookieFullname,
          r.patrolType,
          r.comment,
+         acq.id as acquisitions,
          r.createdAt
           ")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=r.agent")
         ->leftJoin(Agent::class, "ro", "WITH", "ro.id=r.rookie")
+        ->leftJoin(ReportRookieAcquisition::class, "acq", "WITH", "acq.id=r.acquisitions")
         ->orHaving($qb->expr()->like("r.numeroReport", ":search"))
         ->orHaving($qb->expr()->like("agentFullname", ":search"))
         ->orHaving($qb->expr()->like("rookieFullname", ":search"))
@@ -103,9 +113,33 @@ class RookieReportRepository extends ServiceEntityRepository
         $count =  $paginator->count();
 
         $result = $qb->getQuery()->getResult();
+
+        $cb = function ($v) {
+            $id = $v["acquisitions"];
+            $v["acquisitions"] = $this->retrieaveAcquisition($id);
+            return $v;
+        };
+
+        $result  = array_map($cb, array_values($result));
+
+
         return ["count" => $count,"data" => $result];
     }
 
+    private function retrieaveAcquisition($id)
+    {
+        $rookieAcquisitions = $this->reportRookieAcquisitionRepository->findOneBy(["id" => $id]);
+        $data =  $this->serializer->normalize($rookieAcquisitions);
+
+        unset($data["id"]);
+        unset($data["createdAt"]);
+        unset($data["updatedAt"]);
+
+
+        return $data;
+
+
+    }
 
 
 }
