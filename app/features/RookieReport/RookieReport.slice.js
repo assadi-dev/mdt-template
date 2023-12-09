@@ -3,9 +3,9 @@ import { initialState } from "./helpers";
 import { retieaveRookieReportAsync } from "./RookieReportAsynAction";
 
 const RookieReportSlice = createSlice({
-  name: "RookieReport/Collections",
+  name: "RookieReport",
   initialState,
-  reducer: {
+  reducers: {
     addRookieReport: (state, action) => {
       const { payload } = action;
       state.collections = [payload, ...state.collections];
@@ -35,12 +35,12 @@ const RookieReportSlice = createSlice({
       })
       .addCase(retieaveRookieReportAsync.fulfilled, (state, action) => {
         state.status = "complete";
-        state.collection = action.payload.data;
+        state.collections = action.payload.data;
         state.count = action.payload.count;
       });
   },
 });
 
-export const { addR } = RookieReportSlice.actions;
+export const { addRookieReport } = RookieReportSlice.actions;
 
 export default RookieReportSlice.reducer;

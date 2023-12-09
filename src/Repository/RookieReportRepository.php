@@ -84,6 +84,7 @@ class RookieReportRepository extends ServiceEntityRepository
           ")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=r.agent")
         ->leftJoin(Agent::class, "ro", "WITH", "ro.id=r.rookie")
+        ->orHaving($qb->expr()->like("r.numeroReport", ":search"))
         ->orHaving($qb->expr()->like("agentFullname", ":search"))
         ->orHaving($qb->expr()->like("rookieFullname", ":search"))
         ->orHaving($qb->expr()->like("r.patrolType", ":search"))
