@@ -46,6 +46,12 @@ class RookieReport
      */
     private $acquisitions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Agent::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rookie;
+
     public function getNumeroReport(): ?string
     {
         return $this->numeroReport;
@@ -102,6 +108,18 @@ class RookieReport
     public function setAcquisitions(?ReportRookieAcquisition $acquisitions): self
     {
         $this->acquisitions = $acquisitions;
+
+        return $this;
+    }
+
+    public function getRookie(): ?Agent
+    {
+        return $this->rookie;
+    }
+
+    public function setRookie(Agent $rookie): self
+    {
+        $this->rookie = $rookie;
 
         return $this;
     }
