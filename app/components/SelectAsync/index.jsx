@@ -4,6 +4,7 @@ import Select from "react-select";
 const SelectAsync = ({ ...props }) => {
   return (
     <Select
+      styles={customStyle}
       classNamePrefix="theme-custom"
       classNames={{
         option: (state) => state.isSelected && "theme-custom-option-selected",
@@ -11,6 +12,13 @@ const SelectAsync = ({ ...props }) => {
       {...props}
     />
   );
+};
+
+const customStyle = {
+  input: (basicStyle, state) => ({
+    ...basicStyle,
+    color: "inherit",
+  }),
 };
 
 export default SelectAsync;

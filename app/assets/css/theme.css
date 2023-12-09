@@ -23,7 +23,7 @@
 
 /**DataTable **/
 .bg-show-btn {
-  background-color: #2b7de9;
+  background-color: #2B7DE9;
 }
 .bg-show-btn:hover {
   background-color: #1359b5;
@@ -116,7 +116,7 @@
 }
 #ReactSimpleImageViewer img {
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
   max-width: 90%;
   max-height: 90%;
 }
@@ -189,4 +189,4 @@ legend {
   to {
     opacity: 0.5;
   }
-} /*# sourceMappingURL=theme.css.map */
+}/*# sourceMappingURL=theme.css.map */
