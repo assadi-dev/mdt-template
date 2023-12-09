@@ -67,96 +67,96 @@ class ReportRookieAcquisition
         return $this->id;
     }
 
-    public function getCivilRelationship(): ?string
+    public function getCivilRelationship(): ?int
     {
         return $this->civilRelationship;
     }
 
-    public function setCivilRelationship(string $civilRelationship): self
+    public function setCivilRelationship(int $civilRelationship): self
     {
         $this->civilRelationship = $civilRelationship;
 
         return $this;
     }
 
-    public function getRoadControl(): ?string
+    public function getRoadControl(): ?int
     {
         return $this->roadControl;
     }
 
-    public function setRoadControl(string $roadControl): self
+    public function setRoadControl(int $roadControl): self
     {
         $this->roadControl = $roadControl;
 
         return $this;
     }
 
-    public function getProcedures(): ?string
+    public function getProcedures(): ?int
     {
         return $this->procedures;
     }
 
-    public function setProcedures(string $procedures): self
+    public function setProcedures(int $procedures): self
     {
         $this->procedures = $procedures;
 
         return $this;
     }
 
-    public function getDrive(): ?string
+    public function getDrive(): ?int
     {
         return $this->drive;
     }
 
-    public function setDrive(string $drive): self
+    public function setDrive(int $drive): self
     {
         $this->drive = $drive;
 
         return $this;
     }
 
-    public function getDeontology(): ?string
+    public function getDeontology(): ?int
     {
         return $this->deontology;
     }
 
-    public function setDeontology(string $deontology): self
+    public function setDeontology(int $deontology): self
     {
         $this->deontology = $deontology;
 
         return $this;
     }
 
-    public function getRespctingHierarchy(): ?string
+    public function getRespctingHierarchy(): ?int
     {
         return $this->respctingHierarchy;
     }
 
-    public function setRespctingHierarchy(string $respctingHierarchy): self
+    public function setRespctingHierarchy(int $respctingHierarchy): self
     {
         $this->respctingHierarchy = $respctingHierarchy;
 
         return $this;
     }
 
-    public function getSpotArea(): ?string
+    public function getSpotArea(): ?int
     {
         return $this->spotArea;
     }
 
-    public function setSpotArea(string $spotArea): self
+    public function setSpotArea(int $spotArea): self
     {
         $this->spotArea = $spotArea;
 
         return $this;
     }
 
-    public function getCallRadio(): ?string
+    public function getCallRadio(): ?int
     {
         return $this->callRadio;
     }
 
-    public function setCallRadio(string $callRadio): self
+    public function setCallRadio(int $callRadio): self
     {
         $this->callRadio = $callRadio;
 
