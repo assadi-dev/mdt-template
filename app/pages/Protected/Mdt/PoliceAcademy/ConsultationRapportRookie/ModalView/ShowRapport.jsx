@@ -12,46 +12,53 @@ import {
 } from "../ConsultationRapportRookie.styled";
 import RowAcquisition from "./RowAcquisition";
 import clsx from "clsx";
+import { datetimeFormatFr } from "../../../../../../services/utils/dateFormat";
 
 const ShowRapport = ({ payload, onCloseModal, ...props }) => {
-  const commentaire = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur vel aliquam illo officiis voluptatibus commodi? Sequi quibusdam earum labore, magnam molestiae excepturi iure consequatur quaerat nesciunt adipisci maiores est recusandae.
-  Recusandae quisquam culpa possimus aliquid deleniti, perspiciatis nam odio doloribus nesciunt architecto voluptatibus repellendus eos quam unde ratione neque iure modi dicta natus rem ducimus omnis impedit. Nam, ab veritatis!
-  Distinctio quidem quibusdam, eos quos quia iusto culpa maiores expedita magni qui! Dolorem maxime repellat dolorum corporis omnis voluptatum amet quam provident? Necessitatibus autem odio fuga! Dolorum maxime placeat ducimus?`;
+  const {
+    acquisitions,
+    agentFullname,
+    comment,
+    createdAt,
+    numeroReport,
+    patrolType,
+    rookieFullname,
+  } = payload;
+
+  const TITLE = `Consultation du rapport N°${numeroReport}`;
 
   return (
     <PreviewDocument
-      title="Consultation du rapport"
+      title={TITLE}
       onCloseModal={onCloseModal}
       className={clsx(props.className, "form-theme-color")}
     >
       <PreviewDocumentHeader>
         <div>
           <p>
-            <span className="text-bolder">Agent: </span>103-Test Test
+            <span className="text-bolder">Agent: </span> {agentFullname}
           </p>
           <p>
-            <span className="text-bolder">Type de patrouille: </span> patrouille
-            test
+            <span className="text-bolder">Type de patrouille: </span>{" "}
+            {patrolType}
           </p>
           <p>
-            <span className="text-bolder">Rookie concerné: </span> 03-Test Test
+            <span className="text-bolder">Rookie concerné: </span>{" "}
+            {rookieFullname}
           </p>
         </div>
         <Row className="justiy-content-end">
-          <p>2023-10-15 à 09:53</p>
+          <p>{datetimeFormatFr(createdAt?.date)}</p>
         </Row>
       </PreviewDocumentHeader>
 
       <AcquisitionRowSection>
         <TitleAcquisition> Acquisition </TitleAcquisition>
-        <RowAcquisition />
+        <RowAcquisition acquisitions={acquisitions} />
       </AcquisitionRowSection>
 
       <TextContent>
-        <MarkdownPreview
-          className="theme-markdownPreview"
-          source={commentaire}
-        />
+        <MarkdownPreview className="theme-markdownPreview" source={comment} />
       </TextContent>
     </PreviewDocument>
   );

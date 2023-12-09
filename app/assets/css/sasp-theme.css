@@ -193,6 +193,9 @@ html:has(.theme-sasp) .theme-custom__control .theme-custom__value-container {
 html:has(.theme-sasp) .theme-custom__control .theme-custom__single-value {
   color: inherit;
 }
+html:has(.theme-sasp) .theme-custom__control.theme-custom__input-container {
+  color: inherit;
+}
 html:has(.theme-sasp) .theme-custom__menu {
   /*  padding: 0 5px; */
 }

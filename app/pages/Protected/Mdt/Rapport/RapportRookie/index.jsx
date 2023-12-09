@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddBtnRapportRookie,
   RapportRookiePageContainer,
@@ -15,9 +15,30 @@ import {
   listOfRapporRookieView,
 } from "./ModalView/listRapportView";
 import { createPortal } from "react-dom";
+import { retieaveRookieReportAsync } from "../../../../../features/RookieReport/RookieReportAsynAction";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultPageSize } from "../../../../../config/constantes";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
 
 const RapportRookie = () => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const dispatch = useDispatch();
+  const { collections, status, error, count } = useSelector(
+    (state) => state.RookieReportReducer
+  );
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
+  const PromiseRef = useRef(new AbortController());
 
   const handleClickAddbtn = () => {
     openModal({
@@ -34,42 +55,48 @@ const RapportRookie = () => {
 
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° Rapport",
+      accessor: "numeroReport",
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      accessor: "agentFullname",
     },
+
     {
-      Header: "Matricule du rookie",
-      accessor: "matriculeRookie",
-    },
-    {
-      Header: "Nom du rookie",
-      accessor: "rookieName",
+      Header: "Rookie concerné",
+      accessor: "rookieFullname",
     },
     {
       Header: "Date et heure",
       accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
       Header: "Action",
       accessor: "",
-      Cell: () => <ShowRapportRookie onShowRapport={handlShowRapport} />,
+      Cell: ({ row }) => (
+        <ShowRapportRookie
+          rapportRookie={row?.original}
+          onShowRapport={handlShowRapport}
+        />
+      ),
     },
   ];
 
-  const collections = [
-    {
-      matricule: 103,
-      agent: "Alyson Finley",
-      matriculeRookie: 153,
-      rookieName: "Sulivan O'Bryan",
-      createdAt: "01-09-2023 à 13h00",
-      commentaire: "No comment",
-    },
-  ];
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
+
+    dispatch(retieaveRookieReportAsync(payload));
+    onPageTotalCountChange(count);
+
+    return () => {
+      PromiseRef.current?.abort();
+    };
+  }, [pageIndex, count, search]);
 
   return (
     <>
@@ -86,9 +113,17 @@ const RapportRookie = () => {
         <DataTable
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
           data={collections}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </RapportRookiePageContainer>
       {createPortal(

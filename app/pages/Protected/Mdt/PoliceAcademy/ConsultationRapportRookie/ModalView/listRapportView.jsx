@@ -22,3 +22,5 @@ export const stateIcons = {
   warning: { icon: FaExclamation },
   bad: { icon: AiOutlineClose },
 };
+
+export const sateNotation = ["bad", "good", "warning"];

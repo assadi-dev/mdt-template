@@ -13,41 +13,41 @@ const RowAcquisition = ({ listAquisition, onClickAcuiqition = () => {} }) => {
       <RowAcquisitionContainer>
         <CardAcquisition
           labelCard="Relation Civiles"
-          state={stateValue[listAquisition?.relationCivil]}
-          name="relationCivil"
-          onClickAcuiqition={() => handleClickState("relationCivil")}
+          state={stateValue[listAquisition?.civilRelationship]}
+          name="civilRelationship"
+          onClickAcuiqition={() => handleClickState("civilRelationship")}
         />
         <CardAcquisition
           labelCard="Contrôle routier"
-          onClickAcuiqition={() => handleClickState("controlRoutier")}
-          state={stateValue[listAquisition?.controlRoutier]}
+          onClickAcuiqition={() => handleClickState("roadControl")}
+          state={stateValue[listAquisition?.roadControl]}
         />
         <CardAcquisition
           labelCard="Procèdures"
-          onClickAcuiqition={() => handleClickState("procedure")}
-          state={stateValue[listAquisition?.procedure]}
+          onClickAcuiqition={() => handleClickState("procedures")}
+          state={stateValue[listAquisition?.procedures]}
         />
         <CardAcquisition
           labelCard="Conduite"
-          onClickAcuiqition={() => handleClickState("conduite")}
-          state={stateValue[listAquisition?.conduite]}
+          onClickAcuiqition={() => handleClickState("drive")}
+          state={stateValue[listAquisition?.drive]}
         />
       </RowAcquisitionContainer>
       <RowAcquisitionContainer>
         <CardAcquisition
           labelCard="Déontologie"
-          onClickAcuiqition={() => handleClickState("deontologie")}
-          state={stateValue[listAquisition?.deontologie]}
+          onClickAcuiqition={() => handleClickState("deontology")}
+          state={stateValue[listAquisition?.deontology]}
         />
         <CardAcquisition
           labelCard="Respect de la hierarchie"
-          onClickAcuiqition={() => handleClickState("respectHierarchie")}
-          state={stateValue[listAquisition?.respectHierarchie]}
+          onClickAcuiqition={() => handleClickState("respctingHierarchy")}
+          state={stateValue[listAquisition?.respctingHierarchy]}
         />
         <CardAcquisition
           labelCard="Terrain"
-          onClickAcuiqition={() => handleClickState("terrain")}
-          state={stateValue[listAquisition?.terrain]}
+          onClickAcuiqition={() => handleClickState("spotArea")}
+          state={stateValue[listAquisition?.spotArea]}
         />
         <CardAcquisition
           labelCard="Calls radio"

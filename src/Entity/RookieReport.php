@@ -46,6 +46,19 @@ class RookieReport
      */
     private $acquisitions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Agent::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rookie;
+
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+
     public function getNumeroReport(): ?string
     {
         return $this->numeroReport;
@@ -105,6 +118,20 @@ class RookieReport
 
         return $this;
     }
+
+    public function getRookie(): ?Agent
+    {
+        return $this->rookie;
+    }
+
+    public function setRookie(Agent $rookie): self
+    {
+        $this->rookie = $rookie;
+
+        return $this;
+    }
+
+
 
 
 
