@@ -11,12 +11,11 @@ const useGradesListoption = (faction) => {
   const fetchData = async (signal) => {
     try {
       const res = await fetchGradesByFaction(faction, signal);
+      setState((current) => (current = { ...current, data: res.data }));
     } catch (error) {
+      setState((current) => (current = { ...current, error: error }));
     } finally {
-      setState(
-        (current) =>
-          (current = { ...current, data: res.data, status: "fullfilled" })
-      );
+      setState((current) => (current = { ...current, status: "fullfilled" }));
     }
   };
 

@@ -3,25 +3,27 @@ import { AcuisitionSectionContainer } from "../../RapportRookie.styled";
 import RowAcquisition from "./RowAcquisition";
 import { stateValue } from "../listRapportView";
 
-const AcquisitionSection = () => {
+const AcquisitionSection = ({ getAcuisitionValue = () => {} }) => {
   const [listAquisition, setListAcquisition] = useState({
-    relationCivil: 0,
-    controlRoutier: 0,
-    procedure: 0,
-    conduite: 0,
-    deontologie: 0,
-    respectHierarchie: 0,
-    terrain: 0,
+    civilRelationship: 0,
+    roadControl: 0,
+    procedures: 0,
+    drive: 0,
+    deontology: 0,
+    respctingHierarchy: 0,
+    spotArea: 0,
     callRadio: 0,
   });
 
   const handleClickState = (name) => {
     setListAcquisition((current) => {
       if (current[name] >= stateValue.length) current[name] = 0;
-      return {
+      const updateCurrent = {
         ...current,
         [name]: (current[name] += 1),
       };
+      getAcuisitionValue(updateCurrent);
+      return updateCurrent;
     });
   };
 

@@ -63,4 +63,27 @@ class ReportRookieAcquisitionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findById($id)
+    {
+
+
+        return $this->createQueryBuilder('r')
+        ->select("r.civilRelationship,
+                r.roadControl,
+                r.procedures,
+                r.drive,
+                r.deontology,
+                r.respctingHierarchy,
+                r.spotArea,
+                r.callRadio
+                ")
+        ->andWhere('r.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getSingleResult();
+    }
+
+
+
 }

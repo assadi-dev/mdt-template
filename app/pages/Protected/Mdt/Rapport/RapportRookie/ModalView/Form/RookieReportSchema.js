@@ -2,25 +2,26 @@ import * as yup from "yup";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 export const rookieReportFormValues = {
-  matriculeRookie: "",
-  rookieName: "",
+  agent: "",
+  agentFullname: "",
+  rookieFullname: "",
   rookie: "",
   patrolType: "",
   comment: "",
   acquisitions: {
-    civilRelationship: "bad",
-    roadControl: "bad",
-    procedures: "bad",
-    drive: "bad",
-    deontology: "bad",
-    respctingHierarchy: "bad",
-    spotArea: "bad",
-    callRadio: "bad",
+    civilRelationship: 0,
+    roadControl: 0,
+    procedures: 0,
+    drive: 0,
+    deontology: 0,
+    respctingHierarchy: 0,
+    spotArea: 0,
+    callRadio: 0,
   },
 };
 
 export const rookieReportResolver = yup.object().shape({
-  matriculeRookie: yup.string().required(requiredMessage),
+  rookie: yup.string().required(requiredMessage),
   patrolType: yup.string().required(requiredMessage),
   comment: yup.string().required(requiredMessage),
 });

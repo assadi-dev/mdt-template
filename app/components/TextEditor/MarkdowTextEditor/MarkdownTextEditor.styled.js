@@ -54,7 +54,7 @@ export const EditorContentContainer = styled.div`
 export const MenuBarRowBtn = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem;
+
   width: 100%;
   grid-gap: 1.3rem;
 `;

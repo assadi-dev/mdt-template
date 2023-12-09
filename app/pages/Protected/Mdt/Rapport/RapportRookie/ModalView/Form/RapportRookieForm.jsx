@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -21,15 +21,30 @@ import {
   rookieReportResolver,
 } from "./RookieReportSchema";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
+import useFetchRookieList from "../../../../../../../hooks/useFetchRookieList";
+import debounce from "debounce";
+import SelectAsync from "../../../../../../../components/SelectAsync";
 
 const RapportRookieForm = ({
   defaultValues = rookieReportFormValues,
   process,
   submitValue,
 }) => {
+  const { fetchRookie, isLoading, data } = useFetchRookieList();
+
+  useEffect(() => {
+    fetchRookie();
+  }, []);
+
   const handlegetCommentaire = (value) => {
     errors.comment && clearErrors("comment");
     setValue("comment", value);
+  };
+
+  const handleSelectRookie = (selected) => {
+    errors.rookie && clearErrors("rookie");
+    setValue("rookie", selected.value);
+    setValue("rookieFullname", selected.label);
   };
 
   const submit = (values) => {
@@ -37,6 +52,7 @@ const RapportRookieForm = ({
       setError("comment", { message: requiredMessage });
       return;
     }
+
     submitValue(values);
   };
 
@@ -45,6 +61,8 @@ const RapportRookieForm = ({
     handleSubmit,
     formState: { errors },
     setValue,
+    getValues,
+    watch,
     setError,
     clearErrors,
   } = useForm({
@@ -52,23 +70,41 @@ const RapportRookieForm = ({
     resolver: yupResolver(rookieReportResolver),
   });
 
+  const options = useMemo(() => {
+    if (!data?.data) return [];
+    return [...data.data].map((rookie) => {
+      return {
+        value: `api/agents/${rookie.idAgent}`,
+        label: `${rookie.matricule}-${rookie.firstname} ${rookie.lastname}`,
+        lastname: rookie.lastname,
+        firstname: rookie.firstname,
+        matricule: rookie.matricule,
+      };
+    });
+  }, [data]);
+
+  const handleClickAcquistion = (acquisitions) => {
+    setValue("acquisitions", acquisitions);
+  };
+
   return (
     <FormContainer className="form-theme-color" onSubmit={handleSubmit(submit)}>
       <FormControl>
         <label htmlFor="">Matricule du Rookie</label>
-        <input type="text" {...register("matriculeRookie")} />
+
+        <SelectAsync
+          options={options}
+          isLoading={isLoading}
+          placeholder="Selectioner le rookie"
+          onChange={handleSelectRookie}
+        />
         <ErrorSection>
-          {errors.matriculeRookie && (
-            <small className="text-error">
-              {errors.matriculeRookie.message}
-            </small>
+          {errors.rookie && (
+            <small className="text-error">{errors.rookie.message}</small>
           )}
         </ErrorSection>
       </FormControl>
-      <FormControl>
-        <label htmlFor="">Nom Prénom du Rookie</label>
-        <input type="text" {...register("rookieName")} readOnly />
-      </FormControl>
+
       <FormControl>
         <label htmlFor="">Type de patrouille</label>
         <input type="text" {...register("patrolType")} />
@@ -79,7 +115,7 @@ const RapportRookieForm = ({
         </ErrorSection>
       </FormControl>
 
-      <AcquisitionSection />
+      <AcquisitionSection getAcuisitionValue={handleClickAcquistion} />
 
       <CommentTextContent>
         <p className="mb-1">Commentaire</p>
