@@ -23,12 +23,11 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class RookieReportRepository extends ServiceEntityRepository
 {
     private $reportRookieAcquisitionRepository;
-    private $serializer;
 
-    public function __construct(ManagerRegistry $registry, ReportRookieAcquisitionRepository $reportRookieAcquisitionRepository, SerializerInterface $serializer)
+
+    public function __construct(ManagerRegistry $registry, ReportRookieAcquisitionRepository $reportRookieAcquisitionRepository)
     {
         parent::__construct($registry, RookieReport::class);
-        $this->serializer = $serializer;
         $this->reportRookieAcquisitionRepository = $reportRookieAcquisitionRepository;
     }
 
@@ -126,18 +125,9 @@ class RookieReportRepository extends ServiceEntityRepository
         return ["count" => $count,"data" => $result];
     }
 
-    private function retrieaveAcquisition($id)
+    private function retrieaveAcquisition($id): array
     {
-        $rookieAcquisitions = $this->reportRookieAcquisitionRepository->findOneBy(["id" => $id]);
-        $data =  $this->serializer->normalize($rookieAcquisitions);
-
-        unset($data["id"]);
-        unset($data["createdAt"]);
-        unset($data["updatedAt"]);
-
-
-        return $data;
-
+        return  $this->reportRookieAcquisitionRepository->findById($id);
 
     }
 
