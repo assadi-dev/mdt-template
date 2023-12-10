@@ -26,4 +26,5 @@ export const GunFightResolver = yup.object().shape({
   secondGroup: yup.string().required(requiredMessage),
   location: yup.string().required(requiredMessage),
   recit: yup.string().required(requiredMessage),
+  seized: yup.array(),
 });
