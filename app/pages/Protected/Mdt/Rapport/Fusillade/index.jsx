@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AddDossierFusilladeBtn,
   FusilladePageContainer,
@@ -11,37 +11,61 @@ import useModalState from "../../../../../hooks/useModalState";
 import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   ADD_DOSSIER_FUSILLADE,
   DELETE_DOSSIER_FUSILLADE,
   EDIT_DOSSIER_FUSILLADE,
+  PREVIEW_DOSSIER_FUSILLADE,
   listOfDossierFusilladeView,
 } from "./ModalView/ListDossierFusillade";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
+import { defaultPageSize } from "../../../../../config/constantes";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { retrieveGunFightReportAsync } from "../../../../../features/GunFightReport/GunFightAsynAction";
 
 const Fusillade = () => {
   const { modalState, openModal, closeModal } = useModalState();
+  const { collections, status, error, count } = useSelector(
+    (state) => state.GunFightReportReducer
+  );
+  const dispatch = useDispatch();
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° du rapport",
+      accessor: "numeroReport",
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      accessor: "agentFullname",
     },
     {
       Header: "Date et heure de la fusillade",
       accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
-    {
-      Header: "N° du rapport",
-      accessor: "numeroDossier",
-    },
+
     {
       Header: "Rapport",
       accessor: "",
-      Cell: () => <ShowDossierFussilade />,
+      Cell: ({ row }) => (
+        <ShowDossierFussilade
+          reportData={row.original}
+          onShowGunFightReport={handlePreviewReport}
+        />
+      ),
     },
     {
       Header: "Actions",
@@ -58,38 +82,26 @@ const Fusillade = () => {
     },
   ];
 
-  const collections = [
-    {
-      id: 15,
-      matricule: "103",
-      agent: "Alyson Finley",
-      createdAt: "01-10-2023 à 22:35",
-      numeroDossier: 25,
-      rapport: "",
-      firstGroupe: "groupe1",
-      secondGroupe: "groupe2",
-      lieux: "Central Park",
-      recit: "Ras",
-      saisies: [
-        {
-          id: 1456,
-          fullname: "Hernade Lucas",
-          saisie: "2 x pochon",
-          appartenance: "Ballas",
-        },
-        {
-          id: 1459,
-          fullname: "Hernade Martinez",
-          saisie: "25 x pochon",
-          appartenance: "Ballas",
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
+
+    dispatch(retrieveGunFightReportAsync(payload));
+    onPageTotalCountChange(count);
+  }, [pageIndex, search, count]);
 
   const handleClickAdd = () => {
     openModal({
       view: ADD_DOSSIER_FUSILLADE,
+    });
+  };
+
+  const handlePreviewReport = (rapport) => {
+    openModal({
+      view: PREVIEW_DOSSIER_FUSILLADE,
+      data: rapport,
     });
   };
 
@@ -121,9 +133,17 @@ const Fusillade = () => {
         <DataTable
           className="table"
           columns={COLUMNS}
-          isLoading={false}
-          isSuccess={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
           data={collections}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </FusilladePageContainer>
       {createPortal(

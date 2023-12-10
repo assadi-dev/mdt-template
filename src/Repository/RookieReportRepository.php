@@ -125,7 +125,7 @@ class RookieReportRepository extends ServiceEntityRepository
         return ["count" => $count,"data" => $result];
     }
 
-    private function retrieaveAcquisition($id): ?object
+    private function retrieaveAcquisition($id)
     {
         return  $this->reportRookieAcquisitionRepository->findById($id);
 

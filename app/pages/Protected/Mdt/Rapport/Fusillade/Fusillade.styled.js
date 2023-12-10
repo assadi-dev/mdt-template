@@ -123,3 +123,22 @@ export const RecitTextContent = styled(TextContent)`
 export const ModalFooterFussillad = styled(ModalFooter)`
   margin: 0;
 `;
+
+export const PreviewGunfightListSeizuresContainer = styled.div`
+  width: 100%;
+
+  ul {
+    padding: 1rem 0 1rem 1rem;
+    min-height: 35px;
+    max-height: 180px;
+    overflow-y: auto;
+    width: 100%;
+    li,
+    ol {
+      margin-top: 1rem;
+      margin-left: 1rem;
+      list-style-type: initial !important;
+      list-style: initial !important;
+    }
+  }
+`;

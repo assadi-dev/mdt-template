@@ -48,18 +48,18 @@ const RowInputSaisie = ({
           <input
             type="text"
             placeholder="Saisie"
-            name="saisie"
+            name="seizure"
             onChange={handleChange}
-            defaultValue={saisie?.saisie}
+            defaultValue={saisie?.seizure}
           />
         </FormControl>
         <FormControl className="m-0">
           <input
             type="text"
             placeholder="Appartenence"
-            name="appartenance"
+            name="affiliation"
             onChange={handleChange}
-            defaultValue={saisie?.appartenance}
+            defaultValue={saisie?.affiliation}
           />
         </FormControl>
       </RowSaisieDossierFusillade>
