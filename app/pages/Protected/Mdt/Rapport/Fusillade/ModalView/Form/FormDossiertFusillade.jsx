@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -20,6 +20,9 @@ import { GunFightResolver, defaultFormvalues } from "./formDefaultvalue";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MarkdowTextEditor from "../../../../../../../components/TextEditor/MarkdowTextEditor";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
+import useFetchAgentList from "../../../../../../../hooks/useFetchAgentList";
+import SelectAsync from "../../../../../../../components/SelectAsync";
+import { cleanAgentMatricule } from "../../../../../../../services/utils/user";
 
 const FormDossiertFusillade = ({
   process = false,
@@ -40,6 +43,38 @@ const FormDossiertFusillade = ({
     defaultValues: { ...defaultValues },
     resolver: yupResolver(GunFightResolver),
   });
+
+  const { data, isLoading, fetchAgents, error, AbortController } =
+    useFetchAgentList();
+
+  const agentList = useMemo(() => {
+    if (!data?.data) return [];
+    return [...data.data].map((agent) => ({
+      value: `${cleanAgentMatricule(
+        agent.matricule,
+        agent.firstname,
+        agent.lastname
+      )}`,
+      label: `${cleanAgentMatricule(
+        agent.matricule,
+        agent.firstname,
+        agent.lastname
+      )}`,
+      id: `${agent.id}`,
+    }));
+  }, [data]);
+  const handleSelectLead = (value) => {
+    errors.lead && clearErrors("lead");
+    setValue("lead", value.value);
+    console.log(value);
+  };
+
+  useEffect(() => {
+    fetchAgents();
+    return () => {
+      AbortController?.abort();
+    };
+  }, []);
 
   const handlegetRecit = (value) => {
     errors.recit && clearErrors("recit");
@@ -65,7 +100,12 @@ const FormDossiertFusillade = ({
     >
       <FormControl>
         <label htmlFor="">Lead Terrain</label>
-        <input {...register("lead")} />
+        <SelectAsync
+          options={agentList}
+          placeholder="Selectioner un agent"
+          isloading={isLoading}
+          onChange={handleSelectLead}
+        />
         <ErrorSection>
           {errors.lead && (
             <small className="text-error">{errors.lead.message}</small>
