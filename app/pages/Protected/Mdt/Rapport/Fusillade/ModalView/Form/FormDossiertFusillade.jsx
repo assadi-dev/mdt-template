@@ -60,15 +60,14 @@ const FormDossiertFusillade = ({
         agent.firstname,
         agent.lastname
       )}`,
-      id: `${agent.id}`,
+      id: `${agent.idAgent}`,
     }));
   }, [data]);
   const handleSelectLead = (value) => {
     errors.lead && clearErrors("lead");
     setValue("lead", value.value);
-    console.log(value);
   };
-  console.log(isLoading);
+
   useEffect(() => {
     fetchAgents();
     return () => {

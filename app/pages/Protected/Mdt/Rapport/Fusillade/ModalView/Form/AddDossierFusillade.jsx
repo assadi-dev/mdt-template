@@ -13,6 +13,7 @@ import {
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
 import { saveGunFightReport } from "../../helpers";
+import { addGunFightReport } from "../../../../../../../features/GunFightReport/GunFightReport.slice";
 
 const AddDossierFusillade = ({ onCloseModal = () => {}, ...props }) => {
   const dispatch = useDispatch();
@@ -26,8 +27,12 @@ const AddDossierFusillade = ({ onCloseModal = () => {}, ...props }) => {
       toggleProcess();
       values.agent = `api/agents/${idAgent}`;
       const response = await saveGunFightReport(values);
-      // const payloadData = {...response.data,...values}
-      console.log(response.data);
+      const payloadData = {
+        ...response.data,
+        ...values,
+        createdAt: { date: response.data.createdAt },
+      };
+      dispatch(addGunFightReport(payloadData));
       toastSuccess();
       onCloseModal();
     } catch (error) {
