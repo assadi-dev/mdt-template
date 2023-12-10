@@ -85,7 +85,7 @@ export const FormControl = styled.div`
 `;
 
 export const ModalFooter = styled.div`
-  margin: 1.6rem 0;
+  margin: 1.3rem 0;
   width: 100%;
   display: grid;
   place-items: center;

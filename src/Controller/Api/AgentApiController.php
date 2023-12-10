@@ -61,4 +61,24 @@ class AgentApiController extends AbstractController
 
     }
 
+
+    /**
+     * @Route("/api/agents/list" , name="app_get_agent_list",methods="GET")
+     */
+
+    public function agen_list()
+    {
+        try {
+            $agent =  $this->agentRepository->findAgentLight();
+            $content = json_encode($agent);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+        }
+    }
+
 }

@@ -5,6 +5,7 @@ import {
   ModalFooter,
 } from "../../../../../../../components/Forms/FormView.styled";
 import {
+  RecitTextContent,
   RowAddSaisiAction,
   RowGroupFusillade,
   RowInputSaisielistContainer,
@@ -14,7 +15,9 @@ import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithL
 import { useForm } from "react-hook-form";
 import RowInputSaisie from "./RowInputSaisie";
 import InputSaisieAction from "./InputSaisieAction";
-import { defaultFormvalues } from "./formDefaultvalue";
+import { GunFightResolver, defaultFormvalues } from "./formDefaultvalue";
+import { yupResolver } from "@hookform/resolvers/yup";
+import MarkdowTextEditor from "../../../../../../../components/TextEditor/MarkdowTextEditor";
 
 const FormDossiertFusillade = ({
   defaultValues = defaultFormvalues,
@@ -28,7 +31,12 @@ const FormDossiertFusillade = ({
     formState: { errors },
     getValues,
     reset,
-  } = useForm({ defaultValues: { ...defaultValues } });
+  } = useForm({
+    defaultValues: { ...defaultValues },
+    resolver: yupResolver(GunFightResolver),
+  });
+
+  const handlegetRecit = () => {};
 
   const handleFormSubmit = (values) => {
     onSave(values);
@@ -45,25 +53,30 @@ const FormDossiertFusillade = ({
     >
       <FormControl>
         <label htmlFor="">Lead Terrain</label>
-        <input {...register("agent")} />
+        <input {...register("lead")} />
       </FormControl>
       <RowGroupFusillade>
         <FormControl>
-          <label htmlFor="">groupe 1</label>
-          <input {...register("firstGroupe")} />
+          <label htmlFor="">Groupe 1</label>
+          <input {...register("firstGroup")} />
         </FormControl>
         <FormControl>
-          <label htmlFor="">groupe 2</label>
-          <input {...register("secondGroupe")} />
+          <label htmlFor="">Groupe 2</label>
+          <input {...register("secondGroup")} />
         </FormControl>
       </RowGroupFusillade>
       <FormControl>
-        <label htmlFor="">lieu(x)</label>
-        <input {...register("lieux")} />
+        <label htmlFor="">Lieu(x)</label>
+        <input {...register("location")} />
       </FormControl>
       <FormControl>
-        <label htmlFor="">récit de l'intervention</label>
-        <textarea style={{ resize: "none" }} {...register("recit")} />
+        <RecitTextContent>
+          <p>Recit de l'intervention</p>
+          <MarkdowTextEditor
+            className="theme-text-editor"
+            getOutput={handlegetRecit}
+          />
+        </RecitTextContent>
       </FormControl>
       <FormControl>
         <InputSaisieAction

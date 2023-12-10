@@ -22,7 +22,6 @@ import {
 } from "./RookieReportSchema";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 import useFetchRookieList from "../../../../../../../hooks/useFetchRookieList";
-import debounce from "debounce";
 import SelectAsync from "../../../../../../../components/SelectAsync";
 
 const RapportRookieForm = ({

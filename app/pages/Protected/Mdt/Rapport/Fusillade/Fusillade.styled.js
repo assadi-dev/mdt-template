@@ -6,7 +6,9 @@ import {
 import {
   FormContainer,
   ModalContainer,
+  ModalFooter,
 } from "../../../../../components/Forms/FormView.styled";
+import { TextContent } from "../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 
 export const FusilladePageContainer = styled(PageContainer)`
   .table {
@@ -53,7 +55,7 @@ export const SaisieListSection = styled.div`
 export const RowInputSaisielistContainer = styled.ul`
   overflow-y: auto;
   min-height: 100px;
-  max-height: 240px;
+  max-height: 200px;
 
   li {
     display: grid;
@@ -102,4 +104,22 @@ export const RowAddSaisiAction = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+`;
+
+export const RecitTextContent = styled(TextContent)`
+  margin-top: 0;
+  min-height: auto;
+
+  font-size: 1.3rem;
+  .theme-text-editor {
+    margin: 1rem 0 !important;
+  }
+  .tiptap {
+    max-height: 50px;
+    max-height: 80px;
+  }
+`;
+
+export const ModalFooterFussillad = styled(ModalFooter)`
+  margin: 0;
 `;

@@ -265,6 +265,27 @@ class AgentRepository extends ServiceEntityRepository
 
     }
 
+    public function findAgentLight()
+    {
+        $qb =  $this->createQueryBuilder("a");
+        $qb->select(
+            "
+            a.id as idAgent, 
+            a.firstname,
+            a.lastname,
+            a.gender,
+            a.matricule,
+            a.faction,
+            g.name as grade
+        "
+        )
+        ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ;
+
+        $result = $qb->getQuery()->getResult();
+        return $result;
+
+    }
 
 
 }
