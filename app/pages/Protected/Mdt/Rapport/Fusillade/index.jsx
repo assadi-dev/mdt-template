@@ -17,6 +17,7 @@ import {
   ADD_DOSSIER_FUSILLADE,
   DELETE_DOSSIER_FUSILLADE,
   EDIT_DOSSIER_FUSILLADE,
+  PREVIEW_DOSSIER_FUSILLADE,
   listOfDossierFusilladeView,
 } from "./ModalView/ListDossierFusillade";
 import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
@@ -59,7 +60,12 @@ const Fusillade = () => {
     {
       Header: "Rapport",
       accessor: "",
-      Cell: ({ row }) => <ShowDossierFussilade />,
+      Cell: ({ row }) => (
+        <ShowDossierFussilade
+          reportData={row.original}
+          onShowGunFightReport={handlePreviewReport}
+        />
+      ),
     },
     {
       Header: "Actions",
@@ -89,6 +95,13 @@ const Fusillade = () => {
   const handleClickAdd = () => {
     openModal({
       view: ADD_DOSSIER_FUSILLADE,
+    });
+  };
+
+  const handlePreviewReport = (rapport) => {
+    openModal({
+      view: PREVIEW_DOSSIER_FUSILLADE,
+      data: rapport,
     });
   };
 
