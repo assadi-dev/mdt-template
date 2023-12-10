@@ -86,8 +86,13 @@ class GunfightReportRepository extends ServiceEntityRepository
         gr.createdAt
         ")
         ->leftJoin(Agent::class, "a", "WITH", "a.id=gr.agent")
-       /*  ->orHaving($qb->expr()->like("gr.numeroReport", ":search"))
-        ->setParameter('search', $search) */
+         ->orHaving($qb->expr()->like("gr.numeroReport", ":search"))
+         ->orHaving($qb->expr()->like("gr.lead", ":search"))
+         ->orHaving($qb->expr()->like("gr.location", ":search"))
+         ->orHaving($qb->expr()->like("gr.seized", ":search"))
+         ->orHaving($qb->expr()->like("gr.firstGroup", ":search"))
+         ->orHaving($qb->expr()->like("gr.secondGroup", ":search"))
+        ->setParameter('search', $search)
         ->orderBy('gr.createdAt', 'DESC')
         ->groupBy("gr.id")
 

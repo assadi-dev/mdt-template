@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
+use App\Entity\GunfightReport;
 use App\Entity\IncidentReport;
 use App\Entity\InterventionReport;
 use App\Entity\Plaints;
@@ -30,7 +31,8 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
             ['onCreatePlaint', EventPriorities::POST_WRITE],
             ['onCreateRapportIncident', EventPriorities::POST_WRITE],
             ['onCreateRapportIntervention', EventPriorities::POST_WRITE],
-            ['onCreateRapportRookie', EventPriorities::POST_WRITE]
+            ['onCreateRapportRookie', EventPriorities::POST_WRITE],
+            ['onCreateGunfightReport', EventPriorities::POST_WRITE]
         ],
 
 
@@ -105,6 +107,24 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
         $entity->setNumeroReport($numero);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
+    }
+
+
+    public function onCreateGunfightReport(ViewEvent $event): void
+    {
+        $entity = $event->getControllerResult();
+        $method = $event->getRequest()->getMethod();
+
+        if (!$entity instanceof GunfightReport || Request::METHOD_POST !== $method) {
+            return;
+        }
+
+        $id = $id = $entity->getId();
+        $numero = $this->generate_reportNumber($id);
+        $entity->setNumeroReport($numero);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
     }
 
 
