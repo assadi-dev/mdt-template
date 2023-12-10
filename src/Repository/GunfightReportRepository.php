@@ -92,7 +92,7 @@ class GunfightReportRepository extends ServiceEntityRepository
          ->orHaving($qb->expr()->like("gr.seized", ":search"))
          ->orHaving($qb->expr()->like("gr.firstGroup", ":search"))
          ->orHaving($qb->expr()->like("gr.secondGroup", ":search"))
-        ->setParameter('search', $search)
+        ->setParameter('search', "%$search%")
         ->orderBy('gr.createdAt', 'DESC')
         ->groupBy("gr.id")
 
