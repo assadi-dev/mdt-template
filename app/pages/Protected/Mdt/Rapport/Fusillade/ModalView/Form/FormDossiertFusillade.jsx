@@ -101,6 +101,7 @@ const FormDossiertFusillade = ({
       <FormControl>
         <label htmlFor="">Lead Terrain</label>
         <SelectAsync
+          defaultInputValue={getValues("lead")}
           options={agentList}
           placeholder="Selectioner un agent"
           isLoading={isLoading}
@@ -147,6 +148,7 @@ const FormDossiertFusillade = ({
           <MarkdowTextEditor
             className="theme-text-editor"
             getOutput={handlegetRecit}
+            defaultValue={getValues("recit")}
           />
         </RecitTextContent>
         <ErrorSection>

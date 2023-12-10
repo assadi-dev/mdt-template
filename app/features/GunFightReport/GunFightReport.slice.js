@@ -8,12 +8,27 @@ const GunFightReportSlice = createSlice({
   reducers: {
     addGunFightReport: (state, action) => {
       const { payload } = action;
+      const collectionsUpdated = [payload, ...state.collections];
+      state.collections = collectionsUpdated;
+      state.count = state.count + 1;
     },
-    editGunFightReportt: (state, action) => {
+    editGunFightReport: (state, action) => {
       const { payload } = action;
+      const collectionsUpdated = [...state.collections].map((report) => {
+        if (report.id == payload.id) {
+          return { ...report, ...payload };
+        }
+        return report;
+      });
+      state.collections = collectionsUpdated;
     },
     deleteGunFightReport: (state, action) => {
       const { payload } = action;
+      const collectionsUpdated = [...state.collections].filter(
+        (report) => !payload.includes(report.id)
+      );
+      state.collections = collectionsUpdated;
+      state.count = state.count - 1;
     },
     errorGunFightReport: (state, action) => {},
   },
@@ -36,10 +51,6 @@ const GunFightReportSlice = createSlice({
   },
 });
 
-export const {
-  addIncidentReport,
-  editIncidentReport,
-  deleteIncidentReport,
-  errorIncidentReport,
-} = GunFightReportSlice.actions;
+export const { addGunFightReport, editGunFightReport, deleteGunFightReport } =
+  GunFightReportSlice.actions;
 export default GunFightReportSlice.reducer;
