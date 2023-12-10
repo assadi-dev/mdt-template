@@ -68,7 +68,7 @@ const FormDossiertFusillade = ({
     setValue("lead", value.value);
     console.log(value);
   };
-
+  console.log(isLoading);
   useEffect(() => {
     fetchAgents();
     return () => {
@@ -103,7 +103,7 @@ const FormDossiertFusillade = ({
         <SelectAsync
           options={agentList}
           placeholder="Selectioner un agent"
-          isloading={isLoading}
+          isLoading={isLoading}
           onChange={handleSelectLead}
         />
         <ErrorSection>
