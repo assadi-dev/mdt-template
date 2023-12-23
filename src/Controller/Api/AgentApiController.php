@@ -81,4 +81,35 @@ class AgentApiController extends AbstractController
         }
     }
 
+
+    /**
+     * @Route("/api/agent/effectif/pagination/{page}", name="app_get_effectif_agents", methods="GET")
+     */
+    public function get_effectif($page, Request $request)
+    {
+        try {
+
+            $item_per_page = $request->query->get("item_per_page");
+            $search =  $request->query->get("search");
+            if(!isset($item_per_page)) {
+                $item_per_page = 5;
+            }
+            if(!isset($search)) {
+                $search = "";
+            }
+
+            $effectifs = $this->agentRepository->findAgentForEffectif($item_per_page, $page, $search);
+            $content = json_encode($effectifs);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+
+        }
+    }
+
 }

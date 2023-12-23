@@ -203,7 +203,7 @@ class AgentRepository extends ServiceEntityRepository
             a.createdAt,
             a.updatedAt"
         )
-        ->innerJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->LeftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
         ->orWhere($qb->expr()->like("a.firstname", ":search"))
         ->orWhere($qb->expr()->like("a.lastname", ":search"))
         ->orWhere($qb->expr()->like("a.gender", ":search"))
@@ -284,6 +284,43 @@ class AgentRepository extends ServiceEntityRepository
 
         $result = $qb->getQuery()->getResult();
         return $result;
+
+    }
+
+
+    public function findAgentForEffectif($items_per_page = 5, $page = 1, $search)
+    {
+        $countResult = ($page - 1) * $items_per_page;
+
+        $qb = $this->createQueryBuilder("a");
+        $qb
+        ->select("a.id, a.matricule, a.firstname, a.lastname,g.name as grade,a.gender,a.phone, a.iban, a.division ")
+        ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->orWhere($qb->expr()->like("a.firstname", ":search"))
+        ->orWhere($qb->expr()->like("a.lastname", ":search"))
+        ->orWhere($qb->expr()->like("a.gender", ":search"))
+        ->orWhere($qb->expr()->like("a.matricule", ":search"))
+        ->orWhere($qb->expr()->like("a.phone", ":search"))
+        ->orWhere($qb->expr()->like("a.faction", ":search"))
+        ->orWhere($qb->expr()->like("a.division", ":search"))
+        ->orWhere($qb->expr()->like("g.name", ":search"))
+        ->orWhere($qb->expr()->like("a.iban", ":search"))
+        ->setParameter("search", "%$search%")
+        ->groupBy("a.id");
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+
+        $query =  $qb->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+        $result = $query->getResult();
+        return ["count" => $count,"data" => $result];
+
+
 
     }
 
