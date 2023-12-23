@@ -100,7 +100,7 @@ class AgentApiController extends AbstractController
 
             $effectifs = $this->agentRepository->findAgentForEffectif($item_per_page, $page, $search);
             $content = json_encode($effectifs);
-            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
             return $response;
 
         } catch (\Throwable $th) {
