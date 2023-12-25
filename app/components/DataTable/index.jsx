@@ -122,9 +122,11 @@ const DataTable = ({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {isLoading ? (
-            <RowLoading loadingMessage={loadingMessage} />
-          ) : rows.length == 0 && !isLoading ? (
+          {isLoading && (
+            <RowLoading key="loading-row" loadingMessage={loadingMessage} />
+          )}
+
+          {rows.length == 0 && !isLoading ? (
             <EmptyRow />
           ) : (
             rows.map((row, i) => {
