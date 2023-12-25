@@ -1,15 +1,16 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EndOfwatchApiController extends AbstractController
 {
     public function __construct() {}
 
     /**
-     * @Route("/api/end_of_watch/pagination/{page}", name="app_end_of_watch_pagination", methods="GET" )
+     * @Route("/api/end_of_watches/pagination/{page}", name="app_end_of_watch_pagination", methods="GET" )
      */
     public function end_of_watch_collection($page, Request $request): Response
     {
