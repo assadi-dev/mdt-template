@@ -30,7 +30,6 @@ export const AuthenticateSlice = createSlice({
     hydrateUser: (state, action) => {
       const { payload } = action;
       state = { ...state, ...payload, isLoggedIn: true };
-      //console.log(state);
       return state;
     },
     updateUser: (state, action) => {

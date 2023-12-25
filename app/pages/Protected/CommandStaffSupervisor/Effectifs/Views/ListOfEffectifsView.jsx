@@ -14,17 +14,4 @@ export const listEffectifView = {
   },
 };
 
-export const defaultFormValue = {
-  id: null,
-  photo: "",
-  matricule: "",
-  agent: "",
-  firstname: "",
-  lastname: "",
-  phone: "",
-  iban: "",
-  grade: "",
-  division: "",
-};
-
 export const Tabsheader = ["Info", "Formations", "End of watch"];

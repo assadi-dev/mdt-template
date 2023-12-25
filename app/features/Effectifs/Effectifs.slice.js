@@ -6,6 +6,17 @@ const EffectifSlice = createSlice({
   name: "Agent/Effectifs",
   initialState,
   reducers: {
+    edit_an_effectif: (state, action) => {
+      const { payload } = action;
+      const updateSate = [...state.collections].map((agent) => {
+        if (agent.id == payload.id) {
+          return { ...agent, ...payload };
+        }
+        return agent;
+      });
+
+      state.collections = updateSate;
+    },
     delete_an_effectif: (state, action) => {},
   },
   extraReducers: (builder) => {
@@ -27,6 +38,6 @@ const EffectifSlice = createSlice({
   },
 });
 
-export const { delete_an_effectif } = EffectifSlice.actions;
+export const { edit_an_effectif, delete_an_effectif } = EffectifSlice.actions;
 
 export default EffectifSlice.reducer;
