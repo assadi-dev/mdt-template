@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Agent;
 use App\Entity\Grade;
+use App\Entity\GradeCategory;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -322,6 +323,31 @@ class AgentRepository extends ServiceEntityRepository
 
 
 
+    }
+
+
+    /**
+     * Retourne les agents à partir des categories de grade
+     * @param array $gradeCategories doit être tableau contenant le grade
+     */
+    public function findAgentByGradesCategories(array $gradeCategories)
+    {
+        $qb = $this->createQueryBuilder("a");
+
+        $qb->select("a.id,a.matricule,a.firstname,a.lastname, g.name as grade, gc.name as gradeCategory")
+        ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
+        ->leftJoin(GradeCategory::class, "gc", "WITH", "gc.id =g.gradeCategory")
+        ;
+
+
+
+        foreach ($gradeCategories as $key => $categorie) {
+            $param = "param$key";
+            $qb->orHaving("gc.name=:$param")->setParameter($param, $categorie);
+        }
+        $qb->groupBy("a.id");
+
+        return $qb->getQuery()->getResult();
     }
 
 

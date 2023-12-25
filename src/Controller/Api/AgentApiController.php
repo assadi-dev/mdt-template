@@ -112,4 +112,27 @@ class AgentApiController extends AbstractController
         }
     }
 
+
+    /**
+     * @Route("/api/agent/grades/categories", name="app_get_agents_by_grades_categories", methods="POST")
+     */
+    public function getAgentByGradeCategorie(Request $request)
+    {
+        try {
+            $body = json_decode($request->getContent(), true);
+            $categories = $body["categories"];
+
+            $agents = $this->agentRepository->findAgentByGradesCategories($categories);
+            $content = json_encode($agents);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+        }
+
+    }
+
 }
