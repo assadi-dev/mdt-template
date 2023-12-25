@@ -86,7 +86,7 @@ const Effectifs = () => {
         <ActionCells
           data={row.original}
           canEdit={true}
-          canDelete={true}
+          canDelete={false}
           onEdit={handleClickEdit}
           onDelete={handleClickDelete}
         />
