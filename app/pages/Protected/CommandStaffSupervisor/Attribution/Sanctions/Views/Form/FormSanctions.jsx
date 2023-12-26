@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import {
+  ErrorSection,
   FormContainer,
   FormControl,
   ModalFooter,
@@ -68,7 +69,8 @@ const FormSanctions = ({
 
   const handleSaveSanction = (values) => {
     if (!getValues("comment")) {
-      setError("comment", requiredMessage);
+      setError("comment", { message: requiredMessage });
+      return;
     }
     onSaveSanction(values);
   };
@@ -90,11 +92,9 @@ const FormSanctions = ({
       (maker) => maker.label
     );
     const toString = listDecisionMakerToString(namesOfDecisionMaker);
-    if (errors.decisionMaker) clearErrors("agentConcerned");
+    if (errors.decisionMaker) clearErrors("decisionMaker");
     setValue("decisionMaker", toString);
   };
-
-  const inputOption = { required: true };
 
   return (
     <FormContainer
@@ -111,6 +111,11 @@ const FormSanctions = ({
           closeMenuOnSelect={false}
           onChange={handleSelectDecisionMaker}
         />
+        <ErrorSection>
+          {errors.decisionMaker && (
+            <small className="text-error">{errors.decisionMaker.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl className="mb-3">
         <label htmlFor="">Agent Concerné</label>
@@ -120,13 +125,22 @@ const FormSanctions = ({
           placeholder="Selctionner l'agent concerné"
           onChange={handleSelectAgentConcerned}
         />
+        <ErrorSection>
+          {errors.agentConcerned && (
+            <small className="text-error">
+              {errors.agentConcerned.message}
+            </small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl className="mb-3">
         <label htmlFor="">Type de sanction</label>
-        <input
-          placeholder="Ex: Blame I"
-          {...register("typeSanction", inputOption)}
-        />
+        <input placeholder="Ex: Blame I" {...register("typeSanction")} />
+        <ErrorSection>
+          {errors.typeSanction && (
+            <small className="text-error">{errors.typeSanction.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
 
       <FormControl className="mb-3">
@@ -134,8 +148,13 @@ const FormSanctions = ({
         <SanctionTextContent
           className="theme-text-editor"
           getOutput={getDetailSanction}
-          defaultValue={getValues("raison")}
+          defaultValue={getValues("comment")}
         />
+        <ErrorSection>
+          {errors.comment && (
+            <small className="text-error">{errors.comment.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
