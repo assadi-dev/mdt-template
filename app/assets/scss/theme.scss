@@ -237,3 +237,14 @@ legend {
     font-size: 1.3rem;
   }
 }
+
+.theme-custom__menu {
+  font-size: 1.3rem;
+  .theme-custom__menu-list {
+    .theme-custom__option {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

@@ -239,6 +239,10 @@ html:has(.theme-sasp) {
       background-color: #fff;
       color: #444;
       cursor: pointer;
+      &:hover {
+        background-color: variables.$lspd-primary-color;
+        color: #fff;
+      }
     }
 
     .theme-custom-option-selected {

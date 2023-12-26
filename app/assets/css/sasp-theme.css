@@ -211,6 +211,10 @@ html:has(.theme-sasp) .theme-custom__menu .theme-custom__option {
   color: #444;
   cursor: pointer;
 }
+html:has(.theme-sasp) .theme-custom__menu .theme-custom__option:hover {
+  background-color: #2B7DE9;
+  color: #fff;
+}
 html:has(.theme-sasp) .theme-custom__menu .theme-custom-option-selected {
   background-color: #2B7DE9;
   color: #fff;
