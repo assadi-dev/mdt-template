@@ -202,3 +202,37 @@ legend {
     opacity: 0.5;
   }
 }
+
+/** React Select**/
+
+.theme-custom__control {
+  background-color: transparent;
+  cursor: pointer;
+
+  &.theme-custom__control--is-focused {
+    background: initial;
+  }
+  & .theme-custom__indicator-separator {
+    display: none;
+  }
+
+  & .theme-custom__value-container {
+    color: inherit;
+  }
+
+  & .theme-custom__single-value {
+    color: inherit;
+  }
+  &.theme-custom__input-container {
+    color: inherit;
+  }
+  .theme-custom__multi-value {
+    .theme-custom__multi-value__label {
+      font-weight: 600;
+    }
+  }
+
+  .theme-custom__placeholder {
+    font-size: 1.3rem;
+  }
+}
