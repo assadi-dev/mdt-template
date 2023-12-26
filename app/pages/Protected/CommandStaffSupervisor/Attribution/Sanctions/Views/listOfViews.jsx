@@ -26,10 +26,3 @@ export const collections = [
     typeSanction: "Blame",
   },
 ];
-
-export const formSanctionSchema = {
-  decideur: "",
-  agentConcerne: "",
-  typeSanction: "",
-  raison: "",
-};
