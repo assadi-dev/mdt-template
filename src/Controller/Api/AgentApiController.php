@@ -2,7 +2,11 @@
 
 namespace App\Controller\Api;
 
+use Faker\Factory;
+use App\Entity\Agent;
 use App\Repository\AgentRepository;
+use App\Repository\GradeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,11 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AgentApiController extends AbstractController
 {
     private $agentRepository;
+    private $gradeRepository;
+    private $entityManager;
 
 
-    public function __construct(AgentRepository $agentRepository)
+    public function __construct(AgentRepository $agentRepository, GradeRepository $gradeRepository, EntityManagerInterface $entityManager)
     {
         $this->agentRepository = $agentRepository;
+        $this->gradeRepository = $gradeRepository;
+        $this->entityManager = $entityManager;
 
     }
 
@@ -134,5 +142,68 @@ class AgentApiController extends AbstractController
         }
 
     }
+
+
+    /**
+     * Generateur d'agent pour test
+     * @Route("api/agent/generate/{quantity}" , name="app_agent_generator", methods="GET")
+     */
+    public function agent_generator($quantity)
+    {
+        try {
+
+
+
+
+
+            for ($i = 0; $i < intval($quantity) ; $i++) {
+                $faker = Factory::create("en_US");
+                $agent = new Agent();
+                $gradesList =  $this->gradeRepository->findBy(
+                    ["name" => [
+                "Rookie",
+                "Senior lead officer",
+                "Sergeant",
+                "Sergeant chef",
+                "Lieutenant",
+                "Capitain adjoint",
+                "Capitain"
+                ]]
+                );
+                $gender = $faker->randomElement(["male","female"]);
+                $gender == "female"
+                ? $agent->setFirstname($faker->firstNameFemale())->setLastname($faker->lastName())->setGender("female")
+                : $agent->setFirstname($faker->firstNameMale())->setLastname($faker->lastName())->setGender("male");
+                $agent->setFaction("sasp");
+                $phone = "555-" . $faker->randomNumber(6, true);
+                $agent->setPhone($phone);
+                $grade = $faker->randomElement($gradesList);
+                $agent->setGrade($grade);
+                $agent->setMatricule($faker->numberBetween(200, 999));
+                $this->entityManager->persist($agent);
+                $this->entityManager->flush();
+            }
+
+
+
+            $agentList =  $this->agentRepository->findAgentLight();
+            $result = $agentList;
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+
+
+
+
+
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+        }
+
+    }
+
 
 }

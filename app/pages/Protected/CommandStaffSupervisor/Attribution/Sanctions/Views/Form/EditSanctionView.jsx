@@ -13,7 +13,10 @@ const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title">Modifier une sanction </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormSanctions defaultFormValue={formSanctionValues} />
+      <FormSanctions
+        defaultFormValue={formSanctionValues}
+        labelSubmiButton={"Mettre à jour"}
+      />
     </ModalFormSanctionContainer>
   );
 };

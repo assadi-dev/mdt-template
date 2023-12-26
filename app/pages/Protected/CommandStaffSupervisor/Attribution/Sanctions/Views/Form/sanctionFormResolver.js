@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 export const formSanctionDefaultValue = {
-  idAgent: "",
+  agent: "",
   decisionMaker: "",
   agentConcerned: "",
   typeSanction: "",

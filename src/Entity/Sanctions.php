@@ -41,6 +41,11 @@ class Sanctions
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Agent::class)
+     */
+    private $agent;
+
     public function getDecisionMaker(): ?string
     {
         return $this->decisionMaker;
@@ -84,6 +89,18 @@ class Sanctions
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getAgent(): ?Agent
+    {
+        return $this->agent;
+    }
+
+    public function setAgent(?Agent $agent): self
+    {
+        $this->agent = $agent;
 
         return $this;
     }

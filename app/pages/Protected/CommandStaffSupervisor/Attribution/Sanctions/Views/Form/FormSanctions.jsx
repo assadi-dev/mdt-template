@@ -21,13 +21,17 @@ import {
   formSanctionDefaultValue,
   formSanctionSchema,
 } from "./sanctionFormResolver";
+import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 const FormSanctions = ({
   defaultFormValue = formSanctionDefaultValue,
   onSaveSanction = () => {},
+  process = false,
+  labelSubmiButton,
 }) => {
   const supervisorList = useFetchSupervisor(superviseurCategoryList);
   const officersList = useFetchAgentByCategories(officierCategory);
+  const LABEL_SUBMIT_BTN = labelSubmiButton ? labelSubmiButton : "Ajouter";
 
   const {
     register,
@@ -48,7 +52,7 @@ const FormSanctions = ({
       id: agent.id,
       matricule: agent.matricule,
       value: `api/agents/${agent.id}`,
-      label: `${agent.firstname} ${agent.lastname}`,
+      label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
     }));
   }, [supervisorList.data]);
 
@@ -58,11 +62,14 @@ const FormSanctions = ({
       id: agent.id,
       matricule: agent.matricule,
       value: `api/agents/${agent.id}`,
-      label: `${agent.firstname} ${agent.lastname}`,
+      label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
     }));
   }, [officersList.data]);
 
   const handleSaveSanction = (values) => {
+    if (!getValues("comment")) {
+      setError("comment", requiredMessage);
+    }
     onSaveSanction(values);
   };
 
@@ -83,16 +90,15 @@ const FormSanctions = ({
       (maker) => maker.label
     );
     const toString = listDecisionMakerToString(namesOfDecisionMaker);
-    console.log(toString);
-    /*  if (errors.agentConcerned) clearErrors("agentConcerned");
-    setValue("agentConcerned", agent.value); */
+    if (errors.decisionMaker) clearErrors("agentConcerned");
+    setValue("decisionMaker", toString);
   };
 
   const inputOption = { required: true };
 
   return (
     <FormContainer
-      onSubmit={handleSaveSanction(handleSaveSanction)}
+      onSubmit={handleSubmit(handleSaveSanction)}
       className="form-theme-color"
     >
       <FormControl className="mb-3">
@@ -133,9 +139,10 @@ const FormSanctions = ({
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
-          labelButton={"Ajouter"}
+          labelButton={LABEL_SUBMIT_BTN}
           className="bg-btn-theme-color"
           type="submit"
+          isLoading={process}
         />
       </ModalFooter>
     </FormContainer>
