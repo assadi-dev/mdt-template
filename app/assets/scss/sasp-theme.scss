@@ -196,6 +196,7 @@ html:has(.theme-sasp) {
 
   /** React Select **/
 
+  //Custom de l'input
   .theme-custom__control {
     background-color: transparent;
     border: 1px solid rgba($color: variables.$sasp-primary-color, $alpha: 0.5);
@@ -233,6 +234,7 @@ html:has(.theme-sasp) {
     }
   }
 
+  //Custom du menu option
   .theme-custom__menu {
     /*  padding: 0 5px; */
     .theme-custom__option {
