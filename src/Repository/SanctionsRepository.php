@@ -85,6 +85,7 @@ class SanctionsRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("s.numeroSanction", ":search"))
         ->orHaving($qb->expr()->like("s.decisionMaker", ":search"))
         ->orHaving($qb->expr()->like("s.typeSanction", ":search"))
+        ->orHaving($qb->expr()->like("agentConcerned", ":search"))
         ->groupBy("s.id")
         ->orderBy("s.createdAt", "DESC")
         ->setParameter("search", "%$search%")

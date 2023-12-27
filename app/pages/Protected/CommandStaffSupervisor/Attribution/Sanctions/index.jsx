@@ -128,7 +128,7 @@ const AttributionSanctions = () => {
     return () => {
       PromiseSanctionRef.current?.abort();
     };
-  }, []);
+  }, [count, pageIndex, search]);
 
   return (
     <AttributionSanctionPageContainer>
