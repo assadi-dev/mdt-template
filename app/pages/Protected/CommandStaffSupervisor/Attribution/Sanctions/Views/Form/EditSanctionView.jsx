@@ -8,19 +8,21 @@ import {
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
 import { update_sanction } from "../../helpers";
+import { agent_iri } from "../../../../../../../services/api/instance";
 
 const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
   const formSanctionValues = { ...payload };
+  const id = payload.id;
 
   const submitSanction = async (values) => {
     try {
-      console.log(values);
+      delete values.agent;
+      delete values.createdAt;
       const toUpdateData = values;
       delete toUpdateData.id;
-      delete toUpdateData.agent;
       console.log(toUpdateData);
-      /*   const result = await update_sanction(values);
-      const payload = values; */
+      await update_sanction(id, toUpdateData);
+      const payload = values;
       onCloseModal();
       toastSuccess();
     } catch (error) {

@@ -19,6 +19,7 @@ export const save_sanction = (data) => {
 export const update_sanction = (id, data) => {
   return api.put(`/sanctions/${id}`, data);
 };
+
 export const delete_sanction = (id) => {
   return api.delete(`/sanctions/${id}`);
 };

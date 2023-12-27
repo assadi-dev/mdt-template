@@ -52,21 +52,20 @@ const FormSanctions = ({
     return [...supervisorList.data].map((agent) => ({
       id: agent.id,
       matricule: agent.matricule,
-      value: `api/agents/${agent.id}`,
+      iri: `api/agents/${agent.id}`,
       label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
+      value: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
     }));
   }, [supervisorList.data]);
 
   const DEFAULT_DECIDEUR = useMemo(() => {
-    if (!defaultFormValue.decisionMaker) return {};
+    if (!defaultFormValue.decisionMaker) return "";
     const toArray = defaultFormValue.decisionMaker.split(",");
-    return toArray.map((decisionMaker) => ({ label: decisionMaker.trim() }));
+    return toArray.map((decisionMaker) => ({
+      label: decisionMaker.trim(),
+      value: decisionMaker.trim(),
+    }));
   }, [defaultFormValue.decisionMaker]);
-
-  const DEFAULT_AGENT_CONCERNED = useMemo(() => {
-    if (!defaultFormValue.agentConcerned) return {};
-    return { label: defaultFormValue.agentConcerned };
-  }, [defaultFormValue.agentConcerned]);
 
   const OFFICERS_OPTION = useMemo(() => {
     if (!officersList.data || officersList.data.length == 0) return [];
@@ -78,11 +77,23 @@ const FormSanctions = ({
     }));
   }, [officersList.data]);
 
+  const DEFAULT_AGENT_CONCERNED = useMemo(() => {
+    if (!defaultFormValue.agentConcerned) return {};
+    return { label: defaultFormValue.agentConcerned };
+  }, [defaultFormValue.agentConcerned, OFFICERS_OPTION]);
+
   const handleSaveSanction = (values) => {
     if (!getValues("comment")) {
       setError("comment", { message: requiredMessage });
       return;
     }
+    if (defaultFormValue.agentConcerned) {
+      const findAgent = OFFICERS_OPTION?.find(
+        (agent) => agent.label == getValues("agentConcerned")
+      );
+      findAgent && setValue("agentConcerned", findAgent.value);
+    }
+
     onSaveSanction(values);
   };
 
