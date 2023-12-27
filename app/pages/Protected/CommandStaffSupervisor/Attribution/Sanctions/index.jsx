@@ -28,7 +28,6 @@ import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
 
 const AttributionSanctions = () => {
   const { endLoader, loaderState } = useLoader();
-  useDelayed(endLoader, 1000);
 
   const { collections, status, count, error } = useSelector(
     (state) => state.SanctionReducer

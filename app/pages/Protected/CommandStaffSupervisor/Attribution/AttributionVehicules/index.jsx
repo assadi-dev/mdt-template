@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddAttributionVehiculeButton,
   AttributionVehicule,
@@ -20,6 +20,9 @@ import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { retrieveVehicleAttributionAsync } from "../../../../../features/VehicleAttribution/VehicleAsynAction";
+import { defaultPageSize } from "../../../../../config/constantes";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
 
 const AttributionVehicules = () => {
   const { endLoader, loaderState } = useLoader();
@@ -30,6 +33,16 @@ const AttributionVehicules = () => {
   );
 
   const { modalState, openModal, closeModal } = useModalState();
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const COLUMNS = [
     {
@@ -71,6 +84,24 @@ const AttributionVehicules = () => {
     },
   ];
 
+  const promiseVehicleAttributionRef = useRef(new AbortController());
+
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+      promiseVehicleAttributionRef = dispatch(
+        retrieveVehicleAttributionAsync(payload)
+      );
+      onPageTotalCountChange(count);
+      return () => {
+        promiseVehicleAttributionRef.current?.abort();
+      };
+    } catch (error) {}
+  }, [pageIndex, count, search]);
+
   const handleClikAddAttributionVehicule = () => {
     openModal({
       view: ADD_ATTRIBUTION_VEHICULE,
@@ -103,8 +134,17 @@ const AttributionVehicules = () => {
       <DataTable
         columns={COLUMNS}
         data={collecttions}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
+        manualPagination={true}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

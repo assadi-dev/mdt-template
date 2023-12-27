@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./helper";
+import { retrieveVehicleAttributionAsync } from "./VehicleAsynAction";
 
 const VehicleAttributionSlice = createSlice({
   name: "VehicleAttribution",
@@ -34,6 +35,24 @@ const VehicleAttributionSlice = createSlice({
       state.collections = removedToCollection;
       state.count = state.count - payload.length;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(retrieveVehicleAttributionAsync.rejected, (state, action) => {
+        const { error } = action;
+        state.error = error.message;
+        state.status = "complete";
+      })
+      .addCase(retrieveVehicleAttributionAsync.pending, (state) => {
+        state.status = "pending";
+        state.error = "";
+      })
+      .addCase(retrieveVehicleAttributionAsync.fulfilled, (state, action) => {
+        const { payload } = action;
+        state.status = "complete";
+        state.collections = payload.data;
+        state.count = payload.count;
+      });
   },
 });
 

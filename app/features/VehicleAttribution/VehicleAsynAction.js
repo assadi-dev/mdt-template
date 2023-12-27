@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchVehicleAttributionCollection } from "./helper";
 
-export const retrieveSanctionsAsync = createAsyncThunk(
+export const retrieveVehicleAttributionAsync = createAsyncThunk(
   "VehicleAttribution/Collections",
   async (payload) => {
     try {
