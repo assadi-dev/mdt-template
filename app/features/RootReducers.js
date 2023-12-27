@@ -17,6 +17,7 @@ import RookieReportReducer from "./RookieReport/RookieReport.slice";
 import GunFightReportReducer from "./GunFightReport/GunFightReport.slice";
 import EffectifsReducer from "./Effectifs/Effectifs.slice";
 import SanctionReducer from "./Sanctions/Sanctions.slice";
+import VehicleAttributionReducer from "./VehicleAttribution/VehicleAttribution.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -38,6 +39,7 @@ const RootReducers = {
   GunFightReportReducer,
   EffectifsReducer,
   SanctionReducer,
+  VehicleAttributionReducer,
 };
 
 export default RootReducers;

@@ -14,18 +14,6 @@ export const listOfAttributionVehicule = {
   "delete-attributionVehicule": { element: DeleteAttributionVehiculeView },
 };
 
-export const collecttions = [
-  {
-    id: 1,
-    matricule: 103,
-    agent: "jackson Marshall",
-    grade: "Rookie",
-    typeVehicule: "Buffalo S",
-    idVehicule: 585613,
-    plaqueVehicule: "49GHT256",
-  },
-];
-
 export const formAtrributionVehicule = {
   matricule: "",
   agent: "",

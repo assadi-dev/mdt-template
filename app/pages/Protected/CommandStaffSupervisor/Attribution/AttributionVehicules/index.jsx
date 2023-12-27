@@ -13,17 +13,21 @@ import {
   DELETE_ATTRIBUTION_VEHICULE,
   EDIT_ATTRIBUTION_VEHICULE,
   SHOW_ATTRIBUTION_VEHICULE,
-  collecttions,
   listOfAttributionVehicule,
 } from "./Views/ListOfViews";
 import useModalState from "../../../../../hooks/useModalState";
 import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const AttributionVehicules = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
+  const dispatch = useDispatch();
+  const { collecttions, count, status, error } = useSelector(
+    (state) => state.VehicleAttributionReducer
+  );
 
   const { modalState, openModal, closeModal } = useModalState();
 
