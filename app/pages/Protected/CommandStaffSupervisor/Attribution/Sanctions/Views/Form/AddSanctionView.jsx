@@ -6,16 +6,26 @@ import FormSanctions from "./FormSanctions";
 import { agent_iri } from "../../../../../../../services/api/instance";
 import { useDispatch, useSelector } from "react-redux";
 import { save_sanction } from "../../helpers";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../../services/utils/alert";
 
 const AddSanctionView = ({ onCloseModal, ...props }) => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
 
   const submitSanction = async (values) => {
-    values.agent = agent_iri + authenticateUser.idAgent;
-    console.log(values);
-    const result = await save_sanction(values);
-    const payload = values;
+    try {
+      values.agent = agent_iri + authenticateUser.idAgent;
+      console.log(values);
+      const result = await save_sanction(values);
+      const payload = values;
+      onCloseModal();
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    }
   };
 
   return (

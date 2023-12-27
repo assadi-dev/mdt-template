@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddSanctionBtn,
   AttributionSanctionPageContainer,
@@ -15,31 +15,54 @@ import {
   DELETE_ATTRIBUTION_SANCTION,
   EDIT_ATTRIBUTION_SANCTION,
   SHOW_ATTRIBUTION_SANCTION,
-  collections,
   listOfViewSanction,
 } from "./Views/listOfViews";
 import { createPortal } from "react-dom";
 import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
+import { useSelector, useDispatch } from "react-redux";
+import { retrieveSanctionsAsync } from "../../../../../features/Sanctions/SanctionAsynAction";
+import { defaultPageSize } from "../../../../../config/constantes";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
+import { datetimeFormatFr } from "../../../../../services/utils/dateFormat";
 
 const AttributionSanctions = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
 
+  const { collections, status, count, error } = useSelector(
+    (state) => state.SanctionReducer
+  );
+
+  const dispatch = useDispatch();
+
   const { modalState, openModal, closeModal } = useModalState();
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const COLUMNS = [
     {
       Header: "Date",
-      accessor: "createdAt",
+      Cell: ({ row }) => {
+        const createdAt = row.original.createdAt;
+        return datetimeFormatFr(createdAt?.date);
+      },
     },
     {
       Header: "Agent Concerné",
-      accessor: "agent",
+      accessor: "agentConcerned",
     },
     {
-      Header: "Decideur",
-      accessor: "decideur",
+      Header: "Decideur(s)",
+      accessor: "decisionMaker",
     },
     {
       Header: "Raison",
@@ -93,6 +116,20 @@ const AttributionSanctions = () => {
     });
   };
 
+  const PromiseSanctionRef = useRef(new AbortController());
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
+
+    dispatch(retrieveSanctionsAsync(payload));
+    onPageTotalCountChange(count);
+    return () => {
+      PromiseSanctionRef.current?.abort();
+    };
+  }, []);
+
   return (
     <AttributionSanctionPageContainer>
       <RowAction className="row-action-page">
@@ -108,8 +145,17 @@ const AttributionSanctions = () => {
         className="table-align-center-not-first"
         columns={COLUMNS}
         data={collections}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
+        manualPagination={true}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
 
       {createPortal(

@@ -57,6 +57,17 @@ const FormSanctions = ({
     }));
   }, [supervisorList.data]);
 
+  const DEFAULT_DECIDEUR = useMemo(() => {
+    if (!defaultFormValue.decisionMaker) return {};
+    const toArray = defaultFormValue.decisionMaker.split(",");
+    return toArray.map((decisionMaker) => ({ label: decisionMaker.trim() }));
+  }, [defaultFormValue.decisionMaker]);
+
+  const DEFAULT_AGENT_CONCERNED = useMemo(() => {
+    if (!defaultFormValue.agentConcerned) return {};
+    return { label: defaultFormValue.agentConcerned };
+  }, [defaultFormValue.agentConcerned]);
+
   const OFFICERS_OPTION = useMemo(() => {
     if (!officersList.data || officersList.data.length == 0) return [];
     return [...officersList.data].map((agent) => ({
@@ -111,6 +122,7 @@ const FormSanctions = ({
           placeholder="Selctionner les décideurs"
           closeMenuOnSelect={false}
           onChange={handleSelectDecisionMaker}
+          defaultValue={DEFAULT_DECIDEUR}
         />
         <ErrorSection>
           {errors.decisionMaker && (
@@ -125,6 +137,7 @@ const FormSanctions = ({
           isLoading={officersList.isLoading}
           placeholder="Selctionner l'agent concerné"
           onChange={handleSelectAgentConcerned}
+          defaultValue={DEFAULT_AGENT_CONCERNED}
         />
         <ErrorSection>
           {errors.agentConcerned && (
