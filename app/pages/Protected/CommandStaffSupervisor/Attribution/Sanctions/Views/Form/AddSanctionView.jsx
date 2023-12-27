@@ -10,6 +10,7 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
+import { add_sanction } from "../../../../../../../features/Sanctions/Sanctions.slice";
 
 const AddSanctionView = ({ onCloseModal, ...props }) => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
@@ -18,9 +19,12 @@ const AddSanctionView = ({ onCloseModal, ...props }) => {
   const submitSanction = async (values) => {
     try {
       values.agent = agent_iri + authenticateUser.idAgent;
-      console.log(values);
       const result = await save_sanction(values);
       const payload = values;
+      payload.createdAt = { date: result.data.createdAt };
+      payload.id = result.data.id;
+      payload.agentConcerned = values.agentConcernedLabel;
+      dispatch(add_sanction(payload));
       onCloseModal();
       toastSuccess();
     } catch (error) {

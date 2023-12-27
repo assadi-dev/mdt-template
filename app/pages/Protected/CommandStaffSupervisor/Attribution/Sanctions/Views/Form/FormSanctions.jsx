@@ -79,6 +79,11 @@ const FormSanctions = ({
 
   const DEFAULT_AGENT_CONCERNED = useMemo(() => {
     if (!defaultFormValue.agentConcerned) return {};
+    setValue("agentConcernedLabel", defaultFormValue.agentConcerned);
+    const findAgent = OFFICERS_OPTION?.find(
+      (agent) => agent.label == defaultFormValue.agentConcerned
+    );
+    findAgent && setValue("agentConcerned", findAgent.value);
     return { label: defaultFormValue.agentConcerned };
   }, [defaultFormValue.agentConcerned, OFFICERS_OPTION]);
 
@@ -86,12 +91,6 @@ const FormSanctions = ({
     if (!getValues("comment")) {
       setError("comment", { message: requiredMessage });
       return;
-    }
-    if (defaultFormValue.agentConcerned) {
-      const findAgent = OFFICERS_OPTION?.find(
-        (agent) => agent.label == getValues("agentConcerned")
-      );
-      findAgent && setValue("agentConcerned", findAgent.value);
     }
 
     onSaveSanction(values);
@@ -112,7 +111,7 @@ const FormSanctions = ({
 
   const handleSelectDecisionMaker = (decisionMakers) => {
     const namesOfDecisionMaker = [...decisionMakers].map(
-      (maker) => maker.label
+      (maker) => maker.value
     );
     const toString = listDecisionMakerToString(namesOfDecisionMaker);
     if (errors.decisionMaker) clearErrors("decisionMaker");
