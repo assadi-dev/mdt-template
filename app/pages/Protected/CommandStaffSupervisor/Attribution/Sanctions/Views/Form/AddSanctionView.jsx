@@ -5,6 +5,7 @@ import CloseModalBtn from "../../../../../../../components/Modal/CloseModalBtn";
 import FormSanctions from "./FormSanctions";
 import { agent_iri } from "../../../../../../../services/api/instance";
 import { useDispatch, useSelector } from "react-redux";
+import { save_sanction } from "../../helpers";
 
 const AddSanctionView = ({ onCloseModal, ...props }) => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
@@ -13,6 +14,8 @@ const AddSanctionView = ({ onCloseModal, ...props }) => {
   const submitSanction = async (values) => {
     values.agent = agent_iri + authenticateUser.idAgent;
     console.log(values);
+    const result = await save_sanction(values);
+    const payload = values;
   };
 
   return (

@@ -85,6 +85,7 @@ const FormSanctions = ({
   const handleSelectAgentConcerned = (agent) => {
     if (errors.agentConcerned) clearErrors("agentConcerned");
     setValue("agentConcerned", agent.value);
+    setValue("agentConcernedLabel", agent.label);
   };
 
   const handleSelectDecisionMaker = (decisionMakers) => {

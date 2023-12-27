@@ -1,3 +1,4 @@
+import api from "../../../../../services/api/instance";
 export const superviseurCategoryList = ["Supervisor", "Command staff"];
 export const officierCategory = ["State officier"];
 
@@ -9,4 +10,8 @@ export const listDecisionMakerToString = (decissionMakers) => {
       "decissionMakers doit etre un tableau de chaine de caractere "
     );
   }
+};
+
+export const save_sanction = (data) => {
+  return api.post(`/sanctions`, data);
 };
