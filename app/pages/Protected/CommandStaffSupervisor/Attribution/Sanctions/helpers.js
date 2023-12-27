@@ -1,6 +1,7 @@
 import api from "../../../../../services/api/instance";
 export const superviseurCategoryList = ["Supervisor", "Command staff"];
 export const officierCategory = ["State officier"];
+export const saspOfficer = [...officierCategory, ...superviseurCategoryList];
 
 export const listDecisionMakerToString = (decissionMakers) => {
   try {

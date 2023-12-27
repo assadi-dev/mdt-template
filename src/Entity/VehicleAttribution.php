@@ -22,6 +22,12 @@ class VehicleAttribution
      */
     private $id;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Agent::class)
+     */
+    private $agentAttributed;
+
     /**
      * @ORM\Column(type="string", length=50)
      */
@@ -83,6 +89,17 @@ class VehicleAttribution
         return $this;
     }
 
+    public function getAgentAttributed(): ?Agent
+    {
+        return $this->agentAttributed;
+    }
+
+    public function setAgentAttributed(?Agent $agentAttributed): self
+    {
+        $this->agentAttributed = $agentAttributed;
+
+        return $this;
+    }
     public function getAgent(): ?Agent
     {
         return $this->agent;
