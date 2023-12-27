@@ -4,6 +4,7 @@ import { requiredMessage } from "../../../../../../config/ValidationMessage";
 export const defaultFormValue = {
   firstname: "",
   lastname: "",
+  gender: "male",
   phone: "",
   iban: "",
   grade: "",

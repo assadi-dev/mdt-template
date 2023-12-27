@@ -14,6 +14,7 @@ import { defaultFormValue, effectifFormResolver } from "./effectifResolver";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGradesListoption from "../../../../../../hooks/useGradesListoption";
 import SelectAsync from "../../../../../../components/SelectAsync";
+import { noPhoto } from "../../../../../../services/utils/user";
 
 const FormEffectif = ({
   defaultValues = defaultFormValue,
@@ -38,8 +39,10 @@ const FormEffectif = ({
   const submit = (values) => {
     onSave(values);
   };
-
-  const photoStyle = { backgroundImage: `url(${user_male})` };
+  console.log(defaultFormValue?.gender);
+  const photoStyle = {
+    backgroundImage: `url(${noPhoto(getValues("gender"))})`,
+  };
 
   const gradeData = useGradesListoption("sasp");
 
