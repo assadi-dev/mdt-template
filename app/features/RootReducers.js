@@ -16,6 +16,7 @@ import InterventionReportReducer from "./interventionReport/InterventionReport.s
 import RookieReportReducer from "./RookieReport/RookieReport.slice";
 import GunFightReportReducer from "./GunFightReport/GunFightReport.slice";
 import EffectifsReducer from "./Effectifs/Effectifs.slice";
+import SanctionReducer from "./Sanctions/Sanctions.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -36,6 +37,7 @@ const RootReducers = {
   RookieReportReducer,
   GunFightReportReducer,
   EffectifsReducer,
+  SanctionReducer,
 };
 
 export default RootReducers;
