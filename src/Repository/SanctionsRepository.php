@@ -91,14 +91,15 @@ class SanctionsRepository extends ServiceEntityRepository
         ->setParameter("search", "%$search%")
         ;
 
-        $query = $qb->getQuery();
-        $paginator = new Paginator($query, false);
-        $count =  $paginator->count();
-
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($items_per_page);
         $qb->addCriteria($criteria);
+
+
+        $query = $qb->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
 
         $result = $query->getResult();
 
