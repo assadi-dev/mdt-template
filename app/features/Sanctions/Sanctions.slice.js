@@ -6,9 +6,36 @@ const SanctionSlice = createSlice({
   name: "Sanction",
   initialState,
   reducers: {
-    add_sanction: (state, action) => {},
-    edit_sanction: (state, action) => {},
-    delete_sanction: (state, action) => {},
+    add_sanction: (state, action) => {
+      const { payload } = action;
+
+      const addtoCollection = [payload, ...state.collections];
+      state.collections = addtoCollection;
+      state.count = state.count + 1;
+    },
+    edit_sanction: (state, action) => {
+      const { payload } = action;
+      const updateCollection = [...state.collections].map((sanction) => {
+        if (sanction.id == payload.id) {
+          return { ...sanction, ...payload };
+        }
+        return sanction;
+      });
+
+      state.collections = updateCollection;
+    },
+    delete_sanction: (state, action) => {
+      const { payload } = action;
+      if (!Array.isArray(payload))
+        throw new Error("payload must be an array of ids");
+
+      const removedToCollection = [...state.collections].filter((sanction) =>
+        sanction.id.includes(payload)
+      );
+
+      state.collections = removedToCollection;
+      state.count = state - payload.length;
+    },
   },
   extraReducers: (builder) => {
     builder

@@ -9,10 +9,13 @@ import {
 } from "../../../../../../../services/utils/alert";
 import { update_sanction } from "../../helpers";
 import { agent_iri } from "../../../../../../../services/api/instance";
+import { useDispatch, useSelector } from "react-redux";
+import { edit_sanction } from "../../../../../../../features/Sanctions/Sanctions.slice";
 
 const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
   const formSanctionValues = { ...payload };
   const id = payload.id;
+  const dispatch = useDispatch();
 
   const submitSanction = async (values) => {
     try {
@@ -20,9 +23,12 @@ const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
       delete values.createdAt;
       const toUpdateData = values;
       delete toUpdateData.id;
-      console.log(toUpdateData);
       await update_sanction(id, toUpdateData);
       const payload = values;
+      payload.agentConcerned = values.agentConcernedLabel;
+      payload.id = id;
+      delete payload.agentConcernedLabel;
+      dispatch(edit_sanction(payload));
       onCloseModal();
       toastSuccess();
     } catch (error) {
