@@ -39,7 +39,6 @@ const FormEffectif = ({
   const submit = (values) => {
     onSave(values);
   };
-  console.log(defaultFormValue?.gender);
   const photoStyle = {
     backgroundImage: `url(${noPhoto(getValues("gender"))})`,
   };
