@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchSanctionCollections } from "./helpers";
+import { fetchVehicleAttributionCollection } from "./helper";
 
 export const retrieveSanctionsAsync = createAsyncThunk(
-  "Sanctions/Collections",
+  "VehicleAttribution/Collections",
   async (payload) => {
     try {
       const { page, params } = payload;
-      const res = await fetchSanctionCollections(page, params);
+      const res = await fetchVehicleAttributionCollection(page, params);
       return res.data;
     } catch (error) {
       let message = "";
