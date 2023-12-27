@@ -21,6 +21,13 @@ class Sanctions
      */
     private $id;
 
+
+    /**
+     * @ORM\Column(type="string", length=18, nullable=true)
+     */
+    private $numeroSanction;
+
+
     /**
      * @ORM\Column(type="text")
      */
@@ -49,6 +56,18 @@ class Sanctions
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNumeroSanction(): ?string
+    {
+        return $this->numeroSanction;
+    }
+
+    public function setNumeroSanction(?string $numeroSanction): self
+    {
+        $this->numeroSanction = $numeroSanction;
+
+        return $this;
     }
 
     public function getDecisionMaker(): ?string
