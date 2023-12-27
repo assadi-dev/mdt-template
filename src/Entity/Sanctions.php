@@ -46,6 +46,11 @@ class Sanctions
      */
     private $agent;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getDecisionMaker(): ?string
     {
         return $this->decisionMaker;
