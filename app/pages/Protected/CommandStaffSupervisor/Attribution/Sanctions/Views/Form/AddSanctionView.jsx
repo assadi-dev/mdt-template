@@ -11,12 +11,15 @@ import {
   toastSuccess,
 } from "../../../../../../../services/utils/alert";
 import { add_sanction } from "../../../../../../../features/Sanctions/Sanctions.slice";
+import useProcess from "../../../../../../../hooks/useProcess";
 
 const AddSanctionView = ({ onCloseModal, ...props }) => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
+  const { process, toggleProcess } = useProcess();
 
   const submitSanction = async (values) => {
+    toggleProcess();
     try {
       values.agent = agent_iri + authenticateUser.idAgent;
       const result = await save_sanction(values);
@@ -29,6 +32,8 @@ const AddSanctionView = ({ onCloseModal, ...props }) => {
       toastSuccess();
     } catch (error) {
       toastError();
+    } finally {
+      toggleProcess();
     }
   };
 
@@ -38,7 +43,7 @@ const AddSanctionView = ({ onCloseModal, ...props }) => {
         <h2 className="form-title">Ajouter une sanction </h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormSanctions onSaveSanction={submitSanction} />
+      <FormSanctions onSaveSanction={submitSanction} process={process} />
     </ModalFormSanctionContainer>
   );
 };

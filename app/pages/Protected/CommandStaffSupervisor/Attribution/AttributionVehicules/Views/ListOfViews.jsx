@@ -13,12 +13,3 @@ export const listOfAttributionVehicule = {
   "edit-attributionVehicule": { element: EditAttributionVehiculeView },
   "delete-attributionVehicule": { element: DeleteAttributionVehiculeView },
 };
-
-export const formAtrributionVehicule = {
-  matricule: "",
-  agent: "",
-  grade: "",
-  typeVehicule: "",
-  plaqueVehicule: "",
-  idVehicule: "",
-};

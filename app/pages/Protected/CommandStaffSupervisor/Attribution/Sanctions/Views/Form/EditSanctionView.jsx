@@ -11,13 +11,16 @@ import { update_sanction } from "../../helpers";
 import { agent_iri } from "../../../../../../../services/api/instance";
 import { useDispatch, useSelector } from "react-redux";
 import { edit_sanction } from "../../../../../../../features/Sanctions/Sanctions.slice";
+import useProcess from "../../../../../../../hooks/useProcess";
 
 const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
   const formSanctionValues = { ...payload };
   const id = payload.id;
   const dispatch = useDispatch();
+  const { process, toggleProcess } = useProcess();
 
   const submitSanction = async (values) => {
+    toggleProcess();
     try {
       delete values.agent;
       delete values.createdAt;
@@ -34,6 +37,8 @@ const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
     } catch (error) {
       console.log(error.message);
       toastError();
+    } finally {
+      toggleProcess();
     }
   };
 
@@ -47,6 +52,7 @@ const EditSanctionView = ({ payload, onCloseModal, ...props }) => {
         defaultFormValue={formSanctionValues}
         labelSubmiButton={"Mettre à jour"}
         onSaveSanction={submitSanction}
+        process={process}
       />
     </ModalFormSanctionContainer>
   );

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { formAtrributionVehicule } from "../ListOfViews";
+
 import { useForm } from "react-hook-form";
 import {
   ErrorSection,
@@ -15,6 +15,11 @@ import {
   superviseurCategoryList,
 } from "../../../Sanctions/helpers";
 import SelectAsync from "../../../../../../../components/SelectAsync";
+import {
+  formAtrributionVehicule,
+  vehicleAttributionResolver,
+} from "./VehicleFormResolver";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const FormAttributionVehicule = ({
   defaultFormValues = formAtrributionVehicule,
@@ -33,7 +38,10 @@ const FormAttributionVehicule = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ defaultValues: defaultFormValues });
+  } = useForm({
+    defaultValues: defaultFormValues,
+    resolver: yupResolver(vehicleAttributionResolver),
+  });
 
   const onSave = (values) => {
     onSaveAttribution(values);
@@ -47,6 +55,7 @@ const FormAttributionVehicule = ({
       iri: `api/agents/${agent.id}`,
       label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
       value: `api/agents/${agent.id}`,
+      grade: agent.grade,
     }));
   }, [officersList.data.length]);
 
@@ -56,6 +65,9 @@ const FormAttributionVehicule = ({
 
   const handleSelectAgent = (value) => {
     if (errors.agentAttributed) clearErrors("agentAttributed");
+    setValue("agentAttributed", value.value);
+    setValue("agentAttributedLabel", value.label);
+    setValue("grade", value.grade);
   };
 
   return (
@@ -69,29 +81,46 @@ const FormAttributionVehicule = ({
           onChange={handleSelectAgent}
           defaultValue={DEFAULT_AGENT_ATTRIBUTED}
         />
-        {/*         <ErrorSection>
-          {errors.agentConcerned && (
-            <small className="text-error">
-              {errors.agentConcerned.message}
-            </small>
-          )}
-        </ErrorSection> */}
+        {
+          <ErrorSection>
+            {errors.agentAttributed && (
+              <small className="text-error">
+                {errors.agentAttributed.message}
+              </small>
+            )}
+          </ErrorSection>
+        }
       </FormControl>
       <FormControl>
         <label htmlFor="">Grade</label>
-        <input placeholder="Ex: Sergent" {...register("grade")} />
+        <input placeholder="Ex: Sergent" {...register("grade")} readOnly />
       </FormControl>
       <FormControl>
         <label htmlFor="">Type du vehicule</label>
-        <input placeholder="Ex: buffalo Stx" {...register("typeVehicule")} />
+        <input placeholder="Ex: buffalo Stx" {...register("typeVehicle")} />
+        <ErrorSection>
+          {errors.typeVehicle && (
+            <small className="text-error">{errors.typeVehicle.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl>
         <label htmlFor="">Plaque du véhicule</label>
-        <input placeholder="Ex: 49GHT256" {...register("plaqueVehicule")} />
+        <input placeholder="Ex: 49GHT256" {...register("immatriculation")} />
+        <ErrorSection>
+          {errors.typeVehicle && (
+            <small className="text-error">{errors.typeVehicle.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl>
         <label htmlFor="">ID du Véhicule</label>
-        <input placeholder="Ex: 569810" {...register("idVehicule")} />
+        <input placeholder="Ex: 569810" {...register("idVehicle")} />
+        <ErrorSection>
+          {errors.idVehicle && (
+            <small className="text-error">{errors.idVehicle.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
 
       <ModalFooter>

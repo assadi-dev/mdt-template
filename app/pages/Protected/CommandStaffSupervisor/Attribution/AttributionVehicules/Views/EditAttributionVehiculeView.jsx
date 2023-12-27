@@ -3,11 +3,26 @@ import { HeaderModal } from "../../../../../../components/Forms/FormView.styled"
 import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import { ModalFormAttributionVehiculeContainer } from "../AttributionVehicules.styled";
 import FormAttributionVehicule from "./Form/FormAttribution.Vehicule";
+import useProcess from "../../../../../../hooks/useProcess";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
 
 const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
   const TITLE_DOCUMENT = `Editer l'attribution d'un véhicule`;
+  const { process, toggleProcess } = useProcess();
 
-  const handleEditAttribution = (values) => {};
+  const handleEditAttribution = (values) => {
+    toggleProcess();
+    try {
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    } finally {
+      toggleProcess();
+    }
+  };
 
   return (
     <ModalFormAttributionVehiculeContainer {...props}>
@@ -18,6 +33,7 @@ const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
       <FormAttributionVehicule
         defaultFormValues={payload}
         onSaveAttribution={handleEditAttribution}
+        process={process}
       />
     </ModalFormAttributionVehiculeContainer>
   );
