@@ -82,7 +82,12 @@ class SanctionsRepository extends ServiceEntityRepository
         s.createdAt
         ")
         ->leftJoin(Agent::class, "concerned", "WITH", "concerned.id=s.agentConcerned")
+        ->orHaving($qb->expr()->like("s.numeroSanction", ":search"))
+        ->orHaving($qb->expr()->like("s.decisionMaker", ":search"))
+        ->orHaving($qb->expr()->like("s.typeSanction", ":search"))
         ->groupBy("s.id")
+        ->orderBy("s.createdAt", "DESC")
+        ->setParameter("search", "%$search%")
         ;
 
         $query = $qb->getQuery();
