@@ -14,15 +14,3 @@ export const listOfViewSanction = {
   "edit-attributionSanction": { element: EditSanctionView },
   "delete-attributionSanction": { element: DeleteSanctionView },
 };
-
-export const collections = [
-  {
-    id: 1,
-    agent: "jackson Marshall",
-    decideur: "Alyson Finley",
-    raison: "Uriner dans la voie publique",
-    createdAt: "08/10/2023",
-    agentConcerne: "jackson Marshall",
-    typeSanction: "Blame",
-  },
-];

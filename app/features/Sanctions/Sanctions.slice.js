@@ -24,13 +24,13 @@ const SanctionSlice = createSlice({
 
       state.collections = updateCollection;
     },
-    delete_sanction: (state, action) => {
+    remove_sanction: (state, action) => {
       const { payload } = action;
       if (!Array.isArray(payload))
         throw new Error("payload must be an array of ids");
 
-      const removedToCollection = [...state.collections].filter((sanction) =>
-        sanction.id.includes(payload)
+      const removedToCollection = [...state.collections].filter(
+        (sanction) => !payload.includes(sanction.id)
       );
 
       state.collections = removedToCollection;
@@ -57,7 +57,7 @@ const SanctionSlice = createSlice({
   },
 });
 
-export const { add_sanction, edit_sanction, delete_sanction } =
+export const { add_sanction, edit_sanction, remove_sanction } =
   SanctionSlice.actions;
 
 export default SanctionSlice.reducer;

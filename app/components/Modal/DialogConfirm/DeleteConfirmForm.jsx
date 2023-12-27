@@ -45,6 +45,7 @@ const DeleteConfirmForm = ({
             className="bg-danger-btn"
             type="submit"
             onClick={onConfirm}
+            disabled={process}
           >
             Confirmer
             {process && <SpinnerButton />}
