@@ -295,7 +295,7 @@ class AgentRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder("a");
         $qb
-        ->select("a.id, a.matricule, a.firstname, a.lastname,g.name as grade,a.gender,a.phone, a.iban, a.division ")
+        ->select("a.id, a.matricule, a.firstname, a.lastname, a.gender,g.name as grade,a.gender,a.phone, a.iban, a.division ")
         ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
         ->orWhere($qb->expr()->like("a.firstname", ":search"))
         ->orWhere($qb->expr()->like("a.lastname", ":search"))
@@ -334,7 +334,7 @@ class AgentRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder("a");
 
-        $qb->select("a.id,a.matricule,a.firstname,a.lastname, g.name as grade, gc.name as gradeCategory")
+        $qb->select("a.id,a.matricule,a.firstname,a.lastname,a.gender, g.name as grade, gc.name as gradeCategory")
         ->leftJoin(Grade::class, "g", "WITH", "g.id=a.grade")
         ->leftJoin(GradeCategory::class, "gc", "WITH", "gc.id =g.gradeCategory")
         ;

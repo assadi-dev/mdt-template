@@ -78,7 +78,9 @@ class SanctionsRepository extends ServiceEntityRepository
         s.decisionMaker,
         CONCAT( concerned.matricule,'-',concerned.firstname,' ',concerned.lastname) as agentConcerned,
         s.typeSanction,
-        s.comment")
+        s.comment,
+        s.createdAt
+        ")
         ->leftJoin(Agent::class, "concerned", "WITH", "concerned.id=s.agentConcerned")
         ->groupBy("s.id")
         ;
