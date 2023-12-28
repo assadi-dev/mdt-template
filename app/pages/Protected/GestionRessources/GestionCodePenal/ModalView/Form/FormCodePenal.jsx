@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const FormCodePenal = ({
   defaultValues = codePenalFormValue,
   labelValidation = "Ajouter",
+  process = false,
   handleSave = () => {},
 }) => {
   const {
@@ -97,6 +98,7 @@ const FormCodePenal = ({
         <ButtonWithLoader
           labelButton={labelValidation}
           className="bg-btn-theme-color"
+          isLoading={process}
         />
       </ModalFooter>
     </FormCodePenalContainer>

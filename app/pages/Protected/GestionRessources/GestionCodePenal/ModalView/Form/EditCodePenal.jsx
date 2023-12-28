@@ -5,8 +5,13 @@ import {
 } from "../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import FormCodePenal from "./FormCodePenal";
+import useProcess from "../../../../../../hooks/useProcess";
+import { useDispatch } from "react-redux";
 
 const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
+  const { process, toggleProcess } = useProcess();
+  const dispatch = useDispatch();
+
   let defaultValues = {
     id: payload?.id,
     label: payload?.label,
@@ -26,6 +31,7 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
       <FormCodePenal
         labelValidation="Mettre à jour"
         defaultValues={defaultValues}
+        process={process}
       />
     </ModalFormContainer>
   );
