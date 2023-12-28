@@ -14,7 +14,7 @@ const UsersSlice = createSlice({
   name: "User/slice",
   initialState,
   reducers: {
-    udpateUser: (state, action) => {
+    update_user: (state, action) => {
       const { payload } = action;
 
       const userUpdate = [...state.collections].map((u) => {
@@ -34,7 +34,7 @@ const UsersSlice = createSlice({
         (u) => !payload.includes(u.id)
       );
       state.collections = removeToCollection;
-      state.count = state.count - removeToCollection.length;
+      //state.count = state.count - removeToCollection.length;
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +56,6 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { udpateUser, remove_user } = UsersSlice.actions;
+export const { update_user, remove_user } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

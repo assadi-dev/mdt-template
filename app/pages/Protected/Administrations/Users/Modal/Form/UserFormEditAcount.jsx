@@ -26,7 +26,7 @@ import { fetchGradesByFaction } from "../../../../../../hooks/ApiCall";
 import { useMemo } from "react";
 import SelectAsync from "../../../../../../components/SelectAsync";
 import { useDispatch, useSelector } from "react-redux";
-import { udpateUser } from "../../../../../../features/Users/Users.slice";
+import { update_user } from "../../../../../../features/Users/Users.slice";
 import {
   toastError,
   toastSuccess,
@@ -119,7 +119,7 @@ const UserFormEditAcount = ({ userData, onCloseModal, ...props }) => {
         gradeId: values.gradeId,
         matricule: values.matricule.trim(),
       };
-      dispatch(udpateUser(payload));
+      dispatch(update_user(payload));
 
       let updateUserCredential = {
         idDiscord: values.idDiscord.trim(),

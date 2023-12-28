@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.action";
 import { firsLetterCapitalise } from "../../../../services/utils/textUtils";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
-import { udpateUser } from "../../../../features/Users/Users.slice";
+import { update_user } from "../../../../features/Users/Users.slice";
 import View from "./Modal/View";
 import Modal from "../../../../components/Modal/Modal";
 import { useReducer } from "react";
@@ -41,7 +41,7 @@ const Users = () => {
       await userupdateApi(id, { roles: [value.value] });
       toastSuccess();
       let payload = { id, roles: [value.value] };
-      dispatch(udpateUser(payload));
+      dispatch(update_user(payload));
     } catch (error) {
       toastError();
     }
