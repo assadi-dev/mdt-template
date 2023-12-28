@@ -15,12 +15,25 @@ import { datetimeFormatFr } from "../../../../services/utils/dateFormat";
 import { udpateUser } from "../../../../features/Users/Users.slice";
 import { update_user_acount } from "./helpers";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
+import useModalState from "../../../../hooks/useModalState";
+import { DELETE_USER, listUsersView } from "./Views/listOfViews";
+import Modal from "../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../components/Modal/RenderModalContent";
 
 const GestionDesComptes = () => {
   const dispatch = useDispatch();
   const { collections, status, count } = useSelector(
     (state) => state.UsersReducer
   );
+
+  const { modalState, openModal, closeModal } = useModalState();
+
+  const handleClickDelete = (effectif) => {
+    openModal({
+      view: DELETE_USER,
+      data: effectif,
+    });
+  };
 
   const {
     onPageChange,
@@ -77,7 +90,13 @@ const GestionDesComptes = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells data={row?.original} canDelete={true} />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row?.original}
+          canDelete={true}
+          onDelete={handleClickDelete}
+        />
+      ),
     },
   ];
 
@@ -98,25 +117,36 @@ const GestionDesComptes = () => {
   }, [pageIndex, count, search]);
 
   return (
-    <GestionDesCompteoageContainer>
-      <RowAction className="row-action-page"></RowAction>
-      <DataTable
-        className="table-align-center-not-first"
-        data={collections}
-        columns={COLUMNS}
-        manualPagination={true}
-        isLoading={status == "pending"}
-        isSuccess={status == "complete"}
-        totalCount={totalCount}
-        initialStatePagination={{
-          pageIndex,
-          pageSize,
-        }}
-        onPageChange={onPageChange}
-        onPageTotalCountChange={onPageTotalCountChange}
-        onSearchValue={handleSearch}
-      />
-    </GestionDesCompteoageContainer>
+    <>
+      <GestionDesCompteoageContainer>
+        <RowAction className="row-action-page"></RowAction>
+        <DataTable
+          className="table-align-center-not-first"
+          data={collections}
+          columns={COLUMNS}
+          manualPagination={true}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          totalCount={totalCount}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          onPageChange={onPageChange}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+        />
+      </GestionDesCompteoageContainer>
+
+      <Modal isOpen={modalState.isOpen}>
+        <RenderModalFormContent
+          view={modalState.view}
+          payload={modalState.data}
+          enumOfView={listUsersView}
+          onCloseModal={closeModal}
+        />
+      </Modal>
+    </>
   );
 };
 
