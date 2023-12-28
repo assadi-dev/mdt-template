@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { RowAction } from "../../../../components/PageContainer";
 import DataTable from "../../../../components/DataTable";
 import useLoader from "../../../../hooks/useLoader";
@@ -6,14 +6,41 @@ import useDelayed from "../../../../hooks/useDelayed";
 import ActionCells from "../../../../components/DataTable/ActionCells";
 import ActionValidate from "./ActionValidate";
 import { GestionDesCompteoageContainer } from "./GestionDesCompte.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultPageSize } from "../../../../config/constantes";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.action";
+import { cleanNameAgent } from "../../../../services/utils/user";
+import { datetimeFormatFr } from "../../../../services/utils/dateFormat";
+import { udpateUser } from "../../../../features/Users/Users.slice";
+import { update_user_acount } from "./helpers";
+import { toastError, toastSuccess } from "../../../../services/utils/alert";
 
 const GestionDesComptes = () => {
-  const { loaderState, toggleLoader } = useLoader();
-  useDelayed(toggleLoader, 1000);
+  const dispatch = useDispatch();
+  const { collections, status, count } = useSelector(
+    (state) => state.UsersReducer
+  );
 
-  const handleValidate = (checked, agent) => {
-    const id = agent?.id;
-    console.log(checked, id);
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
+  const handleValidate = async (checked, agent) => {
+    try {
+      const id = agent?.id;
+      const payload = { isValidate: checked };
+      await update_user_acount(id, payload);
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    }
   };
 
   const COLUMNS = [
@@ -24,10 +51,18 @@ const GestionDesComptes = () => {
     {
       Header: "Agent",
       accessor: "agent",
+      Cell: ({ row }) => {
+        const { matricule, firstname, lastname } = row.original;
+        return cleanNameAgent(firstname, lastname);
+      },
     },
     {
       Header: "Date de création",
       accessor: "createdAt",
+      Cell: ({ row }) => {
+        const { date } = row.original?.createdAt;
+        return datetimeFormatFr(date);
+      },
     },
     {
       Header: "Validation",
@@ -46,15 +81,21 @@ const GestionDesComptes = () => {
     },
   ];
 
-  const collections = [
-    {
-      id: 1,
-      matricule: 109,
-      agent: "Gustavo Rael",
-      createdAt: "20/10/2023 à 16:00",
-      isValidate: true,
-    },
-  ];
+  const promiseUserRef = useRef();
+
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
+    promiseUserRef.current = dispatch(getUserPaginationAsync(payload));
+
+    onPageTotalCountChange(count);
+
+    return () => {
+      promiseUserRef.current?.abort();
+    };
+  }, [pageIndex, count, search]);
 
   return (
     <GestionDesCompteoageContainer>
@@ -63,8 +104,17 @@ const GestionDesComptes = () => {
         className="table-align-center-not-first"
         data={collections}
         columns={COLUMNS}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        manualPagination={true}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
+        totalCount={totalCount}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        onPageChange={onPageChange}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
       />
     </GestionDesCompteoageContainer>
   );
