@@ -75,6 +75,7 @@ class CodePenalRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("cp.categorie", ":search"))
         ->orHaving($qb->expr()->like("cp.sentence", ":search"))
         ->setParameter("search", "%$search%")
+        ->orderBy("cp.createdAt", "DESC")
         ->groupBy("cp.id");
         $criteria = Criteria::create()
         ->setFirstResult($countResult)

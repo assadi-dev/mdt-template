@@ -7,14 +7,6 @@ import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import FormCodePenal from "./FormCodePenal";
 
 const AddCodePenal = ({ onCloseModal, ...props }) => {
-  let defaultValues = {
-    id: "",
-    label: "",
-    categorie: "",
-    amount: "",
-    peine: "",
-  };
-
   const submit = (values) => {
     console.log(values);
   };
@@ -25,11 +17,7 @@ const AddCodePenal = ({ onCloseModal, ...props }) => {
         <h2 className="form-title">Ajouter un code pénal</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <FormCodePenal
-        className="modal-theme-color"
-        defaultValues={defaultValues}
-        handleSave={submit}
-      />
+      <FormCodePenal className="modal-theme-color" handleSave={submit} />
     </ModalFormContainer>
   );
 };

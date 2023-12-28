@@ -12,12 +12,10 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
     label: payload?.label,
     categorie: payload?.categorie,
     amount: payload?.amount,
-    peine: payload?.peine,
+    sentence: payload?.sentence,
   };
 
-  const MODAL_TITLE = payload?.label
-    ? payload.label
-    : "Modifier le code penale";
+  const MODAL_TITLE = "Modifier le code penale";
 
   return (
     <ModalFormContainer {...props}>

@@ -10,17 +10,11 @@ import { Button } from "../../../../../../components/PageContainer";
 import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
 import ReactDropdown from "react-dropdown";
 import { codePenalCategories } from "../../../../../../config/options";
-
-const values = {
-  id: "",
-  label: "",
-  categorie: "",
-  amount: "",
-  peine: "",
-};
+import { codePenalFormValue, codePenalResolver } from "./CodePenalResolver";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const FormCodePenal = ({
-  defaultValues = values,
+  defaultValues = codePenalFormValue,
   labelValidation = "Ajouter",
   handleSave = () => {},
 }) => {
@@ -29,16 +23,14 @@ const FormCodePenal = ({
     handleSubmit,
     reset,
     formState: { errors },
+    getValues,
     setValue,
     setError,
     clearErrors,
   } = useForm({
     defaultValues,
+    resolver: yupResolver(codePenalResolver),
   });
-
-  const options = {
-    required: true,
-  };
 
   const handSelectCategorie = (categorie) => {
     if (errors.categorie) clearErrors("categorie");
@@ -61,15 +53,10 @@ const FormCodePenal = ({
     >
       <FormControl>
         <label htmlFor="label">Nom</label>
-        <input
-          placeholder="Nom de l'infraction"
-          {...register("label", options)}
-        />
+        <input placeholder="Nom de l'infraction" {...register("label")} />
         <ErrorSection>
           {errors.label && (
-            <small className="text-error">
-              Veuillez renseigner le nom de l'infraction
-            </small>
+            <small className="text-error">{errors.label.message}</small>
           )}
         </ErrorSection>
       </FormControl>
@@ -80,43 +67,29 @@ const FormCodePenal = ({
           placeholder="selectionner une categorie"
           className="dropdown-select-custom"
           onChange={handSelectCategorie}
-          value={defaultValues.categorie}
+          value={getValues("categorie")}
         />
         <ErrorSection>
           {errors.categorie && (
-            <small className="text-error">
-              Veuillez renseigner la catégorie de l'infraction
-            </small>
+            <small className="text-error">{errors.categorie.message}</small>
           )}
         </ErrorSection>
       </FormControl>
       <FormControl>
         <label htmlFor="amount">Amende</label>
-        <input
-          type="text"
-          placeholder="Ex: 3000"
-          {...register("amount", options)}
-        />
+        <input type="text" placeholder="Ex: 3000" {...register("amount")} />
         <ErrorSection>
           {errors.amount && (
-            <small className="text-error">
-              Veuillez renseigner le montant de l'amende
-            </small>
+            <small className="text-error">{errors.amount.message}</small>
           )}
         </ErrorSection>
       </FormControl>
       <FormControl>
         <label htmlFor="peine">Peine</label>
-        <input
-          type="text"
-          placeholder="EX: HH:MM"
-          {...register("peine", options)}
-        />
+        <input type="text" placeholder="EX: HH:MM" {...register("sentence")} />
         <ErrorSection>
-          {errors.peine && (
-            <small className="text-error">
-              Veuillez renseigner la durée de peine "HH:MM"
-            </small>
+          {errors.sentence && (
+            <small className="text-error">{errors.sentence.message}</small>
           )}
         </ErrorSection>
       </FormControl>
