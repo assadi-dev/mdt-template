@@ -17,7 +17,7 @@ const UsersSlice = createSlice({
     udpateUser: (state, action) => {
       const { payload } = action;
 
-      let userUpdate = [...state.collections].map((u) => {
+      const userUpdate = [...state.collections].map((u) => {
         if (u.id == payload.id) {
           return { ...u, ...payload };
         }
@@ -25,6 +25,16 @@ const UsersSlice = createSlice({
       });
 
       state.collections = userUpdate;
+    },
+    remove_user: (state, action) => {
+      const { payload } = action;
+      if (!Array.isArray(payload))
+        throw new Error("payload must be an array of ids");
+      const removeToCollection = [...state.collections].filter(
+        (u) => !payload.includes(u.id)
+      );
+      state.collections = removeToCollection;
+      state.count = state.c.count - removeToCollection.length;
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +56,6 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { udpateUser } = UsersSlice.actions;
+export const { udpateUser, remove_user } = UsersSlice.actions;
 
 export default UsersSlice.reducer;
