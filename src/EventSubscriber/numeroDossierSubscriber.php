@@ -9,6 +9,7 @@ use App\Entity\InterventionReport;
 use App\Entity\Plaints;
 use App\Entity\RookieReport;
 use App\Entity\Sanctions;
+use App\Entity\VehicleAttribution;
 use App\Repository\RookieReportRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -35,6 +36,7 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
             ['onCreateRapportRookie', EventPriorities::POST_WRITE],
             ['onCreateGunfightReport', EventPriorities::POST_WRITE],
             ['onCreateSanction', EventPriorities::POST_WRITE],
+            ['onCreateVehicleAttribution', EventPriorities::POST_WRITE],
         ],
 
 
@@ -141,6 +143,22 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
         $id = $id = $entity->getId();
         $numero = $this->generate_reportNumber($id);
         $entity->setNumeroSanction($numero);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
+    }
+    public function onCreateVehicleAttribution(ViewEvent $event): void
+    {
+        $entity = $event->getControllerResult();
+        $method = $event->getRequest()->getMethod();
+
+        if (!$entity instanceof VehicleAttribution || Request::METHOD_POST !== $method) {
+            return;
+        }
+
+        $id = $id = $entity->getId();
+        $numero = $this->generate_reportNumber($id);
+        $entity->setNumeroAttribution($numero);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 

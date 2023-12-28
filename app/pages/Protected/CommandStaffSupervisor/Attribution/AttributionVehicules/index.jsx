@@ -46,8 +46,8 @@ const AttributionVehicules = () => {
 
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° Attribution",
+      accessor: "numeroAttribution",
     },
     {
       Header: "Agent",

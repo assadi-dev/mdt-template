@@ -23,7 +23,7 @@ class VehicleAttribution
     private $id;
 
     /**
-    * @ORM\Column(type="string", length=18)
+    * @ORM\Column(type="string", length=18,nullable=true)
     */
     private $numeroAttribution;
 

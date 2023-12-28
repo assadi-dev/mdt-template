@@ -76,6 +76,7 @@ class VehicleAttributionRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("va");
         $qb->select("
             va.id,
+            va.numeroAttribution,
             agAttributed.id as idAgentAttributed,
             CONCAT(agAttributed.matricule,'-',agAttributed.firstname,' ',agAttributed.lastname) as agentAttributed,
             g.name as grade,
@@ -88,6 +89,7 @@ class VehicleAttributionRepository extends ServiceEntityRepository
         ->leftJoin(Agent::class, "ag", "WITH", "ag.id = va.agent")
         ->leftJoin(Agent::class, "agAttributed", "WITH", "agAttributed.id = va.agentAttributed")
         ->leftJoin(Grade::class, "g", "WITH", "g.id = agAttributed.grade")
+        ->orHaving($qb->expr()->like("va.numeroAttribution", ":search"))
         ->orHaving($qb->expr()->like("va.immatriculation", ":search"))
         ->orHaving($qb->expr()->like("va.typeVehicle", ":search"))
         ->orHaving($qb->expr()->like("agentAttributed", ":search"))
