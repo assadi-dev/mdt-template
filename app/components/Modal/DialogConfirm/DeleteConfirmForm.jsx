@@ -19,6 +19,8 @@ const DeleteConfirmForm = ({
   process = false,
   ...props
 }) => {
+  const DISABLE_BTN = process == true ? true : false;
+
   const cancelpromise = () =>
     new Promise((resolve) => {
       onCancel();
@@ -45,7 +47,7 @@ const DeleteConfirmForm = ({
             className="bg-danger-btn"
             type="submit"
             onClick={onConfirm}
-            disabled={process}
+            disabled={DISABLE_BTN}
           >
             Confirmer
             {process && <SpinnerButton />}

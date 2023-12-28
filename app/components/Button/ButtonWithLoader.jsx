@@ -8,7 +8,7 @@ const ButtonWithLoader = ({
   children,
   ...props
 }) => {
-  const DISABLE_BTN = isLoading == true ? "true" : null;
+  const DISABLE_BTN = isLoading == true ? true : false;
 
   return (
     <ButtonContainer {...props} disabled={DISABLE_BTN}>
