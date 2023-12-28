@@ -11,17 +11,21 @@ import {
   toastSuccess,
 } from "../../../../../../services/utils/alert";
 import useProcess from "../../../../../../hooks/useProcess";
+import { save_vehicleAttribution } from "../helpers";
 
 const AddAttributionVehiculeView = ({ onCloseModal, ...props }) => {
   const authenticateUser = useSelector((state) => state.AuthenticateReducer);
   const dispatch = useDispatch();
   const { process, toggleProcess } = useProcess();
 
-  const handleAddAttribution = (values) => {
+  const handleAddAttribution = async (values) => {
     values.agent = agent_iri + authenticateUser.idAgent;
     toggleProcess();
     try {
       console.log(values);
+
+      await save_vehicleAttribution(values);
+
       const payload = { ...values };
       payload.id = Math.round(Math.random() * 100);
       payload.agentAttributed = values.agentAttributedLabel;

@@ -8,14 +8,24 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../services/utils/alert";
+import { useDispatch } from "react-redux";
+import { edit_vehicleAttribution } from "../../../../../../features/VehicleAttribution/VehicleAttribution.slice";
 
 const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
   const TITLE_DOCUMENT = `Editer l'attribution d'un véhicule`;
   const { process, toggleProcess } = useProcess();
+  const dispatch = useDispatch();
+  const ID = payload?.id;
 
-  const handleEditAttribution = (values) => {
-    toggleProcess();
+  const handleEditAttribution = async (values) => {
     try {
+      toggleProcess();
+      const payload = { ...values, id: ID, date: new Date() };
+      payload.agentAttributed = values.agentAttributedLabel;
+      delete payload.agent;
+
+      dispatch(edit_vehicleAttribution(payload));
+      onCloseModal();
       toastSuccess();
     } catch (error) {
       toastError();

@@ -28,7 +28,7 @@ const AttributionVehicules = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
   const dispatch = useDispatch();
-  const { collecttions, count, status, error } = useSelector(
+  const { collections, count, status, error } = useSelector(
     (state) => state.VehicleAttributionReducer
   );
 
@@ -51,7 +51,7 @@ const AttributionVehicules = () => {
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      accessor: "agentAttributed",
     },
     {
       Header: "Grades",
@@ -59,15 +59,15 @@ const AttributionVehicules = () => {
     },
     {
       Header: "Type de vehicule",
-      accessor: "typeVehicule",
+      accessor: "typeVehicle",
     },
     {
       Header: "ID Vehicule",
-      accessor: "idVehicule",
+      accessor: "idVehicle",
     },
     {
       Header: "Plaque du véhicule",
-      accessor: "plaqueVehicule",
+      accessor: "immatriculation",
     },
     {
       Header: "Action",
@@ -92,10 +92,11 @@ const AttributionVehicules = () => {
         page: pageIndex,
         params: { item_per_page: pageSize, search: search },
       };
-      promiseVehicleAttributionRef = dispatch(
+      promiseVehicleAttributionRef.current = dispatch(
         retrieveVehicleAttributionAsync(payload)
       );
       onPageTotalCountChange(count);
+
       return () => {
         promiseVehicleAttributionRef.current?.abort();
       };
@@ -133,7 +134,7 @@ const AttributionVehicules = () => {
       </RowAction>
       <DataTable
         columns={COLUMNS}
-        data={collecttions}
+        data={collections}
         isLoading={status == "pending"}
         isSuccess={status == "complete"}
         manualPagination={true}

@@ -7,5 +7,5 @@ export const initialState = {
 };
 
 export const fetchVehicleAttributionCollection = (page, params) => {
-  return Api.get(`/vehicleAttributions/${page}`, { params });
+  return Api.get(`/vehicle_attributions/pagination/${page}`, { params });
 };
