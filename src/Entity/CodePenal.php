@@ -33,7 +33,7 @@ class CodePenal
     private $categorie;
 
     /**
-     * @ORM\Column(type="decimal", precision=18, scale=0)
+     * @ORM\Column(type="decimal", precision=12, scale=2)
      */
     private $amount;
 

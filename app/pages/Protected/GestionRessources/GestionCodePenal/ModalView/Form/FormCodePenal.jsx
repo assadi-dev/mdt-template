@@ -17,7 +17,7 @@ const FormCodePenal = ({
   defaultValues = codePenalFormValue,
   labelValidation = "Ajouter",
   process = false,
-  handleSave = () => {},
+  onSubmitValues = () => {},
 }) => {
   const {
     register,
@@ -44,7 +44,7 @@ const FormCodePenal = ({
       setError("categorie");
       return false;
     }
-    handleSave(values);
+    onSubmitValues(values);
   };
 
   return (

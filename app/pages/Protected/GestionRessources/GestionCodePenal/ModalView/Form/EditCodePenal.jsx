@@ -7,6 +7,12 @@ import CloseModalBtn from "../../../../../../components/Modal/CloseModalBtn";
 import FormCodePenal from "./FormCodePenal";
 import useProcess from "../../../../../../hooks/useProcess";
 import { useDispatch } from "react-redux";
+import { edit_codePenal } from "../../../../../../features/CodePenals/CodPenal.slice";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
+import { update_codePenal } from "./helpers";
 
 const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
@@ -19,8 +25,24 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
     amount: payload?.amount,
     sentence: payload?.sentence,
   };
+  const ID = payload.id;
 
   const MODAL_TITLE = "Modifier le code penale";
+
+  const handleUpdateCodePenal = async (values) => {
+    try {
+      toggleProcess();
+      await update_codePenal(ID, values);
+      dispatch(edit_codePenal(values));
+      onCloseModal();
+      toastSuccess();
+    } catch (error) {
+      console.log(error);
+      toastError();
+    } finally {
+      toggleProcess();
+    }
+  };
 
   return (
     <ModalFormContainer {...props}>
@@ -32,6 +54,7 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
         labelValidation="Mettre à jour"
         defaultValues={defaultValues}
         process={process}
+        onSubmitValues={handleUpdateCodePenal}
       />
     </ModalFormContainer>
   );
