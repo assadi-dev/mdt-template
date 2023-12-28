@@ -15,7 +15,7 @@ export const codePenalResolver = yup.object().shape({
   sentence: yup
     .string()
     .matches(
-      /^[a-zA-Z0-9]{2}:\d{2}$/,
+      /^[a-zA-Z0-9]{2,}:\d{2}$/,
       ` Veuillez renseigner la durée de peine "HH:MM"`
     )
     .required(requiredMessage),
