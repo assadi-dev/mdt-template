@@ -55,7 +55,7 @@ const Users = () => {
       await userupdateApi(id, { isValidate: value });
       toastSuccess();
       let payload = { id, isValidate: value };
-      dispatch(udpateUser(payload));
+      dispatch(update_user(payload));
     } catch (error) {
       toastError();
     }
