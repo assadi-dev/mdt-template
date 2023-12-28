@@ -22,6 +22,11 @@ class VehicleAttribution
      */
     private $id;
 
+    /**
+    * @ORM\Column(type="string", length=18)
+    */
+    private $numeroAttribution;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Agent::class)
@@ -51,6 +56,20 @@ class VehicleAttribution
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+
+    public function getNumeroAttribution(): ?string
+    {
+        return $this->numeroAttribution;
+    }
+
+
+    public function setNumeroAttribution(string $numeroAttribution): self
+    {
+        $this->numeroAttribution = $numeroAttribution;
+
+        return $this;
     }
 
     public function getTypeVehicle(): ?string
@@ -111,4 +130,6 @@ class VehicleAttribution
 
         return $this;
     }
+
+
 }
