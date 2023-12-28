@@ -59,9 +59,19 @@ const FormAttributionVehicule = ({
     }));
   }, [officersList.data.length]);
 
-  const DEFAULT_AGENT_ATTRIBUTED = useMemo(() => {}, [
-    officersList.data.length,
-  ]);
+  const DEFAULT_AGENT_ATTRIBUTED = useMemo(() => {
+    if (defaultFormValues.agentAttributed) {
+      const findAgent = [...AGENT_OPTION].find(
+        (list) => list.label == defaultFormValues.agentAttributed
+      );
+      findAgent && setValue("agentAttributed", findAgent?.value);
+      findAgent && setValue("agentAttributedLabel", findAgent?.label);
+      return {
+        label: defaultFormValues.agentAttributed,
+      };
+    }
+    return null;
+  }, [officersList.data, AGENT_OPTION.length]);
 
   const handleSelectAgent = (value) => {
     if (errors.agentAttributed) clearErrors("agentAttributed");

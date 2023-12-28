@@ -11,7 +11,7 @@ const VehicleAttributionSlice = createSlice({
       const addToCollection = [payload, ...state.collections];
 
       state.collections = addToCollection;
-      //state.count = state.count + 1;
+      state.count = state.count + 1;
     },
     edit_vehicleAttribution: (state, action) => {
       const { payload } = action;
@@ -33,7 +33,7 @@ const VehicleAttributionSlice = createSlice({
       );
 
       state.collections = removedToCollection;
-      // state.count = state.count - payload.length;
+      state.count = state.count - payload.length;
     },
   },
   extraReducers: (builder) => {

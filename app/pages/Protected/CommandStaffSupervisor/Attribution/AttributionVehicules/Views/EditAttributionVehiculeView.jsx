@@ -10,6 +10,7 @@ import {
 } from "../../../../../../services/utils/alert";
 import { useDispatch } from "react-redux";
 import { edit_vehicleAttribution } from "../../../../../../features/VehicleAttribution/VehicleAttribution.slice";
+import { udpate_vehicleAttribution } from "../helpers";
 
 const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
   const TITLE_DOCUMENT = `Editer l'attribution d'un véhicule`;
@@ -20,10 +21,15 @@ const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
   const handleEditAttribution = async (values) => {
     try {
       toggleProcess();
-      const payload = { ...values, id: ID, date: new Date() };
-      payload.agentAttributed = values.agentAttributedLabel;
-      delete payload.agent;
 
+      const payload = { ...values, id: ID };
+      payload.agentAttributed = payload.agentAttributedLabel;
+      delete values.createdAt;
+      delete values.agent;
+      delete values.id;
+      delete values.agentAttributedLabel;
+      delete values.idAgentAttributed;
+      await udpate_vehicleAttribution(ID, values);
       dispatch(edit_vehicleAttribution(payload));
       onCloseModal();
       toastSuccess();
@@ -44,6 +50,7 @@ const EditAttributionVehiculeView = ({ payload, onCloseModal, ...props }) => {
         defaultFormValues={payload}
         onSaveAttribution={handleEditAttribution}
         process={process}
+        labelSubmiButton={"Mettre à jour"}
       />
     </ModalFormAttributionVehiculeContainer>
   );
