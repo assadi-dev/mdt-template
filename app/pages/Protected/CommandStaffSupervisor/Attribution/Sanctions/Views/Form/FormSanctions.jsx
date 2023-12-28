@@ -13,6 +13,7 @@ import useFetchSupervisor from "../../../../../../../hooks/useFetchSupervisor";
 import {
   listDecisionMakerToString,
   officierCategory,
+  saspOfficer,
   superviseurCategoryList,
 } from "../../helpers";
 import SelectAsync from "../../../../../../../components/SelectAsync";
@@ -31,7 +32,7 @@ const FormSanctions = ({
   labelSubmiButton,
 }) => {
   const supervisorList = useFetchSupervisor(superviseurCategoryList);
-  const officersList = useFetchAgentByCategories(officierCategory);
+  const officersList = useFetchAgentByCategories(saspOfficer);
   const LABEL_SUBMIT_BTN = labelSubmiButton ? labelSubmiButton : "Ajouter";
 
   const {
