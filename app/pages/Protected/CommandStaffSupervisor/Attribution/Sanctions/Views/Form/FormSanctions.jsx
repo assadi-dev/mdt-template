@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -24,6 +24,7 @@ import {
   formSanctionSchema,
 } from "./sanctionFormResolver";
 import { requiredMessage } from "../../../../../../../config/ValidationMessage";
+import useFetchAgentList from "../../../../../../../hooks/useFetchAgentList";
 
 const FormSanctions = ({
   defaultFormValue = formSanctionDefaultValue,
@@ -32,7 +33,7 @@ const FormSanctions = ({
   labelSubmiButton,
 }) => {
   const supervisorList = useFetchSupervisor(superviseurCategoryList);
-  const officersList = useFetchAgentByCategories(saspOfficer);
+  const officersList = useFetchAgentList();
   const LABEL_SUBMIT_BTN = labelSubmiButton ? labelSubmiButton : "Ajouter";
 
   const {
@@ -47,6 +48,13 @@ const FormSanctions = ({
     defaultValues: { ...defaultFormValue },
     resolver: yupResolver(formSanctionSchema),
   });
+
+  useEffect(() => {
+    officersList.fetchAgents();
+    return () => {
+      officersList.AbortController?.abort();
+    };
+  }, []);
 
   const SUPERVISORS_OPTION = useMemo(() => {
     if (supervisorList.data.length == 0) return [];
@@ -69,14 +77,15 @@ const FormSanctions = ({
   }, [defaultFormValue.decisionMaker]);
 
   const OFFICERS_OPTION = useMemo(() => {
-    if (!officersList.data || officersList.data.length == 0) return [];
-    return [...officersList.data].map((agent) => ({
-      id: agent.id,
+    if (!officersList.data?.data || officersList.data?.data?.length == 0)
+      return [];
+    return [...officersList.data?.data].map((agent) => ({
+      id: agent.idAgent,
       matricule: agent.matricule,
-      value: `api/agents/${agent.id}`,
+      value: `api/agents/${agent.idAgent}`,
       label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
     }));
-  }, [officersList.data]);
+  }, [officersList.data.data]);
 
   const DEFAULT_AGENT_CONCERNED = useMemo(() => {
     if (!defaultFormValue.agentConcerned) return {};
