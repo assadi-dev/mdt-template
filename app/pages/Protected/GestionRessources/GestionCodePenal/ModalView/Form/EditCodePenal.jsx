@@ -37,7 +37,6 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
       onCloseModal();
       toastSuccess();
     } catch (error) {
-      console.log(error);
       toastError();
     } finally {
       toggleProcess();

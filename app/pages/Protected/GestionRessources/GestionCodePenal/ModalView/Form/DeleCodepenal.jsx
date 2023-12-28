@@ -22,7 +22,6 @@ const DeleCodepenal = ({ payload, onCloseModal, ...props }) => {
       onCloseModal();
       toastSuccess();
     } catch (error) {
-      console.log(error);
       toastError();
     } finally {
       toggleProcess();
@@ -36,6 +35,7 @@ const DeleCodepenal = ({ payload, onCloseModal, ...props }) => {
       text={TEXT_DELETE}
       onConfirm={confirmDelete}
       process={process}
+      onCloseModal={onCloseModal}
       {...props}
     ></DeleteConfirmForm>
   );
