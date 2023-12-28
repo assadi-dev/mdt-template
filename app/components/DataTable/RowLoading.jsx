@@ -4,7 +4,7 @@ import { LoadingLabelMessage, SpinnerLoaderContent } from "./DataTable.styled";
 
 const RowLoading = ({ loadingMessage = "Chargement en cours" }) => {
   return (
-    <tr className="loading-row">
+    <tr key="loading-row" className="loading-row">
       <td colSpan={100}>
         <SpinnerLoaderContent>
           <SpinnerLoading />

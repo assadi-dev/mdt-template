@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useLoader from "../../../../hooks/useLoader";
 import useDelayed from "../../../../hooks/useDelayed";
 import ActionCells from "../../../../components/DataTable/ActionCells";
@@ -19,12 +19,28 @@ import {
   LIST_OF_VIEWs_CODE_PENAL,
 } from "./ModalView/listOfgCodePenalView";
 import uniqid from "uniqid";
-import { codePenalLists } from "../../../../config/codePenal";
 import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { useDispatch, useSelector } from "react-redux";
+import { defaultPageSize } from "../../../../config/constantes";
+import { retrieveCodePenalCollectionsAsync } from "../../../../features/CodePenals/CodePenalAsynAction";
 
 const GestionCodePenal = () => {
+  const dispatch = useDispatch();
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+  const { collections, count, status, error } = useSelector(
+    (state) => state.CodePenalReducer
+  );
 
   const { modalState, openModal, closeModal } = useModalState();
 
@@ -58,10 +74,11 @@ const GestionCodePenal = () => {
     {
       Header: "Amendes",
       accessor: "amount",
+      Cell: ({ value }) => <span>{value} $</span>,
     },
     {
       Header: "Peine",
-      accessor: "peine",
+      accessor: "sentence",
     },
 
     {
@@ -79,20 +96,15 @@ const GestionCodePenal = () => {
     },
   ];
 
-  const collections = [
-    ...codePenalLists.map((codepenal) => {
-      const id = uniqid();
-      const createdAt = new Date();
-      const amount = codepenal?.amount;
+  useEffect(() => {
+    const payload = {
+      page: pageIndex,
+      params: { item_per_page: pageSize, search: search },
+    };
 
-      return { id, ...codepenal, amount, createdAt };
-    }),
-  ];
-
-  const totalCollection = collections.length;
-
-  const { totalCount, onPageChange, pageIndex, onPageTotalCountChange } =
-    useCustomPagination();
+    dispatch(retrieveCodePenalCollectionsAsync(payload));
+    onPageTotalCountChange(count);
+  }, [pageIndex, count, search]);
 
   return (
     <>
@@ -111,8 +123,16 @@ const GestionCodePenal = () => {
           className="table-align-center-not-first"
           columns={COLUMNS}
           data={collections}
-          isLoading={loaderState}
-          isSuccess={!loaderState}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </GestionCodePenalPage>
       {createPortal(

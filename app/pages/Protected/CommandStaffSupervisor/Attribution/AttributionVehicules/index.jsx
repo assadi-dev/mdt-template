@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AddAttributionVehiculeButton,
   AttributionVehicule,
@@ -13,28 +13,45 @@ import {
   DELETE_ATTRIBUTION_VEHICULE,
   EDIT_ATTRIBUTION_VEHICULE,
   SHOW_ATTRIBUTION_VEHICULE,
-  collecttions,
   listOfAttributionVehicule,
 } from "./Views/ListOfViews";
 import useModalState from "../../../../../hooks/useModalState";
 import Modal from "../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../components/Modal/RenderModalFormContent";
 import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveVehicleAttributionAsync } from "../../../../../features/VehicleAttribution/VehicleAsynAction";
+import { defaultPageSize } from "../../../../../config/constantes";
+import useCustomPagination from "../../../../../hooks/useCustomPagination";
 
 const AttributionVehicules = () => {
   const { endLoader, loaderState } = useLoader();
   useDelayed(endLoader, 1000);
+  const dispatch = useDispatch();
+  const { collections, count, status, error } = useSelector(
+    (state) => state.VehicleAttributionReducer
+  );
 
   const { modalState, openModal, closeModal } = useModalState();
 
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
   const COLUMNS = [
     {
-      Header: "Matricule",
-      accessor: "matricule",
+      Header: "N° Attribution",
+      accessor: "numeroAttribution",
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      accessor: "agentAttributed",
     },
     {
       Header: "Grades",
@@ -42,15 +59,15 @@ const AttributionVehicules = () => {
     },
     {
       Header: "Type de vehicule",
-      accessor: "typeVehicule",
+      accessor: "typeVehicle",
     },
     {
       Header: "ID Vehicule",
-      accessor: "idVehicule",
+      accessor: "idVehicle",
     },
     {
       Header: "Plaque du véhicule",
-      accessor: "plaqueVehicule",
+      accessor: "immatriculation",
     },
     {
       Header: "Action",
@@ -66,6 +83,25 @@ const AttributionVehicules = () => {
       ),
     },
   ];
+
+  const promiseVehicleAttributionRef = useRef(new AbortController());
+
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+      promiseVehicleAttributionRef.current = dispatch(
+        retrieveVehicleAttributionAsync(payload)
+      );
+      onPageTotalCountChange(count);
+
+      return () => {
+        promiseVehicleAttributionRef.current?.abort();
+      };
+    } catch (error) {}
+  }, [pageIndex, count, search]);
 
   const handleClikAddAttributionVehicule = () => {
     openModal({
@@ -98,9 +134,18 @@ const AttributionVehicules = () => {
       </RowAction>
       <DataTable
         columns={COLUMNS}
-        data={collecttions}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        data={collections}
+        isLoading={status == "pending"}
+        isSuccess={status == "complete"}
+        manualPagination={true}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

@@ -8,6 +8,8 @@ use App\Entity\IncidentReport;
 use App\Entity\InterventionReport;
 use App\Entity\Plaints;
 use App\Entity\RookieReport;
+use App\Entity\Sanctions;
+use App\Entity\VehicleAttribution;
 use App\Repository\RookieReportRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -32,7 +34,9 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
             ['onCreateRapportIncident', EventPriorities::POST_WRITE],
             ['onCreateRapportIntervention', EventPriorities::POST_WRITE],
             ['onCreateRapportRookie', EventPriorities::POST_WRITE],
-            ['onCreateGunfightReport', EventPriorities::POST_WRITE]
+            ['onCreateGunfightReport', EventPriorities::POST_WRITE],
+            ['onCreateSanction', EventPriorities::POST_WRITE],
+            ['onCreateVehicleAttribution', EventPriorities::POST_WRITE],
         ],
 
 
@@ -127,8 +131,45 @@ final class numeroDossierSubscriber implements EventSubscriberInterface
 
     }
 
+    public function onCreateSanction(ViewEvent $event): void
+    {
+        $entity = $event->getControllerResult();
+        $method = $event->getRequest()->getMethod();
+
+        if (!$entity instanceof Sanctions || Request::METHOD_POST !== $method) {
+            return;
+        }
+
+        $id = $id = $entity->getId();
+        $numero = $this->generate_reportNumber($id);
+        $entity->setNumeroSanction($numero);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
+    }
+    public function onCreateVehicleAttribution(ViewEvent $event): void
+    {
+        $entity = $event->getControllerResult();
+        $method = $event->getRequest()->getMethod();
+
+        if (!$entity instanceof VehicleAttribution || Request::METHOD_POST !== $method) {
+            return;
+        }
+
+        $id = $id = $entity->getId();
+        $numero = $this->generate_reportNumber($id);
+        $entity->setNumeroAttribution($numero);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
+    }
 
 
+
+    /**
+     * Génération du numero de dossier au format 0000X
+     * @return string le numéro generé ex 00014
+     */
     private function generate_reportNumber($number): string
     {
         return str_pad($number, 5, "0", STR_PAD_LEFT);

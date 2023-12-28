@@ -1,5 +1,4 @@
-import React from "react";
-import { defaultFormValue } from "../ListOfEffectifsView";
+import React, { useMemo } from "react";
 import {
   ErrorSection,
   FormContainer,
@@ -11,29 +10,64 @@ import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
 import { user_male } from "../../../../../../config/constantes";
+import { defaultFormValue, effectifFormResolver } from "./effectifResolver";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useGradesListoption from "../../../../../../hooks/useGradesListoption";
+import SelectAsync from "../../../../../../components/SelectAsync";
+import { noPhoto } from "../../../../../../services/utils/user";
 
 const FormEffectif = ({
   defaultValues = defaultFormValue,
   onSave,
+  process = false,
   ...props
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
+    setValue,
     setError,
     clearErrors,
     reset,
   } = useForm({
     defaultValues,
+    resolver: yupResolver(effectifFormResolver),
   });
 
   const submit = (values) => {
-    console.log(values);
+    onSave(values);
+  };
+  const photoStyle = {
+    backgroundImage: `url(${noPhoto(getValues("gender"))})`,
   };
 
-  const photoStyle = { backgroundImage: `url(${user_male})` };
+  const gradeData = useGradesListoption("sasp");
 
+  const isOptionLoading = gradeData.status == "fullfilled" ? false : true;
+
+  const gradesListOptions = useMemo(() => {
+    if (gradeData.data.length == 0) return [];
+
+    const lists = [...gradeData?.data].map((grade) => ({
+      value: `api/grades/${grade.id}`,
+      label: grade.name,
+    }));
+
+    const find = lists.find((grade) => grade.label == getValues("grade"));
+    if (find) {
+      setValue("grade", find.value);
+      setValue("gradeLabel", find.label);
+    }
+
+    return lists;
+  }, [gradeData.data]);
+
+  const handleChangeGrade = (value) => {
+    setValue("grade", value.value);
+    setValue("gradeLabel", value.label);
+  };
   return (
     <FormContainer onSubmit={handleSubmit(submit)} className="form-theme-color">
       <GridRowHeader>
@@ -43,14 +77,14 @@ const FormEffectif = ({
             <input
               autoFocus
               type="text"
-              {...register("firstname", { required: true })}
+              {...register("firstname")}
               placeholder="Son Prénom"
             />
             <ErrorSection>
               <AnimatePresence>
                 {errors.firstname && (
                   <motion.small className="text-error">
-                    Veuillez entrer le prénom
+                    {errors.firstname.message}
                   </motion.small>
                 )}
               </AnimatePresence>
@@ -60,14 +94,14 @@ const FormEffectif = ({
             <label htmlFor="firstname">Nom</label>
             <input
               type="text"
-              {...register("lastname", { required: true })}
+              {...register("lastname")}
               placeholder="Son Nom"
             />
             <ErrorSection>
               <AnimatePresence>
                 {errors.lastname && (
                   <motion.small className="text-error">
-                    Veuillez entrer le prénom
+                    {errors.lastname.message}
                   </motion.small>
                 )}
               </AnimatePresence>
@@ -77,14 +111,14 @@ const FormEffectif = ({
             <label htmlFor="firstname">Matricule</label>
             <input
               type="text"
-              {...register("matricule", { required: true })}
+              {...register("matricule")}
               placeholder="Son Matricule"
             />
             <ErrorSection>
               <AnimatePresence>
                 {errors.matricule && (
                   <motion.small className="text-error">
-                    Veuillez entrer le prénom
+                    {errors.matricule.message}
                   </motion.small>
                 )}
               </AnimatePresence>
@@ -93,12 +127,17 @@ const FormEffectif = ({
 
           <FormControl>
             <label htmlFor="firstname">Grade</label>
-            <input type="text" {...register("grade", { required: true })} />
+            <SelectAsync
+              options={gradesListOptions}
+              isLoading={isOptionLoading}
+              defaultValue={{ label: getValues("grade") }}
+              onChange={handleChangeGrade}
+            />
             <ErrorSection>
               <AnimatePresence>
                 {errors.grade && (
                   <motion.small className="text-error">
-                    Veuillez entrer le grade
+                    {errors.grade.message}
                   </motion.small>
                 )}
               </AnimatePresence>
@@ -112,12 +151,12 @@ const FormEffectif = ({
 
       <FormControl>
         <label htmlFor="firstname">IBAN</label>
-        <input type="text" {...register("iban", { required: true })} />
+        <input type="text" {...register("iban")} />
         <ErrorSection>
           <AnimatePresence>
             {errors.iban && (
               <motion.small className="text-error">
-                Veuillez entrer l'IBAN
+                {errors.iban.message}
               </motion.small>
             )}
           </AnimatePresence>
@@ -126,12 +165,12 @@ const FormEffectif = ({
 
       <FormControl>
         <label htmlFor="firstname">Division</label>
-        <input type="text" {...register("division", { required: true })} />
+        <input type="text" {...register("division")} />
         <ErrorSection>
           <AnimatePresence>
             {errors.division && (
               <motion.small className="text-error">
-                Veuillez entrer la division
+                {errors.division.message}
               </motion.small>
             )}
           </AnimatePresence>
@@ -143,6 +182,7 @@ const FormEffectif = ({
           className="bg-btn-theme-color"
           type="submit"
           labelButton="Mettre à jour"
+          isLoading={process}
         />
       </ModalFooter>
     </FormContainer>

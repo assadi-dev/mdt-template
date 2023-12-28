@@ -189,4 +189,38 @@ legend {
   to {
     opacity: 0.5;
   }
+}
+/** React Select**/
+.theme-custom__control {
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.theme-custom__control.theme-custom__control--is-focused {
+  background: initial;
+}
+.theme-custom__control .theme-custom__indicator-separator {
+  display: none;
+}
+.theme-custom__control .theme-custom__value-container {
+  color: inherit;
+}
+.theme-custom__control .theme-custom__single-value {
+  color: inherit;
+}
+.theme-custom__control.theme-custom__input-container {
+  color: inherit;
+}
+.theme-custom__control .theme-custom__multi-value .theme-custom__multi-value__label {
+  font-weight: 600;
+}
+.theme-custom__control .theme-custom__placeholder {
+  font-size: 1.3rem;
+}
+
+.theme-custom__menu {
+  font-size: 1.3rem;
+}
+.theme-custom__menu .theme-custom__menu-list .theme-custom__option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }/*# sourceMappingURL=theme.css.map */

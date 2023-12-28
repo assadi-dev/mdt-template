@@ -11,7 +11,7 @@ const FormModalTabs = ({
     <Tabs {...props}>
       <TabsFormHeader className="tab-header-list">
         {tabsListHeader.map((tabsListHeader) => (
-          <Tab>{tabsListHeader}</Tab>
+          <Tab key={tabsListHeader}>{tabsListHeader}</Tab>
         ))}
       </TabsFormHeader>
       {children}

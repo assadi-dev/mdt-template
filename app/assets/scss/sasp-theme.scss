@@ -196,11 +196,13 @@ html:has(.theme-sasp) {
 
   /** React Select **/
 
+  //Custom de l'input
   .theme-custom__control {
     background-color: transparent;
     border: 1px solid rgba($color: variables.$sasp-primary-color, $alpha: 0.5);
     color: #fff;
     cursor: pointer;
+
     &.theme-custom__control--is-focused {
       border-color: rgba(
         $color: lighten(variables.$sasp-primary-color, 10%),
@@ -223,14 +225,26 @@ html:has(.theme-sasp) {
     &.theme-custom__input-container {
       color: inherit;
     }
+    .theme-custom__multi-value {
+      color: variables.$sasp-secondary-color;
+      .theme-custom__multi-value__label {
+        color: variables.$sasp-secondary-color;
+        font-weight: 600;
+      }
+    }
   }
 
+  //Custom du menu option
   .theme-custom__menu {
     /*  padding: 0 5px; */
     .theme-custom__option {
       background-color: #fff;
       color: #444;
       cursor: pointer;
+      &:hover {
+        background-color: variables.$lspd-primary-color;
+        color: #fff;
+      }
     }
 
     .theme-custom-option-selected {

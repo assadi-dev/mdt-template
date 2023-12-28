@@ -6,10 +6,11 @@ import {
 } from "../../../../../../../components/Modal/PreviewDocument/PreviewDocument.styled";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { Row } from "../../../../../../../components/PageContainer";
+import { datetimeFormatFr } from "../../../../../../../services/utils/dateFormat";
 
 const PreviewSanctionView = ({ payload, onCloseModal, ...props }) => {
-  const TITLE_DOCUMENT = payload?.numeroDocument
-    ? `Sanction n° ${payload.numeroDocument}`
+  const TITLE_DOCUMENT = payload?.numeroSanction
+    ? `Sanction n° ${payload.numeroSanction}`
     : `Aperçu de la sanction`;
 
   return (
@@ -21,12 +22,12 @@ const PreviewSanctionView = ({ payload, onCloseModal, ...props }) => {
       <PreviewDocumentHeader>
         <Row style={{ marginTop: "18px" }}>
           <p className="agent">
-            <strong>Decideur: </strong> {payload?.decideur}
+            <strong>Decideur: </strong> {payload?.decisionMaker}
           </p>
         </Row>
         <Row>
           <p className="objet">
-            <strong>Agent concerné: </strong> {payload?.agentConcerne}
+            <strong>Agent concerné: </strong> {payload?.agentConcerned}
           </p>
         </Row>
         <Row className="justiy-content-between">
@@ -34,13 +35,13 @@ const PreviewSanctionView = ({ payload, onCloseModal, ...props }) => {
             {" "}
             <strong>Type de sanction: </strong> {payload?.typeSanction}
           </p>
-          <p className="date">{payload?.createdAt}</p>
+          <p className="date">{datetimeFormatFr(payload?.createdAt?.date)}</p>
         </Row>
       </PreviewDocumentHeader>
       <TextContent>
         <MarkdownPreview
           className="theme-markdownPreview"
-          source={payload?.raison}
+          source={payload?.comment}
         />
       </TextContent>
     </PreviewDocument>

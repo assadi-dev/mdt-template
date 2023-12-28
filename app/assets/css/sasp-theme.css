@@ -196,6 +196,13 @@ html:has(.theme-sasp) .theme-custom__control .theme-custom__single-value {
 html:has(.theme-sasp) .theme-custom__control.theme-custom__input-container {
   color: inherit;
 }
+html:has(.theme-sasp) .theme-custom__control .theme-custom__multi-value {
+  color: #131B26;
+}
+html:has(.theme-sasp) .theme-custom__control .theme-custom__multi-value .theme-custom__multi-value__label {
+  color: #131B26;
+  font-weight: 600;
+}
 html:has(.theme-sasp) .theme-custom__menu {
   /*  padding: 0 5px; */
 }
@@ -203,6 +210,10 @@ html:has(.theme-sasp) .theme-custom__menu .theme-custom__option {
   background-color: #fff;
   color: #444;
   cursor: pointer;
+}
+html:has(.theme-sasp) .theme-custom__menu .theme-custom__option:hover {
+  background-color: #2B7DE9;
+  color: #fff;
 }
 html:has(.theme-sasp) .theme-custom__menu .theme-custom-option-selected {
   background-color: #2B7DE9;

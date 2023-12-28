@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
+  ErrorSection,
   FormContainer,
   FormControl,
   ModalFooter,
 } from "../../../../../../../components/Forms/FormView.styled";
 import { useForm } from "react-hook-form";
-import { formSanctionSchema } from "../listOfViews";
+
 import { SanctionTextContent } from "../../AttributionSanction.styled";
 import ButtonWithLoader from "../../../../../../../components/Button/ButtonWithLoader";
+import useFetchSupervisor from "../../../../../../../hooks/useFetchSupervisor";
+import {
+  listDecisionMakerToString,
+  officierCategory,
+  superviseurCategoryList,
+} from "../../helpers";
+import SelectAsync from "../../../../../../../components/SelectAsync";
+import useFetchAgentByCategories from "../../../../../../../hooks/useFetchAgentByCategories";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  formSanctionDefaultValue,
+  formSanctionSchema,
+} from "./sanctionFormResolver";
+import { requiredMessage } from "../../../../../../../config/ValidationMessage";
 
 const FormSanctions = ({
-  defaultFormValue = formSanctionSchema,
+  defaultFormValue = formSanctionDefaultValue,
   onSaveSanction = () => {},
+  process = false,
+  labelSubmiButton,
 }) => {
+  const supervisorList = useFetchSupervisor(superviseurCategoryList);
+  const officersList = useFetchAgentByCategories(officierCategory);
+  const LABEL_SUBMIT_BTN = labelSubmiButton ? labelSubmiButton : "Ajouter";
+
   const {
     register,
     handleSubmit,
@@ -23,46 +44,127 @@ const FormSanctions = ({
     setValue,
   } = useForm({
     defaultValues: { ...defaultFormValue },
+    resolver: yupResolver(formSanctionSchema),
   });
 
+  const SUPERVISORS_OPTION = useMemo(() => {
+    if (supervisorList.data.length == 0) return [];
+    return [...supervisorList.data].map((agent) => ({
+      id: agent.id,
+      matricule: agent.matricule,
+      iri: `api/agents/${agent.id}`,
+      label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
+      value: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
+    }));
+  }, [supervisorList.data]);
+
+  const DEFAULT_DECIDEUR = useMemo(() => {
+    if (!defaultFormValue.decisionMaker) return "";
+    const toArray = defaultFormValue.decisionMaker.split(",");
+    return toArray.map((decisionMaker) => ({
+      label: decisionMaker.trim(),
+      value: decisionMaker.trim(),
+    }));
+  }, [defaultFormValue.decisionMaker]);
+
+  const OFFICERS_OPTION = useMemo(() => {
+    if (!officersList.data || officersList.data.length == 0) return [];
+    return [...officersList.data].map((agent) => ({
+      id: agent.id,
+      matricule: agent.matricule,
+      value: `api/agents/${agent.id}`,
+      label: `${agent.matricule}-${agent.firstname} ${agent.lastname}`,
+    }));
+  }, [officersList.data]);
+
+  const DEFAULT_AGENT_CONCERNED = useMemo(() => {
+    if (!defaultFormValue.agentConcerned) return {};
+    setValue("agentConcernedLabel", defaultFormValue.agentConcerned);
+    const findAgent = OFFICERS_OPTION?.find(
+      (agent) => agent.label == defaultFormValue.agentConcerned
+    );
+    findAgent && setValue("agentConcerned", findAgent.value);
+    return { label: defaultFormValue.agentConcerned };
+  }, [defaultFormValue.agentConcerned, OFFICERS_OPTION]);
+
   const handleSaveSanction = (values) => {
+    if (!getValues("comment")) {
+      setError("comment", { message: requiredMessage });
+      return;
+    }
+
     onSaveSanction(values);
   };
 
   const getDetailSanction = (content) => {
-    if (errors.typeSanction) {
-      clearErrors("detailSanction");
+    if (errors.comment) {
+      clearErrors("comment");
     }
-    setValue("typeSanction", content);
+    setValue("comment", content);
   };
 
-  const inputOption = { required: true };
+  const handleSelectAgentConcerned = (agent) => {
+    if (errors.agentConcerned) clearErrors("agentConcerned");
+    setValue("agentConcerned", agent.value);
+    setValue("agentConcernedLabel", agent.label);
+  };
+
+  const handleSelectDecisionMaker = (decisionMakers) => {
+    const namesOfDecisionMaker = [...decisionMakers].map(
+      (maker) => maker.value
+    );
+    const toString = listDecisionMakerToString(namesOfDecisionMaker);
+    if (errors.decisionMaker) clearErrors("decisionMaker");
+    setValue("decisionMaker", toString);
+  };
 
   return (
     <FormContainer
-      onSubmit={handleSaveSanction(handleSaveSanction)}
+      onSubmit={handleSubmit(handleSaveSanction)}
       className="form-theme-color"
     >
       <FormControl className="mb-3">
         <label htmlFor="">Décideur</label>
-        <input
-          placeholder="Ex: Glenn Powell"
-          {...register("decideur", inputOption)}
+        <SelectAsync
+          options={SUPERVISORS_OPTION}
+          isLoading={supervisorList.isLoading}
+          isMulti
+          placeholder="Selctionner les décideurs"
+          closeMenuOnSelect={false}
+          onChange={handleSelectDecisionMaker}
+          defaultValue={DEFAULT_DECIDEUR}
         />
+        <ErrorSection>
+          {errors.decisionMaker && (
+            <small className="text-error">{errors.decisionMaker.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl className="mb-3">
         <label htmlFor="">Agent Concerné</label>
-        <input
-          placeholder="Ex: Kayline Moreno"
-          {...register("agentConcerne", inputOption)}
+        <SelectAsync
+          options={OFFICERS_OPTION}
+          isLoading={officersList.isLoading}
+          placeholder="Selctionner l'agent concerné"
+          onChange={handleSelectAgentConcerned}
+          defaultValue={DEFAULT_AGENT_CONCERNED}
         />
+        <ErrorSection>
+          {errors.agentConcerned && (
+            <small className="text-error">
+              {errors.agentConcerned.message}
+            </small>
+          )}
+        </ErrorSection>
       </FormControl>
       <FormControl className="mb-3">
         <label htmlFor="">Type de sanction</label>
-        <input
-          placeholder="Ex: Blame I"
-          {...register("typeSanction", inputOption)}
-        />
+        <input placeholder="Ex: Blame I" {...register("typeSanction")} />
+        <ErrorSection>
+          {errors.typeSanction && (
+            <small className="text-error">{errors.typeSanction.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
 
       <FormControl className="mb-3">
@@ -70,14 +172,20 @@ const FormSanctions = ({
         <SanctionTextContent
           className="theme-text-editor"
           getOutput={getDetailSanction}
-          defaultValue={getValues("raison")}
+          defaultValue={getValues("comment")}
         />
+        <ErrorSection>
+          {errors.comment && (
+            <small className="text-error">{errors.comment.message}</small>
+          )}
+        </ErrorSection>
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
-          labelButton={"Ajouter"}
+          labelButton={LABEL_SUBMIT_BTN}
           className="bg-btn-theme-color"
           type="submit"
+          isLoading={process}
         />
       </ModalFooter>
     </FormContainer>

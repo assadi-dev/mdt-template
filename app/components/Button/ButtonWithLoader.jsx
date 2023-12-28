@@ -8,8 +8,10 @@ const ButtonWithLoader = ({
   children,
   ...props
 }) => {
+  const DISABLE_BTN = isLoading == true ? true : false;
+
   return (
-    <ButtonContainer {...props}>
+    <ButtonContainer {...props} disabled={DISABLE_BTN}>
       {labelButton} {children}{" "}
       {isLoading && <SpinnerButton className="loading-process" />}
     </ButtonContainer>

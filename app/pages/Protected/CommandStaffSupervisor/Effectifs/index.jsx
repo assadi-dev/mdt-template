@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EffectifPageContainer } from "./Effectifs.styled";
 import { RowAction } from "../../../../components/PageContainer";
 import DataTable from "../../../../components/DataTable";
@@ -13,11 +13,30 @@ import {
   EDIT_EFFECTIF,
   listEffectifView,
 } from "./Views/ListOfEffectifsView";
+import { cleanNameAgent } from "../../../../services/utils/user";
+import { useSelector, useDispatch } from "react-redux";
+import { defaultPageSize } from "../../../../config/constantes";
+import useCustomPagination from "../../../../hooks/useCustomPagination";
+import { retrieveEffectifCollectionsAsync } from "../../../../features/Effectifs/EffectifsAsyncAction";
 
 const Effectifs = () => {
   const { loaderState, toggleLoader } = useLoader();
 
-  useDelayed(toggleLoader, 1000);
+  const dispatch = useDispatch();
+
+  const { collections, status, count, error } = useSelector(
+    (state) => state.EffectifsReducer
+  );
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
 
   const { modalState, openModal, closeModal } = useModalState();
 
@@ -41,7 +60,8 @@ const Effectifs = () => {
     },
     {
       Header: "Agent",
-      accessor: "agent",
+      Cell: ({ row }) =>
+        `${cleanNameAgent(row.original?.firstname, row.original?.lastname)}`,
     },
     {
       Header: "N°de téléphone",
@@ -66,7 +86,7 @@ const Effectifs = () => {
         <ActionCells
           data={row.original}
           canEdit={true}
-          canDelete={true}
+          canDelete={false}
           onEdit={handleClickEdit}
           onDelete={handleClickDelete}
         />
@@ -74,34 +94,23 @@ const Effectifs = () => {
     },
   ];
 
-  const collections = [
-    {
-      id: 22,
-      matricule: 103,
-      agent: "Jackson Marshall",
-      firstname: "Jackson",
-      lastname: "Marshall",
-      phone: "555-4589",
-      iban: "Jackmars",
-      grade: "officier I",
-      division: "Police Academy",
-      photo:
-        "https://static.wikia.nocookie.net/gtawiki/images/8/86/Jernigan-GTAV-SheriffDeputy-Portrait.png/revision/latest?cb=20180401093533",
-    },
-    {
-      id: 22,
-      photo:
-        "https://static.wikia.nocookie.net/gtawiki/images/8/86/Jernigan-GTAV-SheriffDeputy-Portrait.png/revision/latest?cb=20180401093533",
-      matricule: 109,
-      agent: "Catherine Oconor",
-      firstname: "Catherine",
-      lastname: "Oconor",
-      phone: "555-456677",
-      iban: "123456789",
-      grade: "officier II",
-      division: "Police Academy",
-    },
-  ];
+  const promiseEffectifsRef = React.useRef();
+
+  useEffect(() => {
+    try {
+      const payload = {
+        page: pageIndex,
+        params: { item_per_page: pageSize, search: search },
+      };
+      promiseEffectifsRef.current = dispatch(
+        retrieveEffectifCollectionsAsync(payload)
+      );
+      onPageTotalCountChange(count);
+      return () => {
+        promiseEffectifsRef.current?.abort();
+      };
+    } catch (error) {}
+  }, [search, pageIndex, count]);
 
   return (
     <>
@@ -111,8 +120,17 @@ const Effectifs = () => {
           className="table-align-center-not-first"
           columns={COLUMNS}
           data={collections}
-          isLoading={loaderState}
-          isSuccess={!loaderState}
+          isLoading={status == "pending"}
+          isSuccess={status == "complete"}
+          manualPagination={true}
+          onPageTotalCountChange={onPageTotalCountChange}
+          onSearchValue={handleSearch}
+          onPageChange={onPageChange}
+          initialStatePagination={{
+            pageIndex,
+            pageSize,
+          }}
+          totalCount={totalCount}
         />
       </EffectifPageContainer>
       <Modal isOpen={modalState.isOpen}>
