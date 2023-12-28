@@ -77,9 +77,7 @@ class VehicleAttributionRepository extends ServiceEntityRepository
         $qb->select("
             va.id,
             va.agentAttributed as idAgentAttributed,
-
-            CONCAT( agAttributed.matricule,'-',agAttributed.firstname,' ',agAttributed.lastname) as agentAttributed,
-
+            CONCAT(agAttributed.matricule,'-',agAttributed.firstname,' ',agAttributed.lastname) as agentAttributed,
             g.name as grade,
             va.typeVehicle,
             va.immatriculation,
@@ -108,7 +106,8 @@ class VehicleAttributionRepository extends ServiceEntityRepository
         $paginator = new Paginator($query, false);
         $count =  $paginator->count();
 
-        $result = $qb->getQuery()->getResult();
+        $result =  $query->getResult();
+        dd($result);
         return ["count" => $count,"data" => $result];
 
     }
