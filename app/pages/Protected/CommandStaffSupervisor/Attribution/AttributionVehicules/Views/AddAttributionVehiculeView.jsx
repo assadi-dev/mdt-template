@@ -22,12 +22,9 @@ const AddAttributionVehiculeView = ({ onCloseModal, ...props }) => {
     values.agent = agent_iri + authenticateUser.idAgent;
     toggleProcess();
     try {
-      console.log(values);
+      const res = await save_vehicleAttribution(values);
 
-      await save_vehicleAttribution(values);
-
-      const payload = { ...values };
-      payload.id = Math.round(Math.random() * 100);
+      const payload = { id: res.data.id, ...values };
       payload.agentAttributed = values.agentAttributedLabel;
       dispatch(add_vehicleAttribution(payload));
       onCloseModal();

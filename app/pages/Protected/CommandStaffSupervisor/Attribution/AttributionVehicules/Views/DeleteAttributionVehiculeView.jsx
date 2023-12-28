@@ -7,6 +7,7 @@ import {
 } from "../../../../../../services/utils/alert";
 import { useDispatch } from "react-redux";
 import { remove_vehicleAttribution } from "../../../../../../features/VehicleAttribution/VehicleAttribution.slice";
+import { delete_vehicleAttribution } from "../helpers";
 
 const DeleteAttributionVehiculeView = ({
   payload,
@@ -21,6 +22,7 @@ const DeleteAttributionVehiculeView = ({
   const handleConfirm = async () => {
     try {
       toggleProcess();
+      await delete_vehicleAttribution(ID);
       dispatch(remove_vehicleAttribution([ID]));
       onCloseModal();
       toastSuccess();
