@@ -34,7 +34,7 @@ const UsersSlice = createSlice({
         (u) => !payload.includes(u.id)
       );
       state.collections = removeToCollection;
-      state.count = state.c.count - removeToCollection.length;
+      state.count = state.count - removeToCollection.length;
     },
   },
   extraReducers: (builder) => {
