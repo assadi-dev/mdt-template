@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { MainContainer, Row } from "./User.styled";
 import DataTable from "../../../../components/DataTable";
 import ActionCells from "../../../../components/DataTable/ActionCells";
@@ -133,25 +133,23 @@ const Users = () => {
     },
   ];
 
-  const { collections, status, error } = useSelector(
+  const { collections, status, count, error } = useSelector(
     (state) => state.UsersReducer
   );
-
+  const userPromiseRef = useRef();
   useEffect(() => {
-    let res = null;
     const main = async () => {
       let payload = {
         page: pageIndex,
         params: { item_per_page: pageSize, search: search },
       };
-      res = dispatch(getUserPaginationAsync(payload));
-      let result = await res.unwrap();
-      onPageTotalCountChange(result.count);
+      userPromiseRef.current = dispatch(getUserPaginationAsync(payload));
+      onPageTotalCountChange(count);
     };
 
     main();
     return () => {
-      res && res.abort();
+      userPromiseRef.current?.abort();
     };
   }, [pageIndex, search]);
 
