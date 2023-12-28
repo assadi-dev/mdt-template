@@ -12,7 +12,10 @@ import useCustomPagination from "../../../../hooks/useCustomPagination";
 import { getUserPaginationAsync } from "../../../../features/Users/UsersAsync.action";
 import { cleanNameAgent } from "../../../../services/utils/user";
 import { datetimeFormatFr } from "../../../../services/utils/dateFormat";
-import { udpateUser } from "../../../../features/Users/Users.slice";
+import {
+  udpateUser,
+  update_user,
+} from "../../../../features/Users/Users.slice";
 import { update_user_acount } from "./helpers";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
 import useModalState from "../../../../hooks/useModalState";
@@ -50,6 +53,7 @@ const GestionDesComptes = () => {
       const id = agent?.id;
       const payload = { isValidate: checked };
       await update_user_acount(id, payload);
+      dispatch(update_user({ id, ...payload }));
       toastSuccess();
     } catch (error) {
       toastError();
