@@ -99,6 +99,10 @@ export const EndOfWatchDetail = styled.legend`
   text-align: center;
   p {
     margin-top: 0.5rem;
+    font-size: 1rem;
+    @media screen and (min-width: 992px) {
+      font-size: initial;
+    }
   }
 `;
 
