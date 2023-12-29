@@ -1,4 +1,10 @@
-import React, { Suspense, useEffect, useState, useTransition } from "react";
+import React, {
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { PageContainer, Row } from "../../../../components/PageContainer";
 import { FormControl } from "../../../../components/Forms/FormView.styled";
 import {
@@ -26,7 +32,7 @@ const Trombinoscop = () => {
 
   const [searchAgent, setSearchAgent] = useState("");
   const { debouncedValue } = useDebounce(searchAgent, 500);
-  const ITEM_PER_PAGE = 10;
+  const ITEM_PER_PAGE = 20;
 
   const handeSearchinput = (value) => {
     setSearchAgent(value);
@@ -38,18 +44,20 @@ const Trombinoscop = () => {
     setPageIndex((current) => (current += increment));
   };
 
+  const fetchTrombinoscopPromiseRef = useRef();
+
   useEffect(() => {
     try {
       const payload = {
         page: pageIndex,
         params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
       };
-      const fetchTrombinoscopPromise = dispatch(
+      fetchTrombinoscopPromiseRef.current = dispatch(
         retrieveAgentTrombinoscopAsync(payload)
       );
 
       return () => {
-        fetchTrombinoscopPromise?.abort();
+        fetchTrombinoscopPromiseRef.current?.abort();
       };
     } catch (error) {}
   }, [debouncedValue, pageIndex]);
