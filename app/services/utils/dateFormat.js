@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import { fr } from "date-fns/locale";
+const timeZone = "Europe/Paris";
 
 /**
  * Retourne la date au format suivant YYYY-MM-DD
@@ -40,4 +42,14 @@ export const datetimeFormatWithSec = (date = "") => {
 export const formatDatefrWithoutHour = (date) => {
   if (!date) return "";
   return format(new Date(date), "dd-MM-yyyy");
+};
+
+/**
+ * Retourne la date au format suivant 29 juillet 2023
+ * @param {*} date
+ * @returns
+ */
+export const formatDateFullMonth = (date) => {
+  if (!date) return "";
+  return format(new Date(date), "dd MMMM yyyy", { locale: fr });
 };
