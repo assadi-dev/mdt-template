@@ -106,6 +106,47 @@ class SanctionsRepository extends ServiceEntityRepository
         return ["count" => $count,"data" => $result];
 
     }
+    public function findByAgentPagination($idAgent, $items_per_page, $page, $search)
+    {
+
+        $countResult = ($page - 1) * $items_per_page;
+        $qb = $this->createQueryBuilder("s");
+
+        $qb->select("s.id,
+        s.numeroSanction,
+        s.decisionMaker,
+        CONCAT( concerned.matricule,'-',concerned.firstname,' ',concerned.lastname) as agentConcerned,
+        s.typeSanction,
+        s.comment,
+        s.createdAt
+        ")
+        ->leftJoin(Agent::class, "concerned", "WITH", "concerned.id=s.agentConcerned")
+        ->orHaving($qb->expr()->like("s.numeroSanction", ":search"))
+        ->orHaving($qb->expr()->like("s.decisionMaker", ":search"))
+        ->orHaving($qb->expr()->like("s.typeSanction", ":search"))
+        ->orHaving($qb->expr()->like("agentConcerned", ":search"))
+        ->where("concerned.id = :idAgent")
+        ->groupBy("s.id")
+        ->orderBy("s.createdAt", "DESC")
+        ->setParameter("search", "%$search%")
+        ->setParameter("idAgent", $idAgent)
+        ;
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+
+
+        $query = $qb->getQuery();
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+        $result = $query->getResult();
+
+        return ["count" => $count,"data" => $result];
+
+    }
 
 
 }
