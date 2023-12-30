@@ -75,6 +75,12 @@ class EndOfWatchRepository extends ServiceEntityRepository
         $qb->select("eow.id,agent.matricule,agent.firstname,agent.lastname,agent.faction,agent.gender,g.name as grade,eow.date,eow.reason")
         ->leftJoin(Agent::class, "agent", "WITH", "agent.id=eow.agent")
         ->leftJoin(Grade::class, "g", "WITH", "g.id=agent.grade")
+        ->orHaving($qb->expr()->like("agent.matricule", ":search"))
+        ->orHaving($qb->expr()->like("agent.firstname", ":search"))
+        ->orHaving($qb->expr()->like("agent.faction", ":search"))
+        ->orHaving($qb->expr()->like("g.name", ":search"))
+        ->orHaving($qb->expr()->like("eow.reason", ":search"))
+        ->setParameter("search", "%$search%")
         ->orderBy("eow.createdAt", "DESC")
         ->groupBy("eow.id")
         ;

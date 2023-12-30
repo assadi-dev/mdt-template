@@ -19,10 +19,13 @@ const EndOfWatch = () => {
     setPageIndex((current) => (current += increment));
   };
 
-  const { data, isSuccess, isLoading, error } =
-    useGetEndOfWatchCollectionsQuery(pageIndex, {
-      item_per_page: ITEM_PER_PAGE,
-      search: debouncedValue,
+  const { data, isSuccess, isLoading, error, refetch } =
+    useGetEndOfWatchCollectionsQuery({
+      page: pageIndex,
+      params: {
+        item_per_page: ITEM_PER_PAGE,
+        search: debouncedValue,
+      },
     });
 
   const MAX_PAGE = Math.ceil(data?.count / ITEM_PER_PAGE) || 1;

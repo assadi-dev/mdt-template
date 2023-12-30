@@ -6,7 +6,9 @@ const EndOfWatchGrid = ({ collections = [], searchAgent }) => {
   return (
     <EndOfWatchGridCards>
       {collections.length > 0
-        ? collections.map((agent) => <EndOfWatchCards agent={agent} />)
+        ? collections.map((agent) => (
+            <EndOfWatchCards key={agent.id} agent={agent} />
+          ))
         : "Aucun resultat"}
     </EndOfWatchGridCards>
   );

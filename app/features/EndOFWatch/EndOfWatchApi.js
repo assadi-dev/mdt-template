@@ -6,7 +6,13 @@ export const endOfWatchApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_INSTANCE }),
   endpoints: (builder) => ({
     getEndOfWatchCollections: builder.query({
-      query: (page) => `end_of_watches/pagination/${page}`,
+      query: (payload) => {
+        const { page, params } = payload;
+        return {
+          url: `end_of_watches/pagination/${page}`,
+          params,
+        };
+      },
     }),
   }),
 });
