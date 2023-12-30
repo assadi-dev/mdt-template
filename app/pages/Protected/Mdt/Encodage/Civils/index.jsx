@@ -34,7 +34,7 @@ const EncodageCivils = () => {
   const promiseRef = useRef(null);
   const [searchCivil, setSearchCivil] = useState("");
   const { debouncedValue } = useDebounce(searchCivil, 500);
-  const ITEM_PER_PAGE = 10;
+  const ITEM_PER_PAGE = 12;
 
   const [pageIndex, setPageIndex] = useState(1);
   const MAX_PAGE = Math.ceil(count / ITEM_PER_PAGE);
