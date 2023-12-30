@@ -26,11 +26,11 @@ export const routing = [
           },
           {
             path: "permis-ppa",
-            element: <Pages.ArmesVehiculeAttribue />,
+            element: <Pages.ArmesVehiculeAttribution />,
           },
           {
             path: "armes-vehicule-attribue",
-            element: <Pages.PermisPPA />,
+            element: <Pages.ArmesVehiculeAttribution />,
           },
           {
             path: "sanction",

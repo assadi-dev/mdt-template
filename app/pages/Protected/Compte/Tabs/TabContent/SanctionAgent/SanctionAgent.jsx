@@ -18,6 +18,9 @@ import { createPortal } from "react-dom";
 import useModalState from "../../../../../../hooks/useModalState";
 
 const SanctionAgent = () => {
+  const { idAgent } = useSelector((state) => state.AuthenticateReducer);
+
+  const [skip, setSkip] = React.useState(true);
   const { modalState, openModal, closeModal } = useModalState();
   const {
     onPageChange,
@@ -37,6 +40,7 @@ const SanctionAgent = () => {
     },
   };
   const { data, isLoading, isSuccess } = useGetSanctionByAgentQuery(payload, {
+    skip,
     refetchOnMountOrArgChange: true,
   });
 
@@ -76,7 +80,11 @@ const SanctionAgent = () => {
     },
   ];
 
-  console.log(data);
+  React.useEffect(() => {
+    if (!idAgent) return;
+    setSkip(false);
+  }, [idAgent]);
+
   return (
     <>
       <SanctionPageContainer>
