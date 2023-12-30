@@ -19,3 +19,12 @@ export const effectifFormResolver = yup.object().shape({
   grade: yup.string().required(requiredMessage),
   matricule: yup.string().required(requiredMessage),
 });
+
+export const eowFormValue = {
+  date: "",
+  reason: "",
+};
+export const eowFormResolver = yup.object().shape({
+  date: yup.string().required(requiredMessage),
+  reason: yup.string().required(requiredMessage),
+});

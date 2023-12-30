@@ -7,12 +7,18 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import FormModalTabs from "../../../../../components/Forms/FormModalTabs";
 import { Tabsheader } from "./ListOfEffectifsView";
 import FormEOW from "./Forms/FormEOW";
-import { extractIdgrade, objectCredential, update_effectif } from "./helpers";
+import {
+  extractIdgrade,
+  objectCredential,
+  save_eow,
+  update_effectif,
+} from "./helpers";
 import { toastError, toastSuccess } from "../../../../../services/utils/alert";
 import useProcess from "../../../../../hooks/useProcess";
 import { useSelector, useDispatch } from "react-redux";
 import { edit_an_effectif } from "../../../../../features/Effectifs/Effectifs.slice";
 import { hydrateUser } from "../../../../../features/Authenticate/Athenticate.slice";
+import { agent_iri } from "../../../../../services/api/instance";
 
 const EditEffectifView = ({ payload, onCloseModal, ...props }) => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -48,6 +54,19 @@ const EditEffectifView = ({ payload, onCloseModal, ...props }) => {
     }
   };
 
+  const handleSaveEow = async (values) => {
+    try {
+      toggleProcess();
+      values.agent = `${agent_iri}${payload.id}`;
+      await save_eow(values);
+      toastSuccess();
+    } catch (error) {
+      toastError();
+    } finally {
+      toggleProcess();
+    }
+  };
+
   return (
     <EffectModalCOntainer {...props}>
       <HeaderModal>
@@ -66,7 +85,7 @@ const EditEffectifView = ({ payload, onCloseModal, ...props }) => {
           <div> Formation </div>
         </TabPanel>
         <TabPanel>
-          <FormEOW />
+          <FormEOW onSubmitValues={handleSaveEow} process={process} />
         </TabPanel>
       </FormModalTabs>
     </EffectModalCOntainer>
