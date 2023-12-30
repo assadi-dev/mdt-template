@@ -4,6 +4,7 @@ import { EndOfWatchSearchInput, HeaderRow } from "./EndOFWatch.styled";
 import useDebounce from "../../../hooks/useDebounce";
 import PaginateOriginal from "../../../components/Pagination/PaginateOriginal";
 import EndOfWatchGrid from "./EndOfWatchGrid";
+import { useGetEndOfWatchCollectionsQuery } from "../../../features/EndOFWatch/EndOfWatchApi";
 
 const EndOfWatch = () => {
   const [searchAgent, setSearchAgent] = useState("");
@@ -13,21 +14,21 @@ const EndOfWatch = () => {
     setSearchAgent(value);
   };
   const [pageIndex, setPageIndex] = useState(1);
-  const MAX_PAGE = 1; //Math.ceil(count / ITEM_PER_PAGE);
 
   const handleSetPage = (increment) => {
     setPageIndex((current) => (current += increment));
   };
 
-  useEffect(() => {
-    try {
-      const payload = {
-        page: pageIndex,
-        params: { item_per_page: ITEM_PER_PAGE, search: debouncedValue },
-      };
-      //Fetch End of Watch
-    } catch (error) {}
-  }, []);
+  const { data, isSuccess, isLoading, error, refetch } =
+    useGetEndOfWatchCollectionsQuery({
+      page: pageIndex,
+      params: {
+        item_per_page: ITEM_PER_PAGE,
+        search: debouncedValue,
+      },
+    });
+
+  const MAX_PAGE = Math.ceil(data?.count / ITEM_PER_PAGE) || 1;
 
   return (
     <PageContainer>
@@ -48,7 +49,7 @@ const EndOfWatch = () => {
         />
       </HeaderRow>
 
-      <EndOfWatchGrid />
+      <EndOfWatchGrid collections={data?.data} />
     </PageContainer>
   );
 };

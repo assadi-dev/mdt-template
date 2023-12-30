@@ -18,3 +18,7 @@ export const objectCredential = (values) => {
     matricule: values.matricule.trim(),
   };
 };
+
+export const save_eow = (data) => {
+  return api.post(`/end_of_watches`, data);
+};

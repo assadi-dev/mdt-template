@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Repository\EndOfWatchRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,7 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EndOfwatchApiController extends AbstractController
 {
-    public function __construct() {}
+
+    private $endOfWatchRepository;
+
+    public function __construct(EndOfWatchRepository $endOfWatchRepository) {
+
+        $this->endOfWatchRepository = $endOfWatchRepository;
+
+    }
 
     /**
      * @Route("/api/end_of_watches/pagination/{page}", name="app_end_of_watch_pagination", methods="GET" )
@@ -25,6 +33,12 @@ class EndOfwatchApiController extends AbstractController
             if(!isset($search)) {
                 $search = "";
             }
+
+            $result = $this->endOfWatchRepository->findByPagination($item_per_page, $page, $search);
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+
 
         } catch (\Throwable $th) {
             $result = ["message" => $th->getMessage()];

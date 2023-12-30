@@ -49,3 +49,14 @@ export const isNotAtribute = (value) => {
 export const rapportNumberPrefixer = (number) => {
   return number.toString().padStart(5, "0");
 };
+
+/**
+ * Affiche les 3 premiere lettre du grade
+ * @param {string} grade
+ * @returns
+ */
+export const shortGrade = (grade) => {
+  if (grade.length > 3) {
+    return firsLetterCapitalise(`${grade.substring(0, 3)}.`);
+  }
+};
