@@ -19,7 +19,7 @@ const EndOfWatch = () => {
     setPageIndex((current) => (current += increment));
   };
 
-  const { data, isSuccess, isLoading, error, refetch } =
+  const { data, isSuccess, isLoading, error } =
     useGetEndOfWatchCollectionsQuery({
       page: pageIndex,
       params: {
@@ -48,8 +48,8 @@ const EndOfWatch = () => {
           maxPage={MAX_PAGE}
         />
       </HeaderRow>
-
-      <EndOfWatchGrid collections={data?.data} />
+      {isLoading && "Chargement en cours"}
+      {isSuccess && <EndOfWatchGrid collections={data?.data} />}
     </PageContainer>
   );
 };
