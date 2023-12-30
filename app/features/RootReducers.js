@@ -19,6 +19,10 @@ import EffectifsReducer from "./Effectifs/Effectifs.slice";
 import SanctionReducer from "./Sanctions/Sanctions.slice";
 import VehicleAttributionReducer from "./VehicleAttribution/VehicleAttribution.slice";
 import CodePenalReducer from "./CodePenals/CodPenal.slice";
+import EndOfWatchApiReducer, {
+  endOfWatchApi,
+} from "./EndOFWatch/EndOfWatchApi";
+import EndOfWatchReducer from "./EndOFWatch/EndOfWatch.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -42,6 +46,8 @@ const RootReducers = {
   SanctionReducer,
   VehicleAttributionReducer,
   CodePenalReducer,
+  [endOfWatchApi.reducerPath]: EndOfWatchApiReducer,
+  EndOfWatchReducer,
 };
 
 export default RootReducers;
