@@ -3,6 +3,82 @@ import styled from "styled-components";
 export const PageContainer = styled.div`
   width: 90%;
   margin: 14px auto;
+  .s0 {
+    opacity: 1;
+    fill: #fcfcf9;
+  }
+  .s1 {
+    opacity: 1;
+    fill: #cabe80;
+  }
+  .s2 {
+    opacity: 1;
+    fill: #e3c370;
+  }
+  .s3 {
+    opacity: 1;
+    fill: #fbfbe9;
+  }
+  .s4 {
+    opacity: 1;
+    fill: #faf7c6;
+  }
+  .s5 {
+    opacity: 1;
+    fill: #f1e2b6;
+  }
+  .s6 {
+    opacity: 1;
+    fill: #f7e188;
+  }
+  .s7 {
+    opacity: 0.9;
+    fill: #a39561;
+  }
+  .s8 {
+    opacity: 0.9;
+    fill: #a4a980;
+  }
+  .s9 {
+    opacity: 0.4;
+    fill: #5a624e;
+  }
+  .s10 {
+    opacity: 0.6;
+    fill: #787a60;
+  }
+  .s11 {
+    opacity: 0.2;
+    fill: #414942;
+  }
+  .s12 {
+    opacity: 1;
+    fill: #5d3213;
+  }
+  .s13 {
+    opacity: 1;
+    fill: #00fbf7;
+  }
+  .s14 {
+    opacity: 0.5;
+    fill: #3f3f2d;
+  }
+  .s15 {
+    opacity: 0.9;
+    fill: #7b5e44;
+  }
+  .s16 {
+    opacity: 0.9;
+    fill: #0a0d14;
+  }
+  .s17 {
+    opacity: 1;
+    fill: #0cbdbb;
+  }
+  .s18 {
+    opacity: 1;
+    fill: #03f918;
+  }
 `;
 
 export const Row = styled.div`
