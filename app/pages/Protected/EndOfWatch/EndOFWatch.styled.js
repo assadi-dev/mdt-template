@@ -59,23 +59,25 @@ export const EndOfWatchGridCards = styled.div`
   justify-content: center;
   grid-gap: 1rem;
   @media screen and (min-width: 992px) {
-    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-columns: repeat(auto-fit, 300px);
   }
 `;
 
 //Card
 export const EndOfWatchCardsContainer = styled.figure`
+  justify-self: center;
   padding-top: 1rem;
   @media screen and (min-width: 992px) {
-    width: 80%;
+    width: 100%;
   }
 `;
 
 export const EndOfWatchCardsPicture = styled.div`
   border-radius: 10px;
   border: 2px solid #131b26;
-  width: 100%;
-  height: 350px;
+  width: 240px;
+  height: 280px;
+  margin: 0 auto 1rem auto;
   position: relative;
   box-shadow: 0px 4px 30px 0px #131b26;
 
@@ -101,7 +103,7 @@ export const EndOfWatchDetail = styled.legend`
     margin-top: 0.5rem;
     font-size: 1rem;
     @media screen and (min-width: 992px) {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
     }
   }
 `;
