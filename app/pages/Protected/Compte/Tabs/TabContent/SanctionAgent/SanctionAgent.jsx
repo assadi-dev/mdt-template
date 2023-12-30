@@ -32,7 +32,7 @@ const SanctionAgent = () => {
     pageSize,
   } = useCustomPagination(defaultPageSize, 0, 0, "");
   const payload = {
-    idAgent: 37,
+    idAgent,
     params: {
       page: pageIndex,
       search: search,
