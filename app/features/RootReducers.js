@@ -23,6 +23,7 @@ import EndOfWatchApiReducer, {
   endOfWatchApi,
 } from "./EndOFWatch/EndOfWatchApi";
 import EndOfWatchReducer from "./EndOFWatch/EndOfWatch.slice";
+import { sanctionApi } from "./Sanctions/SanctionApi";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -46,7 +47,8 @@ const RootReducers = {
   SanctionReducer,
   VehicleAttributionReducer,
   CodePenalReducer,
-  [endOfWatchApi.reducerPath]: EndOfWatchApiReducer,
+  [endOfWatchApi.reducerPath]: endOfWatchApi.reducer,
+  [sanctionApi.reducerPath]: sanctionApi.reducer,
   EndOfWatchReducer,
 };
 

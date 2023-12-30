@@ -74,7 +74,7 @@ import GradeCategories from "../pages/Protected/Grades/GrdesCategories";
 import InfoPersonel from "../pages/Protected/Compte/Tabs/TabContent/InfoPersonel";
 import PermisPPA from "../pages/Protected/Compte/Tabs/TabContent/PermisPPA";
 import ArmesVehiculeAttribue from "../pages/Protected/Compte/Tabs/TabContent/ArmesVehiculeAttribue";
-import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent";
+import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent/SanctionAgent";
 
 /** END **/
 
