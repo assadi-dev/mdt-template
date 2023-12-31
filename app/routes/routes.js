@@ -25,8 +25,8 @@ export const routing = [
             element: <Pages.InfoPersonel />,
           },
           {
-            path: "permis-ppa",
-            element: <Pages.ArmesVehiculeAttribution />,
+            path: "formations",
+            element: <Pages.Formations />,
           },
           {
             path: "armes-vehicule-attribue",

@@ -22,7 +22,7 @@ const TabsHeader = ({ onSelect, ...props }) => {
         Info Personnel{" "}
       </NavLink>
       <NavLink
-        to="permis-ppa"
+        to="formations"
         className={(e) =>
           e.isActive
             ? "header-tab-btn bg-selected-theme-color"

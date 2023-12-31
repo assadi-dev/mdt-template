@@ -75,6 +75,7 @@ import InfoPersonel from "../pages/Protected/Compte/Tabs/TabContent/InfoPersonne
 import PermisPPA from "../pages/Protected/Compte/Tabs/TabContent/PermisPPA";
 import ArmesVehiculeAttribution from "../pages/Protected/Compte/Tabs/TabContent/Attributions/ArmesVehiculeAttribution";
 import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent/SanctionAgent";
+import Formations from "../pages/Protected/Compte/Tabs/TabContent/Formations/Formations";
 
 /** END **/
 
@@ -125,6 +126,7 @@ export default {
   EndOfWatch,
   InfoPersonel,
   PermisPPA,
+  Formations,
   SanctionAgent,
   ArmesVehiculeAttribution,
 };
