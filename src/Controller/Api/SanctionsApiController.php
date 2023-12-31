@@ -73,6 +73,9 @@ class SanctionsApiController extends AbstractController
             if(!isset($search)) {
                 $search = "";
             }
+            if(!isset($page)) {
+                $page = 1;
+            }
 
 
             $result =  $this->sanctionsRepository->findByAgentPagination($idAgent, $item_per_page, $page, $search);

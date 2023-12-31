@@ -114,4 +114,53 @@ class VehicleAttributionRepository extends ServiceEntityRepository
     }
 
 
+    public function findByAgentPagination($idAgent, $item_per_page, $page, $search)
+    {
+        $countResult = ($page - 1) * $item_per_page;
+
+
+
+        $qb = $this->createQueryBuilder("va");
+        $qb->select("
+            va.id,
+            va.numeroAttribution,
+            agAttributed.id as idAgentAttributed,
+            CONCAT(agAttributed.matricule,'-',agAttributed.firstname,' ',agAttributed.lastname) as agentAttributed,
+            g.name as grade,
+            va.typeVehicle,
+            va.immatriculation,
+            va.idVehicle,
+            ag.id as agent,
+            va.createdAt
+        ")
+        ->leftJoin(Agent::class, "ag", "WITH", "ag.id = va.agent")
+        ->leftJoin(Agent::class, "agAttributed", "WITH", "agAttributed.id = va.agentAttributed")
+        ->leftJoin(Grade::class, "g", "WITH", "g.id = agAttributed.grade")
+        ->orHaving($qb->expr()->like("va.numeroAttribution", ":search"))
+        ->orHaving($qb->expr()->like("va.immatriculation", ":search"))
+        ->orHaving($qb->expr()->like("va.typeVehicle", ":search"))
+        ->orHaving($qb->expr()->like("agentAttributed", ":search"))
+        ->orHaving($qb->expr()->like("g.name", ":search"))
+        ->where("agAttributed.id = :idAgent")
+        ->setParameter("idAgent", $idAgent)
+        ->setParameter("search", "%$search%")
+        ->orderBy("va.createdAt", "DESC")
+        ->groupBy("va.id")
+        ;
+
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($item_per_page);
+        $qb->addCriteria($criteria);
+        $query =  $qb->getQuery();
+
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+        $result =  $query->getResult();
+        return ["count" => $count,"data" => $result];
+
+    }
+
+
 }
