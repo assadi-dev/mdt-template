@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SanctionPageContainer } from "./SanctionAgent.styled";
 import DataTable from "../../../../../../components/DataTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useGetSanctionByAgentQuery } from "../../../../../../features/Sanctions/SanctionApi";
 import { defaultPageSize } from "../../../../../../config/constantes";
 import useCustomPagination from "../../../../../../hooks/useCustomPagination";
-import ActionCells from "../../../../../../components/DataTable/ActionCells";
 import ShowSanction from "../../../../CommandStaffSupervisor/Attribution/Sanctions/ShowSanction";
 import { datetimeFormatFr } from "../../../../../../services/utils/dateFormat";
 import Modal from "../../../../../../components/Modal/Modal";
@@ -32,7 +31,7 @@ const SanctionAgent = () => {
     pageSize,
   } = useCustomPagination(defaultPageSize, 0, 0, "");
   const payload = {
-    idAgent,
+    idAgent: 37,
     params: {
       page: pageIndex,
       search: search,
@@ -40,7 +39,6 @@ const SanctionAgent = () => {
     },
   };
   const { data, isLoading, isSuccess } = useGetSanctionByAgentQuery(payload, {
-    skip,
     refetchOnMountOrArgChange: true,
   });
 
@@ -96,14 +94,13 @@ const SanctionAgent = () => {
             isLoading={isLoading}
             isSuccess={isSuccess}
             manualPagination={true}
-            onPageTotalCountChange={onPageTotalCountChange}
             onSearchValue={handleSearch}
             onPageChange={onPageChange}
             initialStatePagination={{
               pageIndex,
               pageSize,
             }}
-            totalCount={totalCount}
+            totalCount={data?.count}
           />
         }
       </SanctionPageContainer>
