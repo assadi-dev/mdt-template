@@ -3,8 +3,15 @@ import DataTable from "../../../../../../components/DataTable";
 import { datetimeFormatFr } from "../../../../../../services/utils/dateFormat";
 import { defaultPageSize } from "../../../../../../config/constantes";
 import useCustomPagination from "../../../../../../hooks/useCustomPagination";
+import { useGetServiceWeaponEncodingQuery } from "../../../../../../features/ServiceWeaponEncoding/ServiceWeaponEncodingApi";
 
 const ArmesTabContent = ({ idAgent }) => {
+  const [skip, setSkip] = React.useState(true);
+  React.useEffect(() => {
+    if (!idAgent) return;
+    setSkip(false);
+  }, [idAgent]);
+
   const COLUMN = [
     {
       Header: "Type Arme",
@@ -39,15 +46,18 @@ const ArmesTabContent = ({ idAgent }) => {
       item_per_page: defaultPageSize,
     },
   };
-
+  const { data, isLoading, isSuccess } = useGetServiceWeaponEncodingQuery(
+    payload,
+    { skip, refetchOnMountOrArgChange: true }
+  );
   return (
     <div>
       <DataTable
         className="table-align-center-not-first"
         columns={COLUMN}
-        // data={data?.data}
-        isLoading={false}
-        isSuccess={true}
+        data={data?.data}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
         manualPagination={true}
         onSearchValue={handleSearch}
         onPageChange={onPageChange}
@@ -55,7 +65,7 @@ const ArmesTabContent = ({ idAgent }) => {
           pageIndex,
           pageSize,
         }}
-        // totalCount={data?.count}
+        totalCount={data?.count}
       />
     </div>
   );

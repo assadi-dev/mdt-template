@@ -20,10 +20,10 @@ const ArmesVehiculeAttribution = () => {
         className="form-tab-select"
       >
         <TabPanel>
-          <ArmesTabContent />
+          <ArmesTabContent idAgent={idAgent} />
         </TabPanel>
         <TabPanel>
-          <VehicleTabContent />
+          <VehicleTabContent idAgent={idAgent} />
         </TabPanel>
       </FormModalTabs>
     </AttributionPageContainer>

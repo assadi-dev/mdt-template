@@ -18,9 +18,14 @@ import useModalState from "../../../../../../hooks/useModalState";
 
 const SanctionAgent = () => {
   const { idAgent } = useSelector((state) => state.AuthenticateReducer);
-
-  const [skip, setSkip] = React.useState(true);
   const { modalState, openModal, closeModal } = useModalState();
+  const [skip, setSkip] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!idAgent) return;
+    setSkip(false);
+  }, [idAgent]);
+
   const {
     onPageChange,
     onPageTotalCountChange,
@@ -78,11 +83,6 @@ const SanctionAgent = () => {
       ),
     },
   ];
-
-  React.useEffect(() => {
-    if (!idAgent) return;
-    setSkip(false);
-  }, [idAgent]);
 
   return (
     <>
