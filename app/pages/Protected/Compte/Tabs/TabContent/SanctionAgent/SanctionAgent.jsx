@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { SanctionPageContainer } from "./SanctionAgent.styled";
 import DataTable from "../../../../../../components/DataTable";
 import { useSelector } from "react-redux";
@@ -39,6 +39,7 @@ const SanctionAgent = () => {
     },
   };
   const { data, isLoading, isSuccess } = useGetSanctionByAgentQuery(payload, {
+    skip,
     refetchOnMountOrArgChange: true,
   });
 
