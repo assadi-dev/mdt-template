@@ -19,7 +19,7 @@ export const AsideBarCivilContainer = styled.div`
   border-radius: 8px;
   min-height: 75vh;
   @media screen and (min-width: 992px) {
-    padding: 2.3rem 3.2rem;
+    padding: 2.3rem 2.3rem 1rem 2.3rem;
   }
 `;
 
@@ -97,7 +97,7 @@ export const CivilMainSection = styled.div`
 
 export const RowButtonDocument = styled.div`
   width: 90%;
-  margin: 16px auto;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
