@@ -110,6 +110,51 @@ class ServiceWeaponEncodingRepository extends ServiceEntityRepository
 
 
     }
+    public function findByAgentPagination($idAgent, $items_per_page, $page, $search)
+    {
+
+        $countResult = ($page - 1) * $items_per_page;
+
+        $qb = $this->createQueryBuilder("we");
+
+        $qb->select("
+            we.id,
+            we.serialNumber,
+            we.type,
+            a.id as idAgent,
+            a.matricule,
+            a.firstname,
+            a.lastname,
+            a.gender,
+            we.createdAt
+        ")
+        ->leftJoin(Agent::class, "a", "WITH", "a.id=we.agent")
+        ->orHaving($qb->expr()->like("we.serialNumber", ":search"))
+        ->orHaving($qb->expr()->like("we.type", ":search"))
+        ->orHaving($qb->expr()->like("a.firstname", ":search"))
+        ->orHaving($qb->expr()->like("a.lastname", ":search"))
+        ->orHaving($qb->expr()->like("a.gender", ":search"))
+        ->orHaving($qb->expr()->like("a.matricule", ":search"))
+        ->orderBy("we.createdAt", "DESC")
+        ->where("we.agent = :idAgent")
+        ->setParameter("idAgent", $idAgent)
+        ->setParameter("search", "%$search%")
+        ->groupBy("we.id");
+        $criteria = Criteria::create()
+        ->setFirstResult($countResult)
+        ->setMaxResults($items_per_page);
+        $qb->addCriteria($criteria);
+        $query = $qb->getQuery();
+
+        $paginator = new Paginator($query, false);
+        $count =  $paginator->count();
+
+        $result = $qb->getQuery()->getResult();
+        return ["count" => $count,"data" => $result];
+
+
+
+    }
 
 
 

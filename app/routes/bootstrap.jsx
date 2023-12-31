@@ -71,10 +71,11 @@ import GradeCategories from "../pages/Protected/Grades/GrdesCategories";
 /**END - OTHER***/
 
 /** COMPTE */
-import InfoPersonel from "../pages/Protected/Compte/Tabs/TabContent/InfoPersonel";
+import InfoPersonel from "../pages/Protected/Compte/Tabs/TabContent/InfoPersonnel/InfoPersonel";
 import PermisPPA from "../pages/Protected/Compte/Tabs/TabContent/PermisPPA";
-import ArmesVehiculeAttribue from "../pages/Protected/Compte/Tabs/TabContent/ArmesVehiculeAttribue";
-import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent";
+import ArmesVehiculeAttribution from "../pages/Protected/Compte/Tabs/TabContent/Attributions/ArmesVehiculeAttribution";
+import SanctionAgent from "../pages/Protected/Compte/Tabs/TabContent/SanctionAgent/SanctionAgent";
+import Formations from "../pages/Protected/Compte/Tabs/TabContent/Formations/Formations";
 
 /** END **/
 
@@ -125,6 +126,7 @@ export default {
   EndOfWatch,
   InfoPersonel,
   PermisPPA,
+  Formations,
   SanctionAgent,
-  ArmesVehiculeAttribue,
+  ArmesVehiculeAttribution,
 };

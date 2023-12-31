@@ -4,18 +4,21 @@ import {
   PhoneContainer,
   RowInput,
   UserFormContainer,
-} from "./InfoPersonel.style";
+} from "../InfoPersonel.style";
 import {
   FormControl,
   SubmitButton,
-} from "../../../../../components/Forms/FormView.styled";
-import ButtonWithLoader from "../../../../../components/Button/ButtonWithLoader";
-import useProcess from "../../../../../hooks/useProcess";
+} from "../../../../../../components/Forms/FormView.styled";
+import ButtonWithLoader from "../../../../../../components/Button/ButtonWithLoader";
+import useProcess from "../../../../../../hooks/useProcess";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { hydrateUser } from "../../../../../features/Authenticate/Athenticate.slice";
-import { toastError, toastSuccess } from "../../../../../services/utils/alert";
-import { updateUser } from "../../helper";
+import { hydrateUser } from "../../../../../../features/Authenticate/Athenticate.slice";
+import {
+  toastError,
+  toastSuccess,
+} from "../../../../../../services/utils/alert";
+import { updateUser } from "../../../helper";
 
 const InfoPersonel = () => {
   const { process, toggleProcess } = useProcess();
@@ -105,32 +108,32 @@ const InfoPersonel = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <label htmlFor="">N°Matricule </label>
-          <input type="text" {...register("matricule", { required })} />
+          <input type="text" {...register("matricule")} />
         </FormControl>
         <FormControl>
           <label htmlFor="">IBAN </label>
-          <input type="text" {...register("iban", { required })} />
+          <input type="text" {...register("iban")} />
         </FormControl>
         <FormControl>
           <label htmlFor="">Division </label>
-          <select {...register("division", { required })}>
+          <select {...register("division")}>
             <option value="test">test</option>
           </select>
         </FormControl>
         <RowInput>
           <FormControl>
             <label htmlFor="">Nom </label>
-            <input type="text" {...register("lastname", { required })} />
+            <input type="text" {...register("lastname")} />
           </FormControl>
           <FormControl>
             <label htmlFor="">Prénom </label>
-            <input type="text" {...register("firstname", { required })} />
+            <input type="text" {...register("firstname")} />
           </FormControl>
         </RowInput>
 
         <PhoneContainer>
           <label htmlFor="">Téléphone </label>
-          <input type="text" {...register("phone", { required })} />
+          <input type="text" {...register("phone")} />
         </PhoneContainer>
 
         <FormBottom>

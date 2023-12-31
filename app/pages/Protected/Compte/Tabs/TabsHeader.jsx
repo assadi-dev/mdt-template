@@ -16,7 +16,7 @@ const TabsHeader = ({ onSelect, ...props }) => {
       >
         Info Personnel{" "}
       </Link>
-      <Link to="/permis-ppa" className="header-tab-btn">
+      <Link to="/formations" className="header-tab-btn">
         Permis / PPA{" "}
       </Link>
       <Link

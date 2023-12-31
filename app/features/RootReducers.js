@@ -23,6 +23,9 @@ import EndOfWatchApiReducer, {
   endOfWatchApi,
 } from "./EndOFWatch/EndOfWatchApi";
 import EndOfWatchReducer from "./EndOFWatch/EndOfWatch.slice";
+import { sanctionApi } from "./Sanctions/SanctionApi";
+import { serviceWeaponApi } from "./ServiceWeaponEncoding/ServiceWeaponEncodingApi";
+import { vehicleAttributionApi } from "./VehicleAttribution/VehicleAttributionApi";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -46,8 +49,12 @@ const RootReducers = {
   SanctionReducer,
   VehicleAttributionReducer,
   CodePenalReducer,
-  [endOfWatchApi.reducerPath]: EndOfWatchApiReducer,
   EndOfWatchReducer,
+  //RTK query
+  [endOfWatchApi.reducerPath]: endOfWatchApi.reducer,
+  [sanctionApi.reducerPath]: sanctionApi.reducer,
+  [serviceWeaponApi.reducerPath]: serviceWeaponApi.reducer,
+  [vehicleAttributionApi.reducerPath]: vehicleAttributionApi.reducer,
 };
 
 export default RootReducers;

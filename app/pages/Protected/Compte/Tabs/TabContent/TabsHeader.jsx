@@ -4,7 +4,6 @@ import { Link, NavLink } from "react-router-dom";
 
 const TabsHeader = ({ onSelect, ...props }) => {
   const handleSelect = (value) => {
-    console.log(value);
     if (!onSelect) return;
     onSelect(section);
   };
@@ -22,7 +21,7 @@ const TabsHeader = ({ onSelect, ...props }) => {
         Info Personnel{" "}
       </NavLink>
       <NavLink
-        to="permis-ppa"
+        to="formations"
         className={(e) =>
           e.isActive
             ? "header-tab-btn bg-selected-theme-color"

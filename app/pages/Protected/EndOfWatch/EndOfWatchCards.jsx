@@ -42,10 +42,10 @@ const EndOfWatchCards = ({ agent }) => {
         <p className="text-upper">
           {factionsCollections[AGENT_FACTION].full_name}
         </p>
-        <p className="text-upper">
+        <p>
           <span>EOW: </span> {formatDateFullMonth(DATE_OF_EOW)}
         </p>
-        <p className="text-upper">
+        <p>
           <span>CAUSE: </span> {agent.reason}{" "}
         </p>
       </EndOfWatchDetail>

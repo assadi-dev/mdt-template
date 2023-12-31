@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   AsideBarUser,
   AsideBarUserDetail,
@@ -30,15 +30,16 @@ const Compte = () => {
     dispatch(hydrateUser(res.data));
   };
 
+  const promiseUserRef = useRef(new AbortController());
+
   useEffect(() => {
     if (!idAgent) return;
-    const controller = new AbortController();
 
-    const signal = controller.signal;
+    const signal = promiseUserRef.current?.signal;
     initUserData(signal);
 
     return () => {
-      controller.abort();
+      promiseUserRef.current?.abort();
     };
   }, [idAgent]);
 
