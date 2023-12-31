@@ -26,7 +26,7 @@ const VehicleTabContent = ({ idAgent }) => {
 
   const COLUMN = [
     {
-      Header: "Type véhivule",
+      Header: "Type véhicule",
       accessor: "typeVehicle",
     },
     {
@@ -34,7 +34,7 @@ const VehicleTabContent = ({ idAgent }) => {
       accessor: "idVehicle",
     },
     {
-      Header: "Immatriiculation véhicule",
+      Header: "Immatriculation véhicule",
       accessor: "immatriculation",
     },
     {
