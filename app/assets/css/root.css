@@ -92,6 +92,10 @@ body {
   cursor: default;
 }
 
+.text-azonix {
+  font-family: "Azonix", sans-serif;
+}
+
 .text-error {
   color: #480614;
   background: #bb7c7c;

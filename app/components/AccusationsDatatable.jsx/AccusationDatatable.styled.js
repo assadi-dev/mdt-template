@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const TableContainer = styled.table`
   font-size: 1.25rem;
   width: 100%;
-  border: 1px solid rgba(150, 150, 150, 0.5);
-  padding: 0 0.5rem;
-  border-radius: 5px;
+
   border-spacing: 0 10px;
   border-collapse: separate;
   width: 100%;
@@ -28,6 +26,8 @@ export const TableContainer = styled.table`
     border-spacing: 0 10px;
     border-collapse: separate;
     border-color: inherit;
+    max-height: 100px !important;
+    overflow-y: auto;
   }
 
   & tbody tr {

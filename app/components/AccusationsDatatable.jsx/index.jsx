@@ -25,6 +25,7 @@ const AccusationsDatatable = ({ columns = [], infractions = [], ...props }) => {
           </tr>
         ))}
       </thead>
+
       <tbody {...getTableBodyProps()}>
         {infractions.length > 0 ? (
           rows.map((row, i) => {

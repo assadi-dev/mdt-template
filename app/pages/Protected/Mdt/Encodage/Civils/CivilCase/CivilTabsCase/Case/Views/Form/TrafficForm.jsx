@@ -12,6 +12,9 @@ import ButtonWithLoader from "../../../../../../../../../../components/Button/Bu
 import ErrorInputSection from "../../../../../../../../../../components/Forms/ErrorInputSection";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
 import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx";
+import { TabAccusationContainer } from "../../Case.styled.jsx";
+import ShowTotalAmount from "./ShowTotalAmount.jsx";
+import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
 import SelectNominal from "./Selectnominal.jsx";
 
 const TrafficForm = ({
@@ -33,6 +36,10 @@ const TrafficForm = ({
     resolver: yupResolver(TrafficResolver),
   });
 
+  const handleSelectnominal = (value) => {
+    console.log(value);
+  };
+
   const TRAFFIC_COLUMNS = [
     {
       Header: "Chef d'accusation",
@@ -47,7 +54,13 @@ const TrafficForm = ({
       Header: "Amende",
       accessor: "",
       Cell: ({ row }) => {
-        return <SelectNominal />;
+        return (
+          <SelectNominal
+            nominalOptions={nominalOptionValues}
+            value={nominalOptionValues[3]}
+            onChange={handleSelectnominal}
+          />
+        );
       },
     },
   ];
@@ -58,6 +71,24 @@ const TrafficForm = ({
       label: "Atteinte à la pudeur",
       quantity: 1,
       amount: "800",
+    },
+    {
+      id: 2,
+      label: "Conduite dangereuse mineur",
+      quantity: 1,
+      amount: "1000",
+    },
+    {
+      id: 2,
+      label: "Conduite dangereuse mineur",
+      quantity: 1,
+      amount: "1000",
+    },
+    {
+      id: 2,
+      label: "Conduite dangereuse mineur",
+      quantity: 1,
+      amount: "1000",
     },
     {
       id: 2,
@@ -82,11 +113,16 @@ const TrafficForm = ({
         <ErrorInputSection errors={errors.infractions} />
       </FormControl>
       <FormControl>
-        <AccusationsDatatable
-          columns={TRAFFIC_COLUMNS}
-          infractions={infractions}
-          className="dataTable-theme-color"
-        />
+        <TabAccusationContainer className="border-theme-color-primary">
+          <AccusationsDatatable
+            columns={TRAFFIC_COLUMNS}
+            infractions={infractions}
+            className="dataTable-theme-color"
+          />
+        </TabAccusationContainer>
+      </FormControl>
+      <FormControl>
+        <ShowTotalAmount />
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
