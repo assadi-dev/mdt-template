@@ -67,6 +67,13 @@ class ArrestReport
      */
     private $agent;
 
+    public function __construct()
+    {
+        $this->conversionUp = false;
+
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

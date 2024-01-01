@@ -86,6 +86,18 @@ class ArrestFolder
      */
     private $agent;
 
+    public function __construct()
+    {
+        $this->mirandaLaw = false;
+        $this->healthcare = false;
+        $this->feed = false;
+        $this->avocat = false;
+    }
+
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -46,6 +46,11 @@ class Traffic
      */
     private $agent;
 
+    /**
+     * @ORM\Column(type="decimal", precision=16, scale=2)
+     */
+    private $amount;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Traffic
     public function setAgent(?Agent $agent): self
     {
         $this->agent = $agent;
+
+        return $this;
+    }
+
+    public function getAmount(): ?string
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(string $amount): self
+    {
+        $this->amount = $amount;
 
         return $this;
     }
