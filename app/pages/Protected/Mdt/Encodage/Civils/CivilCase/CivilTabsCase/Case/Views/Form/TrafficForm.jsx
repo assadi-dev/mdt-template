@@ -65,38 +65,7 @@ const TrafficForm = ({
     },
   ];
 
-  const infractions = [
-    {
-      id: 1,
-      label: "Atteinte à la pudeur",
-      quantity: 1,
-      amount: "800",
-    },
-    {
-      id: 2,
-      label: "Conduite dangereuse mineur",
-      quantity: 1,
-      amount: "1000",
-    },
-    {
-      id: 2,
-      label: "Conduite dangereuse mineur",
-      quantity: 1,
-      amount: "1000",
-    },
-    {
-      id: 2,
-      label: "Conduite dangereuse mineur",
-      quantity: 1,
-      amount: "1000",
-    },
-    {
-      id: 2,
-      label: "Conduite dangereuse mineur",
-      quantity: 1,
-      amount: "1000",
-    },
-  ];
+  const infractions = getValues("infractions");
 
   const submit = (values) => {
     onSubmitValue(values);

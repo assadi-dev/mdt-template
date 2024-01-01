@@ -90,5 +90,22 @@ class CodePenalRepository extends ServiceEntityRepository
 
     }
 
+    public function findByCategory($category)
+    {
+
+        $qb = $this->createQueryBuilder("cp");
+        $qb->select("cp.id,cp.label,cp.categorie,cp.sentence,cp.amount");
+        if(!isset($category) || $category != "all") {
+            $qb->where("cp.categorie = :category")
+            ->setParameter("category", $category);
+        }
+
+        $qb->orderBy("cp.createdAt", "DESC")
+          ->groupBy("cp.id");
+        $query =  $qb->getQuery();
+        return   $query->getResult();
+
+    }
+
 
 }
