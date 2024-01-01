@@ -10,7 +10,7 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
   return (
     <ModalFormContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title ">Ajouter une avertissement</h2>
+        <h2 className="form-title ">Avertissement</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <AvertissementForm />
