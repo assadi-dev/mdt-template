@@ -33,10 +33,10 @@ const PreviewComptabilite = ({ payload, onCloseModal, ...props }) => {
             <strong>Objet: </strong> {payload?.subject}
           </p>
         </Row>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p className="date">{payload?.date}</p>
         </Row>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p className="montant">
             <strong>Montant: </strong>
             {payload?.amount}$

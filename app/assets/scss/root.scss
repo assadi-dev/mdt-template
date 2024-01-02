@@ -91,6 +91,10 @@ body {
   cursor: default;
 }
 
+.text-azonix {
+  font-family: "Azonix", sans-serif;
+}
+
 .text-error {
   color: #480614;
   background: #bb7c7c;
@@ -145,16 +149,16 @@ body {
 .d-flex {
   display: flex;
 }
-.justiy-content-start {
+.justify-content-start {
   justify-content: flex-start;
 }
-.justiy-content-center {
+.justify-content-center {
   justify-content: center;
 }
-.justiy-content-end {
+.justify-content-end {
   justify-content: flex-end;
 }
-.justiy-content-between {
+.justify-content-between {
   justify-content: space-between;
 }
 
@@ -179,6 +183,15 @@ body {
 /** Margin **/
 .m-0 {
   margin: 0 !important;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 1.3rem;
+}
+.mt-3 {
+  margin-top: 1.8rem;
 }
 .mb-1 {
   margin-bottom: 1rem;

@@ -33,7 +33,7 @@ const PreviewAcquisition = ({ payload, onCloseModal, ...props }) => {
           </p>
         </Row>
 
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p className="date">{payload?.dateOfAcquisition}</p>
         </Row>
       </PreviewDocumentHeader>

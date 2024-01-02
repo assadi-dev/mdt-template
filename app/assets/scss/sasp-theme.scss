@@ -168,7 +168,8 @@ html:has(.theme-sasp) {
     & .Dropdown-option {
       background-color: rgba($color: variables.$lspd-primary-color, $alpha: 0);
       color: #444;
-      &:hover {
+      &:hover,
+      &.is-selected {
         background-color: rgba(
           $color: variables.$lspd-primary-color,
           $alpha: 1
@@ -544,6 +545,10 @@ html:has(.theme-sasp) {
       -ms-transition: background 0.35s;
       -o-transition: background 0.35s;
     }
+  }
+
+  .border-theme-color-primary {
+    border: 1px solid rgba($color: variables.$sasp-primary-color, $alpha: 0.5);
   }
 
   /*********/

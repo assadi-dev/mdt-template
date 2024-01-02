@@ -30,7 +30,7 @@ const PreviewSanctionView = ({ payload, onCloseModal, ...props }) => {
             <strong>Agent concerné: </strong> {payload?.agentConcerned}
           </p>
         </Row>
-        <Row className="justiy-content-between">
+        <Row className="justify-content-between">
           <p>
             {" "}
             <strong>Type de sanction: </strong> {payload?.typeSanction}

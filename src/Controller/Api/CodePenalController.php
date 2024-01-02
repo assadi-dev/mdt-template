@@ -50,4 +50,33 @@ class CodePenalController extends AbstractController
             return $response;
         }
     }
+
+
+
+    /**
+     * @Route("api/code_penals/category", name="app_codePenal_category", methods="GET" )
+     */
+    public function getcodePenal_by_category(Request $request): Response
+    {
+        try {
+
+
+            $category = $request->query->get("category");
+
+            if(!isset($category) || strlen($category) == 0) {
+                $category = "all";
+            }
+            $result = $this->codePenalRepository->findByCategory($category);
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+
+
+        } catch (\Throwable $th) {
+            $result = ["message" => $th->getMessage()];
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_INTERNAL_SERVER_ERROR, ["Content-Type" => "application/json"]);
+            return $response;
+        }
+    }
 }

@@ -35,7 +35,7 @@ const PreviewRapportIncident = ({
           <span className="text-bolder">Officier impliqués: </span>
           {payload?.officerImplicated}
         </p>
-        <Row className="justiy-content-between">
+        <Row className="justify-content-between">
           <p>
             <span className="text-bolder">Emplacement: </span>
             {payload?.location}

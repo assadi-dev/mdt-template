@@ -54,7 +54,7 @@ const PreviewGunfightReport = ({ payload, onCloseModal, ...props }) => {
             {location}
           </p>
         </div>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p>{datetimeFormatFr(createdAt?.date)}</p>
         </Row>
       </PreviewDocumentHeader>

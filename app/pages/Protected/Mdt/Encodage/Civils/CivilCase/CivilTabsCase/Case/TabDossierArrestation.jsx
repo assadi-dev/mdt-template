@@ -5,8 +5,19 @@ import { Button } from "../../../../../../../../components/PageContainer";
 import useLoader from "../../../../../../../../hooks/useLoader";
 import { execDelayed } from "../../../../../../../../services/utils/functions";
 import useDelayed from "../../../../../../../../hooks/useDelayed";
+import { createPortal } from "react-dom";
+import useModalState from "../../../../../../../../hooks/useModalState";
+import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
+import Modal from "../../../../../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
+import {
+  ADD_ARREST_FOLDER,
+  ListAddArrestFolderModalView,
+} from "./Views/modal/Arrest_folder/ArrestFolderlistView";
 
 const TabDossierArrestation = () => {
+  const { modalState, openModal, closeModal } = useModalState();
+
   const { loaderState, toggleLoader } = useLoader();
   useDelayed(toggleLoader, 1000);
 
@@ -22,10 +33,18 @@ const TabDossierArrestation = () => {
     },
   ];
 
+  const handleClickAddbtn = () => {
+    openModal({
+      view: ADD_ARREST_FOLDER,
+    });
+  };
+
   return (
     <>
       <CivilTabsContentRowAction>
-        <Button className="bg-btn-alt-theme-color">Ajouter</Button>
+        <Button className="bg-btn-alt-theme-color" onClick={handleClickAddbtn}>
+          Ajouter
+        </Button>
       </CivilTabsContentRowAction>
       <DataTable
         columns={columns}
@@ -34,6 +53,17 @@ const TabDossierArrestation = () => {
         isLoading={loaderState}
         isSuccess={!loaderState}
       />
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <RenderModalFormContent
+            view={modalState.view}
+            payload={modalState.data}
+            onCloseModal={closeModal}
+            enumOfView={ListAddArrestFolderModalView}
+          />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };

@@ -160,7 +160,7 @@ html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option {
   background-color: rgba(43, 125, 233, 0);
   color: #444;
 }
-html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option:hover {
+html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option:hover, html:has(.theme-sasp) .dropdown-select-custom .Dropdown-option.is-selected {
   background-color: #2b7de9;
   color: #fff;
 }
@@ -459,4 +459,7 @@ html:has(.theme-sasp) .form-tab-select .react-tabs__tab--selected {
   -moz-transition: background 0.35s;
   -ms-transition: background 0.35s;
   -o-transition: background 0.35s;
+}
+html:has(.theme-sasp) .border-theme-color-primary {
+  border: 1px solid rgba(150, 150, 150, 0.5);
 }/*# sourceMappingURL=sasp-theme.css.map */

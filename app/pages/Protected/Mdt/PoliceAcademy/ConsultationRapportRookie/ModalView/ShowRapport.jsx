@@ -47,7 +47,7 @@ const ShowRapport = ({ payload, onCloseModal, ...props }) => {
             {rookieFullname}
           </p>
         </div>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p>{datetimeFormatFr(createdAt?.date)}</p>
         </Row>
       </PreviewDocumentHeader>
