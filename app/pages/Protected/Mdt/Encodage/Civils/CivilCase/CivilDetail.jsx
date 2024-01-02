@@ -40,10 +40,12 @@ const CivilDetail = ({ civilData, ...props }) => {
           <p className="label">Née le</p>
           <p>{isNotAtribute(formatDatefrWithoutHour(birthdate))}</p>
         </li>
-        {/*       <li>
+        {/*  
+          <li>
           <p className="label">Addresse</p>
           <p>{isNotAtribute(address)}</p>
-        </li> */}
+        </li> 
+        */}
         <li>
           <p className="label">Téléphone</p>
           <p>{isNotAtribute(phone)}</p>
