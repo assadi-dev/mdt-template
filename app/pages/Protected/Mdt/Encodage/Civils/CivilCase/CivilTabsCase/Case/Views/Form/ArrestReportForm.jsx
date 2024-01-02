@@ -16,7 +16,7 @@ import {
 } from "../../Case.styled";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
 import { nominalOptionValues } from "../../../../../../../../../../config/options";
-import SelectNominal from "./Selectnominal";
+import SelectNominal from "./SelectNominal";
 import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate";
 import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx";
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader";

@@ -15,7 +15,7 @@ import AccusationsDatatable from "../../../../../../../../../../components/Accus
 import { TabAccusationContainer } from "../../Case.styled.jsx";
 import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
-import SelectNominal from "./Selectnominal.jsx";
+import SelectNominal from "./SelectNominal.jsx";
 import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
 
 const TrafficForm = ({
