@@ -26,8 +26,6 @@ export const TableContainer = styled.table`
     border-spacing: 0 10px;
     border-collapse: separate;
     border-color: inherit;
-    max-height: 100px !important;
-    overflow-y: auto;
   }
 
   & tbody tr {
