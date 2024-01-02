@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ArrestFolderResolver,
-  ArrestFolderValues,
-  ArrestReportResolver,
-  ArrestReportrValues,
-} from "./formResolver.js";
+import { ArrestFolderResolver, ArrestFolderValues } from "./formResolver.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import {
@@ -18,11 +13,10 @@ import {
   RowInputForm,
   SwitchAccusationBtn,
   TabAccusationContainer,
-  switchAccusationBtn,
 } from "../../Case.styled.jsx";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect.jsx";
 import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
-import SelectNominal from "./Selectnominal.jsx";
+import SelectNominal from "./SelectNominal.jsx";
 import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
 import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx/index.jsx";
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader.jsx";
