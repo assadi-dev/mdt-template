@@ -10,7 +10,10 @@ import useModalState from "../../../../../../../../hooks/useModalState";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
 import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
-import { ListAddArrestFolderModalView } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
+import {
+  ADD_ARREST_FOLDER,
+  ListAddArrestFolderModalView,
+} from "./Views/modal/Arrest_folder/ArrestFolderlistView";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -29,6 +32,12 @@ const TabDossierArrestation = () => {
       Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
     },
   ];
+
+  const handleClickAddbtn = () => {
+    openModal({
+      view: ADD_ARREST_FOLDER,
+    });
+  };
 
   return (
     <>

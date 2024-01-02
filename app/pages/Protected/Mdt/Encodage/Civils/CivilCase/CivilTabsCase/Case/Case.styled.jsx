@@ -19,18 +19,35 @@ export const TabAccusationContainer = styled.div`
 
 export const ShowAmountContainer = styled.div`
   margin: 1.3rem auto;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  grid-gap: 1.3rem;
   width: 100%;
-  min-height: 25px;
+  min-height: 35px;
   padding: 1.3rem;
   border-radius: 5px;
   p {
-    width: fit-content;
     white-space: nowrap;
   }
   @media screen and (min-width: 992px) {
     min-height: 60px;
     font-size: 1.6rem;
+    flex-direction: row;
+  }
+`;
+
+export const RowInputForm = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  .flex {
+    flex: 1;
+  }
+  .flex-25 {
+    flex: 0 25%;
   }
 `;

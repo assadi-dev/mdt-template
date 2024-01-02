@@ -1,5 +1,5 @@
 import React from "react";
-import AddArrestReportView from "./ArrestReportView";
+import AddArrestReportView from "./AddArrestReportView";
 
 export const ADD_ARREST_REPORT = "ADD_ARREST_REPORT";
 export const SHOW_ARREST_REPORT = "SHOW_ARREST_REPORT";

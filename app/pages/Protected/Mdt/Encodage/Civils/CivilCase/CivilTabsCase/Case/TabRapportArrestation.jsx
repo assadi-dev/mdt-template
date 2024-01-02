@@ -9,7 +9,10 @@ import useModalState from "../../../../../../../../hooks/useModalState";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
 import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
-import { ListAddArrestReportModalView } from "./Views/modal/Arrest_report/ArrestReportListView";
+import {
+  ADD_ARREST_REPORT,
+  ListAddArrestReportModalView,
+} from "./Views/modal/Arrest_report/ArrestReportListView";
 
 const TabRapportArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -28,10 +31,18 @@ const TabRapportArrestation = () => {
   const { loaderState, toggleLoader } = useLoader();
   useDelayed(toggleLoader, 1000);
 
+  const handleClickAddbtn = () => {
+    openModal({
+      view: ADD_ARREST_REPORT,
+    });
+  };
+
   return (
     <>
       <CivilTabsContentRowAction>
-        <Button className="bg-btn-alt-theme-color">Ajouter</Button>
+        <Button className="bg-btn-alt-theme-color" onClick={handleClickAddbtn}>
+          Ajouter
+        </Button>
       </CivilTabsContentRowAction>
       <DataTable
         columns={columns}
