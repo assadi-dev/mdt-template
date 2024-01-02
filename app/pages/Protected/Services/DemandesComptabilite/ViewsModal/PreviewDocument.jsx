@@ -36,10 +36,10 @@ const PreviewDocument = ({ previewData, onCloseModal, ...props }) => {
             <strong>Objet: </strong> {subject}
           </p>
         </Row>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p className="date">{date}</p>
         </Row>
-        <Row className="justiy-content-end">
+        <Row className="justify-content-end">
           <p className="montant">
             <strong>Montant: </strong>
             {amount} $

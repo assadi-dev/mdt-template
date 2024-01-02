@@ -8,9 +8,11 @@ export const CaseModalFormContainer = styled(ModalFormContainer)`
 `;
 
 export const TabAccusationContainer = styled.div`
-  min-height: 300px;
-  max-height: 330px;
-  overflow-y: auto;
+  min-height: 330px;
+
+  //max-height: 330px;
+  // overflow-y: auto;
+
   padding: 0 0.5rem;
   border-radius: 5px;
 `;

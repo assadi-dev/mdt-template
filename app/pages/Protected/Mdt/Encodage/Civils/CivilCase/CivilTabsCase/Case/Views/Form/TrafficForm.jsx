@@ -16,6 +16,7 @@ import { TabAccusationContainer } from "../../Case.styled.jsx";
 import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
 import SelectNominal from "./Selectnominal.jsx";
+import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
 
 const TrafficForm = ({
   defaultValues = TrafficValues,
@@ -76,6 +77,21 @@ const TrafficForm = ({
     onSubmitValue(values);
   };
 
+  const tableInstanceRef = React.useRef({});
+  const prevBtnRef = React.useRef(<button></button>);
+  const nextBtnRef = React.useRef(<button></button>);
+
+  const initTableInstance = (instance) => {
+    tableInstanceRef.current = instance;
+    tableInstanceRef.current?.canPreviousPage
+      ? prevBtnRef.current.removeAttribute("disabled")
+      : prevBtnRef.current.setAttribute("disabled", "");
+
+    tableInstanceRef.current?.canNextPage
+      ? nextBtnRef.current.removeAttribute("disabled")
+      : nextBtnRef.current.setAttribute("disabled", "");
+  };
+
   return (
     <FormContainer className="form-theme-color" onSubmit={handleSubmit(submit)}>
       <FormControl>
@@ -91,11 +107,20 @@ const TrafficForm = ({
         <ErrorInputSection errors={errors.infractions} />
       </FormControl>
       <FormControl>
+        <div className="d-flex justify-content-end">
+          <AccusationTablePaginate
+            pageIndex={tableInstanceRef.current?.pageIndex}
+            instance={tableInstanceRef.current}
+            prevBtnRef={prevBtnRef}
+            nextBtnRef={nextBtnRef}
+          />
+        </div>
         <TabAccusationContainer className="border-theme-color-primary">
           <AccusationsDatatable
             columns={TRAFFIC_COLUMNS}
             infractions={watch("infractions") && infractions}
             className="dataTable-theme-color"
+            getTablePagingationInstance={initTableInstance}
           />
         </TabAccusationContainer>
       </FormControl>

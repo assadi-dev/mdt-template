@@ -27,7 +27,7 @@ const ShowPlainte = ({ onCloseModal = () => {}, payload, ...props }) => {
           <span className="text-bolder">Dépositaire: </span>
           {payload?.depository}
         </p>
-        <Row className="justiy-content-between">
+        <Row className="justify-content-between">
           <p>
             <span className="text-bolder">Accusé: </span>
             {payload?.accused}

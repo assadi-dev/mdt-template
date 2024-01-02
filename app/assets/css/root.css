@@ -156,19 +156,19 @@ body {
   display: flex;
 }
 
-.justiy-content-start {
+.justify-content-start {
   justify-content: flex-start;
 }
 
-.justiy-content-center {
+.justify-content-center {
   justify-content: center;
 }
 
-.justiy-content-end {
+.justify-content-end {
   justify-content: flex-end;
 }
 
-.justiy-content-between {
+.justify-content-between {
   justify-content: space-between;
 }
 

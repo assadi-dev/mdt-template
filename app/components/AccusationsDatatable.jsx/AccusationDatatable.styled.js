@@ -67,3 +67,26 @@ export const TableContainer = styled.table`
     }
   }
 `;
+
+export const TablePageContainer = styled.div`
+  display: flex;
+  width: fit-content;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  button {
+    flex: 0;
+    display: grid;
+    place-items: center;
+    min-width: 25px;
+    padding: 0.6rem;
+    &:active {
+      opacity: 0;
+    }
+    height: 25px;
+    border-radius: 5px;
+  }
+  &:disabled {
+    opacity: 0.5 !important;
+  }
+`;
