@@ -1,5 +1,11 @@
 import React from "react";
 import { TablePageContainer } from "./AccusationDatatable.styled";
+import {
+  CgPushChevronLeft,
+  CgPushChevronRight,
+  CgChevronLeft,
+  CgChevronRight,
+} from "react-icons/cg";
 
 const AccusationTablePaginate = ({
   pageIndex = 1,
@@ -7,8 +13,6 @@ const AccusationTablePaginate = ({
   prevBtnRef,
   nextBtnRef,
 }) => {
-  console.log(instance);
-
   const handleClickNext = () => {
     instance?.nextPage();
   };
@@ -25,7 +29,7 @@ const AccusationTablePaginate = ({
           ref={prevBtnRef}
           className="bg-btn-theme-color"
         >
-          {"<"}
+          <CgChevronLeft />
         </button>
       }
 
@@ -35,7 +39,7 @@ const AccusationTablePaginate = ({
         ref={nextBtnRef}
         className="bg-btn-theme-color"
       >
-        {">"}
+        <CgChevronRight />
       </button>
     </TablePageContainer>
   );

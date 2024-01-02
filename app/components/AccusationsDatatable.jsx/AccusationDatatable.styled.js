@@ -79,14 +79,20 @@ export const TablePageContainer = styled.div`
     display: grid;
     place-items: center;
     min-width: 25px;
-    padding: 0.6rem;
+
     &:active {
       opacity: 0;
     }
     height: 25px;
     border-radius: 5px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
-  &:disabled {
-    opacity: 0.5 !important;
+  [disabled],
+  :disabled {
+    opacity: 0.3 !important;
   }
 `;

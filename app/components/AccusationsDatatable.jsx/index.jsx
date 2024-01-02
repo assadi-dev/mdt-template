@@ -56,7 +56,7 @@ const AccusationsDatatable = ({
       previousPage,
       setPageSize,
     };
-    console.log(canPreviousPage);
+
     getTablePagingationInstance(instance);
   }, [pageIndex, canNextPage, canPreviousPage]);
 
