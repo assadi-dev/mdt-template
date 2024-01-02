@@ -30,6 +30,7 @@ const TrafficForm = ({
     setValue,
     getValues,
     setError,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -67,6 +68,10 @@ const TrafficForm = ({
 
   const infractions = getValues("infractions");
 
+  const handleSelectedInfractions = (infraction) => {
+    setValue("infractions", infraction);
+  };
+
   const submit = (values) => {
     onSubmitValue(values);
   };
@@ -78,14 +83,18 @@ const TrafficForm = ({
         <ErrorInputSection errors={errors.location} />
       </FormControl>
       <FormControl>
-        <ChefAccusationInoutSelect placeholder="Séléctionnez les chef d'accusations" />
+        <ChefAccusationInoutSelect
+          defaultValue={getValues("infractions")}
+          placeholder="Séléctionnez les chef d'accusations"
+          onSelected={handleSelectedInfractions}
+        />
         <ErrorInputSection errors={errors.infractions} />
       </FormControl>
       <FormControl>
         <TabAccusationContainer className="border-theme-color-primary">
           <AccusationsDatatable
             columns={TRAFFIC_COLUMNS}
-            infractions={infractions}
+            infractions={watch("infractions") && infractions}
             className="dataTable-theme-color"
           />
         </TabAccusationContainer>

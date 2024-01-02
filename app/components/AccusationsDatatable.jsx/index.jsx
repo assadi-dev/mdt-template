@@ -3,8 +3,14 @@ import { TableContainer } from "./AccusationDatatable.styled";
 import { useTable } from "react-table";
 
 const AccusationsDatatable = ({ columns = [], infractions = [], ...props }) => {
-  const columnData = React.useMemo(() => columns, [columns]);
-  const rowData = React.useMemo(() => infractions, infractions);
+  const columnData = React.useMemo(() => {
+    if (!columns) return [];
+    return columns;
+  }, [columns]);
+  const rowData = React.useMemo(() => {
+    if (!infractions) return [];
+    return infractions;
+  }, [infractions]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
@@ -27,26 +33,22 @@ const AccusationsDatatable = ({ columns = [], infractions = [], ...props }) => {
       </thead>
 
       <tbody {...getTableBodyProps()}>
-        {infractions.length > 0 ? (
-          rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr key={i} {...row.getRowProps()}>
-                {row.cells.map((cell, i) => {
-                  return (
-                    <td key={i} {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })
-        ) : (
-          <tr>
-            <td colSpan={headerGroups[0].headers.length + 1}></td>
-          </tr>
-        )}
+        {infractions.length > 0
+          ? rows.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr key={i} {...row.getRowProps()}>
+                  {row.cells.map((cell, i) => {
+                    return (
+                      <td key={i} {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          : null}
       </tbody>
     </TableContainer>
   );

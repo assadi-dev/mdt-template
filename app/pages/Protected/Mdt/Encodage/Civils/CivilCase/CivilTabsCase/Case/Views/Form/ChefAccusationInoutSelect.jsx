@@ -2,7 +2,12 @@ import React from "react";
 import SelectAsync from "../../../../../../../../../../components/SelectAsync";
 import { useGetCodePenalByCategoryQuery } from "../../../../../../../../../../features/CodePenals/CodePenalApi";
 
-const ChefAccusationInoutSelect = ({ category = "all", ...props }) => {
+const ChefAccusationInoutSelect = ({
+  category = "all",
+  defaultValue = [],
+  onSelected = () => {},
+  ...props
+}) => {
   const payload = {
     params: category,
   };
@@ -12,7 +17,7 @@ const ChefAccusationInoutSelect = ({ category = "all", ...props }) => {
     if (!data) return [];
     return [...data].map((codePenal) => ({
       id: codePenal.id,
-      value: codePenal.label,
+      value: codePenal.id,
       label: codePenal.label,
       sentence: codePenal.sentence,
       amount: Number(codePenal.amount),
@@ -27,6 +32,8 @@ const ChefAccusationInoutSelect = ({ category = "all", ...props }) => {
       isLoading={isLoading}
       isMulti
       closeMenuOnSelect={false}
+      defaultValue={defaultValue}
+      onChange={onSelected}
     />
   );
 };
