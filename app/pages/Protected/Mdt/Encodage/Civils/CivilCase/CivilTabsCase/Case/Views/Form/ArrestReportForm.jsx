@@ -66,10 +66,7 @@ const ArrestReportForm = ({
       Header: "Tentative",
       accessor: "tentative",
       Cell: ({ row }) => (
-        <SwitchAccusationBtn
-          height={18}
-          className="mx-auto text-center toggle-custom"
-        />
+        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
       ),
     },
     {
