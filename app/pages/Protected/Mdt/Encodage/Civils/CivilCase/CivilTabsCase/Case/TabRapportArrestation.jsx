@@ -4,8 +4,16 @@ import { Button } from "../../../../../../../../components/PageContainer";
 import DataTable from "../../../../../../../../components/DataTable";
 import useDelayed from "../../../../../../../../hooks/useDelayed";
 import useLoader from "../../../../../../../../hooks/useLoader";
+import { createPortal } from "react-dom";
+import useModalState from "../../../../../../../../hooks/useModalState";
+import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
+import Modal from "../../../../../../../../components/Modal/Modal";
+import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
+import { ListAddArrestReportModalView } from "./Views/modal/Arrest_report/ArrestReportListView";
 
 const TabRapportArrestation = () => {
+  const { modalState, openModal, closeModal } = useModalState();
+
   const columns = [
     { Header: "N° Dossier", accessor: "id" },
     { Header: "Agent", accessor: "agent" },
@@ -32,6 +40,17 @@ const TabRapportArrestation = () => {
         isLoading={loaderState}
         isSuccess={!loaderState}
       />
+      {createPortal(
+        <Modal isOpen={modalState.isOpen}>
+          <RenderModalFormContent
+            view={modalState.view}
+            payload={modalState.data}
+            onCloseModal={closeModal}
+            enumOfView={ListAddArrestReportModalView}
+          />
+        </Modal>,
+        document.body
+      )}
     </>
   );
 };
