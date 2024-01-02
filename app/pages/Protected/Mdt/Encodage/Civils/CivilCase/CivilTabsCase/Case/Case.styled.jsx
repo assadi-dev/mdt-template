@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ModalFormContainer } from "../../../../../../../../components/Forms/FormView.styled";
+import SwitchButton from "../../../../../../../../components/Button/SwitchButton";
 
 export const CaseModalFormContainer = styled(ModalFormContainer)`
   @media screen and (min-width: 992px) {
@@ -49,5 +50,16 @@ export const RowInputForm = styled.div`
   }
   .flex-25 {
     flex: 0 25%;
+  }
+`;
+
+export const SwitchAccusationBtn = styled(SwitchButton)`
+  .react-toggle-track {
+    height: 18px;
+    width: 44px;
+  }
+  .react-toggle-thumb {
+    height: 16px;
+    width: 16px;
   }
 `;

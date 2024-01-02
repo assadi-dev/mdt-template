@@ -8,7 +8,12 @@ import {
   ModalFooter,
 } from "../../../../../../../../../../components/Forms/FormView.styled";
 import ErrorInputSection from "../../../../../../../../../../components/Forms/ErrorInputSection";
-import { RowInputForm, TabAccusationContainer } from "../../Case.styled";
+import {
+  RowInputForm,
+  SwitchAccusationBtn,
+  TabAccusationContainer,
+  switchAccusationBtn,
+} from "../../Case.styled";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
 import { nominalOptionValues } from "../../../../../../../../../../config/options";
 import SelectNominal from "./Selectnominal";
@@ -60,15 +65,26 @@ const ArrestReportForm = ({
     {
       Header: "Tentative",
       accessor: "tentative",
+      Cell: ({ row }) => (
+        <SwitchAccusationBtn
+          height={18}
+          className="mx-auto text-center toggle-custom"
+        />
+      ),
     },
     {
       Header: "Complicité",
       accessor: "complicity",
+      Cell: ({ row }) => (
+        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
+      ),
     },
     {
       Header: "Quantité",
       accessor: "quantity",
-      Cell: ({ value }) => <input type="number" defaultValue={value} />,
+      Cell: ({ row }) => (
+        <input type="number" defaultValue={row.original.quantity} />
+      ),
     },
     {
       Header: "Amende",
@@ -134,7 +150,7 @@ const ArrestReportForm = ({
             Conversion $ -&gt; UP
           </label>
           <div className="d-flex justify-center mt-2">
-            <SwitchButton className="mx-auto text-center" />
+            <SwitchButton className="mx-auto text-center toggle-custom" />
           </div>
         </FormControl>
       </RowInputForm>
