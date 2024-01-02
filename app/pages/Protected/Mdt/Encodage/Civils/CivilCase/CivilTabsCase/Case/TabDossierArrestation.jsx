@@ -42,7 +42,9 @@ const TabDossierArrestation = () => {
   return (
     <>
       <CivilTabsContentRowAction>
-        <Button className="bg-btn-alt-theme-color">Ajouter</Button>
+        <Button className="bg-btn-alt-theme-color" onClick={handleClickAddbtn}>
+          Ajouter
+        </Button>
       </CivilTabsContentRowAction>
       <DataTable
         columns={columns}

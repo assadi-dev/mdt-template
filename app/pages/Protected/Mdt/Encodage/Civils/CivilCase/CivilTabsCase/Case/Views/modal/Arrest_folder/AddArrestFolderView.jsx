@@ -2,6 +2,7 @@ import React from "react";
 import { ArrestFolderFormContainer } from "./ArrestFolder.styled";
 import { HeaderModal } from "../../../../../../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../../../../../../components/Modal/CloseModalBtn";
+import ArrestFolderForm from "../../Form/ArrestFolderForm";
 
 const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
   return (
@@ -10,6 +11,7 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title ">Dossier d'arrestation</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
+      <ArrestFolderForm />
     </ArrestFolderFormContainer>
   );
 };

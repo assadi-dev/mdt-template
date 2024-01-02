@@ -1,30 +1,36 @@
 import React from "react";
-import { ArrestReportResolver, ArrestReportrValues } from "./formResolver";
+import {
+  ArrestFolderResolver,
+  ArrestFolderValues,
+  ArrestReportResolver,
+  ArrestReportrValues,
+} from "./formResolver.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import {
   FormContainer,
   FormControl,
   ModalFooter,
-} from "../../../../../../../../../../components/Forms/FormView.styled";
-import ErrorInputSection from "../../../../../../../../../../components/Forms/ErrorInputSection";
+} from "../../../../../../../../../../components/Forms/FormView.styled.jsx";
+import ErrorInputSection from "../../../../../../../../../../components/Forms/ErrorInputSection.jsx";
 import {
+  LawSwitchRowContainer,
   RowInputForm,
   SwitchAccusationBtn,
   TabAccusationContainer,
   switchAccusationBtn,
-} from "../../Case.styled";
-import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
-import { nominalOptionValues } from "../../../../../../../../../../config/options";
-import SelectNominal from "./Selectnominal";
-import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate";
-import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx";
-import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader";
-import ShowTotalAmount from "./ShowTotalAmount";
+} from "../../Case.styled.jsx";
+import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect.jsx";
+import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
+import SelectNominal from "./Selectnominal.jsx";
+import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
+import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx/index.jsx";
+import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader.jsx";
+import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 
-const ArrestReportForm = ({
-  defaultValues = ArrestReportrValues,
+const ArrestFolderForm = ({
+  defaultValues = ArrestFolderValues,
   onSubmitValue,
   process = false,
   labelSubmit = "Ajouter",
@@ -40,7 +46,7 @@ const ArrestReportForm = ({
     formState: { errors },
   } = useForm({
     defaultValues,
-    resolver: yupResolver(ArrestReportResolver),
+    resolver: yupResolver(ArrestFolderResolver),
   });
 
   const handleSelectnominal = (value) => {
@@ -123,11 +129,11 @@ const ArrestReportForm = ({
   return (
     <FormContainer className="form-theme-color" onSubmit={handleSubmit(submit)}>
       <RowInputForm>
-        <FormControl className="flex">
+        <FormControl className="flex-75">
           <label className="text-center" htmlFor="">
             Lieux
           </label>
-          <div className="flex-align input-form ">
+          <div className="flex-align input-form">
             <input type="text" {...register("location")} placeholder="Lieux" />
           </div>
           <ErrorInputSection errors={errors.location} />
@@ -136,7 +142,7 @@ const ArrestReportForm = ({
           <label htmlFor="" className="text-center">
             Entrée cellule
           </label>
-          <div className="flex-align input-form ">
+          <div className="flex-align input-form">
             <input
               className="text-center "
               type="time"
@@ -146,15 +152,27 @@ const ArrestReportForm = ({
           </div>
           <ErrorInputSection errors={errors.dateOfEntry} />
         </FormControl>
-        <FormControl className="flex-25">
-          <label htmlFor="" className="text-center">
-            Conversion $ -&gt; UP
-          </label>
-          <div className="flex-align input-form ">
-            <SwitchButton className="mx-auto text-center toggle-custom" />
-          </div>
-        </FormControl>
       </RowInputForm>
+
+      <LawSwitchRowContainer className="border-theme-color-primary">
+        <FormControl className="text-center">
+          <label htmlFor="">Droit Miranda</label>
+          <SwitchButton className="toggle-custom" />
+        </FormControl>
+        <FormControl className="text-center">
+          <label htmlFor="">Soins</label>
+          <SwitchButton className="toggle-custom" />
+        </FormControl>
+        <FormControl className="text-center">
+          <label htmlFor="">Nouriture</label>
+          <SwitchButton className="toggle-custom" />
+        </FormControl>
+        <FormControl className="text-center">
+          <label htmlFor="">Avocat</label>
+          <SwitchButton className="toggle-custom" />
+        </FormControl>
+      </LawSwitchRowContainer>
+
       <FormControl>
         <ChefAccusationInoutSelect
           defaultValue={getValues("infractions")}
@@ -196,4 +214,4 @@ const ArrestReportForm = ({
   );
 };
 
-export default ArrestReportForm;
+export default ArrestFolderForm;
