@@ -16,14 +16,15 @@ import AccusationTablePaginate from "../../../../../../../../../../components/Ac
 import AccusationsDatatable from "../../../../../../../../../../components/AccusationsDatatable.jsx";
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader";
 import ShowTotalAmount from "./ShowTotalAmount";
+import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 
-const ArrestReportForm = (
+const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
   onSubmitValue,
   process = false,
   labelSubmit = "Ajouter",
   ...props
-) => {
+}) => {
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ const ArrestReportForm = (
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues,
+    defaultValues: ArrestReportrValues,
     resolver: yupResolver(ArrestReportResolver),
   });
 
@@ -110,12 +111,16 @@ const ArrestReportForm = (
     <FormContainer className="form-theme-color" onSubmit={handleSubmit(submit)}>
       <RowInputForm>
         <FormControl className="flex">
-          <label htmlFor="">Lieux</label>
+          <label className="text-center" htmlFor="">
+            Lieux
+          </label>
           <input type="text" {...register("location")} placeholder="Lieux" />
           <ErrorInputSection errors={errors.location} />
         </FormControl>
         <FormControl className="flex-25">
-          <label htmlFor="">Entrée cellule</label>
+          <label htmlFor="" className="text-center">
+            Entrée cellule
+          </label>
           <input
             className="text-center "
             type="time"
@@ -124,10 +129,13 @@ const ArrestReportForm = (
           />
           <ErrorInputSection errors={errors.dateOfEntry} />
         </FormControl>
-        <FormControl className="flex">
-          <label htmlFor="">Conversion $ -> UP</label>
-          <input type="text" {...register("location")} placeholder="Lieux" />
-          <ErrorInputSection errors={errors.location} />
+        <FormControl className="flex-25">
+          <label htmlFor="" className="text-center">
+            Conversion $ -&gt; UP
+          </label>
+          <div className="d-flex justify-center mt-2">
+            <SwitchButton className="mx-auto text-center" />
+          </div>
         </FormControl>
       </RowInputForm>
       <FormControl>

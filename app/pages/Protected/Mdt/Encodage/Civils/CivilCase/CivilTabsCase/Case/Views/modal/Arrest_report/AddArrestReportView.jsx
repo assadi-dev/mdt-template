@@ -11,7 +11,7 @@ const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title ">Rapport d'arrestation</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <ArrestReportForm />
+      <ArrestReportForm   />
     </ArrestReportFormContainer>
   );
 };

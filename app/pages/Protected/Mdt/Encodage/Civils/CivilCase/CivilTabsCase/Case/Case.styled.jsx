@@ -23,7 +23,7 @@ export const ShowAmountContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  grid-gap: 1.3rem;
+  grid-gap: 1.56rem;
   width: 100%;
   min-height: 35px;
   padding: 1.3rem;
@@ -41,7 +41,7 @@ export const ShowAmountContainer = styled.div`
 export const RowInputForm = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
   width: 100%;
   gap: 1rem;
   .flex {
