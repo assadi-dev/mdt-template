@@ -22,7 +22,11 @@ import AccusationsDatatable from "../../../../../../../../../../components/Accus
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader";
 import ShowTotalAmount from "./ShowTotalAmount";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
-import { calculateSentence } from "../../../../../helpers.jsx";
+import {
+  calculateSentence,
+  updateInfraction,
+} from "../../../../../helpers.jsx";
+import InputQuantity from "./InputQuantity.jsx";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -44,8 +48,11 @@ const ArrestReportForm = ({
     resolver: yupResolver(ArrestReportResolver),
   });
 
-  const handleSelectnominal = (value) => {
-    console.log(value);
+  const handleSelectnominal = (infraction) => {
+    updateInfraction(infraction, getValues, setValue);
+  };
+  const handleChangeQuantity = (infraction) => {
+    updateInfraction(infraction, getValues, setValue);
   };
 
   const infractions = getValues("infractions");
@@ -81,7 +88,10 @@ const ArrestReportForm = ({
       Header: "Quantité",
       accessor: "quantity",
       Cell: ({ row }) => (
-        <input type="number" defaultValue={row.original.quantity} />
+        <InputQuantity
+          infraction={row.original}
+          onChange={handleChangeQuantity}
+        />
       ),
     },
     {
@@ -90,8 +100,8 @@ const ArrestReportForm = ({
       Cell: ({ row }) => {
         return (
           <SelectNominal
+            infraction={row.original}
             nominalOptions={nominalOptionValues}
-            value={nominalOptionValues[3]}
             onChange={handleSelectnominal}
           />
         );
@@ -101,9 +111,9 @@ const ArrestReportForm = ({
       Header: "Peine",
       accessor: "sentence",
       Cell: ({ row }) => {
-        const { sentence, quantity } = row.original;
+        const { sentence, nominal, quantity } = row.original;
         console.log(row.original);
-        const result = calculateSentence(quantity, 1, sentence);
+        const result = calculateSentence(quantity, nominal, sentence);
 
         return result;
       },

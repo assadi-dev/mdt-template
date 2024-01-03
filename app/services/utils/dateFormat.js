@@ -87,7 +87,7 @@ export const hoursMinFormatBySec = (seconds) => {
   if (hours > 23)
     return sf
       .convert(seconds)
-      .format(`D jour${hours > 24 ? "s" : ""} et MM min`);
+      .format(`D jour${hours > 48 ? "s" : ""} H heures M min`);
   return sf.convert(seconds).format("HH:MM");
 };
 

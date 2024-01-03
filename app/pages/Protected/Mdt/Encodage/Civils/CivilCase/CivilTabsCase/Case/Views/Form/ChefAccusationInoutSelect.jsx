@@ -21,9 +21,10 @@ const ChefAccusationInoutSelect = ({
       label: codePenal.label,
       sentence: codePenal.sentence,
       amount: Number(codePenal.amount),
-      totalSentence: codePenal.sentence,
-      totalAmount: Number(codePenal.amount),
+      attempt: 1,
+      complicity: 1,
       quantity: 1,
+      nominal: 1,
     }));
   }, [data]);
 
