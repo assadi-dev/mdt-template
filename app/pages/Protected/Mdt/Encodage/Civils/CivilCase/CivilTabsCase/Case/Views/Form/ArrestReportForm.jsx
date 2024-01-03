@@ -30,6 +30,7 @@ import InputQuantity from "./InputQuantity.jsx";
 import AttemptSwitchBtn from "./SwitchBtn/AttemptSwitchBtn.jsx";
 import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
+import TotalSentensesText from "./SwitchBtn/TotalSentensesText.jsx";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -133,20 +134,7 @@ const ArrestReportForm = ({
     {
       Header: "Peine",
       accessor: "sentence",
-      Cell: ({ row }) => {
-        const { sentence, nominal, quantity, attempt, complicity } =
-          row.original;
-
-        const result = calculateSentence(
-          quantity,
-          nominal,
-          sentence,
-          attempt,
-          complicity
-        );
-
-        return result;
-      },
+      Cell: ({ row }) => <TotalSentensesText infraction={row.original} />,
     },
   ];
 
