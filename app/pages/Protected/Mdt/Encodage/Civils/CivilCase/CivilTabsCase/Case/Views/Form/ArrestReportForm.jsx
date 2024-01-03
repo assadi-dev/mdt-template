@@ -12,7 +12,6 @@ import {
   RowInputForm,
   SwitchAccusationBtn,
   TabAccusationContainer,
-  switchAccusationBtn,
 } from "../../Case.styled";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
 import { nominalOptionValues } from "../../../../../../../../../../config/options";
@@ -27,6 +26,9 @@ import {
   updateInfraction,
 } from "../../../../../helpers.jsx";
 import InputQuantity from "./InputQuantity.jsx";
+import AttemptSwitchBtn from "./SwitchBtn/AttemptSwitchBtn.jsx";
+import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
+import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -48,18 +50,23 @@ const ArrestReportForm = ({
     resolver: yupResolver(ArrestReportResolver),
   });
 
-  const handleSelectnominal = (infraction) => {
-    updateInfraction(infraction, getValues, setValue);
-  };
-  const handleChangeQuantity = (infraction) => {
-    updateInfraction(infraction, getValues, setValue);
-  };
-
   const infractions = getValues("infractions");
 
-  const handleSelectedInfractions = (infraction) => {
-    setValue("infractions", infraction);
-  };
+  const handleChangeInput = React.useCallback(
+    (infraction) => {
+      const updatedCollection = updateInfraction(infraction, infractions);
+      const callback = () => setValue("infractions", updatedCollection);
+      execDelayed(callback, 600);
+    },
+    [getValues("infractions")]
+  );
+
+  const handleSelectedInfractions = React.useCallback(
+    (selected) => {
+      setValue("infractions", selected);
+    },
+    [getValues("infractions")]
+  );
 
   const submit = (values) => {
     onSubmitValue(values);
@@ -74,24 +81,27 @@ const ArrestReportForm = ({
       Header: "Tentative",
       accessor: "tentative",
       Cell: ({ row }) => (
-        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
+        <AttemptSwitchBtn
+          infraction={row.original}
+          onChange={handleChangeInput}
+        />
       ),
     },
     {
       Header: "Complicité",
       accessor: "complicity",
       Cell: ({ row }) => (
-        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
+        <ComplicitySwitchBtn
+          infraction={row.original}
+          onChange={handleChangeInput}
+        />
       ),
     },
     {
       Header: "Quantité",
       accessor: "quantity",
       Cell: ({ row }) => (
-        <InputQuantity
-          infraction={row.original}
-          onChange={handleChangeQuantity}
-        />
+        <InputQuantity infraction={row.original} onChange={handleChangeInput} />
       ),
     },
     {
@@ -102,7 +112,7 @@ const ArrestReportForm = ({
           <SelectNominal
             infraction={row.original}
             nominalOptions={nominalOptionValues}
-            onChange={handleSelectnominal}
+            onChange={handleChangeInput}
           />
         );
       },
@@ -111,9 +121,16 @@ const ArrestReportForm = ({
       Header: "Peine",
       accessor: "sentence",
       Cell: ({ row }) => {
-        const { sentence, nominal, quantity } = row.original;
-        console.log(row.original);
-        const result = calculateSentence(quantity, nominal, sentence);
+        const { sentence, nominal, quantity, attempt, complicity } =
+          row.original;
+
+        const result = calculateSentence(
+          quantity,
+          nominal,
+          sentence,
+          attempt,
+          complicity
+        );
 
         return result;
       },
