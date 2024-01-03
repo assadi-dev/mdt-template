@@ -102,8 +102,8 @@ const ArrestReportForm = ({
       accessor: "sentence",
       Cell: ({ row }) => {
         const { sentence, quantity } = row.original;
-
-        const result = calculateSentence(2, 1, sentence);
+        console.log(row.original);
+        const result = calculateSentence(quantity, 1, sentence);
 
         return result;
       },
