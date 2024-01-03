@@ -22,6 +22,7 @@ import AccusationsDatatable from "../../../../../../../../../../components/Accus
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader";
 import ShowTotalAmount from "./ShowTotalAmount";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
+import { calculateSentence } from "../../../../../helpers.jsx";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -99,6 +100,13 @@ const ArrestReportForm = ({
     {
       Header: "Peine",
       accessor: "sentence",
+      Cell: ({ row }) => {
+        const { sentence, quantity } = row.original;
+
+        const result = calculateSentence(2, 1, sentence);
+
+        return result;
+      },
     },
   ];
 

@@ -61,8 +61,11 @@ export const TableContainer = styled.table`
 
       input {
         padding: 0.5rem !important;
-        width: fit-content !important;
+        width: auto;
         text-align: center;
+        @media screen and (min-width: 992px) {
+          max-width: 100px;
+        }
       }
     }
   }
