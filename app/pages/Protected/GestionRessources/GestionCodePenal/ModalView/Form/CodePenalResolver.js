@@ -16,7 +16,7 @@ export const codePenalResolver = yup.object().shape({
     .string()
     .matches(
       /^([0-9]{1,}|d{1,}):([0-9]{1,}|d{1,})$/,
-      ` Veuillez renseigner la durée de peine "HH:MM"`
+      `Veuillez renseigner la durée de peine "HH:MM"`
     )
     .required(requiredMessage),
 });
