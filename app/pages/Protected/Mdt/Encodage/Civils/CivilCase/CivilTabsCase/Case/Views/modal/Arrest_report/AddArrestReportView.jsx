@@ -3,6 +3,7 @@ import { HeaderModal } from "../../../../../../../../../../../components/Forms/F
 import CloseModalBtn from "../../../../../../../../../../../components/Modal/CloseModalBtn";
 import { ArrestReportFormContainer } from "./ArrestReport.styled";
 import ArrestReportForm from "../../Form/ArrestReportForm";
+import { MainViewContainer } from "../Arrest_folder/ArrestFolder.styled";
 
 const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
   return (
@@ -11,7 +12,9 @@ const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title ">Rapport d'arrestation</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <ArrestReportForm   />
+      <MainViewContainer>
+        <ArrestReportForm />
+      </MainViewContainer>
     </ArrestReportFormContainer>
   );
 };
