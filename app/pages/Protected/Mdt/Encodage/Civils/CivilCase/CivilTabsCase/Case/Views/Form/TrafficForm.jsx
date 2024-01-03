@@ -103,6 +103,7 @@ const TrafficForm = ({
           defaultValue={getValues("infractions")}
           placeholder="Séléctionnez les chef d'accusations"
           onSelected={handleSelectedInfractions}
+          category="Contravention"
         />
         <ErrorInputSection errors={errors.infractions} />
       </FormControl>
