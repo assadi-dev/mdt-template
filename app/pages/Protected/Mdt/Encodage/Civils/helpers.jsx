@@ -9,12 +9,16 @@ export const saveCivil = (body) => {
 };
 
 // Calcule
+//Atempt = 0.25
+//Complicity = 0.6
 
 /**
  * Calcule de la peine
  * @param {number} quantity
  * @param {number} nominal
  * @param {string} sentence
+ * @param {number} attempt
+ * @param {number} complicity
  * @returns
  */
 export const calculateSentence = (
@@ -29,6 +33,32 @@ export const calculateSentence = (
   return hoursMinFormatBySec(total);
 };
 
+/**
+ * Calcule du montant de l'infraction
+ * @param {number} amount
+ * @param {number} quantity
+ * @param {number} nominal
+ * @param {number} attempt
+ * @param {number} complicity
+ * @returns
+ */
+export const calculateAmount = (
+  amount = 0,
+  quantity = 1,
+  nominal = 1,
+  attempt = 1,
+  complicity = 1
+) => {
+  const total = amount * nominal * quantity * attempt * complicity;
+  return total;
+};
+
+/**
+ * mise à jour de la listes des infractions
+ * @param {*} infraction
+ * @param {*} infractionsCollections
+ * @returns
+ */
 export const updateInfraction = (infraction, infractionsCollections = []) => {
   const updatedCollection = [...infractionsCollections].map((item) => {
     if (item.id == infraction.id) {
@@ -40,8 +70,25 @@ export const updateInfraction = (infraction, infractionsCollections = []) => {
   return updatedCollection;
 };
 
-//Atempt = 0.25
-//Complicity = 0.6
+/**
+ * Total des montants des infraction
+ * @param {*} infractions
+ */
+export const sumOfAmount = (infractions) => {
+  const listofAmount = [...infractions].map((infraction) => {
+    const { amount, quantity, nominal, attempt, complicity } = infraction;
+    return calculateAmount(
+      Number(amount),
+      quantity,
+      nominal,
+      attempt,
+      complicity
+    );
+  });
+  return listofAmount.length > 0
+    ? Number([...listofAmount].reduce((a, b) => a + b))
+    : 0;
+};
 
 /**
  * Permert d'optenir la vleur en UP

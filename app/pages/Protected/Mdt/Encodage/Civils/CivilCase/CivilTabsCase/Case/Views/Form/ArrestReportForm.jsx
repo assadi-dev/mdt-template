@@ -23,6 +23,7 @@ import ShowTotalAmount from "./ShowTotalAmount";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 import {
   calculateSentence,
+  sumOfAmount,
   updateInfraction,
 } from "../../../../../helpers.jsx";
 import InputQuantity from "./InputQuantity.jsx";
@@ -67,6 +68,18 @@ const ArrestReportForm = ({
     },
     [getValues("infractions")]
   );
+
+  const TotalAmount = React.useMemo(() => {
+    if (!getValues("infractions")) return Number("0.00");
+    const sum = sumOfAmount(getValues("infractions"));
+    return sum;
+  }, [getValues("infractions")]);
+
+  const TotalSentence = React.useMemo(() => {
+    if (!getValues("infractions")) return "00:00";
+    const sum = "1 jours 15h24";
+    return sum;
+  }, [getValues("infractions")]);
 
   const submit = (values) => {
     onSubmitValue(values);
@@ -217,7 +230,7 @@ const ArrestReportForm = ({
         </TabAccusationContainer>
       </FormControl>
       <FormControl>
-        <ShowTotalAmount up={"00:00:25"} />
+        <ShowTotalAmount amount={TotalAmount} up={TotalSentence} />
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
