@@ -92,7 +92,7 @@ const ArrestReportForm = ({
     },
     {
       Header: "Tentative",
-      accessor: "tentative",
+      accessor: "attempt",
       Cell: ({ row }) => (
         <AttemptSwitchBtn
           infraction={row.original}

@@ -22,6 +22,17 @@ import AccusationsDatatable from "../../../../../../../../../../components/Accus
 import ButtonWithLoader from "../../../../../../../../../../components/Button/ButtonWithLoader.jsx";
 import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
+import {
+  sumOfAmount,
+  sumOfSentences,
+  updateInfraction,
+} from "../../../../../helpers.jsx";
+import { totalHoursMinFormatBySec } from "../../../../../../../../../../services/utils/dateFormat.js";
+import AttemptSwitchBtn from "./SwitchBtn/AttemptSwitchBtn.jsx";
+import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
+import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
+import InputQuantity from "./InputQuantity.jsx";
+import TotalSentensesText from "./SwitchBtn/TotalSentensesText.jsx";
 
 const ArrestFolderForm = ({
   defaultValues = ArrestFolderValues,
@@ -43,15 +54,37 @@ const ArrestFolderForm = ({
     resolver: yupResolver(ArrestFolderResolver),
   });
 
-  const handleSelectnominal = (value) => {
-    console.log(value);
-  };
-
   const infractions = getValues("infractions");
 
-  const handleSelectedInfractions = (infraction) => {
-    setValue("infractions", infraction);
-  };
+  const handleChangeInput = React.useCallback(
+    (infraction) => {
+      const updatedCollection = updateInfraction(infraction, infractions);
+      const callback = () => setValue("infractions", updatedCollection);
+      execDelayed(callback, 600);
+    },
+    [getValues("infractions")]
+  );
+
+  const handleSelectedInfractions = React.useCallback(
+    (selected) => {
+      setValue("infractions", selected);
+    },
+    [getValues("infractions")]
+  );
+
+  const TotalAmount = React.useMemo(() => {
+    if (!getValues("infractions")) return Number("0.00");
+    const sum = sumOfAmount(getValues("infractions"));
+    return sum;
+  }, [getValues("infractions")]);
+
+  const TotalSentence = React.useMemo(() => {
+    if (!getValues("infractions")) return "00:00";
+
+    const sum = sumOfSentences(getValues("infractions"));
+
+    return totalHoursMinFormatBySec(sum);
+  }, [getValues("infractions")]);
 
   const submit = (values) => {
     onSubmitValue(values);
@@ -64,23 +97,29 @@ const ArrestFolderForm = ({
     },
     {
       Header: "Tentative",
-      accessor: "tentative",
+      accessor: "attempt",
       Cell: ({ row }) => (
-        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
+        <AttemptSwitchBtn
+          infraction={row.original}
+          onChange={handleChangeInput}
+        />
       ),
     },
     {
       Header: "Complicité",
       accessor: "complicity",
       Cell: ({ row }) => (
-        <SwitchAccusationBtn className="mx-auto text-center toggle-custom" />
+        <ComplicitySwitchBtn
+          infraction={row.original}
+          onChange={handleChangeInput}
+        />
       ),
     },
     {
       Header: "Quantité",
       accessor: "quantity",
       Cell: ({ row }) => (
-        <input type="number" defaultValue={row.original.quantity} />
+        <InputQuantity infraction={row.original} onChange={handleChangeInput} />
       ),
     },
     {
@@ -89,9 +128,9 @@ const ArrestFolderForm = ({
       Cell: ({ row }) => {
         return (
           <SelectNominal
+            infraction={row.original}
             nominalOptions={nominalOptionValues}
-            value={nominalOptionValues[3]}
-            onChange={handleSelectnominal}
+            onChange={handleChangeInput}
           />
         );
       },
@@ -99,6 +138,7 @@ const ArrestFolderForm = ({
     {
       Header: "Peine",
       accessor: "sentence",
+      Cell: ({ row }) => <TotalSentensesText infraction={row.original} />,
     },
   ];
 
@@ -194,7 +234,7 @@ const ArrestFolderForm = ({
         </TabAccusationContainer>
       </FormControl>
       <FormControl>
-        <ShowTotalAmount up={"00:00:25"} />
+        <ShowTotalAmount amount={TotalAmount} up={TotalSentence} />
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader

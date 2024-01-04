@@ -17,6 +17,9 @@ import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
 import SelectNominal from "./SelectNominal.jsx";
 import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
+import { sumOfAmount, updateInfraction } from "../../../../../helpers.jsx";
+import InputQuantity from "./InputQuantity.jsx";
+import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 
 const TrafficForm = ({
   defaultValues = TrafficValues,
@@ -37,11 +40,28 @@ const TrafficForm = ({
     defaultValues,
     resolver: yupResolver(TrafficResolver),
   });
+  const infractions = getValues("infractions");
+  const handleChangeInput = React.useCallback(
+    (infraction) => {
+      const updatedCollection = updateInfraction(infraction, infractions);
+      const callback = () => setValue("infractions", updatedCollection);
+      execDelayed(callback, 600);
+    },
+    [getValues("infractions")]
+  );
 
-  const handleSelectnominal = (value) => {
-    console.log(value);
-  };
+  const handleSelectedInfractions = React.useCallback(
+    (selected) => {
+      setValue("infractions", selected);
+    },
+    [getValues("infractions")]
+  );
 
+  const TotalAmount = React.useMemo(() => {
+    if (!getValues("infractions")) return Number("0.00");
+    const sum = sumOfAmount(getValues("infractions"));
+    return sum;
+  }, [getValues("infractions")]);
   const TRAFFIC_COLUMNS = [
     {
       Header: "Chef d'accusation",
@@ -50,7 +70,9 @@ const TrafficForm = ({
     {
       Header: "Quantité",
       accessor: "quantity",
-      Cell: ({ value }) => <input type="number" defaultValue={value} />,
+      Cell: ({ row }) => (
+        <InputQuantity infraction={row.original} onChange={handleChangeInput} />
+      ),
     },
     {
       Header: "Amende",
@@ -58,20 +80,14 @@ const TrafficForm = ({
       Cell: ({ row }) => {
         return (
           <SelectNominal
+            infraction={row.original}
             nominalOptions={nominalOptionValues}
-            value={nominalOptionValues[3]}
-            onChange={handleSelectnominal}
+            onChange={handleChangeInput}
           />
         );
       },
     },
   ];
-
-  const infractions = getValues("infractions");
-
-  const handleSelectedInfractions = (infraction) => {
-    setValue("infractions", infraction);
-  };
 
   const submit = (values) => {
     onSubmitValue(values);
@@ -126,7 +142,7 @@ const TrafficForm = ({
         </TabAccusationContainer>
       </FormControl>
       <FormControl>
-        <ShowTotalAmount />
+        <ShowTotalAmount amount={TotalAmount} />
       </FormControl>
       <ModalFooter>
         <ButtonWithLoader
