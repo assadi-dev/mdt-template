@@ -98,3 +98,8 @@ export const LawSwitchRowContainer = styled.div`
     font-size: 1.3rem;
   }
 `;
+
+export const TotalSentenceContainer = styled.p`
+  min-width: 115px;
+  text-align: center;
+`;

@@ -1,6 +1,14 @@
-import { format } from "date-fns";
+import {
+  format,
+  formatDuration,
+  hoursToSeconds,
+  minutesToSeconds,
+  secondsToHours,
+  secondsToMinutes,
+} from "date-fns";
 import { fr } from "date-fns/locale";
 const timeZone = "Europe/Paris";
+import sf from "seconds-formater";
 
 /**
  * Retourne la date au format suivant YYYY-MM-DD
@@ -52,4 +60,41 @@ export const formatDatefrWithoutHour = (date) => {
 export const formatDateFullMonth = (date) => {
   if (!date) return "";
   return format(new Date(date), "dd MMMM yyyy", { locale: fr });
+};
+
+/**
+ * Conversion de la peine en seconde
+ * @param {string} sentence chaine de caractere en format HH:MM
+ */
+export const sentenceToSec = (sentence) => {
+  const reg = /^([0-9]{1,}|d{1,}):([0-9]{1,}|d{1,})$/;
+  if (reg.test(sentence)) {
+    const hours = Number(sentence.split(":")[0]);
+    const minutes = Number(sentence.split(":")[1]);
+
+    return hoursToSeconds(hours) + minutesToSeconds(minutes);
+  } else {
+    throw new Error("Format de la peine incorrect");
+  }
+};
+
+/**
+ * Conversion des secondes en format HH:MM ou DD:HH:MM
+ * @param {number} secondes
+ */
+export const hoursMinFormatBySec = (seconds) => {
+  const hours = secondsToHours(seconds);
+  if (hours > 23)
+    return sf.convert(seconds).format(`D jour${hours > 48 ? "s" : ""} HhMM`);
+  return sf.convert(seconds).format("HH:MM");
+};
+
+/**
+ * Conversion des secondes en format HH:MM ou DD:HH:MM
+ * @param {number} secondes
+ */
+export const totalHoursMinFormatBySec = (seconds) => {
+  const hours = secondsToHours(seconds);
+  if (hours > 23) return sf.convert(seconds).format("D jours H h MM");
+  return sf.convert(seconds).format("HH:MM");
 };

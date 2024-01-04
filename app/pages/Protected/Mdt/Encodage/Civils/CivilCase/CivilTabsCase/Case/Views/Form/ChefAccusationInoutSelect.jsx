@@ -9,7 +9,7 @@ const ChefAccusationInoutSelect = ({
   ...props
 }) => {
   const payload = {
-    params: category,
+    params: { category },
   };
   const { data, isLoading, error } = useGetCodePenalByCategoryQuery(payload);
 
@@ -21,7 +21,10 @@ const ChefAccusationInoutSelect = ({
       label: codePenal.label,
       sentence: codePenal.sentence,
       amount: Number(codePenal.amount),
+      attempt: 1,
+      complicity: 1,
       quantity: 1,
+      nominal: 1,
     }));
   }, [data]);
 

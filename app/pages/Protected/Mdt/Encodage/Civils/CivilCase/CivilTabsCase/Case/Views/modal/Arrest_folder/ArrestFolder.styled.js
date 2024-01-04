@@ -6,3 +6,9 @@ export const ArrestFolderFormContainer = styled(ModalFormContainer)`
     width: 58vw;
   }
 `;
+
+export const MainViewContainer = styled.div`
+  min-height: 100px;
+  max-height: 90vh;
+  overflow-y: auto;
+`;
