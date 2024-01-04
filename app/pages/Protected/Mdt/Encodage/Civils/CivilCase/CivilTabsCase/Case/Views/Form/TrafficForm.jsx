@@ -17,7 +17,11 @@ import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import { nominalOptionValues } from "../../../../../../../../../../config/options.js";
 import SelectNominal from "./SelectNominal.jsx";
 import AccusationTablePaginate from "../../../../../../../../../../components/AccusationsDatatable.jsx/AccusationTablePaginate.jsx";
-import { sumOfAmount, updateInfraction } from "../../../../../helpers.jsx";
+import {
+  cleanInfractionCollection,
+  sumOfAmount,
+  updateInfraction,
+} from "../../../../../helpers.jsx";
 import InputQuantity from "./InputQuantity.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 
@@ -52,7 +56,12 @@ const TrafficForm = ({
 
   const handleSelectedInfractions = React.useCallback(
     (selected) => {
-      setValue("infractions", selected);
+      const cleanCollection = cleanInfractionCollection(
+        getValues("infractions"),
+        selected
+      );
+
+      setValue("infractions", cleanCollection);
     },
     [getValues("infractions")]
   );

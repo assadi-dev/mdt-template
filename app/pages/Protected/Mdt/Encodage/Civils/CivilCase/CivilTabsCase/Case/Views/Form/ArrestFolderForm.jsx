@@ -23,6 +23,7 @@ import ButtonWithLoader from "../../../../../../../../../../components/Button/Bu
 import ShowTotalAmount from "./ShowTotalAmount.jsx";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 import {
+  cleanInfractionCollection,
   sumOfAmount,
   sumOfSentences,
   updateInfraction,
@@ -67,7 +68,12 @@ const ArrestFolderForm = ({
 
   const handleSelectedInfractions = React.useCallback(
     (selected) => {
-      setValue("infractions", selected);
+      const cleanCollection = cleanInfractionCollection(
+        getValues("infractions"),
+        selected
+      );
+
+      setValue("infractions", cleanCollection);
     },
     [getValues("infractions")]
   );

@@ -71,6 +71,26 @@ export const updateInfraction = (infraction, infractionsCollections = []) => {
 };
 
 /**
+ * Mise à jour entre l'ancienne et le nouveau tableau des infractions
+ * @param {array} prevInfractionCollection tableau précédante
+ * @param {array} infractionsCollections tableau suivante
+ */
+export const cleanInfractionCollection = (
+  prevInfractionCollection = [],
+  currentInfractionsCollection = []
+) => {
+  return [...currentInfractionsCollection].map((current) => {
+    const isExist = prevInfractionCollection.find(
+      (old) => old.id == current.id
+    );
+    if (isExist) {
+      return isExist;
+    }
+    return current;
+  });
+};
+
+/**
  * Total des montants des infraction
  * @param {*} infractions
  */
