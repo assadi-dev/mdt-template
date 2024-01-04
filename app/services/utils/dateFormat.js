@@ -79,7 +79,7 @@ export const sentenceToSec = (sentence) => {
 };
 
 /**
- * Conversion des secondes en format HH:MM
+ * Conversion des secondes en format HH:MM ou DD:HH:MM
  * @param {number} secondes
  */
 export const hoursMinFormatBySec = (seconds) => {
