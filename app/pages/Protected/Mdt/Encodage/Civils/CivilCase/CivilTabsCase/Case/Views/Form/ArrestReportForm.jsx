@@ -8,11 +8,7 @@ import {
   ModalFooter,
 } from "../../../../../../../../../../components/Forms/FormView.styled";
 import ErrorInputSection from "../../../../../../../../../../components/Forms/ErrorInputSection";
-import {
-  RowInputForm,
-  SwitchAccusationBtn,
-  TabAccusationContainer,
-} from "../../Case.styled";
+import { RowInputForm, TabAccusationContainer } from "../../Case.styled";
 import ChefAccusationInoutSelect from "./ChefAccusationInoutSelect";
 import { nominalOptionValues } from "../../../../../../../../../../config/options";
 import SelectNominal from "./SelectNominal";
@@ -22,8 +18,8 @@ import ButtonWithLoader from "../../../../../../../../../../components/Button/Bu
 import ShowTotalAmount from "./ShowTotalAmount";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 import {
-  calculateSentence,
   sumOfAmount,
+  sumOfSentences,
   updateInfraction,
 } from "../../../../../helpers.jsx";
 import InputQuantity from "./InputQuantity.jsx";
@@ -31,6 +27,7 @@ import AttemptSwitchBtn from "./SwitchBtn/AttemptSwitchBtn.jsx";
 import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 import TotalSentensesText from "./SwitchBtn/TotalSentensesText.jsx";
+import { totalHoursMinFormatBySec } from "../../../../../../../../../../services/utils/dateFormat.js";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -78,8 +75,10 @@ const ArrestReportForm = ({
 
   const TotalSentence = React.useMemo(() => {
     if (!getValues("infractions")) return "00:00";
-    const sum = "1 jours 15h24";
-    return sum;
+
+    const sum = sumOfSentences(getValues("infractions"));
+
+    return totalHoursMinFormatBySec(sum);
   }, [getValues("infractions")]);
 
   const submit = (values) => {

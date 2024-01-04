@@ -91,6 +91,22 @@ export const sumOfAmount = (infractions) => {
 };
 
 /**
+ * Total de durée de peines des infraction en secondes
+ * @param {*} infractions
+ */
+export const sumOfSentences = (infractions) => {
+  const listOfSentences = [...infractions].map((infraction) => {
+    const { sentence, quantity, nominal, attempt, complicity } = infraction;
+    const toSec = sentenceToSec(sentence);
+    return calculateAmount(toSec, quantity, nominal, attempt, complicity);
+  });
+
+  return listOfSentences.length > 0
+    ? Number(listOfSentences.reduce((a, b) => a + b))
+    : 0;
+};
+
+/**
  * Permert d'optenir la vleur en UP
  * @param {number} amounts montant total des amendes
  * @param {string} sentences temps totals des peines
