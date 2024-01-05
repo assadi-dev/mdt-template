@@ -14,7 +14,7 @@ import ErrorInputSection from "../../../../../../../../../../components/Forms/Er
 
 const AvertissementForm = ({
   defaultValues = AvertissemenValues,
-  onSubmitValue,
+  onSubmitValue = () => {},
   process = false,
   labelSubmit = "Ajouter",
   ...props

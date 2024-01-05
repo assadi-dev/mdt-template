@@ -15,7 +15,7 @@ import {
 import { createPortal } from "react-dom";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
 
-const TabAvertissement = () => {
+const TabAvertissement = ({ idCivil }) => {
   const { modalState, openModal, closeModal } = useModalState();
   const columns = [
     { Header: "N° Dossier", accessor: "numeroAvertissement" },
@@ -37,6 +37,7 @@ const TabAvertissement = () => {
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_AVERTISSEMENT,
+      data: idCivil,
     });
   };
 
