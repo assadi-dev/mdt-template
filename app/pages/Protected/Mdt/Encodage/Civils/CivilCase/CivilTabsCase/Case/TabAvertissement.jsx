@@ -65,7 +65,7 @@ const TabAvertissement = () => {
 
     primiseRef.current = dispatch(fetchAvertissementAsyncCollection(payload));
     return () => {
-      primiseRef.current?.abort;
+      primiseRef.current?.abort();
     };
   }, [idCivil]);
 
