@@ -11,11 +11,11 @@ export const fetchAvertissementCollections = (page, params) => {
   return Api.get(`/avertissements/paginations/${page}`, params);
 };
 export const fetcTrafficsCollections = (page, params) => {
-  return Api.get(`/avertissements/paginations/${page}`, params);
+  return Api.get(`/traffics/paginations/${page}`, params);
 };
 export const fetcArrestReportCollections = (page, params) => {
   return Api.get(`/arrest_reports/paginations/${page}`, params);
 };
 export const fetcArrestFolderCollections = (page, params) => {
-  return Api.get(`/arrest_folder/paginations/${page}`, params);
+  return Api.get(`/arrest_folders/paginations/${page}`, params);
 };

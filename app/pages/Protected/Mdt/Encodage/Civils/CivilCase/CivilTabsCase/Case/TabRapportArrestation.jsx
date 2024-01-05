@@ -14,10 +14,17 @@ import {
   ListAddArrestReportModalView,
 } from "./Views/modal/Arrest_report/ArrestReportListView";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArrestReportAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
 
 const TabRapportArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
   const { idCivil } = useParams();
+  const dispatch = useDispatch();
+
+  const { collections, status, count } = useSelector(
+    (state) => state.ArrestReportReducer
+  );
 
   const columns = [
     { Header: "N° Dossier", accessor: "id" },
@@ -39,6 +46,16 @@ const TabRapportArrestation = () => {
     });
   };
 
+  const PromiseRef = React.useRef();
+  if (!idCivil) return;
+  React.useEffect(() => {
+    const payload = { idCivil };
+    PromiseRef.current = dispatch(fetchArrestReportAsyncCollection(payload));
+    return () => {
+      PromiseRef.current?.abort();
+    };
+  }, [idCivil]);
+
   return (
     <>
       <CivilTabsContentRowAction>
@@ -50,8 +67,9 @@ const TabRapportArrestation = () => {
         columns={columns}
         className="case-table"
         manualPagination={true}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        data={collections}
+        isLoading={status != "complete"}
+        isSuccess={status == "complete"}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>
