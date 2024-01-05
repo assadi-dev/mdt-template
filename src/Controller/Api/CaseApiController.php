@@ -142,13 +142,13 @@ class CaseApiController extends AbstractController
 
 
 
-            /*
-                $agent =  $this->agentRepository->findAgentByMatricule($matricule);
-                $result = $agent;
-                $content = json_encode($result);
-                $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
-                return $response;
-            */
+
+            $arrest_report = [];
+            $result = $arrest_report;
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+
         } catch (\Throwable $th) {
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
@@ -182,13 +182,13 @@ class CaseApiController extends AbstractController
 
 
 
-            /*
-                $agent =  $this->agentRepository->findAgentByMatricule($matricule);
-                $result = $agent;
-                $content = json_encode($result);
-                $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
-                return $response;
-            */
+
+            $arrest_folder = [];
+            $result = $arrest_folder;
+            $content = json_encode($result);
+            $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
+            return $response;
+
         } catch (\Throwable $th) {
             $result = ["message" => $th->getMessage()];
             $content = json_encode($result);
