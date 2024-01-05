@@ -75,7 +75,7 @@ class ArrestFolderRepository extends ServiceEntityRepository
         $qb
         ->select("
             af.id,
-            af.numeroArrestReport,
+            af.numeroArrestFolder,
             CONCAT(ag.matricule,'-',ag.firstname,' ',ag.lastname) as agent,
             ag.id as idAgent, 
             af.location,
@@ -91,12 +91,12 @@ class ArrestFolderRepository extends ServiceEntityRepository
         ")
         ->leftJoin(Agent::class, "ag", "WITH", "af.agent=ag.id")
         ->leftJoin(Civil::class, "ci", "WITH", "af.civil=ci.id")
-        ->orHaving($qb->expr()->like("af.numeroArrestReport", ":search"))
+        ->orHaving($qb->expr()->like("af.numeroArrestFolder", ":search"))
         ->orHaving($qb->expr()->like("af.location", ":search"))
         ->orHaving($qb->expr()->like("agent", ":search"))
         ->orderBy("af.createdAt", "DESC")
         ->groupBy("af.id")
-        ->where("ag.id=:idCivil")
+        ->where("ci.id=:idCivil")
         ->setParameter("idCivil", $idCivil)
         ->setParameter("search", "%$search%")
         ;

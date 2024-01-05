@@ -89,7 +89,7 @@ class TrafficRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("agent", ":search"))
         ->orderBy("tr.createdAt", "DESC")
         ->groupBy("tr.id")
-        ->where("ag.id=:idCivil")
+        ->where("ci.id=:idCivil")
         ->setParameter("idCivil", $idCivil)
         ->setParameter("search", "%$search%")
 

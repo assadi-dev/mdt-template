@@ -92,7 +92,7 @@ class ArrestReportRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("agent", ":search"))
         ->orderBy("ar.createdAt", "DESC")
         ->groupBy("ar.id")
-        ->where("ag.id=:idCivil")
+        ->where("ci.id=:idCivil")
         ->setParameter("idCivil", $idCivil)
         ->setParameter("search", "%$search%")
         ;

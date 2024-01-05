@@ -85,7 +85,7 @@ class AvertissementRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("agent", ":search"))
         ->orderBy("av.createdAt", "DESC")
         ->groupBy("av.id")
-        ->where("ag.id=:idCivil")
+        ->where("ci.id=:idCivil")
         ->setParameter("idCivil", $idCivil)
         ->setParameter("search", "%$search%")
 
