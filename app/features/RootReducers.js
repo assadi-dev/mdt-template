@@ -27,6 +27,10 @@ import { sanctionApi } from "./Sanctions/SanctionApi";
 import { serviceWeaponApi } from "./ServiceWeaponEncoding/ServiceWeaponEncodingApi";
 import { vehicleAttributionApi } from "./VehicleAttribution/VehicleAttributionApi";
 import { codePenalApi } from "./CodePenals/CodePenalApi";
+import AvertissementReducer from "./Civils/Reports/AvertissementSlice";
+import TrafficReducer from "./Civils/Reports/TrafficSlice";
+import ArrestReportReducer from "./Civils/Reports/ArrestReport.slice";
+import ArrestFolderReducer from "./Civils/Reports/ArrestFolder.slice";
 
 const RootReducers = {
   AuthenticateReducer,
@@ -57,6 +61,13 @@ const RootReducers = {
   [serviceWeaponApi.reducerPath]: serviceWeaponApi.reducer,
   [vehicleAttributionApi.reducerPath]: vehicleAttributionApi.reducer,
   [codePenalApi.reducerPath]: codePenalApi.reducer,
+  //Casier Civil
+  AvertissementReducer,
+  TrafficReducer,
+  ArrestReportReducer,
+  ArrestFolderReducer,
+
+  //Casier civil
 };
 
 export default RootReducers;

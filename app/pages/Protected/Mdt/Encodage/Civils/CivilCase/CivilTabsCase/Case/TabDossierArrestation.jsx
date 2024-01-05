@@ -14,12 +14,19 @@ import {
   ADD_ARREST_FOLDER,
   ListAddArrestFolderModalView,
 } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchFolderArrestAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
+import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
+  const { idCivil } = useParams();
+  const dispatch = useDispatch();
 
-  const { loaderState, toggleLoader } = useLoader();
-  useDelayed(toggleLoader, 1000);
+  const { collections, status, count } = useSelector(
+    (state) => state.ArrestFolderReducer
+  );
 
   const columns = [
     { Header: "N° Dossier", accessor: "id" },
@@ -38,6 +45,15 @@ const TabDossierArrestation = () => {
       view: ADD_ARREST_FOLDER,
     });
   };
+  const PromiseRef = React.useRef();
+  if (!idCivil) return;
+  React.useEffect(() => {
+    const payload = { idCivil };
+    PromiseRef.current = dispatch(fetchFolderArrestAsyncCollection(payload));
+    return () => {
+      PromiseRef.current?.abort();
+    };
+  }, [idCivil]);
 
   return (
     <>
@@ -50,8 +66,9 @@ const TabDossierArrestation = () => {
         columns={columns}
         className="case-table"
         manualPagination={true}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        data={collections}
+        isLoading={status != "complete"}
+        isSuccess={status == "complete"}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>

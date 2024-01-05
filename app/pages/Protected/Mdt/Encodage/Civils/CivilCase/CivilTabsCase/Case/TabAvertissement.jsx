@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CivilTabsContentRowAction } from "../CivilTabs.styled";
 import { Button } from "../../../../../../../../components/PageContainer";
 import DataTable from "../../../../../../../../components/DataTable";
@@ -14,15 +14,30 @@ import {
 } from "./Views/modal/Avertissement/AvertissementListView";
 import { createPortal } from "react-dom";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAvertissementAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
+import { useParams } from "react-router-dom";
 
 const TabAvertissement = () => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const dispatch = useDispatch();
+  const { idCivil } = useParams();
+
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+
+  const { collections, status, count } = useSelector(
+    (state) => state.AvertissementReducer
+  );
+
   const columns = [
     { Header: "N° Dossier", accessor: "numeroAvertissement" },
     { Header: "Agent", accessor: "agent" },
     {
       Header: "date",
-      accessor: "created_at",
+      accessor: "createdAt",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
@@ -31,14 +46,28 @@ const TabAvertissement = () => {
       Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
     },
   ];
-  const { loaderState, toggleLoader } = useLoader();
-  useDelayed(toggleLoader, 1000);
 
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_AVERTISSEMENT,
+      data: { idCivil, idAgent, lastname, firstname, matricule },
     });
   };
+
+  const primiseRef = React.useRef();
+
+  useEffect(() => {
+    if (!idCivil) return;
+    const payload = {
+      idCivil,
+      params: { page: 1, item_per_page: 5, search: "" },
+    };
+
+    primiseRef.current = dispatch(fetchAvertissementAsyncCollection(payload));
+    return () => {
+      primiseRef.current?.abort;
+    };
+  }, [idCivil]);
 
   return (
     <>
@@ -51,8 +80,9 @@ const TabAvertissement = () => {
         columns={columns}
         className="case-table"
         manualPagination={true}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        data={collections}
+        isLoading={status != "complete"}
+        isSuccess={status == "complete"}
       />
 
       {createPortal(
