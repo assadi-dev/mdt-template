@@ -22,10 +22,10 @@ class CaseApiController extends AbstractController
 
     public function __construct(AvertissementRepository $avertissementRepository, TrafficRepository $trafficRepository, ArrestReportRepository $arrestReportRepository, ArrestFolderRepository $arrestFolderRepository)
     {
-        $avertissementRepository = $this->avertissementRepository;
-        $trafficRepository = $this->trafficRepository;
-        $arrestReportRepository = $this->arrestReportRepository;
-        $arrestFolderRepository = $this->arrestFolderRepository;
+        $this->avertissementRepository = $avertissementRepository;
+        $this->trafficRepository = $trafficRepository;
+        $this->arrestReportRepository = $arrestReportRepository;
+        $this->arrestFolderRepository = $arrestFolderRepository;
 
     }
 
@@ -56,10 +56,7 @@ class CaseApiController extends AbstractController
                 $page = 1;
             }
 
-            $avertissement = [];
-
-
-
+            $avertissement = $this->avertissementRepository->findByPagination($idCivil, $page, $item_per_page, $search);
             $result = $avertissement;
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
@@ -101,7 +98,7 @@ class CaseApiController extends AbstractController
 
 
 
-            $traffics =  [];
+            $traffics =  $this->trafficRepository->findByPagination($idCivil, $page, $item_per_page, $search);
             $result = $traffics;
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
@@ -143,7 +140,7 @@ class CaseApiController extends AbstractController
 
 
 
-            $arrest_report = [];
+            $arrest_report = $this->arrestReportRepository->findByPagination($idCivil, $page, $item_per_page, $search);
             $result = $arrest_report;
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
@@ -183,7 +180,8 @@ class CaseApiController extends AbstractController
 
 
 
-            $arrest_folder = [];
+            $arrest_folder = $this->arrestFolderRepository->findByPagination($idCivil, $page, $item_per_page, $search);
+
             $result = $arrest_folder;
             $content = json_encode($result);
             $response = new Response($content, Response::HTTP_OK, ["Content-Type" => "application/json"]);
