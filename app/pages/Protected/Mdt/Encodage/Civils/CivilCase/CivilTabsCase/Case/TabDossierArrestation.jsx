@@ -14,6 +14,7 @@ import {
   ADD_ARREST_FOLDER,
   ListAddArrestFolderModalView,
 } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
+import { useDispatch, useSelector } from "react-redux";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -21,6 +22,10 @@ const TabDossierArrestation = () => {
   const { loaderState, toggleLoader } = useLoader();
   useDelayed(toggleLoader, 1000);
 
+  /*   const { collections, status, count } = useSelector(
+    (state) => state.TrafficReducer
+  );
+ */
   const columns = [
     { Header: "N° Dossier", accessor: "id" },
     { Header: "Agent", accessor: "agent" },

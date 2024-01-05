@@ -13,9 +13,13 @@ import {
   ListTrafficModalView,
 } from "./Views/modal/Traffic/TrafficListVIew";
 import useModalState from "../../../../../../../../hooks/useModalState";
+import { useDispatch, useSelector } from "react-redux";
 
 const TabTraffic = () => {
   const { modalState, openModal, closeModal } = useModalState();
+  /*   const { collections, status, count } = useSelector(
+    (state) => state.TrafficReducer
+  ); */
 
   const columns = [
     { Header: "N° Dossier", accessor: "id" },
@@ -48,6 +52,7 @@ const TabTraffic = () => {
         columns={columns}
         className="case-table"
         manualPagination={true}
+        data={collections}
         isLoading={loaderState}
         isSuccess={!loaderState}
       />

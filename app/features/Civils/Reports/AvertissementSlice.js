@@ -5,9 +5,20 @@ const AvertissementSlice = createSlice({
   name: "Avertissement",
   initialState: initialState,
   reducers: {
-    addAvertissement: (state, action) => {},
-    editAvertissement: (state, action) => {},
-    removeAvertissement: (state, action) => {},
+    addAvertissement: (state, action) => {
+      const { payload } = action;
+      payload.createdAt = { date: new Date() };
+      const addedToCollections = [payload, ...state.collections];
+
+      state.collections = addedToCollections;
+      state.count = state.count + 1;
+    },
+    editAvertissement: (state, action) => {
+      const { payload } = action;
+    },
+    removeAvertissement: (state, action) => {
+      const { payload } = action;
+    },
   },
 });
 

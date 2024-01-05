@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CivilTabsContentRowAction } from "../CivilTabs.styled";
 import { Button } from "../../../../../../../../components/PageContainer";
 import DataTable from "../../../../../../../../components/DataTable";
@@ -14,15 +14,27 @@ import {
 } from "./Views/modal/Avertissement/AvertissementListView";
 import { createPortal } from "react-dom";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
+import { useDispatch, useSelector } from "react-redux";
 
 const TabAvertissement = ({ idCivil }) => {
   const { modalState, openModal, closeModal } = useModalState();
+
+  const dispatch = useDispatch();
+
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
+
+  const { collections, status, count } = useSelector(
+    (state) => state.AvertissementReducer
+  );
+
   const columns = [
     { Header: "N° Dossier", accessor: "numeroAvertissement" },
     { Header: "Agent", accessor: "agent" },
     {
       Header: "date",
-      accessor: "created_at",
+      accessor: "createdAt",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
@@ -37,9 +49,13 @@ const TabAvertissement = ({ idCivil }) => {
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_AVERTISSEMENT,
-      data: idCivil,
+      data: { idCivil, idAgent, lastname, firstname, matricule },
     });
   };
+
+  useEffect(() => {
+    dispatch;
+  }, []);
 
   return (
     <>
@@ -52,6 +68,7 @@ const TabAvertissement = ({ idCivil }) => {
         columns={columns}
         className="case-table"
         manualPagination={true}
+        data={collections}
         isLoading={loaderState}
         isSuccess={!loaderState}
       />
