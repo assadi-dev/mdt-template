@@ -15,11 +15,14 @@ import {
 import { createPortal } from "react-dom";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchAvertissementAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
+import { useParams } from "react-router-dom";
 
-const TabAvertissement = ({ idCivil }) => {
+const TabAvertissement = () => {
   const { modalState, openModal, closeModal } = useModalState();
 
   const dispatch = useDispatch();
+  const { idCivil } = useParams();
 
   const { idAgent, lastname, firstname, matricule } = useSelector(
     (state) => state.AuthenticateReducer
@@ -43,8 +46,6 @@ const TabAvertissement = ({ idCivil }) => {
       Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
     },
   ];
-  const { loaderState, toggleLoader } = useLoader();
-  useDelayed(toggleLoader, 1000);
 
   const handleClickAddbtn = () => {
     openModal({
@@ -53,9 +54,20 @@ const TabAvertissement = ({ idCivil }) => {
     });
   };
 
+  const primiseRef = React.useRef();
+
   useEffect(() => {
-    dispatch;
-  }, []);
+    if (!idCivil) return;
+    const payload = {
+      idCivil,
+      params: { page: 1, item_per_page: 5, search: "" },
+    };
+
+    primiseRef.current = dispatch(fetchAvertissementAsyncCollection(payload));
+    return () => {
+      primiseRef.current?.abort;
+    };
+  }, [idCivil]);
 
   return (
     <>
@@ -69,8 +81,8 @@ const TabAvertissement = ({ idCivil }) => {
         className="case-table"
         manualPagination={true}
         data={collections}
-        isLoading={loaderState}
-        isSuccess={!loaderState}
+        isLoading={status != "complete"}
+        isSuccess={status == "complete"}
       />
 
       {createPortal(

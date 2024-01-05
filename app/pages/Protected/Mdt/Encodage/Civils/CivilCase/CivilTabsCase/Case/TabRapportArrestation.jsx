@@ -13,9 +13,11 @@ import {
   ADD_ARREST_REPORT,
   ListAddArrestReportModalView,
 } from "./Views/modal/Arrest_report/ArrestReportListView";
+import { useParams } from "react-router-dom";
 
 const TabRapportArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
+  const { idCivil } = useParams();
 
   const columns = [
     { Header: "N° Dossier", accessor: "id" },

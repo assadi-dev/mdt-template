@@ -15,10 +15,11 @@ import {
   ListAddArrestFolderModalView,
 } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
-
+  const { idCivil } = useParams();
   const { loaderState, toggleLoader } = useLoader();
   useDelayed(toggleLoader, 1000);
 

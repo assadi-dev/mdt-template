@@ -14,9 +14,11 @@ import {
 } from "./Views/modal/Traffic/TrafficListVIew";
 import useModalState from "../../../../../../../../hooks/useModalState";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const TabTraffic = () => {
   const { modalState, openModal, closeModal } = useModalState();
+  const { idCivil } = useParams();
   /*   const { collections, status, count } = useSelector(
     (state) => state.TrafficReducer
   ); */
