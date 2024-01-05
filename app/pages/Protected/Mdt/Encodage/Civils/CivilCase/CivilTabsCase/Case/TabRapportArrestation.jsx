@@ -49,7 +49,10 @@ const TabRapportArrestation = () => {
   const PromiseRef = React.useRef();
   if (!idCivil) return;
   React.useEffect(() => {
-    const payload = { idCivil };
+    const payload = {
+      idCivil,
+      params: { page: 1, item_per_page: 5, search: "" },
+    };
     PromiseRef.current = dispatch(fetchArrestReportAsyncCollection(payload));
     return () => {
       PromiseRef.current?.abort();
