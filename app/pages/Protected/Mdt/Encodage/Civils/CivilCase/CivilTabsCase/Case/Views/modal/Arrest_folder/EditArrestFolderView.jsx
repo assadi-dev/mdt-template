@@ -17,9 +17,11 @@ import {
 } from "../../../../../../../../../../../services/utils/alert";
 import { editArrestFolder } from "../../../../../../../../../../../features/Civils/Reports/ArrestFolder.slice";
 import { datetimeFormatISO8601 } from "../../../../../../../../../../../services/utils/dateFormat";
+import useProcess from "../../../../../../../../../../../hooks/useProcess";
 
 const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
   const dispatch = useDispatch();
+  const { process, toggleProcess } = useProcess();
 
   const MODAL_TIITLE = payload?.numeroArrestFolder
     ? `Dossier d'arrestation n° ${payload?.numeroArrestFolder}`
@@ -27,6 +29,7 @@ const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
 
   const submitArrestFolder = async (values) => {
     try {
+      toggleProcess();
       const id = values.id;
       delete values.agent;
       delete values.civil;
@@ -41,6 +44,7 @@ const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       console.log(error.message);
       toastError();
     } finally {
+      toggleProcess();
     }
   };
 
@@ -59,6 +63,7 @@ const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
           onSubmitValue={submitArrestFolder}
           defaultValues={payload}
           labelSubmit="Mettre à jour"
+          process={process}
         />
       </MainViewContainer>
     </ArrestFolderFormContainer>

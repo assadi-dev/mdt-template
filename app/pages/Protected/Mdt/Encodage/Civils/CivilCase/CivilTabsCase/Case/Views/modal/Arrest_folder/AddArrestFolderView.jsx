@@ -16,6 +16,7 @@ import {
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
 import { addArrestFolder } from "../../../../../../../../../../../features/Civils/Reports/ArrestFolder.slice";
+import useProcess from "../../../../../../../../../../../hooks/useProcess";
 
 const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
   const { idAgent, lastname, firstname, matricule } = useSelector(
@@ -23,9 +24,11 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
   );
   const dispatch = useDispatch();
   const { idCivil } = useParams();
+  const { process, toggleProcess } = useProcess();
 
   const submitArrestFolder = async (values) => {
     try {
+      toggleProcess();
       values.agent = agent_iri + idAgent;
       values.civil = `api/civils/${idCivil}`;
       const result = await save_arrest_folder(values);
@@ -40,6 +43,7 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
     } catch (error) {
       toastError();
     } finally {
+      toggleProcess();
     }
   };
 
@@ -50,7 +54,10 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <MainViewContainer>
-        <ArrestFolderForm onSubmitValue={submitArrestFolder} />
+        <ArrestFolderForm
+          process={process}
+          onSubmitValue={submitArrestFolder}
+        />
       </MainViewContainer>
     </ArrestFolderFormContainer>
   );
