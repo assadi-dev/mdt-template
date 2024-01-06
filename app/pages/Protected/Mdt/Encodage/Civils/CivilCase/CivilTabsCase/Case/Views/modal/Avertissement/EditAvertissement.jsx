@@ -25,8 +25,8 @@ const EditAvertissement = ({ payload, onCloseModal, ...props }) => {
   const { idCivil } = useParams();
   const { process, toggleProcess } = useProcess();
 
-  const MODAL_TIITLE = payload?.numeroArrestReport
-    ? `Avertissement  n° ${payload?.numeroArrestReport}`
+  const MODAL_TIITLE = payload?.numeroAvertissement
+    ? `Avertissement  n° ${payload?.numeroAvertissement}`
     : `????`;
   const id = payload.id;
 
