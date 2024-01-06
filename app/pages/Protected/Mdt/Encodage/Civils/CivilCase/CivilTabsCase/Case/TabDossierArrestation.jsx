@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import { fetchFolderArrestAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
 import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
 import { defaultPageSize } from "../../../../../../../../config/constantes";
+import useCustomPagination from "../../../../../../../../hooks/useCustomPagination";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
