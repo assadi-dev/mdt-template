@@ -19,6 +19,8 @@ import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFor
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAvertissementAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
 import { useParams } from "react-router-dom";
+import { defaultPageSize } from "../../../../../../../../config/constantes";
+import useCustomPagination from "../../../../../../../../hooks/useCustomPagination";
 
 const TabAvertissement = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -77,21 +79,32 @@ const TabAvertissement = () => {
     });
   };
 
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
   const primiseRef = React.useRef();
 
   useEffect(() => {
     if (!idCivil) return;
     const payload = {
       idCivil,
-      params: { page: 1, item_per_page: 5, search: "" },
+      params: { page: pageIndex, item_per_page: defaultPageSize, search },
     };
 
     primiseRef.current = dispatch(fetchAvertissementAsyncCollection(payload));
+    onPageTotalCountChange(count);
 
     return () => {
       primiseRef.current?.abort();
     };
-  }, [idCivil]);
+  }, [idCivil, pageIndex, count, search]);
 
   return (
     <>
@@ -107,6 +120,14 @@ const TabAvertissement = () => {
         data={collections}
         isLoading={status != "complete"}
         isSuccess={status == "complete"}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
 
       {createPortal(

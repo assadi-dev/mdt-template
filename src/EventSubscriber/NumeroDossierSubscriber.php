@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class numeroDossierSubscriber implements EventSubscriberInterface
+final class NumeroDossierSubscriber implements EventSubscriberInterface
 {
     private $entityManager;
 
