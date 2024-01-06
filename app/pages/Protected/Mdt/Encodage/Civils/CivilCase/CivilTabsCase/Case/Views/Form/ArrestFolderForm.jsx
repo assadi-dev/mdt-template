@@ -81,15 +81,15 @@ const ArrestFolderForm = ({
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
+    setValue("amount", sum.toFixed(2));
     return sum;
   }, [getValues("infractions")]);
 
   const TotalSentence = React.useMemo(() => {
     if (!getValues("infractions")) return "00:00";
-
     const sum = sumOfSentences(getValues("infractions"));
-
-    return totalHoursMinFormatBySec(sum);
+    const toHourMinString = totalHoursMinFormatBySec(sum);
+    setValue("sentence", toHourMinString);
   }, [getValues("infractions")]);
 
   const submit = (values) => {

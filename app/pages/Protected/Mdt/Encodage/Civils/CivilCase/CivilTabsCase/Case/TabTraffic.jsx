@@ -27,10 +27,14 @@ const TabTraffic = () => {
   );
 
   const columns = [
-    { Header: "N° Dossier", accessor: "id" },
+    { Header: "N° Dossier", accessor: "numeroTraffic" },
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
-    { Header: "date", accessor: "created_at" },
+    {
+      Header: "Date",
+      accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value.date),
+    },
     {
       Header: "Action",
       accessor: "",

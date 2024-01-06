@@ -32,7 +32,11 @@ const TabDossierArrestation = () => {
     { Header: "N° Dossier", accessor: "id" },
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
-    { Header: "date", accessor: "created_at" },
+    {
+      Header: "date",
+      accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value?.date),
+    },
     {
       Header: "Action",
       accessor: "",

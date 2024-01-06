@@ -30,11 +30,12 @@ export const TrafficValues = {
 };
 
 export const TrafficResolver = yup.object().shape({
-  numeroTraffic: yup.string().required(requiredMessage),
+  numeroTraffic: yup.string(),
   location: yup.string().required(requiredMessage),
   infractions: yup.array().required(requiredMessage),
   civil: yup.string(),
   agent: yup.string(),
+  amount: yup.string(),
 });
 
 // Arrest FOLDER Form
@@ -60,7 +61,7 @@ export const ArrestFolderResolver = yup.object().shape({
   civil: yup.string(),
   location: yup.string().required(requiredMessage),
   infractions: yup.array().required(requiredMessage),
-  description: yup.string().required(requiredMessage),
+  description: yup.string(),
   amount: yup.string(),
   sentence: yup.string(),
   dateOfEntry: yup.string().required(requiredMessage),
@@ -69,7 +70,7 @@ export const ArrestFolderResolver = yup.object().shape({
   feed: yup.boolean(),
   avocat: yup.boolean(),
   agent: yup.string(),
-  amount: 0,
+  amount: yup.string(),
 });
 
 // Arrest REPORT Form
@@ -96,5 +97,5 @@ export const ArrestReportResolver = yup.object().shape({
   dateOfEntry: yup.string().required(requiredMessage),
   conversionUp: yup.boolean(),
   agent: yup.string(),
-  amount: 0,
+  amount: yup.string(),
 });

@@ -64,6 +64,7 @@ const TabAvertissement = () => {
     };
 
     primiseRef.current = dispatch(fetchAvertissementAsyncCollection(payload));
+
     return () => {
       primiseRef.current?.abort();
     };

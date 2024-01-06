@@ -76,6 +76,7 @@ const ArrestReportForm = ({
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
+    setValue("amount", sum.toFixed(2));
     return sum;
   }, [getValues("infractions")]);
 
@@ -83,8 +84,10 @@ const ArrestReportForm = ({
     if (!getValues("infractions")) return "00:00";
 
     const sum = sumOfSentences(getValues("infractions"));
+    const toHourMinString = totalHoursMinFormatBySec(sum);
+    setValue("sentence", toHourMinString);
 
-    return totalHoursMinFormatBySec(sum);
+    return toHourMinString;
   }, [getValues("infractions")]);
 
   const submit = (values) => {

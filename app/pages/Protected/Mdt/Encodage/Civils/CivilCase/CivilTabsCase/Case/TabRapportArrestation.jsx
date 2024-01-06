@@ -16,6 +16,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArrestReportAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
+import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
 
 const TabRapportArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -30,7 +31,11 @@ const TabRapportArrestation = () => {
     { Header: "N° Dossier", accessor: "id" },
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
-    { Header: "date", accessor: "created_at" },
+    {
+      Header: "date",
+      accessor: "createdAt",
+      Cell: ({ value }) => datetimeFormatFr(value?.date),
+    },
     {
       Header: "Action",
       accessor: "",
