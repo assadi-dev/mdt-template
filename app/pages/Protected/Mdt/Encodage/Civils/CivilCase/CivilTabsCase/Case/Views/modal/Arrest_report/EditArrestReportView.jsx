@@ -12,33 +12,38 @@ import {
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
 import { cleanAgentMatricule } from "../../../../../../../../../../../services/utils/user";
-import { save_arrestReport } from "./helpers";
-import { addArrestReport } from "../../../../../../../../../../../features/Civils/Reports/ArrestReport.slice";
+import { save_arrestReport, update_arrestReport } from "./helpers";
 import useProcess from "../../../../../../../../../../../hooks/useProcess";
+import { editArrestReport } from "../../../../../../../../../../../features/Civils/Reports/ArrestReport.slice";
+import { datetimeFormatISO8601 } from "../../../../../../../../../../../services/utils/dateFormat";
 
-const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
-  const { idAgent, lastname, firstname, matricule } = useSelector(
-    (state) => state.AuthenticateReducer
-  );
+const EditArrestReportView = ({ payload, onCloseModal, ...props }) => {
   const dispatch = useDispatch();
   const { process, toggleProcess } = useProcess();
-  const { idCivil } = useParams();
+
+  const MODAL_TIITLE = payload?.numeroArrestReport
+    ? `Rapport d'arrestation n° ${payload?.numeroArrestReport}`
+    : `????`;
+
+  payload.dateOfEntry =
+    payload?.dateOfEntry?.date &&
+    datetimeFormatISO8601(payload?.dateOfEntry?.date);
 
   const submitArrestReport = async (values) => {
     try {
       toggleProcess();
-      values.agent = agent_iri + idAgent;
-      values.civil = `api/civils/${idCivil}`;
-      const result = await save_arrestReport(values);
-      values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.createdAt = result.data?.createdAt;
-      values.id = result.data?.id;
-      values.numeroAvertissement = result.data?.numeroAvertissement;
-      values.createdAt = { date: result.data?.createdAt || new Date() };
-      values.dateOfEntry = { date: result.data?.dateOfEntry || new Date() };
-      dispatch(addArrestReport(values));
-      onCloseModal();
+      const id = values.id;
+      delete values.agent;
+      delete values.civil;
+      delete values.createdAt;
+      const result = await update_arrestReport(id, values);
+      values.dateOfEntry = {
+        date: result.data?.dateOfEntry || values.dateOfEntry,
+      };
+
+      dispatch(editArrestReport(values));
       toastSuccess();
+      onCloseModal();
     } catch (error) {
       toastError();
     } finally {
@@ -49,17 +54,19 @@ const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
   return (
     <ArrestReportFormContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title ">Rapport d'arrestation</h2>
+        <h2 className="form-title ">{MODAL_TIITLE}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <MainViewContainer>
         <ArrestReportForm
+          defaultValues={payload}
           process={process}
           onSubmitValue={submitArrestReport}
+          labelSubmit="Mettre à jour"
         />
       </MainViewContainer>
     </ArrestReportFormContainer>
   );
 };
 
-export default AddArrestReportView;
+export default EditArrestReportView;

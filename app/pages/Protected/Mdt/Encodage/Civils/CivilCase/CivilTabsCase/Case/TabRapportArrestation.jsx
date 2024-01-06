@@ -12,6 +12,7 @@ import RenderModalFormContent from "../../../../../../../../components/Modal/Ren
 import {
   ADD_ARREST_REPORT,
   DELETE_ARREST_REPORT,
+  EDIT_ARREST_REPORT,
   ListAddArrestReportModalView,
 } from "./Views/modal/Arrest_report/ArrestReportListView";
 import { useParams } from "react-router-dom";
@@ -35,8 +36,8 @@ const TabRapportArrestation = () => {
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
     {
-      Header: "date",
-      accessor: "createdAt",
+      Header: "Date",
+      accessor: "dateOfEntry",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
@@ -45,6 +46,7 @@ const TabRapportArrestation = () => {
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
+          onEdit={handleClickEdit}
           onDelete={handleClickDelete}
           canEdit={true}
           canDelete={true}
@@ -63,6 +65,12 @@ const TabRapportArrestation = () => {
   const handleClickDelete = (arrestData) => {
     openModal({
       view: DELETE_ARREST_REPORT,
+      data: arrestData,
+    });
+  };
+  const handleClickEdit = (arrestData) => {
+    openModal({
+      view: EDIT_ARREST_REPORT,
       data: arrestData,
     });
   };

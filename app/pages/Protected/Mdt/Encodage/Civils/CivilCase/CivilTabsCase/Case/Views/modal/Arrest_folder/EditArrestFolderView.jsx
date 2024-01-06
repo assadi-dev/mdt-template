@@ -41,7 +41,6 @@ const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       toastSuccess();
       onCloseModal();
     } catch (error) {
-      console.log(error.message);
       toastError();
     } finally {
       toggleProcess();
