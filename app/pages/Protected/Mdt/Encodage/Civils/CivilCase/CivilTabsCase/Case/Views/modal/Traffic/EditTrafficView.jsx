@@ -21,14 +21,11 @@ import { cleanAgentMatricule } from "../../../../../../../../../../../services/u
 
 const EditTrafficView = ({ payload, onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
-  const { idAgent, lastname, firstname, matricule } = useSelector(
-    (state) => state.AuthenticateReducer
-  );
-  const { idCivil } = useParams();
+
   const dispatch = useDispatch();
 
-  const MODAL_TIITLE = payload?.numeroArrestReport
-    ? `Rapport d'arrestation n° ${payload?.numeroArrestReport}`
+  const MODAL_TIITLE = payload?.numeroTraffic
+    ? `Traffic n° ${payload?.numeroTraffic}`
     : `????`;
 
   payload.dateOfEntry =
