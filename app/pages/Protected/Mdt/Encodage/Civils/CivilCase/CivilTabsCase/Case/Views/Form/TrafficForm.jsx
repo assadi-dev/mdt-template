@@ -68,6 +68,7 @@ const TrafficForm = ({
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
+    setValue("amount", sum.toFixed(2));
     return sum;
   }, [getValues("infractions")]);
   const TRAFFIC_COLUMNS = [
