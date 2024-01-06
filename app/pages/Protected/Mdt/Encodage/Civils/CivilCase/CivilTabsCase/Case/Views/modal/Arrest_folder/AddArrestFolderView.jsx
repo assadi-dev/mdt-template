@@ -30,10 +30,10 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       values.civil = `api/civils/${idCivil}`;
       const result = await save_arrest_folder(values);
       values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.createdAt = result.data?.createdAt;
       values.id = result.data?.id;
       values.numeroAvertissement = result.data?.numeroAvertissement;
       values.createdAt = { date: result.data?.createdAt || new Date() };
+      values.dateOfEntry = { date: result.data?.dateOfEntry || new Date() };
       dispatch(addArrestFolder(values));
       toastSuccess();
       onCloseModal();
