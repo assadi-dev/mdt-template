@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchFolderArrestAsyncCollection } from "../../../../../../../../features/Civils/Reports/ReportAsyncAction";
 import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
+import { defaultPageSize } from "../../../../../../../../config/constantes";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -74,13 +75,25 @@ const TabDossierArrestation = () => {
   };
 
   const PromiseRef = React.useRef();
-  if (!idCivil) return;
+
+  const {
+    onPageChange,
+    onPageTotalCountChange,
+    handleSearch,
+    pageIndex,
+    search,
+    totalCount,
+    pageSize,
+  } = useCustomPagination(defaultPageSize, 0, 0, "");
+
   React.useEffect(() => {
+    if (!idCivil) return;
     const payload = {
       idCivil,
-      params: { page: 1, item_per_page: 5, search: "" },
+      params: { page: pageIndex, item_per_page: defaultPageSize, search },
     };
     PromiseRef.current = dispatch(fetchFolderArrestAsyncCollection(payload));
+    onPageTotalCountChange(count);
     return () => {
       PromiseRef.current?.abort();
     };
@@ -100,6 +113,14 @@ const TabDossierArrestation = () => {
         data={collections}
         isLoading={status != "complete"}
         isSuccess={status == "complete"}
+        onPageTotalCountChange={onPageTotalCountChange}
+        onSearchValue={handleSearch}
+        onPageChange={onPageChange}
+        initialStatePagination={{
+          pageIndex,
+          pageSize,
+        }}
+        totalCount={totalCount}
       />
       {createPortal(
         <Modal isOpen={modalState.isOpen}>
