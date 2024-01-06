@@ -34,7 +34,7 @@ const TabRapportArrestation = () => {
   );
 
   const columns = [
-    { Header: "N° Dossier", accessor: "id" },
+    { Header: "N° Dossier", accessor: "numeroArrestReport" },
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
     {
@@ -100,7 +100,7 @@ const TabRapportArrestation = () => {
     return () => {
       PromiseRef.current?.abort();
     };
-  }, [idCivil]);
+  }, [idCivil, pageIndex, search, count]);
 
   return (
     <>

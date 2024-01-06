@@ -104,7 +104,7 @@ const TabAvertissement = () => {
     return () => {
       primiseRef.current?.abort();
     };
-  }, [idCivil, count, search]);
+  }, [idCivil, pageIndex, count, search]);
 
   return (
     <>
