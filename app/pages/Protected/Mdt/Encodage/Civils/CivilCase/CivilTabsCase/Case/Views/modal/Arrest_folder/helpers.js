@@ -6,6 +6,6 @@ export const save_arrest_folder = (data) => {
 export const update_arrest_folder = (id, data) => {
   return Api.put(`/arrest_folders/${id}`, data);
 };
-export const remote_arrest_folder = (id) => {
+export const delete_arrest_folder = (id) => {
   return Api.delete(`/arrest_folders/${id}`);
 };

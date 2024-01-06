@@ -20,6 +20,14 @@ const ArrestReportSlice = createSlice({
     },
     removeArrestReport: (state, action) => {
       const { payload } = action;
+      if (!Array.isArray(payload))
+        throw new Error("payload must be an array of ids");
+      const removedTo = [...state.collections].filter(
+        (item) => !payload.includes(item.id)
+      );
+
+      state.collections = removedTo;
+      state.count = state.count - payload.length;
     },
   },
   extraReducers: (builders) => {

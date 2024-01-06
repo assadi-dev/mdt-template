@@ -17,9 +17,7 @@ import {
 } from "../../../../../../../../../../../services/utils/alert";
 
 const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
-  const { idAgent, lastname, firstname, matricule } = useSelector(
-    (state) => state.AuthenticateReducer
-  );
+  const { idAgent, lastname, firstname, matricule } = payload;
   const dispatch = useDispatch();
   const { idCivil } = useParams();
   const saveAvertissement = async (values) => {
@@ -28,7 +26,6 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
       values.civil = `api/civils/${idCivil}`;
       const result = await save_avertissement(values);
       values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.createdAt = result.data?.createdAt;
       values.id = result.data?.id;
       values.numeroAvertissement = result.data?.numeroAvertissement;
       values.createdAt = { date: result.data?.createdAt || new Date() };

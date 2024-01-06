@@ -34,7 +34,6 @@ const CivilCase = () => {
       dispatch(removeCivilSelected());
     };
   }, [idCivil]);
-  //idCivil
 
   return (
     <CivilCasePageContainer>
