@@ -43,7 +43,6 @@ const EditTrafficView = ({ payload, onCloseModal, ...props }) => {
       delete values.civil;
       delete values.createdAt;
       await update_traffic(id, values);
-
       dispatch(editTraffic(values));
       toastSuccess();
       onCloseModal();

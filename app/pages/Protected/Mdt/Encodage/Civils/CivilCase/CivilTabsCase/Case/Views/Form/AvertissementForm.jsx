@@ -55,6 +55,7 @@ const AvertissementForm = ({
           id="body"
           className="theme-text-editor mb-0"
           getOutput={handleChangeText}
+          defaultValue={getValues("description")}
         />
         <ErrorInputSection errors={errors.description} />
       </FormControl>
