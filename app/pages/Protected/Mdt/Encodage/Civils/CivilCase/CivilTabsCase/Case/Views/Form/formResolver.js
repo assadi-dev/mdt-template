@@ -61,7 +61,7 @@ export const ArrestFolderResolver = yup.object().shape({
   civil: yup.string(),
   location: yup.string().required(requiredMessage),
   infractions: yup.array().required(requiredMessage),
-  description: yup.string().required(requiredMessage),
+  description: yup.string(),
   amount: yup.string(),
   sentence: yup.string(),
   dateOfEntry: yup.string().required(requiredMessage),

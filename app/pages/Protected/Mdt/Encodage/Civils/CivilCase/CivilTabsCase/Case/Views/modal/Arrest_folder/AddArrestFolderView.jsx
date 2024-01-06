@@ -34,10 +34,10 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       values.numeroAvertissement = result.data?.numeroAvertissement;
       values.createdAt = { date: result.data?.createdAt || new Date() };
       toastSuccess();
+      onCloseModal();
     } catch (error) {
       toastError();
     } finally {
-      onCloseModal();
     }
   };
 

@@ -34,10 +34,10 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
       values.createdAt = { date: result.data?.createdAt || new Date() };
       dispatch(addAvertissement(values));
       toastSuccess();
+      onCloseModal();
     } catch (error) {
       toastError();
     } finally {
-      onCloseModal();
     }
   };
 

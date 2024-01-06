@@ -31,12 +31,11 @@ const AddArrestReportView = ({ payload, onCloseModal, ...props }) => {
       values.id = result.data?.id;
       values.numeroAvertissement = result.data?.numeroAvertissement;
       values.createdAt = { date: result.data?.createdAt || new Date() };
-
+      onCloseModal();
       toastSuccess();
     } catch (error) {
       toastError();
     } finally {
-      onCloseModal();
     }
   };
 
