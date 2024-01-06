@@ -11,6 +11,7 @@ import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFor
 import {
   ADD_TRAFFIC,
   DELETE_TRAFFIC,
+  EDIT_TRAFFIC,
   ListTrafficModalView,
 } from "./Views/modal/Traffic/TrafficListVIew";
 import useModalState from "../../../../../../../../hooks/useModalState";
@@ -45,6 +46,7 @@ const TabTraffic = () => {
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
+          onEdit={handleClickEdit}
           onDelete={handleClickDelete}
           canEdit={true}
           canDelete={true}
@@ -72,6 +74,13 @@ const TabTraffic = () => {
     openModal({
       view: ADD_TRAFFIC,
       data: { idCivil, idAgent, lastname, firstname, matricule },
+    });
+  };
+
+  const handleClickEdit = (trafficData) => {
+    openModal({
+      view: EDIT_TRAFFIC,
+      data: trafficData,
     });
   };
 

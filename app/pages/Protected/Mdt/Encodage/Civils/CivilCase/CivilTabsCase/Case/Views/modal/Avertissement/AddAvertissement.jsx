@@ -15,13 +15,16 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
+import useProcess from "../../../../../../../../../../../hooks/useProcess";
 
 const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
   const { idAgent, lastname, firstname, matricule } = payload;
   const dispatch = useDispatch();
   const { idCivil } = useParams();
+  const { process, toggleProcess } = useProcess();
   const saveAvertissement = async (values) => {
     try {
+      toggleProcess();
       values.agent = agent_iri + idAgent;
       values.civil = `api/civils/${idCivil}`;
       const result = await save_avertissement(values);
@@ -35,6 +38,7 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
     } catch (error) {
       toastError();
     } finally {
+      toggleProcess();
     }
   };
 
@@ -44,7 +48,7 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
         <h2 className="form-title ">Avertissement</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <AvertissementForm onSubmitValue={saveAvertissement} />
+      <AvertissementForm onSubmitValue={saveAvertissement} process={process} />
     </ModalFormContainer>
   );
 };
