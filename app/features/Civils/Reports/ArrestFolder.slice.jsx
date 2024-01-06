@@ -14,6 +14,15 @@ const ArrestFolderSlice = createSlice({
     },
     editArrestFolder: (state, action) => {
       const { payload } = action;
+
+      const updatedCollections = [...state.collections].map((item) => {
+        if (item.id == payload.id) {
+          return { ...item, ...payload };
+        }
+        return item;
+      });
+
+      state.collections = updatedCollections;
     },
     removeArrestFolder: (state, action) => {
       const { payload } = action;

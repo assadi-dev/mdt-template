@@ -13,6 +13,7 @@ import RenderModalFormContent from "../../../../../../../../components/Modal/Ren
 import {
   ADD_ARREST_FOLDER,
   DELETE_ARREST_FOLDER,
+  EDIT_ARREST_FOLDER,
   ListAddArrestFolderModalView,
 } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,6 +45,7 @@ const TabDossierArrestation = () => {
       Cell: ({ row }) => (
         <ActionCells
           data={row.original}
+          onEdit={handleClickEdit}
           onDelete={handleClickDelete}
           canEdit={true}
           canDelete={true}
@@ -61,6 +63,12 @@ const TabDossierArrestation = () => {
   const handleClickDelete = (arrestFolderData) => {
     openModal({
       view: DELETE_ARREST_FOLDER,
+      data: arrestFolderData,
+    });
+  };
+  const handleClickEdit = (arrestFolderData) => {
+    openModal({
+      view: EDIT_ARREST_FOLDER,
       data: arrestFolderData,
     });
   };

@@ -9,51 +9,60 @@ import ArrestFolderForm from "../../Form/ArrestFolderForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { agent_iri } from "../../../../../../../../../../../services/api/instance";
-import { save_arrest_folder } from "./helpers";
+import { save_arrest_folder, update_arrest_folder } from "./helpers";
 import { cleanAgentMatricule } from "../../../../../../../../../../../services/utils/user";
 import {
   toastError,
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
-import { addArrestFolder } from "../../../../../../../../../../../features/Civils/Reports/ArrestFolder.slice";
+import { editArrestFolder } from "../../../../../../../../../../../features/Civils/Reports/ArrestFolder.slice";
+import { datetimeFormatISO8601 } from "../../../../../../../../../../../services/utils/dateFormat";
 
-const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
-  const { idAgent, lastname, firstname, matricule } = useSelector(
-    (state) => state.AuthenticateReducer
-  );
+const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
   const dispatch = useDispatch();
-  const { idCivil } = useParams();
+
+  const MODAL_TIITLE = payload?.numeroArrestFolder
+    ? `Dossier d'arrestation n° ${payload?.numeroArrestFolder}`
+    : `????`;
 
   const submitArrestFolder = async (values) => {
     try {
-      values.agent = agent_iri + idAgent;
-      values.civil = `api/civils/${idCivil}`;
-      const result = await save_arrest_folder(values);
-      values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.createdAt = result.data?.createdAt;
-      values.id = result.data?.id;
-      values.numeroAvertissement = result.data?.numeroAvertissement;
-      values.createdAt = { date: result.data?.createdAt || new Date() };
-      dispatch(addArrestFolder(values));
+      const id = values.id;
+      delete values.agent;
+      delete values.civil;
+      delete values.createdAt;
+      const result = await update_arrest_folder(id, values);
+      values.dateOfEntry = { date: result.data.dateOfEntry };
+      console.log(values);
+      dispatch(editArrestFolder(values));
       toastSuccess();
       onCloseModal();
     } catch (error) {
+      console.log(error.message);
       toastError();
     } finally {
     }
   };
 
+  payload.dateOfEntry =
+    payload?.dateOfEntry?.date &&
+    datetimeFormatISO8601(payload?.dateOfEntry?.date);
+
   return (
     <ArrestFolderFormContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title ">Dossier d'arrestation</h2>
+        <h2 className="form-title ">{MODAL_TIITLE}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <MainViewContainer>
-        <ArrestFolderForm onSubmitValue={submitArrestFolder} />
+        <ArrestFolderForm
+          onSubmitValue={submitArrestFolder}
+          defaultValues={payload}
+          labelSubmit="Mettre à jour"
+        />
       </MainViewContainer>
     </ArrestFolderFormContainer>
   );
 };
 
-export default AddArrestFolderView;
+export default EditArrestFolderView;

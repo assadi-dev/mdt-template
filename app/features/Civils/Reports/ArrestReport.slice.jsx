@@ -17,6 +17,14 @@ const ArrestReportSlice = createSlice({
     },
     editArrestReport: (state, action) => {
       const { payload } = action;
+      const updatedCollections = [...state.collections].map((item) => {
+        if (item.id == payload.id) {
+          return { ...item, ...payload };
+        }
+        return item;
+      });
+
+      state.collections = updatedCollections;
     },
     removeArrestReport: (state, action) => {
       const { payload } = action;

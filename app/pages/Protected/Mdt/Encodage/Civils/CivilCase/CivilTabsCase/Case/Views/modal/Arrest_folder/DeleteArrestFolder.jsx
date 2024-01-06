@@ -27,7 +27,6 @@ const DeleteArrestFolder = ({ payload, onCloseModal, ...props }) => {
       toggleProcess();
       await delete_arrest_folder(ID);
       dispatch(removeArrestFolder([ID]));
-
       onCloseModal();
       toastSuccess(DELETE_SUCCESS);
     } catch (error) {

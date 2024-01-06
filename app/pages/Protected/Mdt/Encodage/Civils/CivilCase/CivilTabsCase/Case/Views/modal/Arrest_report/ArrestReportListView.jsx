@@ -11,6 +11,9 @@ export const ListAddArrestReportModalView = {
   [ADD_ARREST_REPORT]: {
     element: AddArrestReportView,
   },
+  [EDIT_ARREST_REPORT]: {
+    element: "",
+  },
   [DELETE_ARREST_REPORT]: {
     element: DeleteArrestReport,
   },

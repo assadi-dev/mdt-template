@@ -25,6 +25,13 @@ export const dateFormatISO8601 = (date = "") => {
 export const datetimeFormatISO8601 = (date = "") => {
   return format(new Date(date), "yyyy-MM-dd HH:mm:ss");
 };
+/**
+ * Retourne la date et l'heure au format suivant YYYY-MM-DD HH:MM
+ * @param {*} date
+ */
+export const datetimeFormatWithoutSecISO8601 = (date = "") => {
+  return format(new Date(date), "yyyy-MM-dd HH:mm");
+};
 
 /**
  * Retourne la date et l'heure au format suivant DD-MM-YYYY HH:MM:SS
