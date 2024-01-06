@@ -5,34 +5,40 @@ import {
 } from "../../../../../../../../../../../components/Forms/FormView.styled";
 import CloseModalBtn from "../../../../../../../../../../../components/Modal/CloseModalBtn";
 import AvertissementForm from "../../Form/AvertissementForm";
-import { addAvertissement } from "../../../../../../../../../../../features/Civils/Reports/AvertissementSlice";
+import {
+  addAvertissement,
+  editAvertissement,
+} from "../../../../../../../../../../../features/Civils/Reports/AvertissementSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { agent_iri } from "../../../../../../../../../../../services/api/instance";
 import { cleanAgentMatricule } from "../../../../../../../../../../../services/utils/user";
-import { save_avertissement } from "./helpers";
+import { save_avertissement, update_avertissement } from "./helpers";
 import {
   toastError,
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
 import useProcess from "../../../../../../../../../../../hooks/useProcess";
 
-const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
-  const { idAgent, lastname, firstname, matricule } = payload;
+const EditAvertissement = ({ payload, onCloseModal, ...props }) => {
   const dispatch = useDispatch();
   const { idCivil } = useParams();
   const { process, toggleProcess } = useProcess();
+
+  const MODAL_TIITLE = payload?.numeroArrestReport
+    ? `Avertissement  n° ${payload?.numeroArrestReport}`
+    : `????`;
+  const id = payload.id;
+
   const saveAvertissement = async (values) => {
     try {
       toggleProcess();
-      values.agent = agent_iri + idAgent;
-      values.civil = `api/civils/${idCivil}`;
-      const result = await save_avertissement(values);
-      values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.id = result.data?.id;
-      values.numeroAvertissement = result.data?.numeroAvertissement;
-      values.createdAt = { date: result.data?.createdAt || new Date() };
-      dispatch(addAvertissement(values));
+      delete values.agent;
+      delete values.civil;
+      delete values.createdAt;
+      await update_avertissement(id, values);
+
+      dispatch(editAvertissement(values));
       toastSuccess();
       onCloseModal();
     } catch (error) {
@@ -45,12 +51,17 @@ const AddAvertissement = ({ payload, onCloseModal, ...props }) => {
   return (
     <ModalFormContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title ">Avertissement</h2>
+        <h2 className="form-title ">{MODAL_TIITLE}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
-      <AvertissementForm onSubmitValue={saveAvertissement} process={process} />
+      <AvertissementForm
+        defaultValues={payload}
+        labelSubmit="Mettre à jour"
+        onSubmitValue={saveAvertissement}
+        process={process}
+      />
     </ModalFormContainer>
   );
 };
 
-export default AddAvertissement;
+export default EditAvertissement;

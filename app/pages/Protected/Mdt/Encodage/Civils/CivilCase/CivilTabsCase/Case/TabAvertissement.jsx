@@ -10,6 +10,8 @@ import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
 import {
   ADD_AVERTISSEMENT,
+  DELETE_AVERTISSEMENT,
+  EDIT_AVERTISSEMENT,
   ListAvertissementModalView,
 } from "./Views/modal/Avertissement/AvertissementListView";
 import { createPortal } from "react-dom";
@@ -43,7 +45,15 @@ const TabAvertissement = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClickDelete}
+          canEdit={true}
+          canDelete={true}
+        />
+      ),
     },
   ];
 
@@ -51,6 +61,19 @@ const TabAvertissement = () => {
     openModal({
       view: ADD_AVERTISSEMENT,
       data: { idCivil, idAgent, lastname, firstname, matricule },
+    });
+  };
+  const handleClickDelete = (avertissement) => {
+    openModal({
+      view: DELETE_AVERTISSEMENT,
+      data: { idCivil, ...avertissement },
+    });
+  };
+
+  const handleClickEdit = (avertissement) => {
+    openModal({
+      view: EDIT_AVERTISSEMENT,
+      data: avertissement,
     });
   };
 

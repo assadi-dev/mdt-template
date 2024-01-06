@@ -77,6 +77,7 @@ class ArrestReportRepository extends ServiceEntityRepository
         ar.id,
         ar.numeroArrestReport,
         CONCAT(ag.matricule,'-',ag.firstname,' ',ag.lastname) as agent,
+        ar.dateOfEntry,
         ag.id as idAgent, 
         ar.location,
         ar.infractions,

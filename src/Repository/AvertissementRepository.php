@@ -77,7 +77,13 @@ class AvertissementRepository extends ServiceEntityRepository
         $countResult = ($page - 1) * $item_per_page;
         $qb = $this->createQueryBuilder("av");
         $qb
-        ->select("av.id,av.numeroAvertissement, CONCAT(ag.matricule,'-',ag.firstname,' ',ag.lastname) as agent, ag.id as idAgent, av.location,av.createdAt")
+        ->select("av.id,
+        av.numeroAvertissement,
+         CONCAT(ag.matricule,'-',ag.firstname,' ',ag.lastname) as agent,
+          ag.id as idAgent,
+          av.description,
+           av.location,
+           av.createdAt")
         ->leftJoin(Agent::class, "ag", "WITH", "av.agent=ag.id")
         ->leftJoin(Civil::class, "ci", "WITH", "av.civil=ci.id")
         ->orHaving($qb->expr()->like("av.numeroAvertissement", ":search"))

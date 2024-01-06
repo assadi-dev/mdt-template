@@ -12,6 +12,8 @@ import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
 import {
   ADD_ARREST_FOLDER,
+  DELETE_ARREST_FOLDER,
+  EDIT_ARREST_FOLDER,
   ListAddArrestFolderModalView,
 } from "./Views/modal/Arrest_folder/ArrestFolderlistView";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,7 +42,15 @@ const TabDossierArrestation = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClickDelete}
+          canEdit={true}
+          canDelete={true}
+        />
+      ),
     },
   ];
 
@@ -49,6 +59,20 @@ const TabDossierArrestation = () => {
       view: ADD_ARREST_FOLDER,
     });
   };
+
+  const handleClickDelete = (arrestFolderData) => {
+    openModal({
+      view: DELETE_ARREST_FOLDER,
+      data: arrestFolderData,
+    });
+  };
+  const handleClickEdit = (arrestFolderData) => {
+    openModal({
+      view: EDIT_ARREST_FOLDER,
+      data: arrestFolderData,
+    });
+  };
+
   const PromiseRef = React.useRef();
   if (!idCivil) return;
   React.useEffect(() => {

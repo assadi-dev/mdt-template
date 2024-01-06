@@ -8,15 +8,18 @@ import {
   toastError,
   toastSuccess,
 } from "../../../../../../../../../../../services/utils/alert";
-import { save_traffic } from "./helper";
+import { save_traffic, update_traffic } from "./helper";
 import { agent_iri } from "../../../../../../../../../../../services/api/instance";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import useProcess from "../../../../../../../../../../../hooks/useProcess";
-import { addTraffic } from "../../../../../../../../../../../features/Civils/Reports/TrafficSlice";
+import {
+  addTraffic,
+  editTraffic,
+} from "../../../../../../../../../../../features/Civils/Reports/TrafficSlice";
 import { cleanAgentMatricule } from "../../../../../../../../../../../services/utils/user";
 
-const AddTraffic = ({ payload, onCloseModal, ...props }) => {
+const EditTrafficView = ({ payload, onCloseModal, ...props }) => {
   const { process, toggleProcess } = useProcess();
   const { idAgent, lastname, firstname, matricule } = useSelector(
     (state) => state.AuthenticateReducer
@@ -24,18 +27,23 @@ const AddTraffic = ({ payload, onCloseModal, ...props }) => {
   const { idCivil } = useParams();
   const dispatch = useDispatch();
 
+  const MODAL_TIITLE = payload?.numeroArrestReport
+    ? `Rapport d'arrestation n° ${payload?.numeroArrestReport}`
+    : `????`;
+
+  payload.dateOfEntry =
+    payload?.dateOfEntry?.date &&
+    datetimeFormatISO8601(payload?.dateOfEntry?.date);
+
   const saveFormTraffic = async (values) => {
     try {
       toggleProcess();
-      values.agent = agent_iri + idAgent;
-      values.civil = `api/civils/${idCivil}`;
-      const result = await save_traffic(values);
-      values.agent = cleanAgentMatricule(matricule, firstname, lastname);
-      values.createdAt = result.data?.createdAt;
-      values.id = result.data?.id;
-      values.numeroAvertissement = result.data?.numeroAvertissement;
-      values.createdAt = { date: result.data?.createdAt || new Date() };
-      dispatch(addTraffic(values));
+      const id = values.id;
+      delete values.agent;
+      delete values.civil;
+      delete values.createdAt;
+      await update_traffic(id, values);
+      dispatch(editTraffic(values));
       toastSuccess();
       onCloseModal();
     } catch (error) {
@@ -48,14 +56,19 @@ const AddTraffic = ({ payload, onCloseModal, ...props }) => {
   return (
     <CaseModalFormContainer {...props}>
       <HeaderModal>
-        <h2 className="form-title ">Traffic</h2>
+        <h2 className="form-title ">{MODAL_TIITLE}</h2>
         <CloseModalBtn className="close-section" onClick={onCloseModal} />
       </HeaderModal>
       <MainViewContainer>
-        <TrafficForm onSubmitValue={saveFormTraffic} process={process} />
+        <TrafficForm
+          labelSubmit="Mettre à jour"
+          defaultValues={payload}
+          onSubmitValue={saveFormTraffic}
+          process={process}
+        />
       </MainViewContainer>
     </CaseModalFormContainer>
   );
 };
 
-export default AddTraffic;
+export default EditTrafficView;

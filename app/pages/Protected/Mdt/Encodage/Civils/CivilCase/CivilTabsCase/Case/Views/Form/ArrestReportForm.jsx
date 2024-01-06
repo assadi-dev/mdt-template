@@ -73,6 +73,11 @@ const ArrestReportForm = ({
     [getValues("infractions")]
   );
 
+  const handleSwitchConversionUp = (e) => {
+    const checked = e.target.checked;
+    setValue("conversionUp", checked);
+  };
+
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
@@ -183,7 +188,7 @@ const ArrestReportForm = ({
           <div className="flex-align input-form ">
             <input
               className="text-center "
-              type="time"
+              type="datetime-local"
               {...register("dateOfEntry")}
               placeholder="Entrée cellule"
             />
@@ -195,7 +200,11 @@ const ArrestReportForm = ({
             Conversion $ -&gt; UP
           </label>
           <div className="flex-align input-form ">
-            <SwitchButton className="mx-auto text-center toggle-custom" />
+            <SwitchButton
+              className="mx-auto text-center toggle-custom"
+              onChange={handleSwitchConversionUp}
+              defaultChecked={getValues("conversionUp")}
+            />
           </div>
         </FormControl>
       </RowInputForm>

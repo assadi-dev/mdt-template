@@ -34,7 +34,7 @@ const SanctionSlice = createSlice({
       );
 
       state.collections = removedToCollection;
-      state.count = state - payload.length;
+      state.count = state.count - payload.length;
     },
   },
   extraReducers: (builder) => {

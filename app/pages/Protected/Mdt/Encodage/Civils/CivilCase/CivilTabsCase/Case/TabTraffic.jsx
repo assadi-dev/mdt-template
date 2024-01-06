@@ -10,6 +10,8 @@ import { createPortal } from "react-dom";
 import { datetimeFormatFr } from "../../../../../../../../services/utils/dateFormat";
 import {
   ADD_TRAFFIC,
+  DELETE_TRAFFIC,
+  EDIT_TRAFFIC,
   ListTrafficModalView,
 } from "./Views/modal/Traffic/TrafficListVIew";
 import useModalState from "../../../../../../../../hooks/useModalState";
@@ -22,6 +24,9 @@ const TabTraffic = () => {
   const { modalState, openModal, closeModal } = useModalState();
   const { idCivil } = useParams();
   const dispatch = useDispatch();
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
   const { collections, status, count } = useSelector(
     (state) => state.TrafficReducer
   );
@@ -38,7 +43,15 @@ const TabTraffic = () => {
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClickDelete}
+          canEdit={true}
+          canDelete={true}
+        />
+      ),
     },
   ];
 
@@ -60,6 +73,21 @@ const TabTraffic = () => {
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_TRAFFIC,
+      data: { idCivil, idAgent, lastname, firstname, matricule },
+    });
+  };
+
+  const handleClickEdit = (trafficData) => {
+    openModal({
+      view: EDIT_TRAFFIC,
+      data: trafficData,
+    });
+  };
+
+  const handleClickDelete = (trafficData) => {
+    openModal({
+      view: DELETE_TRAFFIC,
+      data: trafficData,
     });
   };
 

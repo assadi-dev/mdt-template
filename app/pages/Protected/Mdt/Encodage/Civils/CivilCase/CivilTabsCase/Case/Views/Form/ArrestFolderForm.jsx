@@ -78,6 +78,12 @@ const ArrestFolderForm = ({
     [getValues("infractions")]
   );
 
+  const handleSwitchHeader = (name, value) => {
+    if (name) {
+      setValue(name, value);
+    }
+  };
+
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
@@ -185,7 +191,7 @@ const ArrestFolderForm = ({
           <div className="flex-align input-form">
             <input
               className="text-center "
-              type="time"
+              type="datetime-local"
               {...register("dateOfEntry")}
               placeholder="Entrée cellule"
             />
@@ -197,19 +203,35 @@ const ArrestFolderForm = ({
       <LawSwitchRowContainer className="border-theme-color-primary">
         <FormControl className="text-center">
           <label htmlFor="">Droit Miranda</label>
-          <SwitchButton className="toggle-custom" />
+          <SwitchButton
+            className="toggle-custom"
+            defaultChecked={getValues("mirandaLaw")}
+            onChange={(e) => handleSwitchHeader("mirandaLaw", e.target.checked)}
+          />
         </FormControl>
         <FormControl className="text-center">
           <label htmlFor="">Soins</label>
-          <SwitchButton className="toggle-custom" />
+          <SwitchButton
+            className="toggle-custom"
+            defaultChecked={getValues("healthcare")}
+            onChange={(e) => handleSwitchHeader("healthcare", e.target.checked)}
+          />
         </FormControl>
         <FormControl className="text-center">
           <label htmlFor="">Nouriture</label>
-          <SwitchButton className="toggle-custom" />
+          <SwitchButton
+            className="toggle-custom"
+            defaultChecked={getValues("feed")}
+            onChange={(e) => handleSwitchHeader("feed", e.target.checked)}
+          />
         </FormControl>
         <FormControl className="text-center">
           <label htmlFor="">Avocat</label>
-          <SwitchButton className="toggle-custom" />
+          <SwitchButton
+            className="toggle-custom"
+            defaultChecked={getValues("avocat")}
+            onChange={(e) => handleSwitchHeader("avocat", e.target.checked)}
+          />
         </FormControl>
       </LawSwitchRowContainer>
 

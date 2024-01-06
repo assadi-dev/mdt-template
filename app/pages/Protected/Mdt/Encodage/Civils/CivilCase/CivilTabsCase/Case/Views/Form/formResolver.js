@@ -1,5 +1,8 @@
 import * as yup from "yup";
 import { requiredMessage } from "../../../../../../../../../../config/ValidationMessage";
+import { datetimeFormatWithoutSecISO8601 } from "../../../../../../../../../../services/utils/dateFormat";
+
+const DATETIME = datetimeFormatWithoutSecISO8601(new Date());
 
 // Avertissement Form
 export const AvertissemenValues = {
@@ -39,6 +42,7 @@ export const TrafficResolver = yup.object().shape({
 });
 
 // Arrest FOLDER Form
+
 export const ArrestFolderValues = {
   numeroArrestFolder: "",
   civil: "",
@@ -47,7 +51,7 @@ export const ArrestFolderValues = {
   description: "",
   amount: "",
   sentence: "",
-  dateOfEntry: "",
+  dateOfEntry: DATETIME,
   mirandaLaw: false,
   healthcare: false,
   feed: false,
@@ -81,7 +85,7 @@ export const ArrestReportrValues = {
   infractions: [],
   amount: "",
   sentence: "",
-  dateOfEntry: "",
+  dateOfEntry: DATETIME,
   conversionUp: false,
   agent: "",
   amount: 0,

@@ -11,6 +11,8 @@ import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";
 import {
   ADD_ARREST_REPORT,
+  DELETE_ARREST_REPORT,
+  EDIT_ARREST_REPORT,
   ListAddArrestReportModalView,
 } from "./Views/modal/Arrest_report/ArrestReportListView";
 import { useParams } from "react-router-dom";
@@ -22,7 +24,9 @@ const TabRapportArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
   const { idCivil } = useParams();
   const dispatch = useDispatch();
-
+  const { idAgent, lastname, firstname, matricule } = useSelector(
+    (state) => state.AuthenticateReducer
+  );
   const { collections, status, count } = useSelector(
     (state) => state.ArrestReportReducer
   );
@@ -32,22 +36,42 @@ const TabRapportArrestation = () => {
     { Header: "Agent", accessor: "agent" },
     { Header: "Montant", accessor: "amount" },
     {
-      Header: "date",
-      accessor: "createdAt",
+      Header: "Date",
+      accessor: "dateOfEntry",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
       Header: "Action",
       accessor: "",
-      Cell: ({ row }) => <ActionCells canEdit={true} canDelete={true} />,
+      Cell: ({ row }) => (
+        <ActionCells
+          data={row.original}
+          onEdit={handleClickEdit}
+          onDelete={handleClickDelete}
+          canEdit={true}
+          canDelete={true}
+        />
+      ),
     },
   ];
-  const { loaderState, toggleLoader } = useLoader();
-  useDelayed(toggleLoader, 1000);
 
   const handleClickAddbtn = () => {
     openModal({
       view: ADD_ARREST_REPORT,
+      data: { idCivil, idAgent, lastname, firstname, matricule },
+    });
+  };
+
+  const handleClickDelete = (arrestData) => {
+    openModal({
+      view: DELETE_ARREST_REPORT,
+      data: arrestData,
+    });
+  };
+  const handleClickEdit = (arrestData) => {
+    openModal({
+      view: EDIT_ARREST_REPORT,
+      data: arrestData,
     });
   };
 

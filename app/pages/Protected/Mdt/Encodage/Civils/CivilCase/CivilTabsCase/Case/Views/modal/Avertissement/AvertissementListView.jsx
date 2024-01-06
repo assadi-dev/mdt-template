@@ -1,17 +1,22 @@
 import React from "react";
 import AddAvertissement from "./AddAvertissement";
 import ShowAvertissement from "./ShowAvertissement";
+import DeleteAvertissementView from "./DeleteAvertissementView";
+import EditAvertissement from "./EditAvertissement";
 
-export const ADD_AVERTISSEMENT = "add-avertissement";
-export const SHOW_AVERTISSEMENT = "show-avertissement";
-export const EDIT_AVERTISSEMENT = "edit-avertissement";
-export const DELETE_AVERTISSEMENT = "delete-avertissement";
+export const ADD_AVERTISSEMENT = "ADD_AVERTISSEMENT";
+export const SHOW_AVERTISSEMENT = "SHOW_AVERTISSEMENT";
+export const EDIT_AVERTISSEMENT = "EDIT_AVERTISSEMENT";
+export const DELETE_AVERTISSEMENT = "DELETE_AVERTISSEMENT";
 
 export const ListAvertissementModalView = {
   [ADD_AVERTISSEMENT]: {
     element: AddAvertissement,
   },
-  [SHOW_AVERTISSEMENT]: {
-    element: ShowAvertissement,
+  [EDIT_AVERTISSEMENT]: {
+    element: EditAvertissement,
+  },
+  [DELETE_AVERTISSEMENT]: {
+    element: DeleteAvertissementView,
   },
 };
