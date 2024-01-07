@@ -23,6 +23,8 @@ import {
 } from "../../../../../helpers.jsx";
 import InputQuantity from "./InputQuantity.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
+import { Tooltip } from "react-tooltip";
+import LabelInfraction from "./LabelInfraction.jsx";
 
 const TrafficForm = ({
   defaultValues = TrafficValues,
@@ -75,6 +77,7 @@ const TrafficForm = ({
     {
       Header: "Chef d'accusation",
       accessor: "label",
+      Cell: ({ value }) => <LabelInfraction content={value} />,
     },
     {
       Header: "Quantité",
