@@ -19,6 +19,7 @@ import useCustomPagination from "../../../../hooks/useCustomPagination";
 import { cleanAgentNoMatricule } from "../../../../services/utils/user";
 import { toastError } from "../../../../services/utils/alert";
 import { ShowAgent } from "./helpers";
+import ShowAmountComptability from "../../CommandStaffSupervisor/Comptabilite/ShowAmountComptability";
 
 const DemandeComptability = () => {
   const dispatch = useDispatch();
@@ -64,7 +65,11 @@ const DemandeComptability = () => {
     { Header: "Matricule", accessor: "matricule" },
     { Header: "Agent", Cell: ({ row }) => ShowAgent(row.original) },
     { Header: "Objet de la demande", accessor: "subject" },
-    { Header: "Montant", accessor: "amount" },
+    {
+      Header: "Montant",
+      accessor: "amount",
+      Cell: ({ value }) => <ShowAmountComptability amount={value} />,
+    },
     { Header: "Date et Heures", accessor: "date" },
     {
       Header: "Status",

@@ -1,10 +1,10 @@
-import AddDemandeComptabilité from "./AddDemandeComptabilité";
+import AddDemandeComptability from "./AddDemandeComptability";
 
 export const ADD_DEMANDE = "add-demande";
 
 export default {
   "add-demande": {
-    element: AddDemandeComptabilité,
+    element: AddDemandeComptability,
     data: null,
   },
 };

@@ -22,6 +22,7 @@ import { fetchFolderArrestAsyncCollection } from "../../../../../../../../featur
 import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
 import { defaultPageSize } from "../../../../../../../../config/constantes";
 import useCustomPagination from "../../../../../../../../hooks/useCustomPagination";
+import ShowAmount from "./Views/ShowAmount";
 
 const TabDossierArrestation = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -35,7 +36,11 @@ const TabDossierArrestation = () => {
   const columns = [
     { Header: "N° Dossier", accessor: "numeroArrestFolder" },
     { Header: "Agent", accessor: "agent" },
-    { Header: "Montant", accessor: "amount" },
+    {
+      Header: "Montant",
+      accessor: "amount",
+      Cell: ({ value }) => <ShowAmount amount={value} />,
+    },
     {
       Header: "date",
       accessor: "createdAt",

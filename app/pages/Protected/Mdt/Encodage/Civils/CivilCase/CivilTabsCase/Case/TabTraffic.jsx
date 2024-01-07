@@ -21,6 +21,7 @@ import { fetchTraffficAsyncCollection } from "../../../../../../../../features/C
 import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
 import { defaultPageSize } from "../../../../../../../../config/constantes";
 import useCustomPagination from "../../../../../../../../hooks/useCustomPagination";
+import ShowAmount from "./Views/ShowAmount";
 
 const TabTraffic = () => {
   const { modalState, openModal, closeModal } = useModalState();
@@ -36,7 +37,11 @@ const TabTraffic = () => {
   const columns = [
     { Header: "N° Dossier", accessor: "numeroTraffic" },
     { Header: "Agent", accessor: "agent" },
-    { Header: "Montant", accessor: "amount" },
+    {
+      Header: "Montant",
+      accessor: "amount",
+      Cell: ({ value }) => <ShowAmount amount={value} />,
+    },
     {
       Header: "Date",
       accessor: "createdAt",

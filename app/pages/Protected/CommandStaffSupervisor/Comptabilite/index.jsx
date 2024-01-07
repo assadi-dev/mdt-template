@@ -23,6 +23,7 @@ import { ShowAgent } from "../../Services/DemandesComptabilite/helpers";
 import { editAccountingRequestByPage } from "../../../../features/AccountingRequest/AccountingRequest.slice";
 import { toastError, toastSuccess } from "../../../../services/utils/alert";
 import { updateAccountingRequest } from "./helpers";
+import ShowAmountComptability from "./ShowAmountComptability";
 
 const Comptabilite = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const Comptabilite = () => {
     {
       Header: "Montant",
       accessor: "amount",
+      Cell: ({ value }) => <ShowAmountComptability amount={value} />,
     },
     {
       Header: "Rapport",

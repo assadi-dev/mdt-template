@@ -14,41 +14,63 @@ import { useDispatch } from "react-redux";
 import { addAccountingRequestByPage } from "../../../../../features/AccountingRequest/AccountingRequest.slice";
 import { postRequestAcuisition } from "./helpers";
 import { toastError, toastSuccess } from "../../../../../services/utils/alert";
+import ErrorInputSection from "../../../../../components/Forms/ErrorInputSection";
+import { FormValueResolver } from "./DemandeComptaResolver";
+import { datetimeFormatISO8601 } from "../../../../../services/utils/dateFormat";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export const AddForm = ({
   agent,
-  register,
-  handleSubmit,
-  setValue,
-  setError,
-  errors,
-  getValues,
+
   onCloseModal = () => {},
 }) => {
   const { process, toggleProcess } = useProcess();
 
   const dispatch = useDispatch();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    clearErrors,
+    setValue,
+    getValues,
+    reset,
+  } = useForm({
+    defaultValues: {
+      agent: `api/agents/${agent.idAgent}`,
+      subject: "",
+      date: datetimeFormatISO8601(new Date()),
+      reason: "",
+      amount: "00.00",
+    },
+    resolver: yupResolver(FormValueResolver),
+  });
+
   const handleChangeRaisonText = (value) => {
     // console.log(value);
-    if (errors.raison) clearErrors("reason");
+    if (errors.reason) clearErrors("reason");
     setValue("reason", value);
   };
 
   const submitDemandeComptabity = async (values) => {
     try {
+      toggleProcess();
       if (!values.reason) return setError("reason");
       values.amount = parseFloat(values.amount).toString();
 
       let payload = { ...values, ...agent };
       const res = await postRequestAcuisition(payload);
       dispatch(addAccountingRequestByPage({ ...res.data, ...agent }));
+      onCloseModal();
       toastSuccess();
     } catch (error) {
+      console.log(error);
       toastError();
     } finally {
       toggleProcess();
-      onCloseModal();
     }
   };
 
@@ -65,14 +87,8 @@ export const AddForm = ({
       >
         <FormControl>
           <label htmlFor="numeroSerie">Objet de la demande</label>
-          <input type="text" {...register("subject", { required: true })} />
-          <ErrorSection>
-            {errors.subject && (
-              <small className="text-error">
-                Veuillez renseignez L'objet de la demande
-              </small>
-            )}
-          </ErrorSection>
+          <input type="text" {...register("subject")} />
+          <ErrorInputSection errors={errors.subject} />
         </FormControl>
         <FormControl>
           <label htmlFor="date">Date et heure</label>
@@ -82,14 +98,8 @@ export const AddForm = ({
 
         <FormControl>
           <label htmlFor="date">Montant</label>
-          <input type="text" {...register("amount", { required: true })} />
-          <ErrorSection>
-            {errors.montant && (
-              <small className="text-error">
-                Veuillez renseignez le montant
-              </small>
-            )}
-          </ErrorSection>
+          <input type="text" {...register("amount")} />
+          <ErrorInputSection errors={errors.amount} />
         </FormControl>
 
         <FormControl>
@@ -101,13 +111,7 @@ export const AddForm = ({
             style={{ marginBottom: 0 }}
             defaultValue={getValues("reason")}
           />
-          <ErrorSection>
-            {errors.raison && (
-              <small className="text-error">
-                Veuillez décrire la raison de votre demande
-              </small>
-            )}
-          </ErrorSection>
+          <ErrorInputSection errors={errors.reason} />
         </FormControl>
 
         <ModalFooter>

@@ -28,12 +28,12 @@ const EncodeCivilForm = ({ onCloseModal, ...props }) => {
       toggleProcess();
       const result = await saveCivil(values);
       dispatch(encodeCivil(result.data));
+      onCloseModal();
       toastSuccess();
     } catch (error) {
       toastError();
     } finally {
       toggleProcess();
-      onCloseModal();
     }
   };
 
