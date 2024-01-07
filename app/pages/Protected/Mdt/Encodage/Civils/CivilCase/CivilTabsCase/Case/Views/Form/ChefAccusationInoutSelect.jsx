@@ -71,7 +71,7 @@ const ChefAccusationInoutSelect = ({
       };
     });
 
-    return unGrouped;
+    return grouped;
   }, [data, isLoading]);
 
   const LIST_OPTIONS = isGrouped == true ? GROUPED_OPTION : OPTIONS;
