@@ -61,7 +61,7 @@ const ArrestFolderForm = ({
     (infraction) => {
       const updatedCollection = updateInfraction(infraction, infractions);
       const callback = () => setValue("infractions", updatedCollection);
-      execDelayed(callback, 600);
+      execDelayed(callback, 0);
     },
     [getValues("infractions")]
   );
@@ -84,6 +84,7 @@ const ArrestFolderForm = ({
     }
   };
 
+  watch("infractions");
   const TotalAmount = React.useMemo(() => {
     if (!getValues("infractions")) return Number("0.00");
     const sum = sumOfAmount(getValues("infractions"));
@@ -255,7 +256,7 @@ const ArrestFolderForm = ({
         <TabAccusationContainer className="border-theme-color-primary">
           <AccusationsDatatable
             columns={ARREST_REPORT_COLUMNS}
-            infractions={watch("infractions") && infractions}
+            infractions={infractions}
             className="dataTable-theme-color"
             getTablePagingationInstance={initTableInstance}
           />
