@@ -46,8 +46,8 @@ const ChefAccusationInoutSelect = ({
 
   const GROUPED_OPTION = React.useMemo(() => {
     if (!data) return [];
-    const values = [];
-    [...data].map((codePenal) => {
+    const unGrouped = [];
+    const grouped = [...data].map((codePenal) => {
       const cpOption = codePenal?.options?.map((option) => {
         const current = {
           id: option.id,
@@ -61,7 +61,7 @@ const ChefAccusationInoutSelect = ({
           quantity: 1,
           nominal: 1,
         };
-        values.push(current);
+        unGrouped.push(current);
         return current;
       });
 
@@ -70,8 +70,8 @@ const ChefAccusationInoutSelect = ({
         options: cpOption,
       };
     });
-    console.log(values);
-    return values;
+
+    return unGrouped;
   }, [data, isLoading]);
 
   const LIST_OPTIONS = isGrouped == true ? GROUPED_OPTION : OPTIONS;
@@ -86,7 +86,6 @@ const ChefAccusationInoutSelect = ({
 
   const colourStyle = {
     option: (basicStyle, state) => {
-      console.log(state.data.category);
       const color = tinycolor(CategoryColor[state.data.category]);
 
       return {
