@@ -1,13 +1,11 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
+import TooltipContent from "../../../../../../../../../../components/Text/TooltipContent";
 
 const LabelInfraction = ({ content = "" }) => {
   return (
     <>
-      <span className="label-tooltip" data-tooltip-content={content}>
-        {content}
-      </span>
-      <Tooltip anchorSelect=".label-tooltip" place="bottom" />
+      <TooltipContent content={content} />
     </>
   );
 };

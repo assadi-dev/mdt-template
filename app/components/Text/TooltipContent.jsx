@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
 
-const TooltipedContent = ({ content }) => {
+const TooltipContent = ({ content }) => {
   return (
     <>
       <span className="label-tooltip" data-tooltip-content={content}>
@@ -12,4 +12,4 @@ const TooltipedContent = ({ content }) => {
   );
 };
 
-export default TooltipedContent;
+export default TooltipContent;

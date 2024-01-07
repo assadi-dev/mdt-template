@@ -30,6 +30,7 @@ import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 import TotalSentensesText from "./SwitchBtn/TotalSentensesText.jsx";
 import { totalHoursMinFormatBySec } from "../../../../../../../../../../services/utils/dateFormat.js";
+import LabelInfraction from "./LabelInfraction.jsx";
 
 const ArrestReportForm = ({
   defaultValues = ArrestReportrValues,
@@ -112,6 +113,7 @@ const ArrestReportForm = ({
     {
       Header: "Chef d'accusation",
       accessor: "label",
+      Cell: ({ value }) => <LabelInfraction content={value} />,
     },
     {
       Header: "Tentative",
