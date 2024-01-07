@@ -2,6 +2,7 @@ import Api from "../../../../../services/api/instance";
 import {
   hoursMinFormatBySec,
   sentenceToSec,
+  totalHoursMinFormatBySec,
 } from "../../../../../services/utils/dateFormat";
 
 export const saveCivil = (body) => {
@@ -127,21 +128,16 @@ export const sumOfSentences = (infractions) => {
 };
 
 /**
- * Permert d'optenir la vleur en UP
+ * Permert d'optenir la valeur en UP
  * @param {number} amounts montant total des amendes
- * @param {string} sentences temps totals des peines
+ * @param {string} sentences temps totals des peines en format HH:MM ou D:HH:MM
  * @returns
  */
 export const conversionUP = (amounts, sentences) => {
   const nominal = 1;
-
   //conversion sentence en secondes
-  sentences;
-
+  sentences = sentenceToSec(sentences);
   const toSecondes = ((amounts * 30) / 5000) * 60;
-
   const result = toSecondes * nominal + sentences;
-  console.log(result);
-
-  // return unixToTime(result);
+  return totalHoursMinFormatBySec(result);
 };

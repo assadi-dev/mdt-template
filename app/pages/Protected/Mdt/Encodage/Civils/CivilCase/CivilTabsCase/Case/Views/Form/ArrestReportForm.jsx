@@ -19,6 +19,7 @@ import ShowTotalAmount from "./ShowTotalAmount";
 import SwitchButton from "../../../../../../../../../../components/Button/SwitchButton.jsx";
 import {
   cleanInfractionCollection,
+  conversionUP,
   sumOfAmount,
   sumOfSentences,
   updateInfraction,
@@ -56,7 +57,7 @@ const ArrestReportForm = ({
     (infraction) => {
       const updatedCollection = updateInfraction(infraction, infractions);
       const callback = () => setValue("infractions", updatedCollection);
-      execDelayed(callback, 600);
+      execDelayed(callback, 0);
     },
     [getValues("infractions")]
   );
@@ -78,22 +79,30 @@ const ArrestReportForm = ({
     setValue("conversionUp", checked);
   };
 
+  watch("infractions");
+  watch("conversionUp");
   const TotalAmount = React.useMemo(() => {
-    if (!getValues("infractions")) return Number("0.00");
+    if (getValues("infractions").length == 0) return Number("0");
+
     const sum = sumOfAmount(getValues("infractions"));
     setValue("amount", sum.toFixed(2));
-    return sum;
-  }, [getValues("infractions")]);
+    return getValues("conversionUp") == true ? Number("0") : sum;
+  }, [getValues("infractions"), getValues("conversionUp")]);
 
   const TotalSentence = React.useMemo(() => {
     if (!getValues("infractions")) return "00:00";
 
     const sum = sumOfSentences(getValues("infractions"));
-    const toHourMinString = totalHoursMinFormatBySec(sum);
-    setValue("sentence", toHourMinString);
+    const totalSentenceToString = totalHoursMinFormatBySec(sum);
+    const toHourMinString =
+      getValues("conversionUp") == true
+        ? conversionUP(getValues("amount"), totalSentenceToString)
+        : totalHoursMinFormatBySec(sum);
+
+    setValue("sentence", totalSentenceToString);
 
     return toHourMinString;
-  }, [getValues("infractions")]);
+  }, [getValues("infractions"), getValues("conversionUp")]);
 
   const submit = (values) => {
     onSubmitValue(values);
@@ -228,7 +237,7 @@ const ArrestReportForm = ({
         <TabAccusationContainer className="border-theme-color-primary">
           <AccusationsDatatable
             columns={ARREST_REPORT_COLUMNS}
-            infractions={watch("infractions") && infractions}
+            infractions={infractions}
             className="dataTable-theme-color"
             getTablePagingationInstance={initTableInstance}
           />
