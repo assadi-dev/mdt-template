@@ -105,7 +105,7 @@ export const TotalSentenceContainer = styled.p`
 `;
 
 export const GroupedOptionHeaderContainer = styled.div`
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   font-weight: bold;
