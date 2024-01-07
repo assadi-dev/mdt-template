@@ -240,6 +240,7 @@ const ArrestFolderForm = ({
 
       <FormControl>
         <ChefAccusationInoutSelect
+          isGrouped={true}
           defaultValue={getValues("infractions")}
           placeholder="Séléctionnez les chef d'accusations"
           onSelected={handleSelectedInfractions}
