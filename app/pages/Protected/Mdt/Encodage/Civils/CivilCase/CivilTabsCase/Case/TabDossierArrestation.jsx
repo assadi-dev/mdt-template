@@ -43,7 +43,7 @@ const TabDossierArrestation = () => {
     },
     {
       Header: "Date",
-      accessor: "createdAt",
+      accessor: "dateOfEntry",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
     {
