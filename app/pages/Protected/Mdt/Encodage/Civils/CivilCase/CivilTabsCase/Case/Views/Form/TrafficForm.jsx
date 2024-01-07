@@ -101,6 +101,8 @@ const TrafficForm = ({
     },
   ];
 
+  watch("infractions");
+
   const submit = (values) => {
     onSubmitValue(values);
   };
@@ -147,7 +149,7 @@ const TrafficForm = ({
         <TabAccusationContainer className="border-theme-color-primary">
           <AccusationsDatatable
             columns={TRAFFIC_COLUMNS}
-            infractions={watch("infractions") && infractions}
+            infractions={infractions}
             className="dataTable-theme-color"
             getTablePagingationInstance={initTableInstance}
           />
