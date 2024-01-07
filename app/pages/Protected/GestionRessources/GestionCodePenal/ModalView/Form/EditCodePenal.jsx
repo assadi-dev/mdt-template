@@ -21,7 +21,7 @@ const EditCodePenal = ({ payload, onCloseModal, ...props }) => {
   let defaultValues = {
     id: payload?.id,
     label: payload?.label,
-    categorie: payload?.categorie,
+    category: payload?.category,
     amount: payload?.amount,
     sentence: payload?.sentence,
   };

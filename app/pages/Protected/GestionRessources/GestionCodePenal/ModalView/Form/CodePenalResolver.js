@@ -3,14 +3,14 @@ import { requiredMessage } from "../../../../../../config/ValidationMessage";
 
 export const codePenalFormValue = {
   label: "",
-  categorie: "",
+  category: "",
   amount: "",
   sentence: "",
 };
 
 export const codePenalResolver = yup.object().shape({
   label: yup.string().required(requiredMessage),
-  categorie: yup.string().required(requiredMessage),
+  category: yup.string().required(requiredMessage),
   amount: yup.string().required(requiredMessage),
   sentence: yup
     .string()

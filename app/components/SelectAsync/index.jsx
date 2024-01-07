@@ -1,10 +1,10 @@
 import React from "react";
 import Select from "react-select";
 
-const SelectAsync = ({ ...props }) => {
+const SelectAsync = ({ styles, ...props }) => {
   return (
     <Select
-      styles={customStyle}
+      styles={{ ...customStyle, ...styles }}
       classNamePrefix="theme-custom"
       classNames={{
         option: (state) => state.isSelected && "theme-custom-option-selected",
