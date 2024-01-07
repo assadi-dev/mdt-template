@@ -3,8 +3,6 @@ import { CivilTabsContentRowAction } from "../CivilTabs.styled";
 import { Button } from "../../../../../../../../components/PageContainer";
 import DataTable from "../../../../../../../../components/DataTable";
 import ActionCells from "../../../../../../../../components/DataTable/ActionCells";
-import useDelayed from "../../../../../../../../hooks/useDelayed";
-import useLoader from "../../../../../../../../hooks/useLoader";
 import useModalState from "../../../../../../../../hooks/useModalState";
 import Modal from "../../../../../../../../components/Modal/Modal";
 import RenderModalFormContent from "../../../../../../../../components/Modal/RenderModalFormContent";

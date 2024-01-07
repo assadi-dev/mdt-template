@@ -34,6 +34,7 @@ import ComplicitySwitchBtn from "./SwitchBtn/ComplicitySwitchBtn.jsx";
 import { execDelayed } from "../../../../../../../../../../services/utils/functions.js";
 import InputQuantity from "./InputQuantity.jsx";
 import TotalSentensesText from "./SwitchBtn/TotalSentensesText.jsx";
+import LabelInfraction from "./LabelInfraction.jsx";
 
 const ArrestFolderForm = ({
   defaultValues = ArrestFolderValues,
@@ -107,6 +108,7 @@ const ArrestFolderForm = ({
     {
       Header: "Chef d'accusation",
       accessor: "label",
+      Cell: ({ value }) => <LabelInfraction content={value} />,
     },
     {
       Header: "Tentative",
