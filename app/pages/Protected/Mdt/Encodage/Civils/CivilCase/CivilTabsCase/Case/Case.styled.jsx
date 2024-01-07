@@ -103,3 +103,34 @@ export const TotalSentenceContainer = styled.p`
   min-width: 115px;
   text-align: center;
 `;
+
+export const GroupedOptionHeaderContainer = styled.div`
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.25rem;
+  width: 100%;
+
+  /*   border-bottom: 2px solid red;
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 1rem 0.5rem; */
+`;
+
+export const BadgeGrouedOption = styled.span`
+  background-color: #ebecf0;
+  border-radius: 2em;
+  color: #172b4d;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  min-width: 1;
+  padding: 0.25rem 0.5em;
+  text-align: "center";
+`;
+
+export const OptionBodyContainer = styled.div`
+  padding-left: 1rem;
+`;

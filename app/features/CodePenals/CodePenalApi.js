@@ -14,9 +14,21 @@ export const codePenalApi = createApi({
         };
       },
     }),
+    getGroupedCodePenalByCategory: builder.query({
+      query: (payload) => {
+        const { params } = payload;
+        return {
+          url: `code_penals/grouped/category`,
+          params,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetCodePenalByCategoryQuery } = codePenalApi;
+export const {
+  useGetCodePenalByCategoryQuery,
+  useGetGroupedCodePenalByCategoryQuery,
+} = codePenalApi;
 
 export default codePenalApi.reducer;

@@ -76,7 +76,7 @@ class CodePenalRepository extends ServiceEntityRepository
         ->orHaving($qb->expr()->like("cp.sentence", ":search"))
         ->setParameter("search", "%$search%")
         ->orderBy("cp.createdAt", "DESC")
-        ->groupBy("cp.id");
+        ->groupBy("cp.id,cp.category");
         $criteria = Criteria::create()
         ->setFirstResult($countResult)
         ->setMaxResults($item_per_page);
@@ -100,11 +100,32 @@ class CodePenalRepository extends ServiceEntityRepository
             ->setParameter("category", $category);
         }
 
-        $qb->orderBy("cp.createdAt", "DESC")
-          ->groupBy("cp.id");
+        $qb->groupBy("cp.category,cp.id");
+
+
+
         $query =  $qb->getQuery();
         return   $query->getResult();
 
+    }
+
+    /**
+     * retourne la liste des infractions groupé par category
+     */
+    public function findByGroupeCategory($category)
+    {
+        $qb = $this->createQueryBuilder("cp");
+        $categories = $qb->select("DISTINCT(cp.category) as category")->getQuery()->getSingleColumnResult();
+        $array_labels =  [];
+
+        foreach ($categories as  $category) {
+
+            $codePenal = $this->findByCategory($category);
+            $object = ["label" => $category,"options" => $codePenal];
+            array_push($array_labels, $object);
+        }
+
+        return   $array_labels;
     }
 
 
