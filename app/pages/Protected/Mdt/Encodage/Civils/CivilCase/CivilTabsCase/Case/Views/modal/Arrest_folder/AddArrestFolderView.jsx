@@ -36,7 +36,7 @@ const AddArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       values.id = result.data?.id;
       values.numeroAvertissement = result.data?.numeroAvertissement;
       values.createdAt = { date: result.data?.createdAt || new Date() };
-      values.dateOfEntry = { date: result.data?.dateOfEntry || new Date() };
+      values.dateOfEntry = { date: values?.dateOfEntry || new Date() };
       dispatch(addArrestFolder(values));
       toastSuccess();
       onCloseModal();

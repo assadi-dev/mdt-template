@@ -38,7 +38,7 @@ const EditArrestReportView = ({ payload, onCloseModal, ...props }) => {
       delete values.createdAt;
       const result = await update_arrestReport(id, values);
       values.dateOfEntry = {
-        date: result.data?.dateOfEntry || values.dateOfEntry,
+        date: values?.dateOfEntry,
       };
 
       dispatch(editArrestReport(values));
