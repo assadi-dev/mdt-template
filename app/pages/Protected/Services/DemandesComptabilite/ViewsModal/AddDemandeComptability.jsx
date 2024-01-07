@@ -12,33 +12,16 @@ import PreviewDocument from "./PreviewDocument";
 import { AddForm } from "./AddForm";
 import { AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormValueResolver } from "./DemandeComptaResolver";
 
-const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
+const AddDemandeComptability = ({ onCloseModal, payload, ...props }) => {
   const [showPreview, setShowPreview] = useState(false);
   const { count } = useSelector(
     (state) => state.AccountingRequestByPageReducer
   );
 
   const { idAgent } = payload;
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-    clearErrors,
-    setValue,
-    getValues,
-    reset,
-  } = useForm({
-    defaultValues: {
-      agent: `api/agents/${idAgent}`,
-      subject: "",
-      date: datetimeFormatISO8601(new Date()),
-      reason: "",
-      amount: "00.00",
-    },
-  });
 
   const handelShowpreview = () => {
     setShowPreview((current) => (current = !current));
@@ -67,16 +50,7 @@ const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
           {showPreview ? (
             <PreviewDocument previewData={{ ...getValues() }} />
           ) : (
-            <AddForm
-              agent={payload}
-              register={register}
-              handleSubmit={handleSubmit}
-              errors={errors}
-              setError={setError}
-              setValue={setValue}
-              getValues={getValues}
-              onCloseModal={onCloseModal}
-            />
+            <AddForm agent={payload} onCloseModal={onCloseModal} />
           )}
         </AnimatePresence>
       </ModalBody>
@@ -84,4 +58,4 @@ const AddDemandeComptabilité = ({ onCloseModal, payload, ...props }) => {
   );
 };
 
-export default AddDemandeComptabilité;
+export default AddDemandeComptability;
