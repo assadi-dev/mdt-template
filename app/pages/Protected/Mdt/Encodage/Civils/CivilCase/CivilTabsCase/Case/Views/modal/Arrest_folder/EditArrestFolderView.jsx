@@ -36,7 +36,7 @@ const EditArrestFolderView = ({ payload, onCloseModal, ...props }) => {
       delete values.createdAt;
       const result = await update_arrest_folder(id, values);
       values.dateOfEntry = { date: result.data.dateOfEntry };
-      console.log(values);
+
       dispatch(editArrestFolder(values));
       toastSuccess();
       onCloseModal();
