@@ -38,7 +38,7 @@ const TabAvertissement = () => {
     { Header: "N° Dossier", accessor: "numeroAvertissement" },
     { Header: "Agent", accessor: "agent" },
     {
-      Header: "date",
+      Header: "Date",
       accessor: "createdAt",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
