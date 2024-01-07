@@ -42,7 +42,7 @@ const TabDossierArrestation = () => {
       Cell: ({ value }) => <ShowAmount amount={value} />,
     },
     {
-      Header: "date",
+      Header: "Date",
       accessor: "createdAt",
       Cell: ({ value }) => datetimeFormatFr(value?.date),
     },
