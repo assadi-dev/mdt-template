@@ -30,7 +30,7 @@ class CodePenal
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $categorie;
+    private $category;
 
     /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
@@ -61,14 +61,14 @@ class CodePenal
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCategory(): ?string
     {
-        return $this->categorie;
+        return $this->category;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategory(string $category): self
     {
-        $this->categorie = $categorie;
+        $this->category = $category;
 
         return $this;
     }

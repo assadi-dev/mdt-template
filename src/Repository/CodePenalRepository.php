@@ -70,9 +70,9 @@ class CodePenalRepository extends ServiceEntityRepository
     {
         $countResult = ($page - 1) * $item_per_page;
         $qb = $this->createQueryBuilder("cp");
-        $qb->select("cp.id,cp.label,cp.categorie,cp.sentence,cp.amount")
+        $qb->select("cp.id,cp.label,cp.category,cp.sentence,cp.amount")
         ->orHaving($qb->expr()->like("cp.label", ":search"))
-        ->orHaving($qb->expr()->like("cp.categorie", ":search"))
+        ->orHaving($qb->expr()->like("cp.category", ":search"))
         ->orHaving($qb->expr()->like("cp.sentence", ":search"))
         ->setParameter("search", "%$search%")
         ->orderBy("cp.createdAt", "DESC")
@@ -94,9 +94,9 @@ class CodePenalRepository extends ServiceEntityRepository
     {
 
         $qb = $this->createQueryBuilder("cp");
-        $qb->select("cp.id,cp.label,cp.categorie,cp.sentence,cp.amount");
+        $qb->select("cp.id,cp.label,cp.category,cp.sentence,cp.amount");
         if(!isset($category) || $category != "all") {
-            $qb->where("cp.categorie = :category")
+            $qb->where("cp.category = :category")
             ->setParameter("category", $category);
         }
 

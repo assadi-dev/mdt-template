@@ -69,7 +69,7 @@ const GestionCodePenal = () => {
     },
     {
       Header: "Categorie",
-      accessor: "categorie",
+      accessor: "category",
     },
     {
       Header: "Amendes",

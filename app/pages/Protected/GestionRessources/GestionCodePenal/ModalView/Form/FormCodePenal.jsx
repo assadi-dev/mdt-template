@@ -33,15 +33,15 @@ const FormCodePenal = ({
     resolver: yupResolver(codePenalResolver),
   });
 
-  const handSelectCategorie = (categorie) => {
-    if (errors.categorie) clearErrors("categorie");
-    const { value } = categorie;
-    setValue("categorie", value);
+  const handSelectCategorie = (category) => {
+    if (errors.category) clearErrors("category");
+    const { value } = category;
+    setValue("category", value);
   };
 
   const submit = (values) => {
-    if (!values.categorie) {
-      setError("categorie");
+    if (!values.category) {
+      setError("category");
       return false;
     }
     onSubmitValues(values);
@@ -68,11 +68,11 @@ const FormCodePenal = ({
           placeholder="selectionner une categorie"
           className="dropdown-select-custom"
           onChange={handSelectCategorie}
-          value={getValues("categorie")}
+          value={getValues("category")}
         />
         <ErrorSection>
-          {errors.categorie && (
-            <small className="text-error">{errors.categorie.message}</small>
+          {errors.category && (
+            <small className="text-error">{errors.category.message}</small>
           )}
         </ErrorSection>
       </FormControl>
